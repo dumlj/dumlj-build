@@ -1,0 +1,119 @@
+{
+  "ts-node": {
+    "swc": true,
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    // 增量编译
+    // "incremental": true,
+    /* 基本选项 */
+    "target": "ES2015",
+    // 模块类型
+    "module": "commonjs",
+    // 指定要包含在编译中的库文件
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // 允许导入 JS 文件
+    "allowJs": true,
+    // 检测 JS 文件
+    "checkJs": false,
+    // 指定 jsx 代码的生成
+    "jsx": "react",
+    // 导出 d.ts 文件
+    "declaration": false,
+    // 生成 sourceMap
+    "sourceMap": true,
+    // 删除注释
+    "removeComments": false,
+    // 不生成输出文件
+    "noEmit": false,
+    // 从 tslib 导入辅助工具函数
+    "importHelpers": true,
+    // 将每个文件作为单独的模块
+    "isolatedModules": false,
+
+    /* 严格的类型检查选项 */
+    "strict": false,
+    // 在表达式和声明上有隐含的 any类型时报错
+    "noImplicitAny": false,
+    // 启用严格的 null 检查
+    "strictNullChecks": false,
+    // 当 this 表达式值为 any 类型的时候，生成一个错误
+    "noImplicitThis": true,
+    // 以严格模式检查每个模块，并在每个文件里加入 'use strict'
+    "alwaysStrict": true,
+    // 跳过 node_module 检测
+    "skipLibCheck": true,
+
+    /* 额外的检查 */
+    // 有未使用的变量时，抛出错误
+    "noUnusedLocals": false,
+    // 有未使用的参数时，抛出错误
+    "noUnusedParameters": false,
+    // 并不是所有函数里的代码都有返回值时，抛出错误
+    "noImplicitReturns": false,
+    // 报告 switch 语句的 fallthrough 错误。（即，不允许 switch 的 case 语句贯穿）
+    "noFallthroughCasesInSwitch": false,
+
+    /* 模块解析选项 */
+    // 模块解析策略
+    "moduleResolution": "node",
+    "rootDir": ".",
+    // 用于解析非相对模块名称的基目录
+    "baseUrl": ".",
+    // 模块名到基于 baseUrl 的路径映射的列表
+    "paths": {},
+    // 根文件夹列表，其组合内容表示项目运行时的结构内容
+    "rootDirs": [],
+    // 包含类型声明的文件列表
+    "typeRoots": ["./node_modules/@types"],
+    // 需要包含的类型声明文件名列表(为空会忽略声明文件)
+    // "types": [],
+    // 允许从没有设置默认导出的模块中默认导入
+    "allowSyntheticDefaultImports": true,
+    // 支持使用 import foo from 'bar' 的方式引入 commonjs 包
+    "esModuleInterop": true,
+    // 支持读取 JSON 文件
+    "resolveJsonModule": true,
+    // 强制区分文件名大小写
+    "forceConsistentCasingInFileNames": true,
+
+    /* Source Map Options */
+    // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
+    // "sourceRoot": "./",
+    // 指定调试器应该找到映射文件而不是生成文件的位置
+    // "mapRoot": "./",
+    // 生成单个 soucemaps 文件，而不是将 sourcemaps 生成不同的文件
+    "inlineSourceMap": false,
+    // 将代码与 sourcemaps 生成到一个文件中，要求同时设置了 --inlineSourceMap 或 --sourceMap 属性
+    "inlineSources": false,
+
+    /* 其他选项 */
+    // 启用装饰器
+    "experimentalDecorators": true,
+    // 为装饰器提供元数据的支持
+    "emitDecoratorMetadata": true,
+    // 插件
+    "plugins": [
+      // 路径别名，编译成 .js
+      {
+        "transform": "typescript-transform-paths",
+        "useRootDirs": true,
+        "exclude": ["**/node_modules/**"]
+      },
+      // 路径别名，编译成 .d.ts
+      {
+        "transform": "typescript-transform-paths",
+        "useRootDirs": true,
+        "afterDeclarations": true,
+        "exclude": ["**/node_modules/**"]
+      }
+    ]
+  },
+  // 包含文件
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "./typings/**/*.d.ts"],
+  // 排除文件
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "dumi-theme-stackblitz",
+  "version": "0.0.1",
+  "description": "stackblitz for dumi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@dumi-plugins/stackblitz"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "DavidJones",
+      "email": "qowera@gmail.com"
+    }
+  ],
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "concurrently -c auto -P \"yarn:compile:* {1}\" --",
+    "compile:tsc": "tsc --project ./tsconfig.json --outDir ./libs --declaration",
+    "dev": "yarn compile --watch"
+  },
+  "dependencies": {
+    "node-html-parser": "^6.1.7",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
