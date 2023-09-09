@@ -20,5 +20,4 @@ export default defineConfig({
       github: 'https://github.com/dumlj/dumlj-build',
     },
   },
-  plugins: [require.resolve('./@dumi-theme/stackblitz')],
 })

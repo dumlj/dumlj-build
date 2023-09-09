@@ -1,4 +1,4 @@
-import { createYarnExcutor } from '@/services/createYarnExcutor'
+import { createCommonExcutor } from '@/creators/createCommonExcutor'
 import { mockExec } from '@dumlj/feature-mock/src'
 
 const COMMAND_RESPONSE_MAP = {
@@ -13,26 +13,13 @@ jest.mock('child_process', () => ({
   execSync: (command: string) => execSync(command),
 }))
 
-let enableCommandExistsMock = true
-jest.mock('command-exists', () => ({
-  __esModule: true,
-  default: () => enableCommandExistsMock,
-}))
-
-describe('test services/createYarnExcutor', () => {
+describe('test services/createCommonExcutor', () => {
   it('can create command function', async () => {
-    const excute = createYarnExcutor(() => 'test')
+    const excute = createCommonExcutor(() => 'test')
     expect(typeof excute).toBe('function')
     expect(typeof excute.sync).toBe('function')
 
     expect(await excute()).toBe('ok')
     expect(excute.sync()).toBe('ok')
-  })
-
-  it('will return empty when yarn no install', async () => {
-    enableCommandExistsMock = false
-
-    const excute = createYarnExcutor(() => 'test')
-    expect(await excute()).toBe('')
   })
 })

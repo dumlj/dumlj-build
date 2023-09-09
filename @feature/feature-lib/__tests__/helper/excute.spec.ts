@@ -1,4 +1,4 @@
-import { excute, excuteSync } from '@/helper/excute'
+import { excute, excuteSync } from '@/helpers/excute'
 import { mockExec } from '@dumlj/feature-mock/src'
 
 const COMMAND_RESPONSE_MAP = {

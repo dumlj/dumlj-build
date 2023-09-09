@@ -1,4 +1,4 @@
-import { createExcutor } from '@/services/createExcutor'
+import { createExcutor } from '@/creators/createExcutor'
 import { expectType } from 'tsd-lite'
 
 describe('test services/createExcutor', () => {

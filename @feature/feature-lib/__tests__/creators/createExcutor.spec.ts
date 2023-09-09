@@ -1,4 +1,4 @@
-import { createExcutor } from '@/services/createExcutor'
+import { createExcutor } from '@/creators/createExcutor'
 import { mockExec } from '@dumlj/feature-mock/src'
 
 const COMMAND_RESPONSE_MAP = {

@@ -1,4 +1,4 @@
-import type { TrimPromise } from '@/typings/TrimPromise'
+import type { TrimPromise } from '@/typings/trim-promise'
 import { expectType } from 'tsd-lite'
 
 describe('test typings/TrimPromise', () => {

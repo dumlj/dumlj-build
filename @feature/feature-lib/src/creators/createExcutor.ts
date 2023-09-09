@@ -1,5 +1,5 @@
-import { excute as originExcute, excuteSync as originExcuteSync } from '../helper/excute'
-import type { TrimPromise } from '../typings/TrimPromise'
+import { excute as originExcute, excuteSync as originExcuteSync } from '../helpers/excute'
+import type { TrimPromise } from '../typings/trim-promise'
 
 /**
  * 预处理
@@ -22,7 +22,7 @@ type Comamnd = (...params: any[]) => string
  * 因为命令行返回均为字符串，
  * 所以大部分情况都需要进行数据处理
  */
-type Resolve = (stdout: string) => any
+type Resolve = (stdout: string, isSync: boolean) => any
 
 export const createExcutor = (preprocess: Preprocess) => {
   return <C extends Comamnd, R extends Resolve>(command: C, resolv?: R) => {
@@ -33,14 +33,14 @@ export const createExcutor = (preprocess: Preprocess) => {
     const excute = async (...params: Params): Promise<Response> => {
       const stdout = (await preprocess(() => originExcute(command(...params)))) || ''
       const response = stdout.toString().trim()
-      return typeof resolv === 'function' ? resolv(response) : stdout
+      return typeof resolv === 'function' ? resolv(response, false) : stdout
     }
 
     /** 同步 */
     excute.sync = (...params: Params): Response => {
       const stdout = preprocess(() => originExcuteSync(command(...params))) || ''
       const response = stdout.toString().trim()
-      return typeof resolv === 'function' ? resolv(response) : stdout
+      return typeof resolv === 'function' ? resolv(response, true) : stdout
     }
 
     return excute

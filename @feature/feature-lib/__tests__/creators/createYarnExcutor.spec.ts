@@ -1,4 +1,4 @@
-import { createGitExcutor } from '@/services/createGitExcutor'
+import { createYarnExcutor } from '@/creators/createYarnExcutor'
 import { mockExec } from '@dumlj/feature-mock/src'
 
 const COMMAND_RESPONSE_MAP = {
@@ -19,9 +19,9 @@ jest.mock('command-exists', () => ({
   default: () => enableCommandExistsMock,
 }))
 
-describe('test services/createGitExcutor', () => {
+describe('test services/createYarnExcutor', () => {
   it('can create command function', async () => {
-    const excute = createGitExcutor(() => 'test')
+    const excute = createYarnExcutor(() => 'test')
     expect(typeof excute).toBe('function')
     expect(typeof excute.sync).toBe('function')
 
@@ -29,10 +29,10 @@ describe('test services/createGitExcutor', () => {
     expect(excute.sync()).toBe('ok')
   })
 
-  it('will return empty when git no install', async () => {
+  it('will return empty when yarn no install', async () => {
     enableCommandExistsMock = false
 
-    const excute = createGitExcutor(() => 'test')
+    const excute = createYarnExcutor(() => 'test')
     expect(await excute()).toBe('')
   })
 })

@@ -1,4 +1,4 @@
-import { createGitExcutor } from '../../services/createGitExcutor'
+import { createGitExcutor } from '../../creators/createGitExcutor'
 
 const command = () => 'git log --pretty="%an %ae%n%cn %ce"'
 
