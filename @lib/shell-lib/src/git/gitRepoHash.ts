@@ -1,6 +1,6 @@
+import { createGitExcutor } from '@/creators/createGitExcutor'
 import { getGitRepoUrl } from '@/git/gitRepoUrl'
 import crypto from 'crypto'
-import { createGitExcutor } from '@/creators/createGitExcutor'
 
 const command = () => 'git remote -v'
 

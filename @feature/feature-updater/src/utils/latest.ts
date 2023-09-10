@@ -16,7 +16,7 @@ const MIN_TIMEOUT = 0.2e3
 const CACHE_LATEST_VERSION = new Map<string, string>()
 
 /** 过去 NPM 发布时间命令 */
-const FETCH_NPM_PUBLISH_TIME_COMMAND = ([]: TemplateStringsArray, name: string) => `npm show ${name} time --json`
+const command = (name: string) => `npm show ${name} time --json`
 
 /** 最后版本 */
 export interface LatestOptions {
@@ -42,7 +42,7 @@ export const latest = async (name: string, options?: LatestOptions) => {
   }
 
   return new Promise<string>((resolve, reject) => {
-    const cp = exec(FETCH_NPM_PUBLISH_TIME_COMMAND`${name}`, (error, stdout) => {
+    const cp = exec(command(name), (error, stdout) => {
       // 清除超时
       timeId && clearTimeout(timeId)
 

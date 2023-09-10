@@ -1,4 +1,5 @@
 import { latest } from '@/utils/latest'
+import { mockLatest } from '@dumlj/mock-lib/src'
 
 const gTime = (time: number) => {
   const d = new Date()
@@ -25,12 +26,9 @@ const VERSIONS = {
 jest.mock('child_process', () => {
   return {
     __esModule: true,
-    exec(_: string, fn: (error: Error, stdout: string) => void) {
-      const fetch = () => fn(null, JSON.stringify(VERSIONS, null, 2))
-      Promise.resolve().then(fetch)
-
-      return {
-        kill: jest.fn(),
+    exec(command: string, fn: (error: Error, stdout: string) => void) {
+      if (0 === command.indexOf('npm show')) {
+        return mockLatest(VERSIONS)(command, fn)
       }
     },
   }
@@ -44,7 +42,6 @@ describe('test utils/latest', () => {
   })
 
   afterAll(() => {
-    jest.clearAllMocks()
     dateNowSpy.mockRestore()
   })
 

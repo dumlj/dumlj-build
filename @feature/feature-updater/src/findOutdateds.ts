@@ -1,8 +1,8 @@
-import semver from 'semver'
 import { npmDeclaredParents } from '@dumlj/shell-lib'
-import { latest as findLatestVersion, type LatestOptions as FindLatestVersionOptions } from './utils/latest'
-import { diff as diffVersion } from './utils/diff'
+import semver from 'semver'
 import { getPackageSource } from './getPackageSource'
+import { diff as diffVersion } from './utils/diff'
+import { latest as findLatestVersion, type LatestOptions as FindLatestVersionOptions } from './utils/latest'
 
 export interface FindOutdatedsOptions extends Omit<FindLatestVersionOptions, 'compareVersion'> {
   /** 依赖名 */

@@ -4,10 +4,16 @@ import { npmDeclaredDependencies } from './npmDeclaredDependencies'
 
 const command = (name: string) => `npm ls "${name}" --json --omit optional --omit peer`
 
-const travel = (dependencies: Dependencies): Package[] => {
+const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Package[] => {
   const resp = Object.keys(dependencies || {}).flatMap((name) => {
     const { version, dependencies: children } = dependencies[name]
-    const next = children ? travel(children) : []
+    const next = children ? travel(children, cache) : []
+    const token = `${name}###${version}`
+    if (cache.has(token)) {
+      return next
+    }
+
+    cache.add(token)
     return [].concat({ name, version }, next)
   })
 
