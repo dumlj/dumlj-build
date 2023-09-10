@@ -6,10 +6,8 @@
   "license": "MIT",
   "workspaces": {
     "packages": [
-      "@feature/*",
-      "@@webpack-plugin/*",
-      "@vite-plugin/*",
-      "@dumi-theme/*"
+      "@lib/*",
+      "@feature/*"
     ]
   },
   "scripts": {
