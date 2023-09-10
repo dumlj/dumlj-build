@@ -1,6 +1,5 @@
 import { createCommonExcutor } from '@/creators/createCommonExcutor'
 import type { Package } from '@/types'
-import { version } from 'typescript'
 
 const command = () => `npm ls --json --omit optional --omit peer --depth 0`
 
@@ -20,7 +19,7 @@ export const npmDeclaredDependencies = createCommonExcutor(command, (stdout) => 
       if (vers.has(token)) {
         return result
       }
-      
+
       vers.add(token)
       result.push({ name, version })
       return result

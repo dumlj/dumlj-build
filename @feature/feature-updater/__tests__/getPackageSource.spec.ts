@@ -4,7 +4,7 @@ const readJson = jest.fn(async () => ({ name: 'dumlj' }))
 
 jest.mock('fs-extra', () => {
   return {
-    readJson: (_: string) => readJson(),
+    readJson: () => readJson(),
   }
 })
 

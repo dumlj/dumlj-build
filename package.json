@@ -13,9 +13,11 @@
   },
   "scripts": {
     "clear": "rimraf ./@*/*/{libs,build,tsconfig.tsbuildinfo}",
+    "compile": "lerna exec --stream --scope @dumlj/* -- concurrently -P \"yarn:compile:* {1}\" --",
     "dev": "jest -c ./jest.config.ts --watch",
     "dev:docs": "dumi dev",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
+    "postinstall": "ts-patch install -s",
     "lint": "yarn lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix . --cache --cache-location \".eslintcache/\"",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit"
@@ -31,6 +33,7 @@
     "@typescript-eslint/parser": "^5.48.0",
     "commitizen": "^4.2.4",
     "commitlint-plugin-i18n": "^0.0.1-alpha.3",
+    "concurrently": "^8.2.1",
     "cz-customizable": "^7.0.0",
     "cz-customizable-i18n-config": "^0.0.1-alpha.2",
     "dumi": "^2.2.7",

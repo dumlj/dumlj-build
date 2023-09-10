@@ -1,0 +1,6 @@
+# Common Features
+
+## Standards
+
+- please name the project with `*-webpack-plugin`
+- please name the module with `@dumlj-build/*-webpack-plugin`
