@@ -1,11 +1,11 @@
 {
-  "name": "@dumlj/mock-lib",
+  "name": "@dumlj/seed-webpack-plugin",
   "version": "0.0.1",
-  "description": "mock 工具库",
+  "description": "种子插件",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@lib/mock-lib"
+    "directory": "@webpack-plugin/seed-webpack-plugin"
   },
   "license": "MIT",
   "author": {
@@ -27,7 +27,18 @@
     "dev": "yarn compile --watch"
   },
   "dependencies": {
+    "@dumlj/feature-updater": "^0.0.1",
+    "command-exists": "^1.2.9",
+    "semver": "^7.3.8",
     "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@dumlj/mock-lib": "^0.0.1",
+    "@types/webpack": "^5",
+    "utility-types": "^3.10.0"
+  },
+  "peerDependencies": {
+    "webpack": ">= 5 < 6"
   },
   "publishConfig": {
     "access": "public"
