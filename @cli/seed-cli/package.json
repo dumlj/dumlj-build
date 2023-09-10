@@ -1,0 +1,40 @@
+{
+  "name": "@dumlj/feature-updater",
+  "version": "0.0.1",
+  "description": "更新程序",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@services/updater"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "DavidJones",
+    "email": "qowera@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "DavidJones",
+      "email": "qowera@gmail.com"
+    }
+  ],
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "concurrently -c auto -P \"yarn:compile:* {1}\" --",
+    "compile:tsc": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn compile --watch"
+  },
+  "dependencies": {
+    "@dumlj/shell-lib": "^0.0.1",
+    "semver": "^7.3.8",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@dumlj/mock-lib": "^0.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
