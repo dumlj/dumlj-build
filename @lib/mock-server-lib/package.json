@@ -1,22 +1,26 @@
 {
-  "name": "@dumlj/mock-lib",
+  "name": "@dumlj/mock-server-lib",
   "version": "0.0.1",
-  "description": "mock 工具库",
+  "description": "mock 请求服务",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@lib/mock-lib"
+    "directory": "@lib/mock-server-lib"
   },
   "license": "MIT",
   "author": {
-    "name": "DavidJones",
-    "email": "qowera@gmail.com"
+    "name": "huangjianyong",
+    "email": "sexy.is.353016313@gmail.com"
   },
   "maintainers": [
     {
       "name": "DavidJones",
       "email": "qowera@gmail.com"
+    },
+    {
+      "name": "huangjianyong",
+      "email": "sexy.is.353016313@gmail.com"
     }
   ],
   "main": "./libs/index.js",
@@ -28,7 +32,7 @@
     "dev": "yarn compile --watch"
   },
   "dependencies": {
-    "tslib": "^2.5.0"
+    "msw": "^1.3.0"
   },
   "publishConfig": {
     "access": "public"
