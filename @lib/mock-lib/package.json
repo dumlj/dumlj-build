@@ -28,7 +28,8 @@
     "dev": "yarn compile --watch"
   },
   "dependencies": {
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "webpack": "^5.88.2"
   },
   "publishConfig": {
     "access": "public"

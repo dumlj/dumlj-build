@@ -12,6 +12,7 @@
     ]
   },
   "scripts": {
+    "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
     "clear": "rimraf ./@*/*/{libs,build,tsconfig.tsbuildinfo}",
     "compile": "lerna exec --stream --scope @dumlj/* -- concurrently -P \"yarn:compile:* {1}\" --",
     "dev": "jest -c ./jest.config.ts --watch",
