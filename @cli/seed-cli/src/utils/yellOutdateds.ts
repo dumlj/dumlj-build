@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import fs from 'fs-extra'
 import { readPackageSourceThroughBin } from './readPackageSourceThroughBin'
 
-interface YellOutdatedsOptions {
+export interface YellOutdatedsOptions {
   bin?: string
 }
 

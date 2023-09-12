@@ -49,5 +49,3 @@ describe('test pretty', () => {
     clearConsole()
   })
 })
-
-export {}

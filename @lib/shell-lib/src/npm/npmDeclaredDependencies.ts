@@ -1,6 +1,11 @@
 import { createCommonExcutor } from '@/creators/createCommonExcutor'
 import type { Package } from '@/types'
 
+export interface NpmDeclaredDependenciesResp {
+  name: string
+  version: string
+}
+
 const command = () => `npm ls --json --omit optional --omit peer --depth 0`
 
 /**
@@ -23,7 +28,7 @@ export const npmDeclaredDependencies = createCommonExcutor(command, (stdout) => 
       vers.add(token)
       result.push({ name, version })
       return result
-    }, [])
+    }, [] as NpmDeclaredDependenciesResp[])
   } catch (error) {
     return []
   }

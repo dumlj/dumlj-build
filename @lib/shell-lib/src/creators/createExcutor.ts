@@ -22,12 +22,12 @@ export type Comamnd = (...params: any[]) => string
  * 因为命令行返回均为字符串，
  * 所以大部分情况都需要进行数据处理
  */
-export type Resolve = (stdout: string, isSync: boolean) => any
+export type Resolve = (stdout: string, isSync: boolean) => unknown
 
 export const createExcutor = (preprocess: Preprocess) => {
   return <C extends Comamnd, R extends Resolve>(command: C, resolv?: R) => {
     type Params = Parameters<C>
-    type Response = TrimPromise<ReturnType<R>>
+    type Response = TrimPromise<ReturnType<R>> extends infer P ? unknown extends P ? string : P : never
 
     /** 异步 */
     const excute = async (...params: Params): Promise<Response> => {
