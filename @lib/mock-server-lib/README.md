@@ -47,7 +47,6 @@ export default async (): Promise<Config.InitialOptions> => ({
   // 配置 setup-jest
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
 })
-
 ```
 
 ### 增加 mock 路由

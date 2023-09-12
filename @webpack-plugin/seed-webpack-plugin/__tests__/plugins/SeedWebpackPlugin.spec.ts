@@ -1,6 +1,6 @@
-import { mockWebpack } from '@dumlj/mock-lib'
 import { OutdatedWebpackPlugin } from '@/plugins/OutdatedWebpackPlugin'
 import { SeedWebpackPlugin } from '@/plugins/SeedWebpackPlugin'
+import { mockWebpack } from '@dumlj/mock-lib'
 import type { Compiler } from 'webpack'
 
 describe('test plugins/SeedWebpackPlugin', () => {

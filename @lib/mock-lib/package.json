@@ -1,8 +1,8 @@
 {
   "name": "@dumlj/mock-lib",
   "version": "0.0.1",
-  "description": "mock 工具库",
   "private": true,
+  "description": "mock 工具库",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

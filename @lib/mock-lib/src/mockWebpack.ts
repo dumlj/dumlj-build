@@ -1,6 +1,6 @@
 import { fs, vol } from 'memfs'
-import webpack from 'webpack'
 import type { Compiler } from 'webpack'
+import webpack from 'webpack'
 
 export const mockWebpack = (files: Record<string, string>) => (webpackOptions?: webpack.Configuration) => {
   const { context = `/${Math.floor(Math.random() * 1e13).toString(32)}` } = webpackOptions
