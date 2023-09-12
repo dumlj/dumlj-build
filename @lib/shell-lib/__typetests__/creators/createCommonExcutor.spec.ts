@@ -1,4 +1,4 @@
-import { createExcutor } from '@/creators/createExcutor'
+import { createCommonExcutor } from '@/creators/createCommonExcutor'
 import { expectType } from 'tsd-lite'
 import { mockExec } from '@dumlj/mock-lib'
 
@@ -13,7 +13,7 @@ jest.mock('child_process', () => {
   }
 })
 
-describe('test creators/createExcutor', () => {
+describe('test creators/createCommonExcutor', () => {
   interface Excute<P extends any[], R> {
     (...params: P): Promise<R>
     sync(...params: P): R
@@ -21,22 +21,17 @@ describe('test creators/createExcutor', () => {
 
   it('can inherit command parameter inputs.', async () => {
     const fn = (id: string, flag?: boolean) => flag ? `${id}` : `unknown`
-    const create = createExcutor((excute) => excute())
-    expectType<Excute<[string, boolean?], string>>(create(fn))
+    expectType<Excute<[string, boolean?], string>>(createCommonExcutor(fn))
   })
 
   it('can inherit command return outputs.', async () => {
     const fn = () => 'x'
-    const create = createExcutor((excute) => excute())
-
-    expectType<Excute<[], number>>(create(fn, () => 1))
-    expectType<Excute<[], boolean>>(create(fn, () => false))
+    expectType<Excute<[], number>>(createCommonExcutor(fn, () => 1))
+    expectType<Excute<[], boolean>>(createCommonExcutor(fn, () => false))
   })
 
   it('can return string type when param `resolv` is not provided.', async () => {
-    const create = createExcutor((excute) => excute())
-    const excute = create(() => 'x')
-
+    const excute = createCommonExcutor(() => 'x')
     expectType<Promise<string>>(excute())
     expectType<string>(excute.sync())
   })
