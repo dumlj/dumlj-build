@@ -14,7 +14,7 @@ export const createPretty = (name: string) => {
   }
 
   return Object.keys(methods).reduce((result, method) => {
-    result[name] = (message: string | Error, options: Options = {}) => {
+    result[method] = (message: string | Error, options: Options = {}) => {
       return methods[method](message, { ...options, prefix: name })
     }
 
