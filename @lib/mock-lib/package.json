@@ -28,6 +28,7 @@
     "dev": "yarn compile --watch"
   },
   "dependencies": {
+    "memfs": "^4.2.1",
     "tslib": "^2.5.0",
     "webpack": "^5.88.2"
   },

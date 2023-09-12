@@ -9,12 +9,12 @@ export default (): Config.InitialOptions => ({
   preset: 'ts-jest',
   runner: 'jest-runner-tsd',
   coverageReporters: ['json', 'html', 'text', 'cobertura'],
+  testMatch: ['<rootDir>/__typetests__/**/*.spec.ts'],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(tsconfigPaths, {
       prefix: '<rootDir>',
     }),
   },
-  testMatch: ['<rootDir>/__typetests__/**/*.spec.ts'],
   globals: {
     'ts-jest': {
       // 必须设置 <rootDir> 否则无法读取

@@ -61,17 +61,17 @@ module.exports = {
         },
       },
     ],
-    // /** 引用必须在依赖中有声明 */
-    // 'import/no-extraneous-dependencies': [
-    //   'warn',
-    //   {
-    //     /**
-    //      * SRC 下不能有只声明在 devDependencies 的依赖
-    //      * 特定情况可以通过 `// eslint-disable-next-line import/no-extraneous-dependencies` 忽略
-    //      */
-    //     devDependencies: ['!**/src/**/*.(ts|tsx|js|jsx|mjs|cjs)'],
-    //   },
-    // ],
+    /** 引用必须在依赖中有声明 */
+    'import/no-extraneous-dependencies': [
+      'warn',
+      {
+        /**
+         * SRC 下不能有只声明在 devDependencies 的依赖
+         * 特定情况可以通过 `// eslint-disable-next-line import/no-extraneous-dependencies` 忽略
+         */
+        devDependencies: ['**/*.spec.ts'],
+      },
+    ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },

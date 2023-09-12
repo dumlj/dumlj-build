@@ -68,13 +68,18 @@ export const latest = async (name: string, options?: LatestOptions) => {
           return false
         }
 
+        if (!includes.includes(diff(compareVer, version))) {
+          return false
+        }
+
         // 保证必须是在当前版本之后发布
         if (![0, -1].includes(semver.parse(compareVer).compare(version))) {
           return false
         }
 
         // 确保在发布后一段时间执行它
-        if (!(Date.now() - new Date(response[version]).getTime() > sincePublish)) {
+        const delta = Date.now() - new Date(response[version]).getTime()
+        if (0 < delta && delta < sincePublish) {
           return false
         }
 
@@ -82,15 +87,9 @@ export const latest = async (name: string, options?: LatestOptions) => {
       })
 
       /** 按日期排序版本列表 */
-      const sortedVers = filteredVers.sort((prev, next) => new Date(response[prev]).getTime() - new Date(response[next]).getTime())
-      /** 对比版本类型 */
-      const verSet = sortedVers.map((version) => ({ version, type: diff(compareVer, version) }))
-      /** 最符合的版本类型 */
-      const verType = includes.find((type) => -1 !== verSet.findIndex((item) => item.type === type))
-      /** 最新版本 */
-      const { version: latestVer } = verSet.find(({ type }) => type === verType) || {}
+      const sortedVers = filteredVers.sort((prev, next) => new Date(response[next]).getTime() - new Date(response[prev]).getTime())
       /** 最终版本号 */
-      const finalVersion = latestVer || compareVer
+      const finalVersion = sortedVers?.[0] || compareVer
 
       // 缓存
       CACHE_LATEST_VERSION[CACHE_TOKEN] = finalVersion

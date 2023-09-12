@@ -8,12 +8,12 @@ export default (): Config.InitialOptions => ({
   verbose: false,
   preset: 'ts-jest',
   coverageReporters: ['json', 'html', 'text', 'cobertura'],
+  testMatch: ['<rootDir>/__tests__/**/*.spec.ts'],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(tsconfigPaths, {
       prefix: '<rootDir>',
     }),
   },
-  testMatch: ['<rootDir>/__tests__/**/*.spec.ts'],
   globals: {
     'ts-jest': {
       // 必须设置 <rootDir> 否则无法读取
