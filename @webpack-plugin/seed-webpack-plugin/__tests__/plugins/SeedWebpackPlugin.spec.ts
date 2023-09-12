@@ -8,7 +8,7 @@ describe('test plugins/SeedWebpackPlugin', () => {
     '/index.js': 'console.log("hi world")',
   })
 
-  it('is has apply method.', async () => {
+  it('is has a `apply` method.', async () => {
     const instance = new SeedWebpackPlugin()
     expect(instance.pluginName).toBe('seed-webpack-plugin')
     expect(instance).toHaveProperty('apply')

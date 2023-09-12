@@ -1,5 +1,5 @@
 {
-  "name": "@dumlj/feature-updater",
+  "name": "@dumlj/seed-cli",
   "version": "0.0.1",
   "description": "更新程序",
   "repository": {
@@ -27,12 +27,15 @@
     "dev": "yarn compile --watch"
   },
   "dependencies": {
-    "@dumlj/shell-lib": "^0.0.1",
-    "semver": "^7.3.8",
+    "@dumlj/feature-updater": "^0.0.1",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "fs-extra": "^11.1.0",
+    "chalk": "^4.1.2",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^0.0.1"
+    "@dumlj/mock-lib": "^0.0.1",
+    "memfs": "^4.2.1"
   },
   "publishConfig": {
     "access": "public"

@@ -59,19 +59,19 @@ describe('test utils/latest', () => {
   })
 
   it('can get preminor version', async () => {
-    expect(await latest('x', { includes: ['preminor'], compareVer: '1.0.0' })).toEqual('1.1.0-alpha.1')
+    expect(await latest('x', { includes: ['preminor'], compareVer: '1.0.0' })).toEqual('1.2.0-alpha.1')
     expect(await latest('x', { includes: ['preminor'], compareVer: '1.1.0' })).toEqual('1.2.0-alpha.1')
     expect(await latest('x', { includes: ['preminor'], compareVer: '1.2.0-alpha.1' })).toEqual('1.2.0-alpha.1')
 
-    expect(await latest('x', { includes: ['preminor', 'patch'], compareVer: '1.0.0' })).toEqual('1.1.0-alpha.1')
+    expect(await latest('x', { includes: ['preminor', 'patch'], compareVer: '1.0.0' })).toEqual('1.2.0-alpha.1')
   })
 
   it('can get minor version', async () => {
-    expect(await latest('x', { includes: ['minor'], compareVer: '1.0.0' })).toEqual('1.1.0')
+    expect(await latest('x', { includes: ['minor'], compareVer: '1.0.0' })).toEqual('1.2.0')
     expect(await latest('x', { includes: ['minor'], compareVer: '1.1.0' })).toEqual('1.2.0')
     expect(await latest('x', { includes: ['minor'], compareVer: '1.2.0' })).toEqual('1.2.0')
 
-    expect(await latest('x', { includes: ['minor', 'preminor'], compareVer: '1.0.0' })).toEqual('1.1.0')
+    expect(await latest('x', { includes: ['minor', 'preminor'], compareVer: '1.0.0' })).toEqual('1.2.0')
   })
 
   it('can get premajor version', async () => {
@@ -95,5 +95,9 @@ describe('test utils/latest', () => {
   it('can get version after the specified time', async () => {
     expect(await latest('x', { includes: ['major'], compareVer: '1.0.0', sincePublish: 3000 * 1e3 })).toEqual('1.0.0')
     expect(await latest('x', { includes: ['major'], compareVer: '1.0.0', sincePublish: 2000 * 1e3 })).toEqual('2.0.0')
+  })
+
+  it('support multiple includes', async () => {
+    expect(await latest('x', { includes: ['minor', 'preminor', 'patch', 'prepatch'], compareVer: '1.0.0' })).toEqual('1.2.0')
   })
 })

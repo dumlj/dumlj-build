@@ -16,7 +16,7 @@ export class OutdatedWebpackPlugin extends SeedWebpackPlugin {
   /** 是否已经检测过 */
   protected hasChecked?: boolean
 
-  /** 检查过期 */
+  /** 版本过期警告 */
   public async yellOutdateds() {
     // 检查过就不在检查
     if (this.hasChecked) {

@@ -8,6 +8,7 @@ export default (): Config.InitialOptions => ({
   verbose: false,
   preset: 'ts-jest',
   coverageReporters: ['json', 'html', 'text', 'cobertura'],
+  testMatch: ['<rootDir>/__tests__/**/*.spec.ts'],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(tsconfigPaths, {
       prefix: '<rootDir>',

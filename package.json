@@ -8,7 +8,8 @@
     "packages": [
       "@lib/*",
       "@feature/*",
-      "@webpack-plugin/*"
+      "@webpack-plugin/*",
+      "@cli/*"
     ]
   },
   "scripts": {
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
     "@commitlint/config-conventional": "^17.4.0",
+    "@jest/types": "^29.6.3",
     "@stackblitz/sdk": "^1.9.0",
     "@swc/helpers": "^0.5.2",
     "@tsd/typescript": "^5.2.2",

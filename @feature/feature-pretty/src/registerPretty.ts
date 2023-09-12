@@ -23,7 +23,9 @@ export const registerPretty = (color: typeof Color, registerOptions?: RegisterPr
 
   const { message, reason, prettyMessage } = pretty(info, options)
   const content = prefix ? `${prefix} ${message}` : message
+
+  const logs = typeof chalk[color] === 'function' ? chalk[color](content) : content
   // eslint-disable-next-line no-console
-  console.log(typeof chalk[color] === 'function' ? chalk[color](content) : content)
+  console.log(logs)
   return { message, reason, prettyMessage }
 }
