@@ -23,7 +23,7 @@
     "preinstall": "./scripts/preinstall",
     "postinstall": "ts-patch install -s",
     "lint": "yarn lint:ts",
-    "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix . --cache --cache-location \".eslintcache/\"",
+    "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit"
   },
   "devDependencies": {
@@ -61,9 +61,9 @@
     "rimraf": "^5.0.1",
     "shx": "^0.3.4",
     "ts-jest": "^29.1.1",
+    "tsd-lite": "^0.8.0",
     "ts-node": "^10.9.1",
     "ts-patch": "^3.0.2",
-    "tsd-lite": "^0.8.0",
     "tslib": "^2.5.0",
     "typescript": "^5.2.2",
     "typescript-transform-paths": "^3.4.6",

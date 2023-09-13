@@ -5,6 +5,7 @@ jest.mock('child_process', () => {
     'git log --pretty="%an %ae%n%cn %ce"': ['DavidJones qowera@gmail.com', 'David Jones qowera@qq.com'].join('\n'),
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
   return mockExec(COMMAND_RESPONSE_MAP)
 })

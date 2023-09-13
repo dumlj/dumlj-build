@@ -1,28 +1,3 @@
-const shellLib = require('@dumlj/shell-lib')
-const path = require('path')
-
-const libs = shellLib.yarnWorkspaces.sync()
-// 读取所有的工作目录的路径 格式 @webpack-plugin/seed-webpack-plugin
-const locations = libs.map((item) => item.location)
-
-// 创建所有的包的声明，packageDir 必须是包含包自身和根目录（符合 Node modules solution pattern）
-const noExtraneousOverrides = locations
-  // map to override rules pointing to local and root package.json for rule
-  .map(function (location) {
-    return {
-      files: [location + '/src/**/*'],
-      rules: {
-        'import/no-extraneous-dependencies': [
-          'error',
-          {
-            devDependencies: false,
-            packageDir: [__dirname, path.resolve(__dirname, location)],
-          },
-        ],
-      },
-    }
-  })
-
 module.exports = {
   /**
    * 设置为根目录
@@ -94,11 +69,10 @@ module.exports = {
          * SRC 下不能有只声明在 devDependencies 的依赖
          * 特定情况可以通过 `// eslint-disable-next-line import/no-extraneous-dependencies` 忽略
          */
-        devDependencies: ['**/*.spec.ts'],
+        devDependencies: ['**/*.spec.ts', '**/*/jest.config.*.ts'],
       },
     ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
-  overrides: noExtraneousOverrides,
 }

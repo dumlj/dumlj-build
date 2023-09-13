@@ -4,6 +4,7 @@ describe('mockServer test', () => {
       expect(res.status).toBe(200)
     })
   })
+
   test('mock path', async () => {
     await fetch('https://baidu.com').then(async (res) => {
       const text = await res.text()

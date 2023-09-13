@@ -2,6 +2,7 @@ import { yarnWorkspaces } from '@/yarn/yarnWorkspaces'
 import { WORKSPACES } from './__mocks__/constants'
 
 jest.mock('child_process', () => {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { WORKSPACES } = jest.requireActual<typeof import('./__mocks__/constants')>('./__mocks__/constants')
   const COMMAND_RESPONSE_MAP = {
     'yarn --json workspaces info': `{
@@ -10,6 +11,7 @@ jest.mock('child_process', () => {
     }`,
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
   return mockExec(COMMAND_RESPONSE_MAP)
 })

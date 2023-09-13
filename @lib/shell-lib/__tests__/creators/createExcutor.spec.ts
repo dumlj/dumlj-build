@@ -6,6 +6,7 @@ jest.mock('child_process', () => {
     'test id': 'ok',
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
   return mockExec(COMMAND_RESPONSE_MAP)
 })

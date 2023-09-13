@@ -6,6 +6,7 @@ jest.mock('child_process', () => {
     'git remote -v': ['origin  https://github.com/dumlj/dumlj.git (fetch)', 'origin  https://github.com/dumlj/dumlj.git (push)'].join('\n'),
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
   return mockExec(COMMAND_RESPONSE_MAP)
 })

@@ -14,7 +14,7 @@ export default async (): Promise<Config.InitialOptions> => {
       // prettier-ignore
       ...packages.flatMap((path) => [
         `<rootDir>/${path}/jest.config.unittest.ts`,
-        `<rootDir>/${path}/jest.config.tsd.ts`,
+        `<rootDir>/${path}/jest.config.typetest.ts`,
       ]),
     ],
   }

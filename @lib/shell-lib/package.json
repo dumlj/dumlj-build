@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "@dumlj/mock-lib": "^0.0.1",
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "tsd-lite": "^0.8.0"
   },
   "publishConfig": {
     "access": "public"
