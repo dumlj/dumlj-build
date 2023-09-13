@@ -1,16 +1,13 @@
 import { createCommonExcutor } from '@/creators/createCommonExcutor'
 import { expectType } from 'tsd-lite'
-import { mockExec } from '@dumlj/mock-lib'
-
-const { exec, execSync } = mockExec({
-  x: JSON.stringify({ name: 'x' }),
-})
 
 jest.mock('child_process', () => {
-  return {
-    exec,
-    execSync,
+  const COMMAND_RESPONSE_MAP = {
+    x: JSON.stringify({ name: 'x' }),
   }
+
+  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  return mockExec(COMMAND_RESPONSE_MAP)
 })
 
 describe('test creators/createCommonExcutor', () => {
@@ -20,7 +17,7 @@ describe('test creators/createCommonExcutor', () => {
   }
 
   it('can inherit command parameter inputs.', async () => {
-    const fn = (id: string, flag?: boolean) => flag ? `${id}` : `unknown`
+    const fn = (id: string, flag?: boolean) => (flag ? `${id}` : `unknown`)
     expectType<Excute<[string, boolean?], string>>(createCommonExcutor(fn))
   })
 

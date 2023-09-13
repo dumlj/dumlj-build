@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+process.env.RUNTIME = 'CLI'
+
+const fs = require('fs')
+const path = require('path')
+const cli = path.join(__dirname, '../libs/cli')
+
+if (fs.existsSync(cli)) {
+  require(cli)
+  return
+}
+
+const { execSync } = require('child_process')
+const { name } = JSON.parse(fs.readFileSync('./package.json').toString('utf-8'))
+
+// execSync('yarn lerna run', {
+//   cwd: path.join(__dirname, '..'),
+//   stdio: 'inherit',
+// })
+
+// require(cli)

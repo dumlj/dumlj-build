@@ -1,37 +1,16 @@
 import { latest } from '@/utils/latest'
-import { mockLatest } from '@dumlj/mock-lib/src'
-
-const gTime = (time: number) => {
-  const d = new Date()
-  d.setSeconds(time)
-  return d
-}
-
-const VERSIONS = {
-  created: gTime(1000),
-  modified: gTime(2001),
-  '1.0.0': gTime(1000),
-  '1.0.1-alpha.1': gTime(1010),
-  '1.0.1': gTime(1011),
-  '1.1.0-alpha.1': gTime(1010),
-  '1.1.0': gTime(1101),
-  '1.1.1-alpha.1': gTime(1110),
-  '1.1.1': gTime(1111),
-  '1.2.0-alpha.1': gTime(1200),
-  '1.2.0': gTime(1201),
-  '2.0.0-alpha.1': gTime(2000),
-  '2.0.0': gTime(2001),
-}
+import { gTime } from '../__mocks__/gTime'
 
 jest.mock('child_process', () => {
-  return {
-    __esModule: true,
-    exec(command: string, fn: (error: Error, stdout: string) => void) {
-      if (0 === command.indexOf('npm show')) {
-        return mockLatest(VERSIONS)(command, fn)
-      }
-    },
+  const { VERSIONS } = jest.requireActual<typeof import('../__mocks__/constants')>('../__mocks__/constants')
+  const { mockLatest } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  const exec = (command: string, fn: (error: Error, stdout: string) => void) => {
+    if (0 === command.indexOf('npm show')) {
+      return mockLatest(VERSIONS)(command, fn)
+    }
   }
+
+  return { exec }
 })
 
 describe('test utils/latest', () => {

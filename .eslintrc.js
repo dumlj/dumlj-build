@@ -3,7 +3,7 @@ const path = require('path')
 
 const libs = shellLib.yarnWorkspaces.sync()
 // 读取所有的工作目录的路径 格式 @webpack-plugin/seed-webpack-plugin
-const locations = libs.map(item => item.location)
+const locations = libs.map((item) => item.location)
 
 // 创建所有的包的声明，packageDir 必须是包含包自身和根目录（符合 Node modules solution pattern）
 const noExtraneousOverrides = locations

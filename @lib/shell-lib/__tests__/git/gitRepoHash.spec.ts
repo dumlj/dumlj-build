@@ -1,18 +1,14 @@
 import { gitRepoHash } from '@/git/gitRepoHash'
-import { mockExec } from '@dumlj/mock-lib/src'
 import crypto from 'crypto'
 
-const COMMAND_RESPONSE_MAP = {
-  'git remote -v': ['origin  https://github.com/dumlj/dumlj.git (fetch)', 'origin  https://github.com/dumlj/dumlj.git (push)'].join('\n'),
-}
+jest.mock('child_process', () => {
+  const COMMAND_RESPONSE_MAP = {
+    'git remote -v': ['origin  https://github.com/dumlj/dumlj.git (fetch)', 'origin  https://github.com/dumlj/dumlj.git (push)'].join('\n'),
+  }
 
-const { exec, execSync } = mockExec(COMMAND_RESPONSE_MAP)
-
-jest.mock('child_process', () => ({
-  __esModule: true,
-  exec: (command: string) => exec(command),
-  execSync: (command: string) => execSync(command),
-}))
+  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  return mockExec(COMMAND_RESPONSE_MAP)
+})
 
 describe('test git/gitRepoHash', () => {
   it('can find all contributors', async () => {

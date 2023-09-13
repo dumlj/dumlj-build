@@ -1,17 +1,13 @@
 import { excute, excuteSync } from '@/helpers/excute'
-import { mockExec } from '@dumlj/mock-lib/src'
 
-const COMMAND_RESPONSE_MAP = {
-  test: 'ok',
-}
+jest.mock('child_process', () => {
+  const COMMAND_RESPONSE_MAP = {
+    test: 'ok',
+  }
 
-const { exec, execSync } = mockExec(COMMAND_RESPONSE_MAP)
-
-jest.mock('child_process', () => ({
-  __esModule: true,
-  exec: (command: string) => exec(command),
-  execSync: (command: string) => execSync(command),
-}))
+  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  return mockExec(COMMAND_RESPONSE_MAP)
+})
 
 describe('test helper/excute', () => {
   it('can excute shell', async () => {

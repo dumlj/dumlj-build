@@ -5,7 +5,6 @@ const { packages } = workspaces
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
-    verbose: true,
     skipFilter: true,
     projects: [
       /**
@@ -14,7 +13,7 @@ export default async (): Promise<Config.InitialOptions> => {
        */
       // prettier-ignore
       ...packages.flatMap((path) => [
-        `<rootDir>/${path}/jest.config.ts`,
+        `<rootDir>/${path}/jest.config.unittest.ts`,
         `<rootDir>/${path}/jest.config.tsd.ts`,
       ]),
     ],

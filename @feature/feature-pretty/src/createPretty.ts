@@ -13,11 +13,14 @@ export const createPretty = (name: string) => {
     [K in keyof T]: (message: string | Error, options?: Omit<Options, 'prefix'>) => ReturnType<T[K]>
   }
 
-  return Object.keys(methods).reduce((result, method) => {
-    result[method] = (message: string | Error, options: Options = {}) => {
-      return methods[method](message, { ...options, prefix: name })
-    }
+  return Object.keys(methods).reduce(
+    (result, method) => {
+      result[method] = (message: string | Error, options: Options = {}) => {
+        return methods[method](message, { ...options, prefix: name })
+      }
 
-    return result
-  }, {} as TrimPrefixOption<typeof methods>)
+      return result
+    },
+    {} as TrimPrefixOption<typeof methods>
+  )
 }

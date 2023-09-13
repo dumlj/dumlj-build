@@ -1,37 +1,27 @@
 {
   "name": "@dumlj/seed-webpack-plugin",
   "version": "0.0.1",
-  "description": "种子插件",
+  "description": "Basic webpack plugins",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
     "directory": "@webpack-plugin/seed-webpack-plugin"
   },
   "license": "MIT",
-  "author": {
-    "name": "DavidJones",
-    "email": "qowera@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "DavidJones",
-      "email": "qowera@gmail.com"
-    }
-  ],
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
-    "compile": "concurrently -c auto -P \"yarn:compile:* {1}\" --",
-    "compile:tsc": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn compile --watch"
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn jest --watch",
+    "test": "yarn jest"
   },
   "dependencies": {
     "@dumlj/feature-updater": "^0.0.1",
+    "chalk": "^4.1.2",
     "command-exists": "^1.2.9",
     "semver": "^7.3.8",
     "tslib": "^2.5.0",
-    "chalk": "^4.1.2",
     "utility-types": "^3.10.0"
   },
   "devDependencies": {

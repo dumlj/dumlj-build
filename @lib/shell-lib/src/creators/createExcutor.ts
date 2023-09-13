@@ -27,7 +27,7 @@ export type Resolve = (stdout: string, isSync: boolean) => unknown
 export const createExcutor = (preprocess: Preprocess) => {
   return <C extends Comamnd, R extends Resolve>(command: C, resolv?: R) => {
     type Params = Parameters<C>
-    type Response = TrimPromise<ReturnType<R>> extends infer P ? unknown extends P ? string : P : never
+    type Response = TrimPromise<ReturnType<R>> extends infer P ? (unknown extends P ? string : P) : never
 
     /** 异步 */
     const excute = async (...params: Params): Promise<Response> => {

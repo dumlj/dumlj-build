@@ -1,28 +1,18 @@
 import { yarnWorkspaces } from '@/yarn/yarnWorkspaces'
-import { mockExec } from '@dumlj/mock-lib/src'
+import { WORKSPACES } from './__mocks__/constants'
 
-const WORKSPACES = {
-  '@dumlj/shell-lib': {
-    location: '@lib/shell-lib',
-    workspaceDependencies: [],
-    mismatchedWorkspaceDependencies: [],
-  },
-}
+jest.mock('child_process', () => {
+  const { WORKSPACES } = jest.requireActual<typeof import('./__mocks__/constants')>('./__mocks__/constants')
+  const COMMAND_RESPONSE_MAP = {
+    'yarn --json workspaces info': `{
+      "type": "log",
+      "data": ${JSON.stringify(JSON.stringify(WORKSPACES, null, 2))}
+    }`,
+  }
 
-const COMMAND_RESPONSE_MAP = {
-  'yarn --json workspaces info': `{
-    "type": "log",
-    "data": ${JSON.stringify(JSON.stringify(WORKSPACES, null, 2))}
-  }`,
-}
-
-const { exec, execSync } = mockExec(COMMAND_RESPONSE_MAP)
-
-jest.mock('child_process', () => ({
-  __esModule: true,
-  exec: (command: string) => exec(command),
-  execSync: (command: string) => execSync(command),
-}))
+  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  return mockExec(COMMAND_RESPONSE_MAP)
+})
 
 describe('test git/gitRootPath', () => {
   it('can get yarn regsitry url', async () => {

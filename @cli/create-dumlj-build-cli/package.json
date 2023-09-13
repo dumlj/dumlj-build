@@ -1,0 +1,29 @@
+{
+  "name": "@dumlj/create-dumlj-build-cli",
+  "version": "0.0.1",
+  "description": "模板生成",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@cli/create-dumlj-build-cli"
+  },
+  "license": "MIT",
+  "bin": "./bin/cli",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn jest --watch",
+    "test": "yarn jest"
+  },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "ts-jest": "^29.1.1"
+  }
+}

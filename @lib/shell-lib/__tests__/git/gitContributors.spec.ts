@@ -1,17 +1,13 @@
 import { gitContributors } from '@/git/gitContributors'
-import { mockExec } from '@dumlj/mock-lib/src'
 
-const COMMAND_RESPONSE_MAP = {
-  'git log --pretty="%an %ae%n%cn %ce"': ['DavidJones qowera@gmail.com', 'David Jones qowera@qq.com'].join('\n'),
-}
+jest.mock('child_process', () => {
+  const COMMAND_RESPONSE_MAP = {
+    'git log --pretty="%an %ae%n%cn %ce"': ['DavidJones qowera@gmail.com', 'David Jones qowera@qq.com'].join('\n'),
+  }
 
-const { exec, execSync } = mockExec(COMMAND_RESPONSE_MAP)
-
-jest.mock('child_process', () => ({
-  __esModule: true,
-  exec: (command: string) => exec(command),
-  execSync: (command: string) => execSync(command),
-}))
+  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
+  return mockExec(COMMAND_RESPONSE_MAP)
+})
 
 describe('test git/gitChangedFiles', () => {
   it('can find all contributors', async () => {

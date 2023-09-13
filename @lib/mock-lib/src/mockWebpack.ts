@@ -6,6 +6,7 @@ export const mockWebpack = (files: Record<string, string>) => (webpackOptions?: 
   const { context = `/${Math.floor(Math.random() * 1e13).toString(32)}` } = webpackOptions
 
   const compiler = webpack({
+    watch: false,
     context,
     entry: ['/index.js'],
     output: {
@@ -28,21 +29,19 @@ export const mockWebpack = (files: Record<string, string>) => (webpackOptions?: 
 
   return new Promise<{ compiler: Compiler; stats: webpack.Stats }>((resolve, reject) => {
     compiler.run((error, stats) => {
-      if (error) {
-        reject(error)
+      if (error || stats.hasErrors()) {
+        reject(error || stats.toString())
         return
       }
 
-      if (stats.hasErrors()) {
-        reject(stats.toString())
-        return
-      }
+      compiler.close((error) => {
+        if (error) {
+          reject(error)
+          return
+        }
 
-      resolve({ compiler, stats })
+        resolve({ compiler, stats })
+      })
     })
   })
 }
-
-afterEach(() => {
-  vol.reset()
-})

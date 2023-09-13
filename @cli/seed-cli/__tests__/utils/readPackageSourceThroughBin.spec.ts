@@ -1,7 +1,10 @@
-import { fs, vol } from 'memfs'
 import { readPackageSourceThroughBin } from '@/utils/readPackageSourceThroughBin'
+import { vol } from 'memfs'
 
-jest.mock('fs', () => fs)
+jest.mock('fs', () => {
+  const { fs } = jest.requireActual('memfs')
+  return fs
+})
 
 describe('test utils/readPackageSourceThroughBin', () => {
   afterEach(() => {
@@ -26,7 +29,7 @@ describe('test utils/readPackageSourceThroughBin', () => {
   it('will return null when pacakge.json not found.', async () => {
     vol.fromJSON({
       '/bin': 'echo "ok"',
-      '/packages/a/package.json': JSON.stringify({ name: 'a', bin: "./bin" }),
+      '/packages/a/package.json': JSON.stringify({ name: 'a', bin: './bin' }),
     })
 
     expect(await readPackageSourceThroughBin('/bin')).toBeNull()

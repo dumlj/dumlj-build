@@ -8,23 +8,13 @@
     "directory": "@feature/feature-pretty"
   },
   "license": "MIT",
-  "author": {
-    "name": "DavidJones",
-    "email": "qowera@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "DavidJones",
-      "email": "qowera@gmail.com"
-    }
-  ],
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
-    "compile": "concurrently -c auto -P \"yarn:compile:* {1}\" --",
-    "compile:tsc": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn compile --watch"
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn jest --watch",
+    "test": "yarn jest"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -32,7 +22,8 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/chalk": "^2.2.0"
+    "@types/chalk": "^2.2.0",
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"
