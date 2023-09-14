@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "baseUrl": ".",
     "rootDir": "src",
     "outDir": "libs",
@@ -11,5 +12,10 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "../../typings/**/*.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "../../@feature/feature-pretty/tsconfig.compile.json"
+    }
+  ]
 }

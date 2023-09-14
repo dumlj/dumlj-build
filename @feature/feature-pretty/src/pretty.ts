@@ -8,5 +8,5 @@ export const pretty = (info: string | Error, options?: Options) => {
   const pe = new PrettyError()
   const prettyMessage = pe.render(reason)
   const message = `${reason.message}${verbose === true ? `\n${prettyMessage}` : ''}`
-  return { message: prefix ? `[${prefix}] ${message}` : message, reason, prettyMessage }
+  return { message: prefix ? `${prefix} ${message}` : message, reason, prettyMessage }
 }

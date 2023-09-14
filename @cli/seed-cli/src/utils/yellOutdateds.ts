@@ -41,6 +41,11 @@ export const yellOutdateds = async (options?: YellOutdatedsOptions) => {
       warn(chalk.yellow(`${badge} ${message}`))
     }
   } catch (error) {
+    // 未发布的不进行对比
+    if (/npm ERR! code E404/.test(error?.message)) {
+      return
+    }
+
     fail(error)
   }
 }

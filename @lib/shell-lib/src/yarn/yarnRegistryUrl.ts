@@ -1,4 +1,4 @@
-import { createYarnExcutor } from '@/creators/createYarnExcutor'
+import { createYarnExcutor } from '../creators/createYarnExcutor'
 
 const command = () => 'yarn config get registry'
 

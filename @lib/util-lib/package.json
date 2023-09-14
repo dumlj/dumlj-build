@@ -1,0 +1,34 @@
+{
+  "name": "@dumlj/util-lib",
+  "version": "0.0.1",
+  "description": "util 工具库",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@lib/util-lib"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn jest --watch",
+    "test": "yarn jest"
+  },
+  "dependencies": {
+    "@jest/types": "^29.6.3",
+    "command-exists": "^1.2.9",
+    "fs-extra": "^11.1.1",
+    "semver": "^7.3.8",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@dumlj/mock-lib": "^0.0.1",
+    "ts-jest": "^29.1.1",
+    "tsd-lite": "^0.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

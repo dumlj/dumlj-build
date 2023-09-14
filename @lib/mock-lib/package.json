@@ -20,7 +20,8 @@
   "dependencies": {
     "memfs": "^4.2.1",
     "tslib": "^2.5.0",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "@jest/types": "^29.6.3"
   },
   "publishConfig": {
     "access": "public"

@@ -1,5 +1,5 @@
-import { createCommonExcutor } from '@/creators/createCommonExcutor'
-import type { Package } from '@/types'
+import { createCommonExcutor } from '../creators/createCommonExcutor'
+import type { Package } from '../types'
 
 export interface NpmDeclaredDependenciesResp {
   name: string

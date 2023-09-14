@@ -22,7 +22,8 @@
     "command-exists": "^1.2.9",
     "semver": "^7.3.8",
     "tslib": "^2.5.0",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
+    "@jest/types": "^29.6.3"
   },
   "devDependencies": {
     "@dumlj/mock-lib": "^0.0.1",

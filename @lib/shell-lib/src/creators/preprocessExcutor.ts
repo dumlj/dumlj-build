@@ -1,4 +1,4 @@
-import type { TrimPromise } from '@/utility-types/trim-promise'
+import type { TrimPromise } from '../utility-types/trim-promise'
 import type { Preprocess } from './createExcutor'
 
 export interface Excutor<P extends any[], R> {

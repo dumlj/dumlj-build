@@ -1,4 +1,4 @@
-import { createGitExcutor } from '@/creators/createGitExcutor'
+import { createGitExcutor } from '../creators/createGitExcutor'
 
 export interface GitCloneOptions {
   url: string

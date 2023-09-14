@@ -1,4 +1,4 @@
-import { createGitExcutor } from '@/creators/createGitExcutor'
+import { createGitExcutor } from '../creators/createGitExcutor'
 
 const command = () => `git status -s`
 

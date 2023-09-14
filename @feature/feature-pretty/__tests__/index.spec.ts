@@ -21,9 +21,9 @@ describe('test pretty', () => {
     for (const methodName of methodNames) {
       expect(instance).toHaveProperty(methodName)
       const res = instance[methodName](msg)
-      expect(res.message).toBe(`[${name}] ${msg}`)
+      expect(res.message).toBe(`${name} ${msg}`)
       const resWithVerbose = instance[methodName](msg, { verbose: true })
-      expect(resWithVerbose.message).toEqual(`[${name}] ${msg}\n${resWithVerbose.prettyMessage}`)
+      expect(resWithVerbose.message).toEqual(`${name} ${msg}\n${resWithVerbose.prettyMessage}`)
     }
   })
 
@@ -37,7 +37,7 @@ describe('test pretty', () => {
       if (methodName === 'debug') {
         expect(res).toBeUndefined()
       } else {
-        expect(res.message).toBe(`[${name}] ${msg}`)
+        expect(res.message).toBe(`${name} ${msg}`)
       }
     }
   })
@@ -47,7 +47,7 @@ describe('test pretty', () => {
     for (const methodName of methodNames) {
       expect(instance).toHaveProperty(methodName)
       const res = instance[methodName](new Error(msg))
-      expect(res.message).toBe(`[${name}] ${msg}`)
+      expect(res.message).toBe(`${name} ${msg}`)
     }
   })
 })

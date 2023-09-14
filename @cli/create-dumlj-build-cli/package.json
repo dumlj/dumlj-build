@@ -18,13 +18,16 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "tslib": "^2.5.0"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@dumlj/seed-cli": "^0.0.1",
+    "tslib": "^2.5.0",
+    "@jest/types": "^29.6.3",
+    "@dumlj/feature-pretty": "^0.0.1"
   },
   "devDependencies": {
     "ts-jest": "^29.1.1",
     "tsd-lite": "^0.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

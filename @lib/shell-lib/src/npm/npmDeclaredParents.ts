@@ -1,5 +1,5 @@
-import { createCommonExcutor } from '@/creators/createCommonExcutor'
-import type { Dependencies, Package } from '@/types'
+import { createCommonExcutor } from '../creators/createCommonExcutor'
+import type { Dependencies, Package } from '../types'
 import { npmDeclaredDependencies } from './npmDeclaredDependencies'
 
 const command = (name: string) => `npm ls "${name}" --json --omit optional --omit peer`

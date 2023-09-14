@@ -32,7 +32,8 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "msw": "^1.3.0"
+    "msw": "^1.3.0",
+    "@jest/types": "^29.6.3"
   },
   "publishConfig": {
     "access": "public"
