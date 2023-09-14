@@ -7,12 +7,12 @@ import depcheck from 'depcheck'
 import { findSiblingsVersion } from '../utils/findSiblingsVersion'
 import { info } from '../services/logger'
 
-export interface TidydepOptions {
+export interface TidyDepsOptions {
   /** 必要依赖 */
   dependencies?: string[]
 }
 
-export const tidydep = async (options?: TidydepOptions) => {
+export const tidyDeps = async (options?: TidyDepsOptions) => {
   const { dependencies: depPattern = ['src/**'] } = options
   const rootPath = await findWorkspaceRootPath()
   const workspaces = await yarnWorkspaces()

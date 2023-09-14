@@ -29,10 +29,10 @@
     "tslib": "^2.5.0",
     "@jest/types": "^29.6.3",
     "micromatch": "^4.0.5",
-    "@dumlj/shell-lib": "^0.0.1",
-    "@dumlj/feature-pretty": "^0.0.1",
     "@dumlj/util-lib": "^0.0.1",
-    "@dumlj/seed-cli": "^0.0.1"
+    "@dumlj/seed-cli": "^0.0.1",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "@dumlj/shell-lib": "^0.0.1"
   },
   "devDependencies": {
     "ts-jest": "^29.1.1",

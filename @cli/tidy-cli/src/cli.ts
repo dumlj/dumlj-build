@@ -1,7 +1,7 @@
 import { program } from 'commander'
 
-import './commands/tidydep'
-import './commands/tidytsc'
+import './commands/tidy-deps'
+import './commands/tidy-tscfg'
 
 const name = 'tidy'
 const defaultArgv = ['node', name]

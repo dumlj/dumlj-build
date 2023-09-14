@@ -5,14 +5,15 @@ import fs from 'fs-extra'
 import { yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { info } from '../services/logger'
-export interface TidytscOptions {
+
+export interface TidyTscfgOptions {
   /** basic tsconfig file in each project */
   tsconfig?: string
   /** name of tsconfig output */
   output?: string
 }
 
-export const tidytsc = async (options?: TidytscOptions) => {
+export const tidyTscfg = async (options?: TidyTscfgOptions) => {
   const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json' } = options || {}
   /** root path in workspaces */
   const rootPath = await findWorkspaceRootPath()
