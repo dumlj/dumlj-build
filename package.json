@@ -26,7 +26,8 @@
     "lint": "yarn lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
-    "ok": "yarn format && yarn lint && yarn test"
+    "tidy": "dumlj-tidy tscfg && dumlj-tidy deps",
+    "ok": "yarn format && yarn lint && yarn tidy && yarn test"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",

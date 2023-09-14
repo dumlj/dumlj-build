@@ -1,14 +1,13 @@
 {
-  "name": "@dumlj/create-dumlj-build-cli",
+  "name": "@dumlj/feature-prepare",
   "version": "0.0.1",
-  "description": "模板生成",
+  "description": "代码源文件预处理工具",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@cli/create-dumlj-build-cli"
+    "directory": "@feature/feature-prepare"
   },
   "license": "MIT",
-  "bin": "./bin/cli",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "scripts": {
@@ -18,14 +17,14 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/seed-cli": "^0.0.1",
-    "tslib": "^2.5.0",
+    "fs-extra": "^11.1.0",
     "@jest/types": "^29.6.3",
-    "@dumlj/feature-pretty": "^0.0.1"
+    "interpret": "^1.4.0",
+    "rechoir": "^0.6.2",
+    "get-tsconfig": "^4.7.0"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
-    "tsd-lite": "^0.8.0"
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

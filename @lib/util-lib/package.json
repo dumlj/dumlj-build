@@ -18,15 +18,11 @@
   },
   "dependencies": {
     "@jest/types": "^29.6.3",
-    "command-exists": "^1.2.9",
     "fs-extra": "^11.1.1",
-    "semver": "^7.3.8",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^0.0.1",
-    "ts-jest": "^29.1.1",
-    "tsd-lite": "^0.8.0"
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

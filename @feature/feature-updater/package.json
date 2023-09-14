@@ -5,7 +5,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@services/updater"
+    "directory": "@feature/feature-updater"
   },
   "license": "MIT",
   "main": "./libs/index.js",
@@ -25,8 +25,7 @@
   },
   "devDependencies": {
     "@dumlj/mock-lib": "^0.0.1",
-    "ts-jest": "^29.1.1",
-    "tsd-lite": "^0.8.0"
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

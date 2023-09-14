@@ -18,15 +18,11 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^0.0.1",
     "tslib": "^2.5.0",
     "@jest/types": "^29.6.3"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^0.0.1",
-    "@types/webpack": "^5",
-    "ts-jest": "^29.1.1",
-    "tsd-lite": "^0.8.0"
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "webpack": "5.x"
