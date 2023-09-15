@@ -1,8 +1,13 @@
 import path from 'path'
 import fs from 'fs-extra'
 
-export const findWorkspaceRootPath = async () => {
-  const lookup = [...module.paths]
+interface FindWorkspaceRootPathOptions {
+  paths?: string[]
+}
+
+export const findWorkspaceRootPath = async (options?: FindWorkspaceRootPathOptions) => {
+  const { paths = [...module.paths] } = options || {}
+  const lookup = [...paths]
   do {
     const current = lookup.shift()
     const folder = path.dirname(current)

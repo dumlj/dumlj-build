@@ -35,7 +35,8 @@
     "@dumlj/shell-lib": "^0.0.1"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "memfs": "^4.2.1"
   },
   "publishConfig": {
     "access": "public"

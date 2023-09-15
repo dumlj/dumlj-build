@@ -13,12 +13,14 @@ export interface TidyDepsOptions {
   src?: string
   /** 必要依赖 */
   necessary?: string | string[]
+  /** node_modules 寻址路径, module.paths */
+  paths?: string[]
 }
 
 export const tidyDeps = async (options?: TidyDepsOptions) => {
-  const { necessary: inNecessary = ['tslib'], src: srcPattern = 'src/**' } = options
+  const { necessary: inNecessary = ['tslib'], src: srcPattern = 'src/**', paths = [...module.paths] } = options
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')
-  const rootPath = await findWorkspaceRootPath()
+  const rootPath = await findWorkspaceRootPath({ paths })
   const workspaces = await yarnWorkspaces()
 
   await Promise.all(
@@ -35,12 +37,10 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       await Promise.all(
         Object.keys(missing).map(async (name) => {
           const version = await findSiblingsVersion(name)
-          const isDev =
-            -1 ===
-            missing[name].findIndex((file) => {
-              const relativePath = path.relative(absPath, file)
-              return micromatch.isMatch(relativePath, srcPattern)
-            })
+          const isDev = !missing[name].find((file) => {
+            const relativePath = path.relative(absPath, file)
+            return micromatch.isMatch(relativePath, srcPattern)
+          })
 
           isDev ? (devDependencies[name] = `^${version}`) : (dependencies[name] = `^${version}`)
         })

@@ -12,18 +12,22 @@ export const findSiblingsVersion = async (name: string) => {
     // nothings todo...
   }
 
-  let current = require.resolve(name)
-  do {
-    const pkgFile = path.join(path.dirname(current), packageJson)
-    if (await fs.pathExists(pkgFile)) {
-      const source = await fs.readJson(pkgFile)
-      if (source.name == name) {
-        return source.version
+  try {
+    let current = require.resolve(name)
+    do {
+      const pkgFile = path.join(path.dirname(current), packageJson)
+      if (await fs.pathExists(pkgFile)) {
+        const source = await fs.readJson(pkgFile)
+        if (source.name == name) {
+          return source.version
+        }
       }
-    }
 
-    current = path.dirname(current)
-  } while (!['.', '/'].includes(current))
+      current = path.dirname(current)
+    } while (!['.', '/'].includes(current))
+  } catch (error) {
+    // nothing todo...
+  }
 
   return excute(`npm view ${name} version`)
 }
