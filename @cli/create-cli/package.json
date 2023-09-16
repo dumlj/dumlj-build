@@ -32,7 +32,8 @@
     "typescript": "^5.2.2",
     "lodash": "^4.17.21",
     "@dumlj/feature-pretty": "^0.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "chalk": "^4.1.2"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
