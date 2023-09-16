@@ -1,7 +1,7 @@
 import { clearConsole } from '@/index'
 
 const name = 'CREATE_PRETTY'
-const methodNames = ['debug', 'success', 'info', 'warn', 'fail'] as const
+const methodNames = ['debug', 'ok', 'info', 'warn', 'fail'] as const
 const msg = 'test message'
 
 describe('test pretty', () => {

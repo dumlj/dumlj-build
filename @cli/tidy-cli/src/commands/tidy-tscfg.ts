@@ -6,6 +6,6 @@ program
   .command('tscfg')
   .option('--tsconfig <tsconfig>', 'specify base tsconfig.json for each project')
   .option('--output <output>', 'specify the name of the tsconfig.json output.')
-  .action((options?: TidyTscfgOptions) => {
-    tryAction(tidyTscfg)(options)
-  })
+  .option('--inlcude <inlcude>', 'specify pattern of filter out included projects.')
+  .option('--exclude <exclude>', 'specify pattern of filter out excluded projects.')
+  .action((options?: TidyTscfgOptions) => tryAction(tidyTscfg)(options))

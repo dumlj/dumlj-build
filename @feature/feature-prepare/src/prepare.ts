@@ -17,13 +17,14 @@ export interface PrepareOptions {
   ts?: {
     /** tsconfig.json 名称 */
     configFile?: string
-    afterResolveTSConfigFile?(stats: { ts: string; tsconfig: string }): void
+    onResolved?(stats: { ts: string; tsconfig: string }): void
   }
 }
 
+/** 预处理文件 */
 export const prepare = async <M = any>(file: string, options?: PrepareOptions): Promise<M> => {
   const { cwd = process.cwd(), ts } = options || {}
-  const { configFile: tsConfigFile = 'tsconfig.json', afterResolveTSConfigFile } = ts || {}
+  const { configFile: tsConfigFile = 'tsconfig.json', onResolved } = ts || {}
 
   const filePath = path.isAbsolute(file) ? file : path.join(cwd, file)
   const extname = path.extname(filePath)
@@ -39,10 +40,10 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
         if (await fs.pathExists(tsConfig)) {
           process.env.TS_NODE_COMPILER_OPTIONS = JSON.stringify(parseTsconfig(tsConfig))
 
-          if (typeof afterResolveTSConfigFile === 'function') {
+          if (typeof onResolved === 'function') {
             const ts = path.relative(cwd, file)
             const tsconfig = path.relative(cwd, tsConfig)
-            afterResolveTSConfigFile({ ts, tsconfig })
+            onResolved({ ts, tsconfig })
           }
         }
 

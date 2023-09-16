@@ -4,7 +4,7 @@ import { registerPretty } from './registerPretty'
 export const debug = registerPretty('cyan', { onlyShowInVerbose: true })
 
 /** 成功 */
-export const success = registerPretty('greenBright', { prefix: '✨' })
+export const ok = registerPretty('greenBright', { prefix: '✨' })
 
 /** 信息 */
 export const info = registerPretty('cyanBright')

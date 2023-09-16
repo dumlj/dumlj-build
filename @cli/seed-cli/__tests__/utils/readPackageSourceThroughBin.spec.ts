@@ -1,10 +1,8 @@
 import { readPackageSourceThroughBin } from '@/utils/readPackageSourceThroughBin'
 import { vol } from 'memfs'
 
-jest.mock('fs', () => {
-  const { fs } = jest.requireActual('memfs')
-  return fs
-})
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
 
 describe('test utils/readPackageSourceThroughBin', () => {
   afterEach(() => {

@@ -17,12 +17,12 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@jest/types": "^29.6.3",
     "fs-extra": "^11.1.1",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
     "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3",
     "memfs": "^4.2.1"
   },
   "publishConfig": {

@@ -2,6 +2,7 @@ import chalk from 'chalk'
 import isEqual from 'lodash/isEqual'
 import path from 'path'
 import fs from 'fs-extra'
+import micromatch from 'micromatch'
 import { yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { info } from '../services/logger'
@@ -11,13 +12,38 @@ export interface TidyTscfgOptions {
   tsconfig?: string
   /** name of tsconfig output */
   output?: string
+  /**
+   * pattern of filter out included projects
+   * @example
+   * ['packages/*']
+   */
+  include?: string | string[]
+  /**
+   * pattern of filter out excluded projects
+   * @example
+   * ['__tests__/*']
+   */
+  exclude?: string | string[]
 }
 
 export const tidyTscfg = async (options?: TidyTscfgOptions) => {
-  const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json' } = options || {}
+  const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json', include: inInclude, exclude: inExclude } = options || {}
+  const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
+  const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
+
   /** root path in workspaces */
   const rootPath = await findWorkspaceRootPath()
-  const workspaces = await yarnWorkspaces()
+  const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
+    if (Array.isArray(include) && include.length > 0) {
+      return micromatch.isMatch(location, include)
+    }
+
+    if (Array.isArray(exclude) && exclude.length > 0) {
+      return !micromatch.isMatch(location, exclude)
+    }
+
+    return true
+  })
 
   const updates: string[] = []
   const created: string[] = []

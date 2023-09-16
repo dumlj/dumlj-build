@@ -18,13 +18,17 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
-    "@jest/types": "^29.6.3",
+    "get-tsconfig": "^4.7.0",
     "interpret": "^1.4.0",
-    "rechoir": "^0.6.2",
-    "get-tsconfig": "^4.7.0"
+    "rechoir": "^0.6.2"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1"
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1",
+    "memfs": "^4.2.1"
+  },
+  "peerDependencies": {
+    "ts-node": "^10.9.1"
   },
   "publishConfig": {
     "access": "public"

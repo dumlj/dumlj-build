@@ -20,13 +20,13 @@
     "@dumlj/feature-updater": "^0.0.1",
     "chalk": "^4.1.2",
     "tslib": "^2.5.0",
-    "utility-types": "^3.10.0",
-    "@jest/types": "^29.6.3"
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
     "@dumlj/mock-lib": "^0.0.1",
     "@types/webpack": "^5",
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3"
   },
   "peerDependencies": {
     "webpack": "5.x"

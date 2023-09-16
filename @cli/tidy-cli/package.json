@@ -12,8 +12,6 @@
   "bin": {
     "dumlj-tidy": "./bin/cli"
   },
-  "main": "./libs/index.js",
-  "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
@@ -21,22 +19,24 @@
     "test": "yarn jest"
   },
   "dependencies": {
+    "@dumlj/feature-pretty": "^0.0.1",
+    "@dumlj/seed-cli": "^0.0.1",
+    "@dumlj/shell-lib": "^0.0.1",
+    "@dumlj/util-lib": "^0.0.1",
     "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "depcheck": "^1.4.6",
     "fs-extra": "^11.1.1",
     "lodash": "^4.17.21",
-    "tslib": "^2.5.0",
-    "@jest/types": "^29.6.3",
     "micromatch": "^4.0.5",
-    "@dumlj/util-lib": "^0.0.1",
-    "@dumlj/seed-cli": "^0.0.1",
-    "@dumlj/feature-pretty": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
-    "memfs": "^4.2.1"
+    "@jest/types": "^29.6.3",
+    "@types/lodash": "^4.14.198",
+    "@types/micromatch": "^4.0.2",
+    "memfs": "^4.2.1",
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

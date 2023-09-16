@@ -15,13 +15,37 @@ export interface TidyDepsOptions {
   necessary?: string | string[]
   /** node_modules 寻址路径, module.paths */
   paths?: string[]
+  /**
+   * pattern of filter out included projects
+   * @example
+   * ['packages/*']
+   */
+  include?: string | string[]
+  /**
+   * pattern of filter out excluded projects
+   * @example
+   * ['__tests__/*']
+   */
+  exclude?: string | string[]
 }
 
 export const tidyDeps = async (options?: TidyDepsOptions) => {
-  const { necessary: inNecessary = ['tslib'], src: srcPattern = 'src/**', paths = [...module.paths] } = options
+  const { necessary: inNecessary = ['tslib'], src: srcPattern = 'src/**', paths = [...module.paths], include: inInclude, exclude: inExclude } = options
+  const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
+  const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')
   const rootPath = await findWorkspaceRootPath({ paths })
-  const workspaces = await yarnWorkspaces()
+  const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
+    if (Array.isArray(include) && include.length > 0) {
+      return micromatch.isMatch(location, include)
+    }
+
+    if (Array.isArray(exclude) && exclude.length > 0) {
+      return !micromatch.isMatch(location, exclude)
+    }
+
+    return true
+  })
 
   await Promise.all(
     workspaces.map(async ({ location }) => {

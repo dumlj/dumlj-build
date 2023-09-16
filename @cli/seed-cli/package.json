@@ -20,13 +20,13 @@
     "chalk": "^4.1.2",
     "fs-extra": "^11.1.0",
     "tslib": "^2.5.0",
-    "@jest/types": "^29.6.3",
     "@dumlj/feature-updater": "^0.0.1",
     "@dumlj/feature-pretty": "^0.0.1"
   },
   "devDependencies": {
     "memfs": "^4.2.1",
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,28 @@
+{
+  "name": "@dumlj/feature-cliui",
+  "version": "0.0.1",
+  "description": "{{description}}",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@feature/feature-cliui"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "scripts": {
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "yarn jest --watch",
+    "test": "yarn jest"
+  },
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

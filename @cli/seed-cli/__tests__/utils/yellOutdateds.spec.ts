@@ -2,6 +2,9 @@ import { yellOutdateds } from '@/utils/yellOutdateds'
 import chalk from 'chalk'
 import { vol } from 'memfs'
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
+
 jest.mock('child_process', () => {
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { VERSIONS } = jest.requireActual<typeof import('../__mocks__/constants')>('../__mocks__/constants')
@@ -14,11 +17,6 @@ jest.mock('child_process', () => {
   }
 
   return { exec }
-})
-
-jest.mock('fs', () => {
-  const { fs } = jest.requireActual('memfs')
-  return fs
 })
 
 describe('test utils/yellOutdateds', () => {

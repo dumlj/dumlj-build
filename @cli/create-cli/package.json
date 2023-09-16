@@ -1,16 +1,17 @@
 {
-  "name": "@dumlj/create-dumlj-build-cli",
+  "name": "@dumlj/create-cli",
   "version": "0.0.1",
-  "description": "模板生成",
+  "description": "模板生成工具",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@cli/create-dumlj-build-cli"
+    "directory": "@cli/create-cli"
   },
   "license": "MIT",
-  "bin": "./bin/cli",
-  "main": "./libs/index.js",
-  "types": "./libs/index.d.ts",
+  "bin": {
+    "dumlj-create": "./bin/cli"
+  },
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
@@ -18,10 +19,24 @@
     "test": "yarn jest"
   },
   "dependencies": {
+    "@dumlj/feature-prepare": "^0.0.1",
+    "@dumlj/seed-cli": "^0.0.1",
+    "@dumlj/shell-lib": "^0.0.1",
+    "@dumlj/util-lib": "^0.0.1",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.4",
+    "inquirer": "^6.5.2",
+    "ts-morph": "^19.0.0",
     "tslib": "^2.5.0",
-    "@jest/types": "^29.6.3"
+    "typescript": "^5.2.2",
+    "lodash": "^4.17.21",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "prettier": "^3.0.3"
   },
   "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@types/inquirer": "^9.0.3",
     "ts-jest": "^29.1.1"
   },
   "publishConfig": {
