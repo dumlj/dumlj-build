@@ -1,13 +1,16 @@
-#!/usr/bin/env node
+#!/usr/bin/env ts-node
 
 const fs = require('fs-extra')
 const { execSync } = require('child_process')
-
-execSync('ts-patch install -s', { stdio: 'inherit' })
+const tasks = ['ts-patch install -s']
 
 if (fs.pathExistsSync('tsconfig.build.json')) {
-  execSync('tsc --build ./tsconfig.build.json', { stdio: 'inherit' })
+  tasks.push('tsc --build ./tsconfig.build.json')
 } else {
-  execSync('lerna run compile --parallel --include-filtered-dependencies --scope=@dumlj/tidy-cli', { stdio: 'inherit' })
-  execSync('dumlj-tidy --exclude \"*/__template__\"', { stdio: 'inherit' })
+  tasks.push(...[
+    'lerna run compile --parallel --include-filtered-dependencies --scope=@dumlj/tidy-cli',
+    'dumlj-tidy --exclude \"*/__template__\"',
+  ])
 }
+
+tasks.forEach((command) => execSync(command), { stdio: 'inherit' })
