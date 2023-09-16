@@ -1,10 +1,10 @@
 #!/usr/bin/env ts-node
 
-const fs = require('fs-extra')
+const fs = require('fs')
 const { execSync } = require('child_process')
 const tasks = ['ts-patch install -s']
 
-if (fs.pathExistsSync('tsconfig.build.json')) {
+if (fs.existsSync('tsconfig.build.json')) {
   tasks.push('tsc --build ./tsconfig.build.json')
 } else {
   tasks.push(...[
@@ -13,4 +13,4 @@ if (fs.pathExistsSync('tsconfig.build.json')) {
   ])
 }
 
-tasks.forEach((command) => execSync(command), { stdio: 'inherit' })
+tasks.forEach((command) => execSync(command, { stdio: 'inherit' }))
