@@ -1,3 +1,5 @@
+import chalk from 'chalk'
+import trimEnd from 'lodash/trimEnd'
 import kebabCase from 'lodash/kebabCase'
 import fs from 'fs-extra'
 import path from 'path'
@@ -173,5 +175,13 @@ export const create = async (options?: CreateOptions) => {
     })
   )
 
-  ok(`Module ${name} has been initialized. The module path is ${output}.`)
+  const stats = [
+    ['name', name],
+    ['description', description],
+    ['template', template.name],
+    ['path', trimEnd(dist, '/')],
+  ]
+
+  const statsText = stats.map(([name, value]) => `${chalk.gray(name)}: ${chalk.bold.cyan(value)}`).join('\n - ')
+  ok(`Module ${name} has been initialized.${chalk.gray(`\n - ${statsText}`)}`)
 }
