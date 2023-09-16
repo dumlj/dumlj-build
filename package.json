@@ -15,18 +15,16 @@
   },
   "scripts": {
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
-    "clear": "rimraf ./@*/*/{libs,build,*.tsbuildinfo}",
-    "compile": "yarn tidy && tsc --build ./tsconfig.build.json",
-    "dev": "jest -c ./jest.config.ts --watch",
-    "dev:docs": "dumi dev",
-    "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "preinstall": "./scripts/preinstall",
-    "pre:compile": "lerna run compile --parallel --include-filtered-dependencies --scope=@dumlj/tidy-cli",
-    "postinstall": "ts-patch install -s && yarn pre:compile && yarn tidy",
+    "postinstall": "./scripts/postinstall",
+    "clear": "rimraf ./@*/*/{libs,build,*.tsbuildinfo}",
+    "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "yarn lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
+    "tidy": "dumlj-tidy --exclude \"*/__template__\"",
+    "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
-    "tidy": "dumlj-tidy tscfg --exclude \"*/__template__\" && dumlj-tidy deps --exclude \"*/__template__\"",
+    "dev": "jest -c ./jest.config.ts --watch",
     "ok": "yarn format && yarn lint && yarn tidy && yarn test"
   },
   "devDependencies": {
@@ -71,6 +69,5 @@
     "typescript": "^5.2.2",
     "typescript-transform-paths": "^3.4.6",
     "utility-types": "^3.10.0"
-  },
-  "packageManager": "yarn@1.22.1"
+  }
 }
