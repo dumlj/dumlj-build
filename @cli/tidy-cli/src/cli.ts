@@ -2,6 +2,7 @@ import { program } from 'commander'
 
 import './commands/tidy-deps'
 import './commands/tidy-tscfg'
+import './commands/tidy-readme'
 import './commands/tidy'
 
 const name = 'tidy'

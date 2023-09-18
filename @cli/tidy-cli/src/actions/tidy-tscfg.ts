@@ -12,6 +12,8 @@ export interface TidyTscfgOptions {
   tsconfig?: string
   /** name of tsconfig output */
   output?: string
+  /** node_modules 寻址路径, module.paths */
+  paths?: string[]
   /**
    * pattern of filter out included projects
    * @example
@@ -27,12 +29,12 @@ export interface TidyTscfgOptions {
 }
 
 export const tidyTscfg = async (options?: TidyTscfgOptions) => {
-  const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json', include: inInclude, exclude: inExclude } = options || {}
+  const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json', paths, include: inInclude, exclude: inExclude } = options || {}
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
 
   /** root path in workspaces */
-  const rootPath = await findWorkspaceRootPath()
+  const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
   const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
     if (Array.isArray(include) && include.length > 0) {
       return micromatch.isMatch(location, include)

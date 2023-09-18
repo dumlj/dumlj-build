@@ -34,7 +34,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')
-  const rootPath = await findWorkspaceRootPath({ paths })
+  const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
   const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
     if (Array.isArray(include) && include.length > 0) {
       return micromatch.isMatch(location, include)
