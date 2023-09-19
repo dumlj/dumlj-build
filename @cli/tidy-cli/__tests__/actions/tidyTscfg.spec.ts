@@ -3,34 +3,30 @@ import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
-
-jest.mock('child_process', () => {
-  const WORKSPACES = {
-    a: {
-      location: 'packages/a',
-      workspaceDependencies: [],
-      mismatchedWorkspaceDependencies: [],
-    },
-    b: {
-      location: 'packages/b',
-      workspaceDependencies: ['a'],
-      mismatchedWorkspaceDependencies: [],
-    },
-  }
-
-  const COMMAND_RESPONSE_MAP = {
-    'yarn --json workspaces info': `{
-      "type": "log",
-      "data": ${JSON.stringify(JSON.stringify(WORKSPACES, null, 2))}
-    }`,
-  }
-
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib/src')>('@dumlj/mock-lib/src')
-  return mockExec(COMMAND_RESPONSE_MAP)
-})
+jest.mock('@dumlj/shell-lib')
 
 describe('test actions/tidyTscfg', () => {
+  beforeAll(async () => {
+    const { yarnWorkspaces } = await import('@dumlj/shell-lib')
+    jest.isMockFunction(yarnWorkspaces) &&
+      yarnWorkspaces.mockImplementation(async () => {
+        return [
+          {
+            name: 'a',
+            location: 'packages/a',
+            workspaceDependencies: [],
+            mismatchedWorkspaceDependencies: [],
+          },
+          {
+            name: 'b',
+            location: 'packages/b',
+            workspaceDependencies: ['a'],
+            mismatchedWorkspaceDependencies: [],
+          }
+        ]
+      })
+  })
+
   beforeEach(() => {
     vol.reset()
 
