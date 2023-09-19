@@ -10,7 +10,7 @@ describe('test prepare', () => {
   beforeEach(() => {
     vol.fromJSON({
       '/tsconfig.json': JSON.stringify({}),
-      '/index.ts': 'export const content = "ok"',
+      '/index.ts': '/* @see jest.mock("/index.ts", ...) */',
     })
   })
 

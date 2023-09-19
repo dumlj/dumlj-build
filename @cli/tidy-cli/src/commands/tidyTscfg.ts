@@ -1,6 +1,6 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { tidyTscfg, type TidyTscfgOptions } from '../actions/tidy-tscfg'
+import { tidyTscfg, type TidyTscfgOptions } from '../actions/tidyTscfg'
 
 program
   .command('tscfg')

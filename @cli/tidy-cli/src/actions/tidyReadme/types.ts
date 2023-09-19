@@ -9,7 +9,7 @@ export interface ReadmeConfig {
    * @description
    * 渲染引擎传入的数据
    */
-  metadatas?: Record<string, () => Promise<any>>
+  metadatas?: Record<string, any | (() => Promise<any>)>
   /**
    * 辅助函数
    * @description

@@ -1,18 +1,18 @@
 import fs from 'fs-extra'
 import path from 'path'
 import micromatch from 'micromatch'
-import { gitContributors, gitRepoUrl, yarnRegistryUrl, yarnWorkspaces } from '@dumlj/shell-lib'
+import chalk from 'chalk'
+import { gitContributors, gitRepoUrl, yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { prepare } from '@dumlj/feature-prepare'
+import { ok } from '@dumlj/feature-pretty'
 import { DEFAULT_PARTS, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_CONFIG_FILE_NAME, DEFAULT_OUTPUT } from './constants'
 import { compile } from './compile'
 import type { ReadmeConfiguration } from './types'
-import { ok } from '@dumlj/feature-pretty'
-import chalk from 'chalk'
 
 export interface TidyReadmeOptions {
   /** name of config file */
-  configFile?: string
+  config?: string
   /** 输出文件 */
   output?: string
   /** template parts of readme */
@@ -31,11 +31,13 @@ export interface TidyReadmeOptions {
    * ['__tests__/*']
    */
   exclude?: string | string[]
+  /** 根路径 */
+  rootPath?: string
 }
 
 export const tidyReadme = async (options?: TidyReadmeOptions) => {
   const {
-    configFile = DEFAULT_CONFIG_FILE_NAME,
+    config = DEFAULT_CONFIG_FILE_NAME,
     output: inOutput = DEFAULT_OUTPUT,
     template: inTemplate = DEFAULT_TEMPLATE_FILE_NAME,
     paths,
@@ -47,7 +49,7 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
 
-  const rcFile = path.join(rootPath, configFile)
+  const rcFile = path.join(rootPath, config)
   const {
     parts = DEFAULT_PARTS,
     template,
@@ -115,7 +117,7 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
    */
   const makeRenders = () =>
     readmes.map(async ({ name, location, paths }) => {
-      const renders = await compile({ parts, paths })
+      const renders = await compile({ files: parts.map((file) => `${file}.md`), lookupPaths: paths })
       if (renders.length === 0) {
         return
       }
@@ -135,19 +137,24 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   }
 
   // 获取渲染数据
-  const [repository, registry, contributors] = await Promise.all([gitRepoUrl(), yarnRegistryUrl(), gitContributors()])
+  const [repository, contributors] = await Promise.all([gitRepoUrl(), gitContributors()])
 
   /** 额外数据 */
   const metadatas: Record<string, any> = {}
   if (typeof metadatasResolvers === 'object' && metadatasResolvers !== null) {
     for (const [name, fn] of Object.entries(metadatasResolvers)) {
-      metadatas[name] = await fn()
+      if (typeof fn === 'function') {
+        metadatas[name] = await fn()
+        continue
+      }
+
+      metadatas[name] = fn
     }
   }
 
   // 渲染
   /** 结果 */
-  const stats = await Promise.all(renders.map((render) => render({ ...metadatas, repository, registry, contributors })))
+  const stats = await Promise.all(renders.map((render) => render({ ...metadatas, repository, contributors })))
   const message = [''].concat(stats.map(({ location }) => path.join(location, output))).join('\n - ')
   ok(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}, please add file to .gitignore.${message}`)
 }

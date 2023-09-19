@@ -1,12 +1,7 @@
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
 import type { Compiler } from 'webpack'
 
-export interface WebpackPluginOptions extends SeedWebpackPluginOptions {
-  /**
-   * @example
-   * debug?: boolean
-   */
-}
+export type WebpackPluginOptions = SeedWebpackPluginOptions
 
 export class WebpackPlugin extends SeedWebpackPlugin {
   static PLUGIN_NAME = 'webpack-plugin'

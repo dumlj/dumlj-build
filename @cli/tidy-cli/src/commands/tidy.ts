@@ -1,7 +1,7 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { tidyTscfg } from '../actions/tidy-tscfg'
-import { tidyDeps } from '../actions/tidy-deps'
+import { tidyTscfg } from '../actions/tidyTscfg'
+import { tidyDeps } from '../actions/tidyDeps'
 
 export interface Options {
   /**

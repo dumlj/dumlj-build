@@ -15,12 +15,12 @@ export const configure = async (): Promise<TemplateSchema> => {
     name: 'Webpack Plugin Template',
     description: 'Create a webpack plugin which inherits seed-webpack-plugin.',
     outputPathResolver: (kebabCaseName: string) => `@webpack-plugin/${kebabCaseName}-webpack-plugin/`,
-    pkgTranform: async ({ name, description, source }) => {
+    pkgTransform: async ({ name, description, source }) => {
       source.name = nameModule(name)
       source.description = description
       source.repository.directory = nameDirectory(name)
     },
-    tsTranform: async ({ name, ast, file }) => {
+    tsTransform: async ({ name, ast, file }) => {
       switch (file) {
         case 'src/WebpackPlugin.ts': {
           const nOptions = ast.getInterfaceOrThrow('WebpackPluginOptions')

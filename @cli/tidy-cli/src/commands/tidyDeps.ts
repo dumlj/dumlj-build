@@ -1,6 +1,6 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { tidyDeps, type TidyDepsOptions } from '../actions/tidy-deps'
+import { tidyDeps, type TidyDepsOptions } from '../actions/tidyDeps'
 
 program
   .command('deps')

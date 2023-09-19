@@ -1,1 +1,1 @@
-export * from './actions/tidy-readme/types'
+export * from './actions/tidyReadme/types'

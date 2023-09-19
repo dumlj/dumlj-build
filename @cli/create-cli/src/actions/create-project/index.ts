@@ -11,17 +11,18 @@ import { ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
 import { yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
-import type { TemplateSchema } from '../types'
+import { DEFAULT_TEMPLATE_PATTERN, DEFAULT_RC_FILE } from './constants'
+import type { TemplateSchema } from './types'
 
-export interface CreateOptions {
+export interface CreateProjectOptions {
   /** pattern of template name in project */
   pattern?: string
   /** name of config file */
-  schema?: string
+  rc?: string
 }
 
-export const create = async (options?: CreateOptions) => {
-  const { pattern = '@template/', schema: configFile = 'schema.ts' } = options || {}
+export const createProject = async (options?: CreateProjectOptions) => {
+  const { pattern = DEFAULT_TEMPLATE_PATTERN, rc: configFile = DEFAULT_RC_FILE } = options || {}
   const rootPath = await findWorkspaceRootPath()
   const workspaces = await yarnWorkspaces()
   const templates = workspaces.filter(({ name }) => new RegExp(`^${pattern}`).test(name))
@@ -119,7 +120,7 @@ export const create = async (options?: CreateOptions) => {
     },
   ])
 
-  const { src, outputPathResolver, pkgTranform, tsTranform } = template
+  const { src, outputPathResolver, pkgTransform, tsTransform } = template
   /** 输出路径 */
   const output = outputPathResolver(kebabCase(name))
   const dist = path.join(rootPath, output)
@@ -131,7 +132,7 @@ export const create = async (options?: CreateOptions) => {
       const tranform = async () => {
         if (file === 'package.json') {
           const source = await fs.readJson(srcFile)
-          const { output = file } = (await pkgTranform({ name, description, file, source })) || {}
+          const { output = file } = (await pkgTransform({ name, description, file, source })) || {}
           const outputFile = path.join(dist, output)
           const code = JSON.stringify(source, null, 2)
           return { file: outputFile, code }
@@ -142,7 +143,7 @@ export const create = async (options?: CreateOptions) => {
             const project = new Project()
             const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
             const ast = project.createSourceFile(path.join(dist, file), content)
-            const { output = file } = (await tsTranform({ name, description, file, ast })) || {}
+            const { output = file } = (await tsTransform({ name, description, file, ast })) || {}
             const code = ast.print()
             const outputFile = path.join(dist, output)
             return { file: outputFile, code }

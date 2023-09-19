@@ -1,4 +1,4 @@
-import { tidyDeps } from '@/actions/tidy-deps'
+import { tidyDeps } from '@/actions/tidyDeps'
 import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports

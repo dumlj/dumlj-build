@@ -1,6 +1,6 @@
 import type { SourceFile } from 'ts-morph'
 
-export interface PkgTranformParams {
+export interface PkgTransformParams {
   /** 名称 */
   name: string
   /** 描述 */
@@ -11,7 +11,7 @@ export interface PkgTranformParams {
   source: PackageSource
 }
 
-export interface TsTranformParams {
+export interface TsTransformParams {
   /** 名称 */
   name: string
   /** 描述 */
@@ -22,7 +22,7 @@ export interface TsTranformParams {
   ast: SourceFile
 }
 
-export interface UpdateConfig {
+export interface TransformReuslt {
   output?: string
 }
 
@@ -34,7 +34,7 @@ export interface TemplateSchema {
   /** 输出文件 */
   outputPathResolver(kebabCaseName: string): string
   /** json 内容转换器 */
-  pkgTranform(params: PkgTranformParams): Promise<UpdateConfig | void>
+  pkgTransform(params: PkgTransformParams): Promise<TransformReuslt | void>
   /** ts 内容 转换器 */
-  tsTranform(params: TsTranformParams): Promise<UpdateConfig | void>
+  tsTransform(params: TsTransformParams): Promise<TransformReuslt | void>
 }

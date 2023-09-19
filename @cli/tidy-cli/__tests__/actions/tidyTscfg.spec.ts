@@ -1,4 +1,4 @@
-import { tidyTscfg } from '@/actions/tidy-tscfg'
+import { tidyTscfg } from '@/actions/tidyTscfg'
 import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
