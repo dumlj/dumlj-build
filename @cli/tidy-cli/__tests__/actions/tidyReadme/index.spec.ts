@@ -82,4 +82,32 @@ describe('test actions/tidyReadme', () => {
     expect(vol.existsSync('/packages/a/README.md')).toBeTruthy()
     expect(-1 !== vol.readFileSync('/packages/a/README.md').indexOf('# hello world')).toBeTruthy()
   })
+
+  it('can exclude some unnecessary projects', async () => {
+    vol.fromJSON({
+      [`/packages/a/__readme__/TITLE.md`]: '# A',
+      [`/packages/a/package.json`]: JSON.stringify({ name: 'a' }),
+      [`/packages/b/__readme__/TITLE.md`]: '# B',
+      [`/packages/b/package.json`]: JSON.stringify({ name: 'b' }),
+      [`/package.json`]: JSON.stringify({ name: 'root', private: true, workspaces: ['packages/*'] }),
+    })
+
+    await tidyReadme({ paths: ['/'], exclude: ['packages/a'] })
+    expect(vol.existsSync('/packages/a/README.md')).toBeFalsy()
+    expect(vol.existsSync('/packages/b/README.md')).toBeTruthy()
+  })
+
+  it('can only compile specified projects', async () => {
+    vol.fromJSON({
+      [`/packages/a/__readme__/TITLE.md`]: '# A',
+      [`/packages/a/package.json`]: JSON.stringify({ name: 'a' }),
+      [`/packages/b/__readme__/TITLE.md`]: '# B',
+      [`/packages/b/package.json`]: JSON.stringify({ name: 'b' }),
+      [`/package.json`]: JSON.stringify({ name: 'root', private: true, workspaces: ['packages/*'] }),
+    })
+
+    await tidyReadme({ paths: ['/'], include: ['packages/a'] })
+    expect(vol.existsSync('/packages/a/README.md')).toBeTruthy()
+    expect(vol.existsSync('/packages/b/README.md')).toBeFalsy()
+  })
 })
