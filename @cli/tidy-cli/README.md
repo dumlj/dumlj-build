@@ -3,3 +3,14 @@
 # Tidy Cli
 
 cli for organizing tsconfig references.
+
+## INSTALL
+
+```bash
+# use npm
+$ npm install --dev @dumlj/tidy-cli
+# use yarn
+$ yarn add --dev @dumlj/tidy-cli
+# use pnpm
+$ pnpm add @dumlj/tidy-cli -D
+```

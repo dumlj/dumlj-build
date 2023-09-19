@@ -21,10 +21,11 @@
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "yarn lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
-    "tidy": "dumlj-tidy --exclude \"*/__template__\"",
+    "tidy": "dumlj-tidy all --exclude \"*/__template__\"",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "dev": "jest -c ./jest.config.ts --watch",
+    "readme": "yarn dumlj-tidy readme --exclude \"*/__template__\"",
     "ok": "yarn format && yarn lint && yarn tidy && yarn test"
   },
   "devDependencies": {

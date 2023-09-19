@@ -19,6 +19,7 @@ export interface Options {
 }
 
 program
+  .command('all')
   .option('--inlcude <inlcude>', 'specify pattern of filter out included projects.')
   .option('--exclude <exclude>', 'specify pattern of filter out excluded projects.')
   .action((options?: Options) => tryAction((options) => Promise.all([tidyTscfg(options), tidyDeps(options)]))(options))
