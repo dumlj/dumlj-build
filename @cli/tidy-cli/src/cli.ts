@@ -1,8 +1,8 @@
 import { program } from 'commander'
 
-import './commands/tidy-deps'
-import './commands/tidy-tscfg'
-import './commands/tidy-readme'
+import './commands/tidyDeps'
+import './commands/tidyTscfg'
+import './commands/tidyReadme'
 import './commands/tidy'
 
 const name = 'tidy'

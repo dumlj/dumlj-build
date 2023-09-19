@@ -8,6 +8,7 @@ export default (): Config.InitialOptions => ({
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: ['<rootDir>/__tests__/**/*.spec.ts'],
+  setupFiles: ['<rootDir>/__tests__/__setup__/index.ts'],
   modulePathIgnorePatterns: ['<rootDir>/.*/__mocks__'],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(tsconfigPaths, {

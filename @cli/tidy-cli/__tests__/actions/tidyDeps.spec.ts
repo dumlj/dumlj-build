@@ -3,41 +3,49 @@ import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
+jest.mock('@dumlj/util-lib')
+jest.mock('@dumlj/shell-lib')
+jest.mock('depcheck')
 
-jest.mock('child_process', () => {
-  const WORKSPACES = {
-    s: {
-      location: 'packages/a',
-      workspaceDependencies: [],
-      mismatchedWorkspaceDependencies: [],
-    },
-  }
+describe('test actions/tidyDeps', () => {
+  beforeAll(async () => {
+    const { findWorkspaceRootPath } = await import('@dumlj/util-lib')
+    jest.isMockFunction(findWorkspaceRootPath) &&
+      findWorkspaceRootPath.mockImplementation(async () => {
+        return '/'
+      })
 
-  const COMMAND_RESPONSE_MAP = {
-    'yarn --json workspaces info': `{
-      "type": "log",
-      "data": ${JSON.stringify(JSON.stringify(WORKSPACES, null, 2))}
-    }`,
-    'npm view x version': '1.0.0',
-  }
+    const { yarnWorkspaces, excute } = await import('@dumlj/shell-lib')
+    jest.isMockFunction(yarnWorkspaces) &&
+      yarnWorkspaces.mockImplementation(async () => {
+        return [
+          {
+            name: 'a',
+            location: 'packages/a',
+            workspaceDependencies: [],
+            mismatchedWorkspaceDependencies: [],
+          },
+        ]
+      })
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib/src')>('@dumlj/mock-lib/src')
-  return mockExec(COMMAND_RESPONSE_MAP)
-})
+    // mock findSiblingsVersion
+    jest.isMockFunction(excute) &&
+      excute.mockImplementation(async () => {
+        return '1.0.0'
+      })
 
-jest.mock('depcheck', () => {
-  return async () => {
-    return {
-      missing: {
-        x: ['/packages/a/src/index.ts'],
-      },
-      using: [],
-    }
-  }
-})
+    const { default: depcheck } = await import('depcheck')
+    jest.isMockFunction(depcheck) &&
+      depcheck.mockImplementation(async () => {
+        return {
+          missing: {
+            x: ['/packages/a/src/index.ts'],
+          },
+          using: [],
+        }
+      })
+  })
 
-describe('test actions/tidy-deps', () => {
   beforeEach(() => {
     vol.reset()
 

@@ -30,7 +30,7 @@ jest.mock('child_process', () => {
   return mockExec(COMMAND_RESPONSE_MAP)
 })
 
-describe('test actions/tidy-tscfg', () => {
+describe('test actions/tidyTscfg', () => {
   beforeEach(() => {
     vol.reset()
 

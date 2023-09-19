@@ -3,48 +3,51 @@ import { tidyReadme } from '@/actions/tidyReadme'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
-jest.mock('rechoir', () => ({ prepare: jest.fn() }))
-jest.mock(
-  '/.readmerc.ts',
-  () => ({
-    configure: async () => ({
-      metadatas: {
-        title: 'hello world',
-      },
-    }),
-  }),
-  { virtual: true }
-)
-
-jest.mock('child_process', () => {
-  const WORKSPACES = {
-    a: {
-      location: 'packages/a',
-      workspaceDependencies: [],
-      mismatchedWorkspaceDependencies: [],
-    },
-    b: {
-      location: 'packages/b',
-      workspaceDependencies: [],
-      mismatchedWorkspaceDependencies: [],
-    },
-  }
-
-  const COMMAND_RESPONSE_MAP = {
-    'yarn --json workspaces info': `{
-      "type": "log",
-      "data": ${JSON.stringify(JSON.stringify(WORKSPACES, null, 2))}
-    }`,
-    'git log --pretty="%an %ae%n%cn %ce"': ['DavidJones qowera@gmail.com', 'David Jones qowera@qq.com'].join('\n'),
-    'git remote -v': ['origin  https://github.com/dumlj/dumlj.git (fetch)', 'origin  https://github.com/dumlj/dumlj.git (push)'].join('\n'),
-  }
-
-  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-  const { mockExec } = jest.requireActual<typeof import('@dumlj/mock-lib/src')>('@dumlj/mock-lib/src')
-  return mockExec(COMMAND_RESPONSE_MAP)
-})
+jest.mock('@dumlj/feature-prepare')
+jest.mock('@dumlj/shell-lib')
 
 describe('test actions/tidyReadme', () => {
+  beforeAll(async () => {
+    const { prepare } = await import('@dumlj/feature-prepare')
+    jest.isMockFunction(prepare) &&
+      prepare.mockImplementation(async () => ({
+        configure: async () => ({
+          metadatas: {
+            title: 'hello world',
+          },
+        }),
+      }))
+
+    const { gitContributors, gitRepoUrl, yarnWorkspaces } = await import('@dumlj/shell-lib')
+    jest.isMockFunction(gitContributors) &&
+      gitContributors.mockImplementation(async () => {
+        return [{ name: 'DavidJones', email: 'qowera@gmail.com' }]
+      })
+
+    jest.isMockFunction(gitRepoUrl) &&
+      gitRepoUrl.mockImplementation(async () => {
+        return 'https://github.com/dumlj/dumlj.git'
+      })
+
+    jest.isMockFunction(yarnWorkspaces) &&
+      yarnWorkspaces.mockImplementation(async () => {
+        return [
+          {
+            name: 'a',
+            location: 'packages/a',
+            workspaceDependencies: [],
+            mismatchedWorkspaceDependencies: [],
+          },
+          {
+            name: 'b',
+            location: 'packages/b',
+            workspaceDependencies: [],
+            mismatchedWorkspaceDependencies: [],
+          },
+        ]
+      })
+  })
+
   afterEach(() => {
     vol.reset()
   })
