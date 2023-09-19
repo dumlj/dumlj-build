@@ -22,7 +22,7 @@ describe('test actions/tidyTscfg', () => {
             location: 'packages/b',
             workspaceDependencies: ['a'],
             mismatchedWorkspaceDependencies: [],
-          }
+          },
         ]
       })
   })

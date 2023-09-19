@@ -1,5 +1,5 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
-# Tidy Cli
+# Feature Pretty
 
-cli for organizing tsconfig references.
+上色工具

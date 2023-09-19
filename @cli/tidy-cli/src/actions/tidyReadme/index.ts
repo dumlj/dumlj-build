@@ -8,7 +8,9 @@ import { prepare } from '@dumlj/feature-prepare'
 import { ok } from '@dumlj/feature-pretty'
 import { DEFAULT_PARTS, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_CONFIG_FILE_NAME, DEFAULT_OUTPUT } from './constants'
 import { compile } from './compile'
+import { pretty } from './pretty'
 import type { ReadmeConfiguration } from './types'
+import { startCase } from 'lodash'
 
 export interface TidyReadmeOptions {
   /** name of config file */
@@ -123,9 +125,12 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
       }
 
       return async (context: Record<string, any> = {}) => {
-        const codes = renders.map((render) => render({ name, location, ...context }, { helpers }))
+        const alias = startCase(name.split('/').pop())
+        const { description } = await import(path.join(name, 'package.json'))
+        const codes = renders.map((render) => render({ name, alias, description, location, ...context }, { helpers }))
         const file = path.join(rootPath, location, output)
-        await fs.writeFile(file, [`<!-- This file is dynamically generated. please edit in ${template} -->`].concat(codes).join('\n\n'))
+        const content = [`<!-- This file is dynamically generated. please edit in ${template} -->`].concat(codes).join('\n\n')
+        await fs.writeFile(file, await pretty(content, { paths }))
         return { file, location }
       }
     })
@@ -156,5 +161,5 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   /** 结果 */
   const stats = await Promise.all(renders.map((render) => render({ ...metadatas, repository, contributors })))
   const message = [''].concat(stats.map(({ location }) => path.join(location, output))).join('\n - ')
-  ok(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}, please add file to .gitignore.${message}`)
+  ok(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}.${message}`)
 }

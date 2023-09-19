@@ -1,5 +1,5 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
-# Tidy Cli
+# Zip Webpack Plugin
 
-cli for organizing tsconfig references.
+Compressed to zip webpack plugin

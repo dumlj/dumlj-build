@@ -1,5 +1,5 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
-# Tidy Cli
+# Feature Prepare
 
-cli for organizing tsconfig references.
+代码源文件预处理工具

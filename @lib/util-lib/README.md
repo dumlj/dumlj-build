@@ -1,5 +1,5 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
-# Tidy Cli
+# Util Lib
 
-cli for organizing tsconfig references.
+util 工具库

@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
+import path from 'path'
 import { parseTsconfig } from 'get-tsconfig'
 import interpret from 'interpret'
-import path from 'path'
 import rechoir from 'rechoir'
 import { findTsConfig } from './findTsConfig'
 
@@ -38,7 +38,8 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
         const tsConfig = path.isAbsolute(tsConfigFile) ? tsConfigFile : path.join(requireFrom, tsConfigFile)
 
         if (await fs.pathExists(tsConfig)) {
-          process.env.TS_NODE_COMPILER_OPTIONS = JSON.stringify(parseTsconfig(tsConfig))
+          const { compilerOptions } = parseTsconfig(tsConfig)
+          process.env.TS_NODE_COMPILER_OPTIONS = JSON.stringify(compilerOptions)
 
           if (typeof onResolved === 'function') {
             const ts = path.relative(cwd, file)
