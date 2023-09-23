@@ -20,7 +20,8 @@
     "@dumlj/shell-lib": "^0.0.1",
     "fs-extra": "^11.1.0",
     "semver": "^7.3.8",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "@dumlj/util-lib": "^0.0.1"
   },
   "devDependencies": {
     "@dumlj/mock-lib": "^0.0.1",

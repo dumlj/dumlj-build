@@ -1,7 +1,7 @@
 import { fail, warn } from '@dumlj/feature-pretty'
 import { shouldUpdate } from '@dumlj/feature-updater'
-import chalk from 'chalk'
 import fs from 'fs-extra'
+import chalk from 'chalk'
 import { readPackageSourceThroughBin } from './readPackageSourceThroughBin'
 
 export interface YellOutdatedsOptions {
@@ -39,6 +39,7 @@ export const yellOutdateds = async (options?: YellOutdatedsOptions) => {
       const badge = `${chalk.bgYellow(' WARN ')}`
       const message = `${chalk.bold(name)}@${chalk.bold(compareVer)} has a new ${chalk.bold(updateType)} version, please update to ${chalk.bold(latestVersion)}.`
       warn(chalk.yellow(`${badge} ${message}`))
+      return
     }
   } catch (error) {
     // 未发布的不进行对比

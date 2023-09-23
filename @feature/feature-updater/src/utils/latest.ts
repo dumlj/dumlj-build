@@ -1,6 +1,7 @@
 import { exec } from 'child_process'
 import semver from 'semver'
 import { diff, type DiffValues } from './diff'
+import { registerCache } from '@dumlj/util-lib'
 
 /** 需要删除的无用属性 */
 const USELESS_PROPS = ['modified', 'created']
@@ -14,6 +15,13 @@ const MIN_TIMEOUT = 0.2e3
  * 重试必须重启，可以忽略这种情况
  */
 const CACHE_LATEST_VERSION = new Map<string, string>()
+
+/**
+ * 文件缓存
+ * @description
+ * 过期则返回空
+ */
+const CacheService = registerCache<{ error?: true; version?: string }>('updater')
 
 /** 过去 NPM 发布时间命令 */
 const command = (name: string) => `npm show ${name} time --json`
@@ -41,12 +49,24 @@ export const latest = async (name: string, options?: LatestOptions) => {
     return lstVersion
   }
 
+  const { error, version: cacheVersion } = (await CacheService.read(CACHE_TOKEN)) || {}
+  if (error) {
+    return compareVer
+  }
+
+  if (semver.valid(cacheVersion)) {
+    CACHE_LATEST_VERSION.set(CACHE_TOKEN, cacheVersion)
+    return cacheVersion
+  }
+
   return new Promise<string>((resolve, reject) => {
-    const cp = exec(command(name), (error, stdout) => {
+    const cp = exec(command(name), async (error, stdout) => {
       // 清除超时
       timeId && clearTimeout(timeId)
 
       if (error) {
+        // 写入 缓存文件
+        CacheService.write(CACHE_TOKEN, { error: true })
         reject(error)
         return
       }
@@ -90,9 +110,11 @@ export const latest = async (name: string, options?: LatestOptions) => {
       const sortedVers = filteredVers.sort((prev, next) => new Date(response[next]).getTime() - new Date(response[prev]).getTime())
       /** 最终版本号 */
       const finalVersion = sortedVers?.[0] || compareVer
+      // 写入 内存缓存
+      CACHE_LATEST_VERSION.set(CACHE_TOKEN, finalVersion)
 
-      // 缓存
-      CACHE_LATEST_VERSION[CACHE_TOKEN] = finalVersion
+      // 写入 缓存文件
+      CacheService.write(CACHE_TOKEN, { version: finalVersion })
       resolve(finalVersion)
     })
 

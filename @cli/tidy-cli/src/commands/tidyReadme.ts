@@ -3,8 +3,9 @@ import { program } from 'commander'
 import { tidyReadme, type TidyReadmeOptions } from '../actions/tidyReadme'
 import { DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_OUTPUT, DEFAULT_CONFIG_FILE_NAME } from '../actions/tidyReadme/constants'
 
-program
-  .command('readme')
+export default program
+  .command('tidy-readme')
+  .summary('organizing README.md')
   .option('--config <config>', `specify name of config file. (default ${DEFAULT_CONFIG_FILE_NAME})`)
   .option('--output <output>', `specify name of output file. (default ${DEFAULT_OUTPUT})`)
   .option('--template <template>', `specify name of template folder. (default ${DEFAULT_TEMPLATE_FILE_NAME})`)

@@ -8,7 +8,6 @@ import { prepare } from '@dumlj/feature-prepare'
 import { ok } from '@dumlj/feature-pretty'
 import { DEFAULT_PARTS, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_CONFIG_FILE_NAME, DEFAULT_OUTPUT } from './constants'
 import { compile } from './compile'
-import { pretty } from './pretty'
 import type { ReadmeConfiguration } from './types'
 import { startCase } from 'lodash'
 
@@ -126,11 +125,12 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
 
       return async (context: Record<string, any> = {}) => {
         const alias = startCase(name.split('/').pop())
-        const { description } = await import(path.join(name, 'package.json'))
+        const pkgJson = path.join(rootPath, location, 'package.json')
+        const { description } = await fs.readJson(pkgJson)
         const codes = renders.map((render) => render({ name, alias, description, location, ...context }, { helpers }))
         const file = path.join(rootPath, location, output)
         const content = [`<!-- This file is dynamically generated. please edit in ${template} -->`].concat(codes).join('\n\n')
-        await fs.writeFile(file, await pretty(content, { paths }))
+        await fs.writeFile(file, content)
         return { file, location }
       }
     })

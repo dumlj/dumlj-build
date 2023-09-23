@@ -1,11 +1,7 @@
-import { program } from 'commander'
+import { registerCli } from '@dumlj/seed-cli'
 
 import './commands/tidyDeps'
 import './commands/tidyTscfg'
 import './commands/tidyReadme'
-import './commands/tidyAll'
 
-const name = 'dumlj-tidy'
-const defaultArgv = ['node', name]
-const argv = defaultArgv.concat(process.argv.slice(defaultArgv.length))
-program.name(name).option('--verbose', '显示详情').usage('<command> [options]').parse(argv)
+registerCli('dumlj-tidy')

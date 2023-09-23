@@ -6,7 +6,6 @@ import path from 'path'
 import { glob } from 'glob'
 import inquirer, { type ChoiceCollection } from 'inquirer'
 import { Project } from 'ts-morph'
-import * as prettier from 'prettier'
 import { ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
 import { yarnWorkspaces } from '@dumlj/shell-lib'
@@ -157,15 +156,6 @@ export const createProject = async (options?: CreateProjectOptions) => {
       try {
         if (!code) {
           await fs.copyFile(srcFile, output)
-          return
-        }
-
-        const { ignored, inferredParser } = await prettier.getFileInfo(srcFile)
-        if (!ignored && inferredParser) {
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          const prettierOptions = require(path.join(rootPath, '.prettierrc'))
-          const prettied = await prettier.format(code, { parser: inferredParser, ...prettierOptions })
-          await fs.writeFile(output, prettied)
           return
         }
 

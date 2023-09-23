@@ -15,7 +15,7 @@ export type Preprocess<R = any> = (excute: () => R) => R
  * 因为大部分情况下都是通过命令行改变参数，
  * 因此将命令行设置成函数形式，就可以动态生成执行函数的输入参数
  */
-export type Comamnd = (...params: any[]) => string
+export type Command = (...params: any[]) => string
 
 /**
  * 结果处理函数
@@ -26,7 +26,7 @@ export type Comamnd = (...params: any[]) => string
 export type Resolve = (stdout: string, isSync: boolean) => unknown
 
 export const createExcutor = (preprocess: Preprocess) => {
-  return <C extends Comamnd, R extends Resolve>(command: C, resolv?: R) => {
+  return <C extends Command, R extends Resolve>(command: C, resolv?: R) => {
     type Params = Parameters<C>
     type Response = TrimPromise<ReturnType<R>> extends infer P ? (unknown extends P ? string : P) : never
 

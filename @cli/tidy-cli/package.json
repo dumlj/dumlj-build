@@ -2,7 +2,7 @@
   "name": "@dumlj/tidy-cli",
   "version": "0.0.1",
   "private": true,
-  "description": "cli for organizing tsconfig references.",
+  "description": "cli for organizing projects",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
@@ -12,6 +12,8 @@
   "bin": {
     "dumlj-tidy": "./bin/cli"
   },
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
@@ -31,7 +33,6 @@
     "handlebars": "^4.7.8",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5",
-    "prettier": "^3.0.3",
     "tslib": "^2.5.0"
   },
   "devDependencies": {

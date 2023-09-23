@@ -1,5 +1,5 @@
 import { createCommonExcutor } from '../creators/createCommonExcutor'
-import type { Package } from '../types'
+import type { NpmLsInfo } from './types'
 
 export interface NpmDeclaredDependenciesResp {
   name: string
@@ -16,7 +16,7 @@ const command = () => `npm ls --json --omit optional --omit peer --depth 0`
 export const npmDeclaredDependencies = createCommonExcutor(command, (stdout) => {
   try {
     const source = stdout.toString().trim()
-    const { dependencies } = JSON.parse(source) as Package
+    const { dependencies }: NpmLsInfo = JSON.parse(source)
     const vers = new Set<string>()
     return Object.keys(dependencies).reduce((result, name) => {
       const { version } = dependencies[name]

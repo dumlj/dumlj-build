@@ -2,7 +2,7 @@
 
 # Seed Cli
 
-更新程序
+basic cli utils
 
 ## INSTALL
 

@@ -2,5 +2,22 @@
 
 process.env.RUNTIME = 'CLI'
 
+const fs = require('fs')
 const path = require('path')
-require(path.join(__dirname, '../libs/cli'))
+
+const hasPrepareFn = (() => {
+  try {
+    require.resolve('@dumlj/feature-prepare')
+    return true
+  } catch (error) {
+    return false    
+  }
+})()
+
+const srcFile = path.join(__dirname, '../src/cli.ts')
+if (fs.existsSync(srcFile) && hasPrepareFn) {
+  const { prepare } = require('@dumlj/feature-prepare')
+  prepare(srcFile)
+} else {
+  require(path.join(__dirname, '../libs/cli'))
+}
