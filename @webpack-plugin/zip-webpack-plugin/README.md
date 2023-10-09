@@ -4,6 +4,7 @@
 
 Compressed to zip webpack plugin
 
+
 ## INSTALL
 
 ```bash
