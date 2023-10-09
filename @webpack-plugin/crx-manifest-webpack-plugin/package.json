@@ -1,0 +1,31 @@
+{
+  "name": "@dumlj/crx-manifest-webpack-plugin",
+  "version": "0.0.1",
+  "description": "generate manifest file for chrome extension",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@webpack-plugin/crx-manifest-webpack-plugin"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5",
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3",
+    "@dumlj/create-cli": "^0.0.1",
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

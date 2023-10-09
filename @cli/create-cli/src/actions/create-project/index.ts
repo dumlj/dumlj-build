@@ -66,7 +66,7 @@ export const createProject = async (options?: CreateProjectOptions) => {
         }
 
         const MIN_SIZE = 4
-        const MAX_SIZE = 10
+        const MAX_SIZE = 30
 
         // 必填
         if (!name) {
@@ -97,7 +97,7 @@ export const createProject = async (options?: CreateProjectOptions) => {
       message: 'please input a description for this module.',
       validate(description) {
         const MIN_SIZE = 3
-        const MAX_SIZE = 30
+        const MAX_SIZE = 100
 
         // 必填
         if (!description) {
@@ -143,7 +143,7 @@ export const createProject = async (options?: CreateProjectOptions) => {
             const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
             const ast = project.createSourceFile(path.join(dist, file), content)
             const { output = file } = (await tsTransform({ name, description, file, ast })) || {}
-            const code = ast.print()
+            const code = ast.print({ removeComments: false })
             const outputFile = path.join(dist, output)
             return { file: outputFile, code }
           }
