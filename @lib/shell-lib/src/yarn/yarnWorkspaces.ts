@@ -8,7 +8,7 @@ export interface ProjectInWorkspaces {
   mismatchedWorkspaceDependencies: string[]
 }
 
-/** 获取 workspace 信息 */
+/** 通过 yarn 获取 workspace 信息 */
 export const yarnWorkspaces = createYarnExcutor(command, (stdout) => {
   const response = JSON.parse(stdout)
   const workspaces: Record<string, ProjectInWorkspaces> = JSON.parse(response.data)

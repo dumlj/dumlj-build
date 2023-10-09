@@ -42,10 +42,10 @@ export class SseLiveReloadWebpackPlugin extends SeedWebpackPlugin {
     return `http://${this.host}:${this.port}/__livereload__`
   }
 
-  constructor(params: SseLiveReloadWebpackPluginParams, options?: SseLiveReloadWebpackPluginOptions) {
+  constructor(params?: SseLiveReloadWebpackPluginParams, options?: SseLiveReloadWebpackPluginOptions) {
     super(options)
 
-    const { host, port } = params
+    const { host = '0.0.0.0', port = 8182 } = params || {}
     const { background, contentScript } = options || {}
 
     this.clients = []

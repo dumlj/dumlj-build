@@ -4,7 +4,7 @@ import JSZip from 'jszip'
 import path from 'path'
 import type { Compiler } from 'webpack'
 
-export interface OneWebpackZipPluginOptions {
+export interface ZipWebpackPluginOptions {
   /** output file name */
   output?: string
   /**
@@ -32,7 +32,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
   protected lonely: boolean
   protected extras?: Record<string, string>
 
-  constructor(options?: OneWebpackZipPluginOptions) {
+  constructor(options?: ZipWebpackPluginOptions) {
     super()
 
     const { output, wrap, lonely, extras } = options || {}

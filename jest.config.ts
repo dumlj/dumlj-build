@@ -1,3 +1,4 @@
+import path from 'path'
 import type { Config } from '@jest/types'
 import { workspaces } from './package.json'
 
@@ -7,6 +8,10 @@ export default async (): Promise<Config.InitialOptions> => {
   return {
     skipFilter: true,
     projects: [
+      /**
+       * 规范检测
+       */
+      path.join(__dirname, '__standardstests__/jest.config.standards.ts'),
       /**
        * 请确保文件夹中至少拥有一个配置，否则会报错
        * Error: Can't find a root directory while resolving a config file path.

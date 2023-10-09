@@ -4,7 +4,7 @@ import { tidyTscfg, type TidyTscfgOptions } from '../actions/tscfg'
 
 export default program
   .command('tscfg')
-  .summary('organizing tsconfig references')
+  .summary('organizing tsconfig references for monorepo project')
   .option('--tsconfig <tsconfig>', 'specify base tsconfig.json for each project')
   .option('--output <output>', 'specify the name of the tsconfig.json output.')
   .option('--inlcude <inlcude>', 'specify pattern of filter out included projects.')
