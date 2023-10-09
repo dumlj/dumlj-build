@@ -2,7 +2,10 @@ import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-we
 import type { Compiler } from 'webpack'
 
 export interface WebpackPluginOptions extends SeedWebpackPluginOptions {
-  // add some plugin options
+  /**
+   * @todo
+   * add some plugin options
+   */
 }
 
 export class WebpackPlugin extends SeedWebpackPlugin {
@@ -12,8 +15,10 @@ export class WebpackPlugin extends SeedWebpackPlugin {
     super(options)
 
     /**
-     * todo something...
      * please remove these comments
+     *
+     * @todo
+     * add some initialization logic code
      *
      * @example
      * const { debug } = options
@@ -25,8 +30,10 @@ export class WebpackPlugin extends SeedWebpackPlugin {
     super.apply(compiler)
 
     /**
-     * todo something...
      * please remove these comments
+     *
+     * @todo
+     * add some plugin feature logic code
      *
      * @example
      * const { webpack, options } = compiler

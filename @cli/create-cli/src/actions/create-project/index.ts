@@ -1,6 +1,6 @@
 import { ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
-import { yarnWorkspaces } from '@dumlj/shell-lib'
+import { gitDetectIgnore, yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import chalk from 'chalk'
 import trimEnd from 'lodash/trimEnd'
@@ -124,9 +124,24 @@ export const createProject = async (options?: CreateProjectOptions) => {
   const output = outputPathResolver(kebabCase(name))
   const dist = path.join(rootPath, output)
   const files = await glob('**/*', { cwd: src, nodir: true, ignore: [configFile] })
+  const ignores = await gitDetectIgnore(files)
+  /**
+   * 没被忽略的文件
+   * @description
+   * 若项目不是 git 项目，gitDetectIgnore 会返回 undefined
+   */
+  const noIgnores = Array.isArray(ignores) ? files.filter((file) => !ignores.includes(file)) : files
+  const project = new Project({
+    /** @todo 格式化无效 */
+    // manipulationSettings: {
+    //   quoteKind: QuoteKind.Single,
+    //   indentationText: IndentationText.TwoSpaces,
+    //   useTrailingCommas: true,
+    // }
+  })
 
   await Promise.all(
-    files.map(async (file) => {
+    noIgnores.map(async (file) => {
       const srcFile = path.join(src, file)
       const tranform = async () => {
         if (file === 'package.json') {
@@ -139,11 +154,14 @@ export const createProject = async (options?: CreateProjectOptions) => {
 
         switch (path.extname(file)) {
           case '.ts': {
-            const project = new Project()
             const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
             const ast = project.createSourceFile(path.join(dist, file), content)
             const { output = file } = (await tsTransform({ name, description, file, ast })) || {}
-            const code = ast.print({ removeComments: false })
+
+            /** @todo 格式化无效 */
+            // ast.formatText()
+
+            const code = ast.print()
             const outputFile = path.join(dist, output)
             return { file: outputFile, code }
           }

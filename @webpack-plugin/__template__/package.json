@@ -19,8 +19,8 @@
     "@types/webpack": "^5",
     "ts-jest": "^29.1.1",
     "@jest/types": "^29.6.3",
-    "@dumlj/create-cli": "^0.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "@dumlj/create-cli": "^0.0.1"
   },
   "peerDependencies": {
     "webpack": "5.x"
