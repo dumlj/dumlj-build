@@ -12,11 +12,11 @@ jest.mock('child_process', () => {
 
 describe('test services/createCommonExcutor', () => {
   it('can create command function', async () => {
-    const excute = createCommonExcutor(() => 'test')
-    expect(typeof excute).toBe('function')
-    expect(typeof excute.sync).toBe('function')
+    const execute = createCommonExcutor(() => 'test')
+    expect(typeof execute).toBe('function')
+    expect(typeof execute.sync).toBe('function')
 
-    expect(await excute()).toBe('ok')
-    expect(excute.sync()).toBe('ok')
+    expect(await execute()).toBe('ok')
+    expect(execute.sync()).toBe('ok')
   })
 })

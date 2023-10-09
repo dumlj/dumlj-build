@@ -1,11 +1,11 @@
+import { yarnWorkspaces } from '@dumlj/shell-lib'
+import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import chalk from 'chalk'
 import isEqual from 'lodash/isEqual'
 import path from 'path'
 import fs from 'fs-extra'
 import micromatch from 'micromatch'
-import { yarnWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
-import { info } from '../services/logger'
+import { ok, info } from '../services/logger'
 
 export interface TidyTscfgOptions {
   /** basic tsconfig file in each project */
@@ -114,4 +114,6 @@ export const tidyTscfg = async (options?: TidyTscfgOptions) => {
   if (updates.length > 0) {
     info(`The following ${chalk.bold(output)} file has been updated.\n - ${updates.join('\n - ')}\n`)
   }
+
+  ok('Generate tsconfig files for project build completed.')
 }

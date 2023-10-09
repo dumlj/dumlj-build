@@ -6,6 +6,11 @@ export interface RegisterCacheOptions {
   expire?: number
 }
 
+export interface ReadOptions {
+  /** 获取后删除 */
+  remove?: boolean
+}
+
 /** 注册缓存 */
 export const registerCache = <T>(scope: string = (Date.now() + Math.random() * 1e13).toString(32), options?: RegisterCacheOptions) => {
   const { expire } = options || {}
@@ -19,10 +24,13 @@ export const registerCache = <T>(scope: string = (Date.now() + Math.random() * 1
   }
 
   /** 读缓存 */
-  const read = async (name: string): Promise<T> => {
+  const read = async (name: string, options?: ReadOptions): Promise<T> => {
+    const { remove: removeAfterRead = false } = options || {}
     const file = path.join(folder, name)
     if (await fs.pathExists(file)) {
       const { _update: updateTime, data } = await fs.readJson(file)
+      removeAfterRead && remove(name)
+
       if (!expire) {
         return data
       }
@@ -33,5 +41,11 @@ export const registerCache = <T>(scope: string = (Date.now() + Math.random() * 1
     }
   }
 
-  return { write, read }
+  /** 删除缓存 */
+  const remove = async (name: string) => {
+    const file = path.join(folder, name)
+    await fs.remove(file)
+  }
+
+  return { write, read, remove }
 }

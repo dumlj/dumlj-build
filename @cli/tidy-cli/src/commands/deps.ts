@@ -1,9 +1,9 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { tidyDeps, type TidyDepsOptions } from '../actions/tidyDeps'
+import { tidyDeps, type TidyDepsOptions } from '../actions/deps'
 
 export default program
-  .command('tidy-deps')
+  .command('deps')
   .summary('organizing packages dependencies')
   .option('-n, --necessary <necessary...>', 'specify necessary dependencies')
   .option('-s, --src <src>', 'specify whether to add necessary to the dependency attribute of pacakge.json.')

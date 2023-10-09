@@ -1,4 +1,4 @@
-import { excute, excuteSync } from '@/helpers/excute'
+import { execute, excuteSync } from '@/helpers/execute'
 
 jest.mock('child_process', () => {
   const COMMAND_RESPONSE_MAP = {
@@ -10,9 +10,9 @@ jest.mock('child_process', () => {
   return mockExec(COMMAND_RESPONSE_MAP)
 })
 
-describe('test helper/excute', () => {
-  it('can excute shell', async () => {
-    expect(await excute('test')).toEqual('ok')
+describe('test helper/execute', () => {
+  it('can execute shell', async () => {
+    expect(await execute('test')).toEqual('ok')
     expect(excuteSync('test')).toEqual('ok')
   })
 })

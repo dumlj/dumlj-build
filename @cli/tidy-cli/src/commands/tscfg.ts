@@ -1,9 +1,9 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { tidyTscfg, type TidyTscfgOptions } from '../actions/tidyTscfg'
+import { tidyTscfg, type TidyTscfgOptions } from '../actions/tscfg'
 
 export default program
-  .command('tidy-tscfg')
+  .command('tscfg')
   .summary('organizing tsconfig references')
   .option('--tsconfig <tsconfig>', 'specify base tsconfig.json for each project')
   .option('--output <output>', 'specify the name of the tsconfig.json output.')

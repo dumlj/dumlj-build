@@ -1,15 +1,17 @@
+import { gitContributors, gitRepoUrl, yarnWorkspaces } from '@dumlj/shell-lib'
+import { findWorkspaceRootPath } from '@dumlj/util-lib'
+import { prepare } from '@dumlj/feature-prepare'
+import { startCase } from 'lodash'
 import fs from 'fs-extra'
 import path from 'path'
 import micromatch from 'micromatch'
 import chalk from 'chalk'
-import { gitContributors, gitRepoUrl, yarnWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
-import { prepare } from '@dumlj/feature-prepare'
-import { ok } from '@dumlj/feature-pretty'
 import { DEFAULT_PARTS, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_CONFIG_FILE_NAME, DEFAULT_OUTPUT } from './constants'
 import { compile } from './compile'
+import { ok, info, fail } from '../../services/logger'
 import type { ReadmeConfiguration } from './types'
-import { startCase } from 'lodash'
+
+export type { ReadmeConfiguration }
 
 export interface TidyReadmeOptions {
   /** name of config file */
@@ -123,12 +125,23 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
         return
       }
 
+      const pkgJson = path.join(rootPath, location, 'package.json')
+      const source = await fs.readFile(pkgJson, { encoding: 'utf-8' })
       return async (context: Record<string, any> = {}) => {
         const alias = startCase(name.split('/').pop())
-        const pkgJson = path.join(rootPath, location, 'package.json')
-        const { description } = await fs.readJson(pkgJson)
+        const { description } = (() => {
+          try {
+            return JSON.parse(source)
+          } catch (error) {
+            fail(error)
+          }
+
+          return { description: '' }
+        })()
+
         const codes = renders.map((render) => render({ name, alias, description, location, ...context }, { helpers }))
         const file = path.join(rootPath, location, output)
+
         const content = [`<!-- This file is dynamically generated. please edit in ${template} -->`].concat(codes).join('\n\n')
         await fs.writeFile(file, content)
         return { file, location }
@@ -161,5 +174,7 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   /** 结果 */
   const stats = await Promise.all(renders.map((render) => render({ ...metadatas, repository, contributors })))
   const message = [''].concat(stats.map(({ location }) => path.join(location, output))).join('\n - ')
-  ok(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}.${message}`)
+  info(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}.${message}`)
+
+  ok('Generate readme files completed.')
 }

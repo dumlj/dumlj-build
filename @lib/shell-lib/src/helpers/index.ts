@@ -1,1 +1,1 @@
-export * from './excute'
+export * from './execute'

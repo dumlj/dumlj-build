@@ -1,5 +1,5 @@
 import type { ExecOptions, ExecSyncOptions } from 'child_process'
-import { excute as originExcute, excuteSync as originExcuteSync } from '../helpers/excute'
+import { execute as originExcute, excuteSync as originExcuteSync } from '../helpers/execute'
 import type { TrimPromise } from '../utility-types/trim-promise'
 
 /**
@@ -7,7 +7,7 @@ import type { TrimPromise } from '../utility-types/trim-promise'
  * @description
  * 可以作为前置检测
  */
-export type Preprocess<R = any> = (excute: () => R) => R
+export type Preprocess<R = any> = (execute: () => R) => R
 
 /**
  * 输入的命令行函数
@@ -36,7 +36,7 @@ export const createExcutor = (preprocess: Preprocess) => {
         const response = stdout.toString().trim()
         /**
          * resolv 可能为异步也可能不为异步，
-         * 但是 excute 本身为异步函数 promise，
+         * 但是 execute 本身为异步函数 promise，
          * 则返回 promise 会返回结果值，无需单独处理
          */
         const result = typeof resolv === 'function' ? resolv(response, false) : stdout
@@ -47,8 +47,8 @@ export const createExcutor = (preprocess: Preprocess) => {
     }
 
     /** 异步 */
-    const excute = (...params: Params) => options().exec(...params)
-    excute.options = options
+    const execute = (...params: Params) => options().exec(...params)
+    execute.options = options
 
     const optionsSync = (options?: ExecSyncOptions) => {
       const exec = (...params: Params): Response => {
@@ -65,7 +65,7 @@ export const createExcutor = (preprocess: Preprocess) => {
     const sync = (...params: Params) => optionsSync().exec(...params)
     sync.options = optionsSync
 
-    excute.sync = sync
-    return excute
+    execute.sync = sync
+    return execute
   }
 }

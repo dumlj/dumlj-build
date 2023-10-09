@@ -1,5 +1,5 @@
 import { vol } from 'memfs'
-import { tidyReadme } from '@/actions/tidyReadme'
+import { tidyReadme } from '@/actions/readme'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))

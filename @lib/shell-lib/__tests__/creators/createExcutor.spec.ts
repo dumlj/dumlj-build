@@ -13,7 +13,7 @@ jest.mock('child_process', () => {
 
 describe('test services/createExcutor', () => {
   it('can create excutor', async () => {
-    const create = createExcutor((excute) => excute())
+    const create = createExcutor((execute) => execute())
     expect(typeof create).toBe('function')
 
     const command = create(() => 'test')
@@ -24,7 +24,7 @@ describe('test services/createExcutor', () => {
   })
 
   it('can pass params to command function', async () => {
-    const create = createExcutor((excute) => excute())
+    const create = createExcutor((execute) => execute())
     const command = jest.fn((id: string) => `test ${id}`)
     expect(await create(command)('id')).toBe('ok')
     expect(command).toHaveBeenCalled()
@@ -32,14 +32,14 @@ describe('test services/createExcutor', () => {
 
   it('can preprocess before executing the command', async () => {
     const preprocess = jest.fn()
-    await createExcutor((excute) => preprocess() || excute())(() => 'test')()
+    await createExcutor((execute) => preprocess() || execute())(() => 'test')()
     expect(preprocess).toHaveBeenCalled()
     expect(preprocess).toBeCalledTimes(1)
   })
 
   it('It can process the returned result data', async () => {
     const resolve = jest.fn((stdout: string) => `${stdout} yet`)
-    expect(await createExcutor((excute) => excute())(() => 'test', resolve)()).toBe('ok yet')
+    expect(await createExcutor((execute) => execute())(() => 'test', resolve)()).toBe('ok yet')
     expect(resolve).toHaveBeenCalled()
     expect(resolve).toBeCalledTimes(1)
   })

@@ -5,7 +5,7 @@ import { exec, execSync, type ExecOptions, type ExecSyncOptions } from 'child_pr
  * @description
  * 兼容 exec 无法捕获错误
  */
-export const excute = (command: string, options?: ExecOptions) => {
+export const execute = (command: string, options?: ExecOptions) => {
   return new Promise<string>((resolve, reject) => {
     const content = []
     const errors = []

@@ -1,3 +1,3 @@
-export { default as tidyDeps } from './commands/tidyDeps'
-export { default as tidyReadme } from './commands/tidyReadme'
-export { default as tidyTscfg } from './commands/tidyTscfg'
+export { default as deps } from './commands/deps'
+export { default as readme } from './commands/readme'
+export { default as tscfg } from './commands/tscfg'

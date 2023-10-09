@@ -1,4 +1,4 @@
-import { findWorkspaceRootPath } from '@/findWorkspaceRootPath'
+import { findWorkspaceRootPath } from '@/finder/findWorkspaceRootPath'
 import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports

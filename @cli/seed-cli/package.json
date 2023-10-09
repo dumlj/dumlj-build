@@ -23,11 +23,11 @@
     "@dumlj/feature-pretty": "^0.0.1",
     "@dumlj/feature-updater": "^0.0.1",
     "@dumlj/shell-lib": "^0.0.1",
+    "@dumlj/util-lib": "^0.0.1",
     "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "fs-extra": "^11.1.0",
-    "tslib": "^2.5.0",
-    "@dumlj/util-lib": "^0.0.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

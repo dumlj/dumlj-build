@@ -6,7 +6,7 @@ import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { yarnWorkspaces } from '@dumlj/shell-lib'
 import depcheck from 'depcheck'
 import { findSiblingsVersion } from '../utils/findSiblingsVersion'
-import { info, warn } from '../services/logger'
+import { ok, info, warn } from '../services/logger'
 
 export interface TidyDepsOptions {
   /** 生产依赖匹配参数 */
@@ -90,7 +90,15 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
         }
       }
 
-      await fs.writeFile(pkgJson, JSON.stringify(source, null, 2))
+      /**
+       * @todo
+       * 这里涉及写文件
+       * 若出现同时读写的情况，而会导致 package.json 无法读取
+       */
+
+      if (missDependencies || missDevDependencies) {
+        await fs.writeFile(pkgJson, JSON.stringify(source, null, 2))
+      }
 
       if (missDependencies) {
         const versions = Object.keys(dependencies).map((name) => `${name}@${dependencies[name]}`)
@@ -131,4 +139,6 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       }
     })
   )
+
+  ok('Analysis of project dependencies completed.')
 }

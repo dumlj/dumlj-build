@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { excute } from '@dumlj/shell-lib'
+import { execute } from '@dumlj/shell-lib'
 
 export const findSiblingsVersion = async (name: string) => {
   const packageJson = 'package.json'
@@ -29,5 +29,5 @@ export const findSiblingsVersion = async (name: string) => {
     // nothing todo...
   }
 
-  return excute(`npm view ${name} version`)
+  return execute(`npm view ${name} version`)
 }

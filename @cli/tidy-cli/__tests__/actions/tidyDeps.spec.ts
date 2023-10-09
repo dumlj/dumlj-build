@@ -1,4 +1,4 @@
-import { tidyDeps } from '@/actions/tidyDeps'
+import { tidyDeps } from '@/actions/deps'
 import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
@@ -15,7 +15,7 @@ describe('test actions/tidyDeps', () => {
         return '/'
       })
 
-    const { yarnWorkspaces, excute } = await import('@dumlj/shell-lib')
+    const { yarnWorkspaces, execute } = await import('@dumlj/shell-lib')
     jest.isMockFunction(yarnWorkspaces) &&
       yarnWorkspaces.mockImplementation(async () => {
         return [
@@ -29,8 +29,8 @@ describe('test actions/tidyDeps', () => {
       })
 
     // mock findSiblingsVersion
-    jest.isMockFunction(excute) &&
-      excute.mockImplementation(async () => {
+    jest.isMockFunction(execute) &&
+      execute.mockImplementation(async () => {
         return '1.0.0'
       })
 

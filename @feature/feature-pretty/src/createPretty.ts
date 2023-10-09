@@ -13,10 +13,14 @@ export const createPretty = (name: string) => {
     [K in keyof T]: (message: string | Error, options?: Omit<Options, 'prefix'>) => ReturnType<T[K]>
   }
 
+  type Method = keyof typeof methods
+  const VERBOSE_METHODS: Method[] = ['fail']
+
   return Object.keys(methods).reduce(
-    (result, method) => {
+    (result, method: Method) => {
       result[method] = (message: string | Error, options: Options = {}) => {
-        return methods[method](message, { ...options, prefix: name })
+        const verbose = VERBOSE_METHODS.includes(method)
+        return methods[method](message, { verbose, ...options, prefix: name })
       }
 
       return result

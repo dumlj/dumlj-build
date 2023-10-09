@@ -1,16 +1,51 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
-const fs = require('fs')
-const { execSync } = require('child_process')
-const tasks = ['ts-patch install -s']
+;(async function main () {
+  const fs = require('fs')
+  const { exec } = require('child_process')
+  const tasks = ['ts-patch install -s']
+  
+  if (fs.existsSync('tsconfig.build.json')) {
+    tasks.push('tsc --build ./tsconfig.build.json')
+  } else {
+    tasks.push(...[
+      'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli',
+      'dumlj concurrently \"tscfg --exclude \\\"*/__template__\\\"\" \"deps --exclude \\\"*/__template__\\\"\"',
+    ])
+  }
 
-if (fs.existsSync('tsconfig.build.json')) {
-  tasks.push('tsc --build ./tsconfig.build.json')
-} else {
-  tasks.push(...[
-    'lerna run compile --parallel --include-filtered-dependencies --scope=@dumlj/tidy-cli',
-    'dumlj-tidy --exclude \"*/__template__\"',
-  ])
-}
+  /**
+   * @todo 后续优化输出样式
+   */
 
-tasks.forEach((command) => execSync(command, { stdio: 'inherit' }))
+  const Spinnies = require('spinnies')
+  const spinnies = new Spinnies()
+  
+  while (tasks.length > 0) {
+    const command = tasks.shift()
+    spinnies.add(command, { text: command })
+  
+    try {
+      await new Promise((resolve) => {
+        const cp = exec(command, {
+          stdio: 'inherit',
+          env: {
+            ...process.env,
+            FORCE_COLOR: true
+          }
+        })
+
+        if (-1 !== process.argv.indexOf('--verbose')) {
+          cp.stdout.pipe(process.stdout)
+        }
+
+        cp.on('exit', () => resolve())
+      })
+    } catch (error) {
+      spinnies.fail(command, { text: error.message })
+      return
+    }
+  
+    spinnies.succeed(command)
+  }
+})()

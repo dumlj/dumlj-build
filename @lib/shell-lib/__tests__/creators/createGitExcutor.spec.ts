@@ -18,18 +18,18 @@ jest.mock('command-exists', () => ({
 
 describe('test services/createGitExcutor', () => {
   it('can create command function', async () => {
-    const excute = createGitExcutor(() => 'test')
-    expect(typeof excute).toBe('function')
-    expect(typeof excute.sync).toBe('function')
+    const execute = createGitExcutor(() => 'test')
+    expect(typeof execute).toBe('function')
+    expect(typeof execute.sync).toBe('function')
 
-    expect(await excute()).toBe('ok')
-    expect(excute.sync()).toBe('ok')
+    expect(await execute()).toBe('ok')
+    expect(execute.sync()).toBe('ok')
   })
 
   it('will return empty when git no install', async () => {
     enableCommandExistsMock = false
 
-    const excute = createGitExcutor(() => 'test')
-    expect(await excute()).toBe('')
+    const execute = createGitExcutor(() => 'test')
+    expect(await execute()).toBe('')
   })
 })

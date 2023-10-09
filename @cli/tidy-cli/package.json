@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "bin": {
-    "dumlj-tidy": "./bin/cli"
+    "dumlj": "./bin/cli"
   },
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",

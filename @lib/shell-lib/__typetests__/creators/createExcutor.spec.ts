@@ -30,23 +30,23 @@ describe('test creators/createExcutor', () => {
 
   it('can inherit command parameter inputs.', async () => {
     const fn = (id: string, flag?: boolean) => (flag ? `${id}` : `unknown`)
-    const create = createExcutor((excute) => excute())
+    const create = createExcutor((execute) => execute())
     expectType<Excute<[string, boolean?], string>>(create(fn))
   })
 
   it('can inherit command return outputs.', async () => {
     const fn = () => 'x'
-    const create = createExcutor((excute) => excute())
+    const create = createExcutor((execute) => execute())
 
     expectType<Excute<[], number>>(create(fn, () => 1))
     expectType<Excute<[], boolean>>(create(fn, () => false))
   })
 
   it('can return string type when param `resolv` is not provided.', async () => {
-    const create = createExcutor((excute) => excute())
-    const excute = create(() => 'x')
+    const create = createExcutor((execute) => execute())
+    const execute = create(() => 'x')
 
-    expectType<Promise<string>>(excute())
-    expectType<string>(excute.sync())
+    expectType<Promise<string>>(execute())
+    expectType<string>(execute.sync())
   })
 })

@@ -40,8 +40,8 @@ describe('test creators/createCommonExcutor', () => {
   })
 
   it('can return string type when param `resolv` is not provided.', async () => {
-    const excute = createCommonExcutor(() => 'x')
-    expectType<Promise<string>>(excute())
-    expectType<string>(excute.sync())
+    const execute = createCommonExcutor(() => 'x')
+    expectType<Promise<string>>(execute())
+    expectType<string>(execute.sync())
   })
 })

@@ -13,7 +13,7 @@ export const info = registerPretty('cyanBright')
 export const warn = registerPretty('yellowBright', { prefix: '⚠️' })
 
 /** 错误 */
-export const fail = registerPretty('redBright', { prefix: '✗' })
+export const fail = registerPretty('redBright', { prefix: '✗', verbose: true })
 
 /** 随机颜色 */
 export const randomHex = () => `#${((Math.random() * (1 << 24)) | 0).toString(16).toUpperCase().padStart(6, '0')}`

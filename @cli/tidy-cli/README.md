@@ -2,7 +2,9 @@
 
 # Tidy Cli
 
-cli for organizing tsconfig references.
+cli for organizing projects
+
+## BACKGROUND
 
 ## INSTALL
 

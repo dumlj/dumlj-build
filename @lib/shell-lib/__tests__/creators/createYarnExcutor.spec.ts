@@ -18,18 +18,18 @@ jest.mock('command-exists', () => ({
 
 describe('test services/createYarnExcutor', () => {
   it('can create command function', async () => {
-    const excute = createYarnExcutor(() => 'test')
-    expect(typeof excute).toBe('function')
-    expect(typeof excute.sync).toBe('function')
+    const execute = createYarnExcutor(() => 'test')
+    expect(typeof execute).toBe('function')
+    expect(typeof execute.sync).toBe('function')
 
-    expect(await excute()).toBe('ok')
-    expect(excute.sync()).toBe('ok')
+    expect(await execute()).toBe('ok')
+    expect(execute.sync()).toBe('ok')
   })
 
   it('will return empty when yarn no install', async () => {
     enableCommandExistsMock = false
 
-    const excute = createYarnExcutor(() => 'test')
-    expect(await excute()).toBe('')
+    const execute = createYarnExcutor(() => 'test')
+    expect(await execute()).toBe('')
   })
 })
