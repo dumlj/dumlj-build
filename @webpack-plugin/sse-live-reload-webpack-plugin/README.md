@@ -4,7 +4,6 @@
 
 livereload over SSE when developing with devServe
 
-
 ## INSTALL
 
 ```bash

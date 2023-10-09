@@ -4,9 +4,7 @@
 
 cli for organizing projects
 
-
 ## BACKGROUND
-
 
 ## INSTALL
 

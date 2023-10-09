@@ -4,7 +4,6 @@
 
 模板生成工具
 
-
 ## INSTALL
 
 ```bash

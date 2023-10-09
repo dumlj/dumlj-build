@@ -72,10 +72,6 @@ export class CrxManifestWebpackPlugin extends SeedWebpackPlugin {
     const { webpack } = compiler
     compiler.hooks.thisCompilation.tap(this.pluginName, (compilation) => {
       compilation.hooks.processAssets.tapPromise(this.pluginName, async () => {
-        if (compilation.compiler.isChild()) {
-          return
-        }
-
         const manifest: ChromeManifest = defaultsDeep({}, this.manifest)
         const entryChunks = Array.from(compilation.entrypoints).reduce<Record<string, Chunk>>((entrypoints, [name, entrypoint]) => {
           entrypoints[name] = entrypoint.getEntrypointChunk()

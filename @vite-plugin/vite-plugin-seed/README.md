@@ -4,7 +4,6 @@
 
 basic vite plugin
 
-
 ## INSTALL
 
 ```bash

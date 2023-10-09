@@ -14,9 +14,7 @@
     ])
   }
 
-  /**
-   * @todo 后续优化输出样式
-   */
+  /** @todo 后续优化输出样式 */
 
   const Spinnies = require('spinnies')
   const spinnies = new Spinnies()

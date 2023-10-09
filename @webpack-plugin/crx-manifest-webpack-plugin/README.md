@@ -4,7 +4,6 @@
 
 generate manifest file for chrome extension
 
-
 ## INSTALL
 
 ```bash

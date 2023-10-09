@@ -4,7 +4,6 @@
 
 basic cli utils
 
-
 ## INSTALL
 
 ```bash

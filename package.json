@@ -26,7 +26,7 @@
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "dev": "jest -c ./jest.config.ts --watch",
-    "ok": "yarn tidy && yarn compile && yarn format && yarn lint && yarn test && yarn readme"
+    "ok": "yarn tidy && yarn compile && yarn lint && yarn test && yarn readme && yarn format"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",
