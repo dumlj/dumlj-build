@@ -1,3 +1,7 @@
+import { ok } from '@dumlj/feature-pretty'
+import { prepare } from '@dumlj/feature-prepare'
+import { yarnWorkspaces } from '@dumlj/shell-lib'
+import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import chalk from 'chalk'
 import trimEnd from 'lodash/trimEnd'
 import kebabCase from 'lodash/kebabCase'
@@ -6,10 +10,6 @@ import path from 'path'
 import { glob } from 'glob'
 import inquirer, { type ChoiceCollection } from 'inquirer'
 import { Project } from 'ts-morph'
-import { ok } from '@dumlj/feature-pretty'
-import { prepare } from '@dumlj/feature-prepare'
-import { yarnWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { DEFAULT_TEMPLATE_PATTERN, DEFAULT_RC_FILE } from './constants'
 import type { TemplateSchema } from './types'
 
@@ -150,7 +150,8 @@ export const createProject = async (options?: CreateProjectOptions) => {
         }
       }
 
-      const { file: output = srcFile, code } = (await tranform()) || {}
+      const outFile = path.join(dist, file)
+      const { file: output = outFile, code } = (await tranform()) || {}
       await fs.ensureDir(path.dirname(output))
 
       try {
