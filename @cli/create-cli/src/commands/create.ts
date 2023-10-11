@@ -1,7 +1,7 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { createProject, type CreateProjectOptions } from '../actions/create-project'
-import { DEFAULT_RC_FILE, DEFAULT_TEMPLATE_PATTERN } from '../actions/create-project/constants'
+import { createProject, type CreateProjectOptions } from '../actions/create'
+import { DEFAULT_RC_FILE, DEFAULT_TEMPLATE_PATTERN } from '../actions/create/constants'
 
 export default program
   .command('create')

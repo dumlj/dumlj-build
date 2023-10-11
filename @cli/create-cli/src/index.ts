@@ -1,2 +1,3 @@
-export { default as create } from './commands/create-project'
-export type { TemplateSchema } from './actions/create-project/types'
+export { default as create } from './commands/create'
+export { default as install } from './commands/install'
+export type { TemplateSchema } from './actions/create/types'
