@@ -1,12 +1,12 @@
 {
-  "name": "@dumlj/vite-plugin-seed",
+  "name": "@dumlj/remotefs-middleware",
   "version": "0.0.1",
-  "description": "basic vite plugin",
+  "description": "remote file system",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@vite-plugin/vite-plugin-seed"
+    "directory": "@vite-plugin/remotefs-middleware"
   },
   "license": "MIT",
   "main": "./libs/index.js",
@@ -19,20 +19,13 @@
   },
   "dependencies": {
     "tslib": "^2.5.0",
-    "chalk": "^4.1.2",
-    "@dumlj/feature-updater": "^0.0.1",
-    "lodash": "^4.17.21",
-    "utility-types": "^3.10.0"
+    "@jest/types": "^29.6.3"
   },
   "devDependencies": {
-    "@jest/types": "^29.6.3",
-    "ts-jest": "^29.1.1",
-    "vite": "^4",
-    "rollup": "^3",
-    "tsd-lite": "^0.8.0"
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
-    "vite": "4.x"
+    "webpack": "5.x"
   },
   "publishConfig": {
     "access": "public"

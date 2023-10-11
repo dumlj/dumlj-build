@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
+import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
 import path from 'path'
 import { upperFirst, camelCase } from 'lodash'
 import micromatch from 'micromatch'
-import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
-import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
 
 describe('test webpack plugins standards', () => {
   const FOLDER = '@webpack-plugin'
