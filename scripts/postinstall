@@ -9,7 +9,8 @@
     tasks.push('tsc --build ./tsconfig.build.json')
   } else {
     tasks.push(...[
-      'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli',
+      'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli --scope=@dumlj/create-cli',
+      'dumlj install husky',
       'dumlj concurrently \"tscfg --exclude \\\"*/__template__\\\"\" \"deps --exclude \\\"*/__template__\\\"\"',
     ])
   }
