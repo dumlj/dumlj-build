@@ -15,17 +15,14 @@
     ])
   }
 
-  /** @todo 后续优化输出样式 */
-
   const Spinnies = require('spinnies')
   const spinnies = new Spinnies()
-  
+  tasks.forEach((command) => spinnies.add(command, { text: command }))
+
   while (tasks.length > 0) {
     const command = tasks.shift()
-    spinnies.add(command, { text: command })
-  
     try {
-      await new Promise((resolve) => {
+      await new Promise((resolve, reject) => {
         const cp = exec(command, {
           stdio: 'inherit',
           env: {
@@ -34,14 +31,12 @@
           }
         })
 
-        if (-1 !== process.argv.indexOf('--verbose')) {
-          cp.stdout.pipe(process.stdout)
-        }
-
-        cp.on('exit', () => resolve())
+        cp.stdout.pipe(process.stdout)
+        cp.stderr.pipe(process.stderr)
+        cp.on('exit', (code) => code ? reject(code) : resolve())
       })
     } catch (error) {
-      spinnies.fail(command, { text: error.message })
+      spinnies.stopAll('fail')
       return
     }
   
