@@ -5,7 +5,7 @@ export const createHelpers = () => {
     notifications.push({ type, message })
   }
 
-  const isSkip = (title: string, variables: Record<string, string>) => {
+  const isSkipIncomplete = (title: string, variables: Record<string, string>) => {
     const names = Object.keys(variables)
     const invalids = names.filter((name) => !(typeof variables[name] === 'string' && variables[name].length > 0))
     if (invalids.length > 0) {
@@ -16,5 +16,5 @@ export const createHelpers = () => {
     return false
   }
 
-  return { notifications, notify, isSkip }
+  return { notifications, notify, isSkipIncomplete }
 }

@@ -1,20 +1,19 @@
 # Dest resouces
-build
 libs
 !**/src/**/libs
-docs-dist
+build
 .next
 coverage
 junit.xml
 gh-pages
-/@next
+!.templaterc.ts
+!.readmerc.ts
 
 # Husky
 .husky
 
 # ESLINT
 .eslintcache
-
 
 # Npm or Yarn
 .yarn/*

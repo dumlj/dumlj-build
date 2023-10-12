@@ -11,7 +11,7 @@
     tasks.push(...[
       'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli --scope=@dumlj/create-cli',
       'dumlj install husky',
-      'dumlj concurrently \"tscfg --exclude \\\"*/__template__\\\"\" \"deps --exclude \\\"*/__template__\\\"\"',
+      'dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\"\"',
     ])
   }
 

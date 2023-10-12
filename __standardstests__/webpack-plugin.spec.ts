@@ -22,7 +22,7 @@ describe('test webpack plugins standards', () => {
       }
 
       if (0 === location.indexOf(FOLDER)) {
-        if (0 !== location.indexOf(path.join(FOLDER, '__'))) {
+        if (-1 === location.indexOf('__')) {
           return true
         }
       }

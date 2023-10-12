@@ -1,0 +1,16 @@
+{
+  "name": "@dumlj-example/seed-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "yarn webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/seed-webpack-plugin": "0.0.1",
+    "@dumlj/vitrual-webpack-plugin": "0.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^5",
+    "webpack-cli": "^5"
+  }
+}

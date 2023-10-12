@@ -30,7 +30,7 @@ export interface TidyDepsOptions {
 }
 
 export const tidyDeps = async (options?: TidyDepsOptions) => {
-  const { necessary: inNecessary = ['tslib'], src: srcPattern = 'src/**', paths = [...module.paths], include: inInclude, exclude: inExclude } = options
+  const { necessary: inNecessary = ['tslib', 'webpack-cli'], src: srcPattern = 'src/**', paths = [...module.paths], include: inInclude, exclude: inExclude } = options
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')

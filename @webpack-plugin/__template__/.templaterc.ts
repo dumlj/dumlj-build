@@ -1,10 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import camelCase from 'lodash/camelCase'
-import kebabCase from 'lodash/kebabCase'
+import { upperFirst, camelCase, kebabCase } from 'lodash'
 import type { TemplateSchema } from '@dumlj/create-cli'
 
 export const configure = async (): Promise<TemplateSchema> => {
-  const alias = (name: string) => camelCase(name).replace(/^[a-z]/, (char) => char.toUpperCase())
+  const alias = (name: string) => upperFirst(camelCase(name))
   const nameClass = (name: string) => `${alias(name)}WebpackPlugin`
   const nameOptions = (name: string) => `${alias(name)}WebpackPluginOptions`
   const namePlugin = (name: string) => kebabCase(`${name}-webpack-plugin`)
@@ -14,6 +13,35 @@ export const configure = async (): Promise<TemplateSchema> => {
   return {
     name: 'Webpack Plugin Template',
     description: 'Create a webpack plugin which inherits seed-webpack-plugin.',
+    nameTransform: (input: string) => {
+      const SUFFIX_NAME = 'WebpackPlugin'
+
+      let length = 0
+      while (true) {
+        if (SUFFIX_NAME.length === length) {
+          break
+        }
+
+        const t = SUFFIX_NAME.substring(0, length + 1)
+        if (new RegExp(t, 'i').test(input)) {
+          length++
+          continue
+        }
+
+        break
+      }
+
+      const suffixSameStr = SUFFIX_NAME.substring(0, length)
+      const nameSameStr = input.substring(input.length - length)
+      if (suffixSameStr.toUpperCase() !== nameSameStr.toUpperCase()) {
+        return { shortName: input, name: nameClass(input), same: '', suffix: SUFFIX_NAME }
+      }
+
+      const shortName = input.substring(0, input.length - nameSameStr.length)
+      const name = alias(`${shortName}${SUFFIX_NAME}`)
+      const suffix = SUFFIX_NAME.substring(length)
+      return { shortName, name, same: suffixSameStr, suffix }
+    },
     outputPathResolver: (kebabCaseName: string) => `@webpack-plugin/${kebabCaseName}-webpack-plugin/`,
     pkgTransform: async ({ name, description, source }) => {
       source.name = nameModule(name)

@@ -1,7 +1,0 @@
-{
-  "name": "@dumlj-example/tidy-cli",
-  "version": "0.0.1",
-  "dependencies": {
-    "@dumlj/tidy-cli": "0.0.1"
-  }
-}

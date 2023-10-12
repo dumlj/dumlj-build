@@ -31,6 +31,13 @@ export interface TemplateSchema {
   name: string
   /** 描述 */
   description: string
+  /** 重命名 */
+  nameTransform(name: string): {
+    shortName: string
+    name: string
+    same: string
+    suffix: string
+  }
   /** 输出文件 */
   outputPathResolver(kebabCaseName: string): string
   /** json 内容转换器 */

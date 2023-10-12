@@ -56,7 +56,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
     const names = Object.keys(variables)
     const invalids = names.filter((name) => !(typeof variables[name] === 'string' && variables[name].length > 0))
     if (invalids.length > 0) {
-      this.notify('warn', `${title}, miss ${['', ...invalids].join('\n - ')}`)
+      this.notify('warn', `${title}\nThe following options are missing: ${['', ...invalids].join('\n - ')}`)
       return true
     }
 

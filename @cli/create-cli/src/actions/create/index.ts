@@ -47,7 +47,11 @@ export const createProject = async (options?: CreateProjectOptions) => {
     template: TemplateSchema & { src: string }
   }
 
-  const { name, description, template } = await inquirer.prompt<Resp>([
+  const {
+    name: alias,
+    description,
+    template,
+  } = await inquirer.prompt<Resp>([
     {
       type: 'list',
       name: 'template',
@@ -57,7 +61,8 @@ export const createProject = async (options?: CreateProjectOptions) => {
     {
       type: 'input',
       name: 'name',
-      message: 'please input a name for this module.',
+      message: `please input a name for this module.`,
+      suffix: chalk.grey(`(e.g.CustomWebpackPlugin)`),
       async validate(name, { template }) {
         const { outputPathResolver } = template
         const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
@@ -90,6 +95,15 @@ export const createProject = async (options?: CreateProjectOptions) => {
 
         return true
       },
+      transformer(input, { template }) {
+        const { nameTransform } = template
+        if (typeof nameTransform === 'function') {
+          const { name, same, suffix } = nameTransform(input)
+          return name.replace(same, ($1) => chalk.cyan($1)).replace(suffix, ($1) => chalk.gray($1))
+        }
+
+        return name
+      },
     },
     {
       type: 'input',
@@ -119,7 +133,9 @@ export const createProject = async (options?: CreateProjectOptions) => {
     },
   ])
 
-  const { src, outputPathResolver, pkgTransform, tsTransform } = template
+  const { src, nameTransform, outputPathResolver, pkgTransform, tsTransform } = template
+  const { shortName: name } = nameTransform(alias)
+
   /** 输出路径 */
   const output = outputPathResolver(kebabCase(name))
   const dist = path.join(rootPath, output)

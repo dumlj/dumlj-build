@@ -17,7 +17,7 @@ export default async (): Promise<Config.InitialOptions> => {
        * Error: Can't find a root directory while resolving a config file path.
        */
       // prettier-ignore
-      ...packages.flatMap((path) => [
+      ...packages.filter((path) => -1 === path.indexOf('__')).flatMap((path) => [
         `<rootDir>/${path}/jest.config.unittest.ts`,
         `<rootDir>/${path}/jest.config.typetest.ts`,
       ]),

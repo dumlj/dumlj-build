@@ -10,7 +10,8 @@
       "@feature/*",
       "@webpack-plugin/*",
       "@vite-plugin/*",
-      "@cli/*"
+      "@cli/*",
+      "@*/*/__example__"
     ]
   },
   "scripts": {
@@ -21,8 +22,8 @@
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "yarn lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
-    "tidy": "dumlj concurrently \"tscfg --exclude \\\"*/__template__\\\"\" \"deps --exclude \\\"*/__template__\\\"\"",
-    "readme": "dumlj readme --exclude \"*/__template__\"",
+    "tidy": "dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\"\"",
+    "readme": "dumlj readme --exclude \"**/__template__\" --exclude \"**/__example__\"",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "dev": "jest -c ./jest.config.ts --watch",
