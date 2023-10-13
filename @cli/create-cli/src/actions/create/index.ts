@@ -9,7 +9,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { glob } from 'glob'
 import inquirer, { type ChoiceCollection } from 'inquirer'
-import { Project } from 'ts-morph'
+import { Project, IndentationText, QuoteKind } from 'ts-morph'
 import { DEFAULT_TEMPLATE_PATTERN, DEFAULT_RC_FILE } from './constants'
 import type { TemplateSchema } from './types'
 
@@ -18,10 +18,12 @@ export interface CreateProjectOptions {
   pattern?: string
   /** name of config file */
   rc?: string
+  /** override exists project */
+  override?: boolean
 }
 
 export const createProject = async (options?: CreateProjectOptions) => {
-  const { pattern = DEFAULT_TEMPLATE_PATTERN, rc: configFile = DEFAULT_RC_FILE } = options || {}
+  const { pattern = DEFAULT_TEMPLATE_PATTERN, rc: configFile = DEFAULT_RC_FILE, override } = options || {}
   const rootPath = await findWorkspaceRootPath()
   const workspaces = await yarnWorkspaces()
   const templates = workspaces.filter(({ name }) => new RegExp(`^${pattern}`).test(name))
@@ -40,17 +42,18 @@ export const createProject = async (options?: CreateProjectOptions) => {
       return { name, value }
     })
   )
-
   interface Resp {
     name: string
     description: string
     template: TemplateSchema & { src: string }
+    override: boolean
   }
 
   const {
     name: alias,
     description,
     template,
+    override: confirmOverride,
   } = await inquirer.prompt<Resp>([
     {
       type: 'list',
@@ -66,7 +69,8 @@ export const createProject = async (options?: CreateProjectOptions) => {
       async validate(name, { template }) {
         const { outputPathResolver } = template
         const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
-        if (await fs.pathExists(folder)) {
+
+        if (!override && fs.pathExists(folder)) {
           return new Error('name is exists')
         }
 
@@ -131,16 +135,33 @@ export const createProject = async (options?: CreateProjectOptions) => {
         return true
       },
     },
+    {
+      type: 'confirm',
+      name: 'override',
+      message: 'A project with the same name already exists, are you sure you want to overwrite it?',
+      default: true,
+      when: () => !!override,
+    },
   ])
 
   const { src, nameTransform, outputPathResolver, pkgTransform, tsTransform } = template
   const { shortName: name } = nameTransform(alias)
+
+  if (typeof confirmOverride === 'boolean') {
+    if (!confirmOverride) {
+      return
+    }
+
+    const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
+    await fs.remove(folder)
+  }
 
   /** 输出路径 */
   const output = outputPathResolver(kebabCase(name))
   const dist = path.join(rootPath, output)
   const files = await glob('**/*', { cwd: src, nodir: true, ignore: [configFile] })
   const ignores = await gitDetectIgnore(files)
+
   /**
    * 没被忽略的文件
    * @description
@@ -148,12 +169,11 @@ export const createProject = async (options?: CreateProjectOptions) => {
    */
   const noIgnores = Array.isArray(ignores) ? files.filter((file) => !ignores.includes(file)) : files
   const project = new Project({
-    /** @todo 格式化无效 */
-    // manipulationSettings: {
-    //   quoteKind: QuoteKind.Single,
-    //   indentationText: IndentationText.TwoSpaces,
-    //   useTrailingCommas: true,
-    // }
+    manipulationSettings: {
+      quoteKind: QuoteKind.Single,
+      indentationText: IndentationText.TwoSpaces,
+      useTrailingCommas: true,
+    },
   })
 
   await Promise.all(
@@ -173,11 +193,7 @@ export const createProject = async (options?: CreateProjectOptions) => {
             const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
             const ast = project.createSourceFile(path.join(dist, file), content)
             const { output = file } = (await tsTransform({ name, description, file, ast })) || {}
-
-            /** @todo 格式化无效 */
-            // ast.formatText()
-
-            const code = ast.print()
+            const code = ast.getText(true)
             const outputFile = path.join(dist, output)
             return { file: outputFile, code }
           }

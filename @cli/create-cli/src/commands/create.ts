@@ -8,4 +8,5 @@ export default program
   .summary('create project by template')
   .option('--pattern <pattern>', `specify pattern of template name in project. (default ${DEFAULT_TEMPLATE_PATTERN})`)
   .option('--config <config>', `specify name of config file. (default ${DEFAULT_RC_FILE})`)
+  .option('--override [override]', 'override exists project.')
   .action((options?: CreateProjectOptions) => tryAction(createProject)(options))
