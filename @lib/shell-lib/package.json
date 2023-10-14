@@ -19,7 +19,9 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "tslib": "^2.5.0",
-    "@jest/types": "^29.6.3"
+    "@jest/types": "^29.6.3",
+    "lodash": "^4.17.21",
+    "chokidar": "^3.5.3"
   },
   "devDependencies": {
     "ts-jest": "^29.1.1",

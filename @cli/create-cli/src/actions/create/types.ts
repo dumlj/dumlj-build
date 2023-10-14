@@ -41,7 +41,7 @@ export interface TemplateSchema {
   /** 输出文件 */
   outputPathResolver(kebabCaseName: string): string
   /** json 内容转换器 */
-  pkgTransform(params: PkgTransformParams): Promise<TransformReuslt | void>
+  pkgTransform(file: string): ((params: PkgTransformParams) => Promise<TransformReuslt | void>) | void
   /** ts 内容 转换器 */
-  tsTransform(params: TsTransformParams): Promise<TransformReuslt | void>
+  tsTransform(file: string): ((params: TsTransformParams) => Promise<TransformReuslt | void>) | void
 }

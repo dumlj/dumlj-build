@@ -22,21 +22,23 @@
     "@dumlj/feature-pretty": "^0.0.1",
     "@dumlj/shell-lib": "^0.0.1",
     "@dumlj/util-lib": "^0.0.1",
+    "cardinal": "^2.1.1",
+    "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "fs-extra": "^11.1.1",
     "glob": "^10.3.4",
     "inquirer": "^6.5.2",
+    "lodash": "^4.17.21",
     "ts-morph": "^19.0.0",
     "tslib": "^2.5.0",
     "typescript": "^5.2.2",
-    "lodash": "^4.17.21",
-    "chalk": "^4.1.2"
+    "chokidar": "^3.5.3"
   },
   "devDependencies": {
+    "@dumlj/seed-cli": "^0.0.1",
     "@jest/types": "^29.6.3",
     "@types/inquirer": "^9.0.3",
-    "ts-jest": "^29.1.1",
-    "@dumlj/seed-cli": "^0.0.1"
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "@dumlj/seed-cli": "*"

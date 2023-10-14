@@ -6,9 +6,9 @@ export const configure = async (): Promise<TemplateSchema> => {
   const alias = (name: string) => upperFirst(camelCase(name))
   const nameClass = (name: string) => `${alias(name)}WebpackPlugin`
   const nameOptions = (name: string) => `${alias(name)}WebpackPluginOptions`
-  const namePlugin = (name: string) => kebabCase(`${name}-webpack-plugin`)
-  const nameModule = (name: string) => `@dumlj/${kebabCase(`${name}-webpack-plugin`)}`
-  const nameDirectory = (name: string) => `@webpack-plugin/${kebabCase(`${name}-webpack-plugin`)}`
+  const namePlugin = (name: string) => `${kebabCase(name)}-webpack-plugin`
+  const nameModule = (name: string) => `@dumlj/${kebabCase(name)}-webpack-plugin`
+  const nameDirectory = (name: string) => `@webpack-plugin/${kebabCase(name)}-webpack-plugin`
 
   return {
     name: 'Webpack Plugin Template',
@@ -42,32 +42,36 @@ export const configure = async (): Promise<TemplateSchema> => {
       const suffix = SUFFIX_NAME.substring(length)
       return { shortName, name, same: suffixSameStr, suffix }
     },
-    outputPathResolver: (kebabCaseName: string) => `@webpack-plugin/${kebabCaseName}-webpack-plugin/`,
-    pkgTransform: async ({ name, description, source }) => {
-      source.name = nameModule(name)
-      source.description = description
-      source.repository.directory = nameDirectory(name)
+    outputPathResolver: (kebabCaseName: string) => `@webpack-plugin/${kebabCase(kebabCaseName)}-webpack-plugin/`,
+    pkgTransform: () => {
+      return async ({ name, description, source }) => {
+        source.name = nameModule(name)
+        source.description = description
+        source.repository.directory = nameDirectory(name)
+      }
     },
-    tsTransform: async ({ name, ast, file }) => {
+    tsTransform: (file) => {
       switch (file) {
-        case 'src/WebpackPlugin.ts': {
-          const nOptions = ast.getInterfaceOrThrow('WebpackPluginOptions')
-          nOptions.rename(nameOptions(name))
+        case 'src/WebpackPlugin.ts':
+          return async ({ name, ast }) => {
+            const nOptions = ast.getInterfaceOrThrow('WebpackPluginOptions')
+            nOptions.rename(nameOptions(name))
 
-          const nClass = ast.getClassOrThrow('WebpackPlugin')
-          nClass.rename(nameClass(name))
+            const nClass = ast.getClassOrThrow('WebpackPlugin')
+            nClass.rename(nameClass(name))
 
-          const nPluginName = nClass.getStaticProperty('PLUGIN_NAME')!
-          nPluginName.set({ initializer: JSON.stringify(namePlugin(name)) })
-          return { output: `src/${nameClass(name)}.ts` }
-        }
+            const nPluginName = nClass.getStaticProperty('PLUGIN_NAME')!
+            nPluginName.set({ initializer: JSON.stringify(namePlugin(name)) })
+            return { output: `src/${nameClass(name)}.ts` }
+          }
 
-        case 'src/index.ts': {
-          const declarations = ast.getExportDeclarations()
-          const declaration = declarations.find((d) => d.getModuleSpecifier()!.getLiteralText() === './WebpackPlugin')!
-          declaration.setModuleSpecifier(`./${nameClass(name)}`)
-          return
-        }
+        case 'src/index.ts':
+          return async ({ name, ast }) => {
+            const declarations = ast.getExportDeclarations()
+            const declaration = declarations.find((d) => d.getModuleSpecifier()!.getLiteralText() === './WebpackPlugin')!
+            declaration.setModuleSpecifier(`./${nameClass(name)}`)
+            return
+          }
       }
     },
   }

@@ -40,6 +40,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
     exclude: inExclude,
     ignore: inIgnore,
   } = options
+
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const ignore = Array.isArray(inIgnore) ? inIgnore : typeof inIgnore === 'string' ? [inIgnore] : []
