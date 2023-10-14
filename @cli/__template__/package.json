@@ -1,0 +1,31 @@
+{
+  "name": "@template/cli",
+  "version": "0.0.1",
+  "description": "something...",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@cli/directory"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.2.2",
+    "@dumlj/feature-pretty": "^0.0.1"
+  },
+  "devDependencies": {
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3",
+    "@dumlj/seed-cli": "^0.0.1"
+  },
+  "peerDependencies": {
+    "@dumlj/seed-cli": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

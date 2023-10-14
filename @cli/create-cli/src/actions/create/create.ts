@@ -198,7 +198,8 @@ export class Create {
 
     const tempalteKey = this.template ? `${DEFAULT_TEMPLATE_PATTERN}${this.template}` : ''
     const defaultTemplate = tempalteKey ? choices.find(({ key }) => key === tempalteKey)?.value : undefined
-    const skip = (name: string) => (Array.isArray(only) ? !only.includes(name) : true)
+    const skip = (name: string) => (Array.isArray(only) ? !only.includes(name) : false)
+
     const formFieldValues: FormFieldValues = await inquirer.prompt<FormFieldValues>([
       {
         type: 'list',
@@ -264,6 +265,7 @@ export class Create {
     const noIgnores = Array.isArray(ignores) ? files.filter((file) => !ignores.includes(file)) : files
     const project = new Project({
       manipulationSettings: {
+        usePrefixAndSuffixTextForRename: true,
         quoteKind: QuoteKind.Single,
         indentationText: IndentationText.TwoSpaces,
         useTrailingCommas: true,
