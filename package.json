@@ -15,6 +15,7 @@
     ]
   },
   "scripts": {
+    "commit": "git-cz",
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
     "preinstall": "./scripts/preinstall",
     "postinstall": "./scripts/postinstall",
@@ -33,13 +34,11 @@
     "@commitlint/cli": "^17.4.0",
     "@commitlint/config-conventional": "^17.4.0",
     "@jest/types": "^29.6.3",
-    "@stackblitz/sdk": "^1.9.0",
     "@swc/helpers": "^0.5.2",
     "@tsd/typescript": "^5.2.2",
     "@types/jest": "^29.5.4",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
-    "cli-spinners": "^2.9.1",
     "commitizen": "^4.2.4",
     "commitlint-plugin-i18n": "^0.0.1-alpha.3",
     "concurrently": "^8.2.1",

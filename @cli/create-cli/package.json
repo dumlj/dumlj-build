@@ -18,12 +18,14 @@
     "test": "yarn jest"
   },
   "dependencies": {
+    "@dumlj/feature-cliui": "^0.0.1",
     "@dumlj/feature-prepare": "^0.0.1",
     "@dumlj/feature-pretty": "^0.0.1",
     "@dumlj/shell-lib": "^0.0.1",
     "@dumlj/util-lib": "^0.0.1",
     "cardinal": "^2.1.1",
     "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
     "commander": "^11.0.0",
     "fs-extra": "^11.1.1",
     "glob": "^10.3.4",
@@ -31,8 +33,7 @@
     "lodash": "^4.17.21",
     "ts-morph": "^19.0.0",
     "tslib": "^2.5.0",
-    "typescript": "^5.2.2",
-    "chokidar": "^3.5.3"
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@dumlj/seed-cli": "^0.0.1",

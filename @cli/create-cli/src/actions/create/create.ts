@@ -1,5 +1,6 @@
 import { fail, ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
+import { pressAnyToContinue } from '@dumlj/feature-cliui'
 import { gitDetectIgnore, yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { monitorToDevelop } from '@dumlj/seed-cli'
@@ -188,6 +189,7 @@ export class Create {
         const { configure } = await prepare<{ configure: () => Promise<TemplateSchema> }>(config)
         const schema = await configure()
         const { name: sName, description } = await configure()
+
         const name = `${sName} - ${description}`
         const value = { ...schema, src: path.dirname(config), key }
         return { name, value, key }
@@ -338,12 +340,12 @@ export class Create {
 
     const confirmValue = (name: string, value: any) => {
       const content = JSON.stringify(value, null, 2)
-      const messages = [`The following are the results for ${chalk.cyanBright(name)}.`, chalk.cyanBright(padLeft(content)), 'Confirm?']
+      const messages = [`The following are the results for ${chalk.cyanBright(name)}.`, chalk.cyanBright(padLeft(content))]
       return messages.join('\n\n')
     }
 
     const confirmFile = (file: string, code: string) => {
-      const messages = [`The following are the content for ${chalk.cyanBright(file)}.`, highlight(padLeft(code)), 'Confirm?']
+      const messages = [`The following are the content for ${chalk.cyanBright(file)}.`, highlight(padLeft(code))]
       return messages.join('\n\n')
     }
 
@@ -371,13 +373,14 @@ export class Create {
       }),
     ]
 
-    await inquirer.prompt([
-      ...debugs.map((message: string) => ({
-        type: 'confirm',
-        name: 'next',
-        message,
-      })),
-    ])
+    while (debugs.length) {
+      const message = debugs.shift()
+      await pressAnyToContinue({ message })
+      /* eslint-disable-next-line no-console */
+      console.log('')
+    }
+
+    ok('Execution complete. You can modify the template file and re-execute it.')
   }
 
   public async create() {
