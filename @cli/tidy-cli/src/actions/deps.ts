@@ -27,12 +27,22 @@ export interface TidyDepsOptions {
    * ['__tests__/*']
    */
   exclude?: string | string[]
+  /** ignore check files */
+  ignore?: string | string[]
 }
 
 export const tidyDeps = async (options?: TidyDepsOptions) => {
-  const { necessary: inNecessary = ['tslib', 'webpack-cli'], src: srcPattern = 'src/**', paths = [...module.paths], include: inInclude, exclude: inExclude } = options
+  const {
+    necessary: inNecessary = ['tslib', 'webpack-cli'],
+    src: srcPattern = 'src/**',
+    paths = [...module.paths],
+    include: inInclude,
+    exclude: inExclude,
+    ignore: inIgnore,
+  } = options
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
+  const ignore = Array.isArray(inIgnore) ? inIgnore : typeof inIgnore === 'string' ? [inIgnore] : []
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
   const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
@@ -53,7 +63,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
-        ignorePatterns: ['libs', 'node_modules'],
+        ignorePatterns: ['libs', 'node_modules'].concat(ignore),
       })
 
       const dependencies: Record<string, string> = {}
