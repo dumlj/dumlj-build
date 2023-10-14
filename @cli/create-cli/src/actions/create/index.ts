@@ -1,4 +1,4 @@
-import { ok } from '@dumlj/feature-pretty'
+import { fail, ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
 import { gitDetectIgnore, yarnWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
@@ -8,27 +8,50 @@ import kebabCase from 'lodash/kebabCase'
 import fs from 'fs-extra'
 import path from 'path'
 import { glob } from 'glob'
-import inquirer, { type ChoiceCollection } from 'inquirer'
+import inquirer from 'inquirer'
 import { Project, IndentationText, QuoteKind } from 'ts-morph'
 import { DEFAULT_TEMPLATE_PATTERN, DEFAULT_RC_FILE } from './constants'
 import type { TemplateSchema } from './types'
 
 export interface CreateProjectOptions {
+  /** project name */
+  name?: string
+  /** project description */
+  description?: string
+  /** template for project */
+  template?: string
   /** pattern of template name in project */
   pattern?: string
   /** name of config file */
   rc?: string
   /** override exists project */
   override?: boolean
+  /** say yes for all confirm  */
+  yes?: boolean
+}
+
+interface FormFieldValues {
+  name: string
+  description: string
+  template: TemplateSchema & { src: string }
+  override: boolean
 }
 
 export const createProject = async (options?: CreateProjectOptions) => {
-  const { pattern = DEFAULT_TEMPLATE_PATTERN, rc: configFile = DEFAULT_RC_FILE, override } = options || {}
+  const {
+    name: defaultName,
+    description: defaultDescription,
+    template: inTemplate,
+    pattern = DEFAULT_TEMPLATE_PATTERN,
+    rc: configFile = DEFAULT_RC_FILE,
+    override,
+    yes,
+  } = options || {}
   const rootPath = await findWorkspaceRootPath()
   const workspaces = await yarnWorkspaces()
   const templates = workspaces.filter(({ name }) => new RegExp(`^${pattern}`).test(name))
-  const choices: ChoiceCollection = await Promise.all(
-    templates.map(async ({ location }) => {
+  const choices = await Promise.all(
+    templates.map(async ({ name: key, location }) => {
       const config = path.join(rootPath, location, configFile)
       if (!(await fs.pathExists(config))) {
         return
@@ -39,66 +62,91 @@ export const createProject = async (options?: CreateProjectOptions) => {
       const { name: sName, description } = await configure()
       const name = `${sName} - ${description}`
       const value = { ...schema, src: path.dirname(config) }
-      return { name, value }
+      return { name, value, key }
     })
   )
-  interface Resp {
-    name: string
-    description: string
-    template: TemplateSchema & { src: string }
-    override: boolean
+
+  /** 校验函数 */
+  const rules = {
+    async name(name: string, { template }: { template: TemplateSchema }) {
+      const { outputPathResolver } = template
+      const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
+
+      if (!override && (await fs.pathExists(folder))) {
+        return new Error('name is exists')
+      }
+
+      const MIN_SIZE = 4
+      const MAX_SIZE = 30
+
+      // 必填
+      if (!name) {
+        return new Error('name is required.')
+      }
+
+      // 最小长度
+      if (name.length < MIN_SIZE) {
+        return new Error('name must be more than 4 characters.')
+      }
+
+      // 最大长度
+      if (name.length > MAX_SIZE) {
+        return new Error('name must be less than 10 characters.')
+      }
+
+      // 必须为英文
+      if (!/^([a-zA-Z]+?)$/.test(name)) {
+        return new Error('name can only be in English letters.')
+      }
+
+      return true
+    },
+    description(description: string) {
+      const MIN_SIZE = 3
+      const MAX_SIZE = 100
+
+      // 必填
+      if (!description) {
+        return new Error('description is required.')
+      }
+
+      // 最小长度
+      if (description.length < MIN_SIZE) {
+        return new Error('description must be more than 4 characters.')
+      }
+
+      // 最大长度
+      if (description.length > MAX_SIZE) {
+        return new Error('description must be less than 10 characters.')
+      }
+
+      return true
+    },
   }
 
+  const { value: defaultTemplate } = choices.find(({ key }) => key === `@template/${inTemplate}`)
   const {
-    name: alias,
-    description,
-    template,
-    override: confirmOverride,
-  } = await inquirer.prompt<Resp>([
+    template = defaultTemplate,
+    name: alias = defaultName,
+    description = defaultDescription,
+    override: overrideConfirm,
+  } = await inquirer.prompt<FormFieldValues>([
     {
       type: 'list',
       name: 'template',
       message: 'please select a template type for initialization.',
       choices: choices.filter(Boolean),
+      default: defaultTemplate,
+      when: () => !yes,
     },
     {
       type: 'input',
       name: 'name',
       message: `please input a name for this module.`,
       suffix: chalk.grey(`(e.g.CustomWebpackPlugin)`),
-      async validate(name, { template }) {
-        const { outputPathResolver } = template
-        const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
-
-        if (!override && fs.pathExists(folder)) {
-          return new Error('name is exists')
-        }
-
-        const MIN_SIZE = 4
-        const MAX_SIZE = 30
-
-        // 必填
-        if (!name) {
-          return new Error('name is required.')
-        }
-
-        // 最小长度
-        if (name.length < MIN_SIZE) {
-          return new Error('name must be more than 4 characters.')
-        }
-
-        // 最大长度
-        if (name.length > MAX_SIZE) {
-          return new Error('name must be less than 10 characters.')
-        }
-
-        // 必须为英文
-        if (!/^([a-zA-Z]+?)$/.test(name)) {
-          return new Error('name can only be in English letters.')
-        }
-
-        return true
-      },
+      default: defaultName,
+      when: () => !yes,
+      validate: rules.name,
       transformer(input, { template }) {
         const { nameTransform } = template
         if (typeof nameTransform === 'function') {
@@ -113,42 +161,44 @@ export const createProject = async (options?: CreateProjectOptions) => {
       type: 'input',
       name: 'description',
       message: 'please input a description for this module.',
-      validate(description) {
-        const MIN_SIZE = 3
-        const MAX_SIZE = 100
-
-        // 必填
-        if (!description) {
-          return new Error('description is required.')
-        }
-
-        // 最小长度
-        if (description.length < MIN_SIZE) {
-          return new Error('description must be more than 4 characters.')
-        }
-
-        // 最大长度
-        if (description.length > MAX_SIZE) {
-          return new Error('description must be less than 10 characters.')
-        }
-
-        return true
-      },
+      default: defaultDescription,
+      when: () => !yes,
+      validate: rules.description,
     },
     {
       type: 'confirm',
       name: 'override',
       message: 'A project with the same name already exists, are you sure you want to overwrite it?',
       default: true,
-      when: () => !!override,
+      when: () => !yes && !!override,
     },
   ])
+
+  const formdata = { name: alias, description, template }
+
+  for (const name in formdata) {
+    if (!(name in rules)) {
+      continue
+    }
+
+    const validate = rules[name]
+    const value = formdata[name]
+    if (typeof validate !== 'function') {
+      return
+    }
+
+    const error = await validate(value, formdata)
+    if (error !== true) {
+      fail(error)
+      return
+    }
+  }
 
   const { src, nameTransform, outputPathResolver, pkgTransform, tsTransform } = template
   const { shortName: name } = nameTransform(alias)
 
-  if (typeof confirmOverride === 'boolean') {
-    if (!confirmOverride) {
+  if (typeof overrideConfirm === 'boolean') {
+    if (yes !== true && !overrideConfirm) {
       return
     }
 
