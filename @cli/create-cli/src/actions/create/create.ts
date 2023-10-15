@@ -382,7 +382,7 @@ export class Create {
       console.log('')
     }
 
-    ok('Execution complete. You can modify the template file and re-execute it.')
+    ok(`Execution complete. You can modify the template file and re-execute it or press ${chalk.whiteBright('Ctrl + C')} to exit.`)
   }
 
   public async create() {
