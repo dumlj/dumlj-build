@@ -12,5 +12,11 @@
   "devDependencies": {
     "webpack": "^5",
     "webpack-cli": "^5"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
   }
 }
