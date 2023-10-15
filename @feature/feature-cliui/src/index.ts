@@ -1,1 +1,1 @@
-export * from './inquirer/pressAnyToContinue'
+export * from './pressAnyToContinue'

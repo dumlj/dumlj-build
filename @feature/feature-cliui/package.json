@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "tslib": "^2.5.0",
-    "chalk": "^4.1.2",
-    "@inquirer/core": "^5.1.0"
+    "chalk": "^4.1.2"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

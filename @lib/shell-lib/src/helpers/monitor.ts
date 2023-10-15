@@ -88,7 +88,6 @@ export const monitor = (params: MonitorParams, options?: MonitorOptions) => {
 
   const close = async () => {
     await Promise.all([watcher.close(), killServer()])
-
     if (typeof onClose === 'function') {
       onClose()
     }

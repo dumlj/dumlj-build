@@ -46,6 +46,7 @@ export const monitorToDevelop = (token: string, options?: MonitorToDevelopOption
     .map((command) => path.basename(command))
     .concat(finalArgvs.slice(1))
     .join(' ')
+
   const MESSAGE = (_: TemplateStringsArray, file: string) =>
     ['', `file ${chalk.magentaBright(file)} has been changed.`, `execute ${chalk.magentaBright(nextCommand)}, please wait...`, ''].join('\n')
 
