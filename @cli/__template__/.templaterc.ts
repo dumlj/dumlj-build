@@ -53,8 +53,8 @@ export const configure = async (): Promise<TemplateSchema> => {
       switch (file) {
         case 'src/actions/entry.ts': {
           return async ({ name, ast }) => {
-            const iOptions = ast.getInterfaceOrThrow('entryOptions')
-            iOptions.rename(`${name}Options`)
+            const iOptions = ast.getInterfaceOrThrow('EntryOptions')
+            iOptions.rename(`${upperFirst(name)}Options`)
 
             const iConst = ast.getVariableDeclarationOrThrow('entry')
             iConst.rename(name)
@@ -70,13 +70,13 @@ export const configure = async (): Promise<TemplateSchema> => {
 
             const imports = declaration.getNamedImports()
             const vEntry = imports.find((item) => item.getName() === 'entry')
-            const vEntryOptions = imports.find((item) => item.getName() === 'entryOptions')
+            const vEntryOptions = imports.find((item) => item.getName() === 'EntryOptions')
 
             vEntry?.getNameNode().rename(name)
-            vEntryOptions?.getNameNode().rename(`${name}Options`)
+            vEntryOptions?.getNameNode().rename(`${upperFirst(name)}Options`)
 
             vEntry?.setName(name).removeAlias()
-            vEntryOptions?.setName(`${name}Options`).removeAlias()
+            vEntryOptions?.setName(`${upperFirst(name)}Options`).removeAlias()
 
             for (const callExpression of ast.getDescendantsOfKind(SyntaxKind.CallExpression)) {
               callExpression

@@ -1,8 +1,8 @@
 import { tryAction } from '@dumlj/seed-cli'
 import { program } from 'commander'
-import { entry, type entryOptions } from '../actions/entry'
+import { entry, type EntryOptions } from '../actions/entry'
 
 export default program
   .command('entry')
   .summary('some description')
-  .action((options?: entryOptions) => tryAction(entry)(options))
+  .action((options?: EntryOptions) => tryAction(entry)(options))

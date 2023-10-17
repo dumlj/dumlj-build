@@ -4,11 +4,11 @@ import WebpackDevServer from 'webpack-dev-server'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { StackblitzWebpackPlugin } from '@dumlj/stackblitz-webpack-plugin'
 
-export interface stackblitzOptions {
+export interface StackblitzOptions {
   cwd: string
 }
 
-export const stackblitz = async (options?: stackblitzOptions) => {
+export const stackblitz = async (options?: StackblitzOptions) => {
   const { cwd = process.cwd() } = options || {}
   const compiler = webpack({
     mode: 'development',

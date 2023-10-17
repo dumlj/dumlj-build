@@ -1,6 +1,6 @@
 import { info } from '@dumlj/feature-pretty'
 
-export interface entryOptions {
+export interface EntryOptions {
   verbose?: boolean
 
   /**
@@ -9,7 +9,7 @@ export interface entryOptions {
    */
 }
 
-export const entry = async (options?: entryOptions) => {
+export const entry = async (options?: EntryOptions) => {
   const { verbose } = options || {}
   info('This is an example cli', { verbose })
 
