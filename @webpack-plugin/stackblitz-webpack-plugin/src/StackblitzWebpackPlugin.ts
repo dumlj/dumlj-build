@@ -195,13 +195,18 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
 
   public applyScript(compiler: Compiler) {
     const { context, webpack } = compiler
-    new webpack.DefinePlugin({ __STACKBLITZ_MANIFEST__: JSON.stringify(this.manifest) }).apply(compiler)
-    new webpack.EntryPlugin(context, path.join(__dirname, 'client')).apply(compiler)
+    const plugins = [
+      new webpack.DefinePlugin({ __STACKBLITZ_MANIFEST__: JSON.stringify(this.manifest) }),
+      new webpack.EntryPlugin(context, path.join(__dirname, 'client'), {
+        filename: 'main.stackblitz.js',
+      }),
+    ]
+
+    plugins.forEach((instance) => instance.apply(compiler))
   }
 
   public apply(compiler: Compiler) {
     super.apply(compiler)
-
     this.applyScript(compiler)
     this.applyTarball(compiler)
   }

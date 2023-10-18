@@ -1,1 +1,1 @@
-<Stackblitz></Stackblitz>
+$stackblitz`@dumlj-example/seed-webpack-plugin`

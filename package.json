@@ -10,6 +10,7 @@
       "@feature/*",
       "@webpack-plugin/*",
       "@vite-plugin/*",
+      "@dumi-plugin/*",
       "@cli/*",
       "@*/*/__example__"
     ]
@@ -27,6 +28,7 @@
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
+    "docs:dev": "dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
     "ok": "yarn tidy && yarn compile && yarn lint && yarn test && yarn readme && yarn format"
   },
@@ -44,7 +46,7 @@
     "concurrently": "^8.2.1",
     "cz-customizable": "^7.0.0",
     "cz-customizable-i18n-config": "^0.0.1-alpha.2",
-    "dumi": "^2.2.7",
+    "dumi": "^2.2.13",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.26.0",
