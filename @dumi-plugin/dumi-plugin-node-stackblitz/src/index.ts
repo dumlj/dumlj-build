@@ -1,12 +1,11 @@
-import type { IApi } from 'dumi'
+import { createDumiPlugin } from '@dumlj/dumi-plugin-seed'
 import { StackblitzWebpackPlugin, type StackblitzWebpackPluginOptions } from '@dumlj/stackblitz-webpack-plugin'
-import { stackblitzRemark } from './stackblitz-remark'
 
 export interface UserConfig {
   nodeStackblitz: StackblitzWebpackPluginOptions
 }
 
-export default (api: IApi & { useConfig: UserConfig }) => {
+export default createDumiPlugin<UserConfig>('nodeStackblitz', async (api, { registerSyntax, pushWebpackPlugin }) => {
   const { nodeStackblitz = {} } = api.useConfig || {}
 
   api.describe({
@@ -14,7 +13,7 @@ export default (api: IApi & { useConfig: UserConfig }) => {
     config: {
       schema(joi) {
         return joi
-          .object({
+          .object<StackblitzWebpackPluginOptions>({
             manifest: joi.string().optional(),
             ignored: joi.array().items(joi.string()).optional(),
             files: joi.array().items(joi.string()).optional(),
@@ -24,16 +23,11 @@ export default (api: IApi & { useConfig: UserConfig }) => {
     },
   })
 
-  api.chainWebpack((config) => {
-    config.plugins.set(StackblitzWebpackPlugin.PLUGIN_NAME, config.plugin(StackblitzWebpackPlugin.PLUGIN_NAME).use(new StackblitzWebpackPlugin(nodeStackblitz)))
-  })
-
-  api.register({
-    key: 'modifyConfig',
-    stage: Infinity,
-    fn: (memo: IApi['config']) => {
-      memo.extraRemarkPlugins = [stackblitzRemark, ...(memo?.extraRemarkPlugins || [])]
-      return memo
-    },
-  })
-}
+  /**
+   * because web component has been registered,
+   * we only need to register the custom syntax
+   * block without specifying a file.
+   */
+  registerSyntax({ syntax: 'stackblitz-live-demo' })
+  pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin(nodeStackblitz))
+})

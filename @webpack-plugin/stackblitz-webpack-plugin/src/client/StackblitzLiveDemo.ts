@@ -21,7 +21,7 @@ export class StackblitzLiveDemo extends HTMLElement {
   public async connectedCallback() {
     this.style.display = 'block'
 
-    const name = this.getAttribute('name')
+    const name = this.getAttribute('content')
     name && (await this.embed(name))
   }
 

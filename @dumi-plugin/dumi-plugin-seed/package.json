@@ -1,12 +1,12 @@
 {
-  "name": "@dumlj/dumi-plugin-node-stackblitz",
+  "name": "@dumlj/dumi-plugin-seed",
   "version": "0.0.1",
-  "description": "Compressed to zip webpack plugin",
+  "description": "basic dumi plugin",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@webpack-plugin/dumi-plugin-node-stackblitz"
+    "directory": "@webpack-plugin/dumi-plugin-seed"
   },
   "license": "MIT",
   "main": "./libs/index.js",
@@ -18,10 +18,13 @@
     "test": "yarn jest"
   },
   "dependencies": {
+    "@dumlj/feature-updater": "^0.0.1",
+    "chalk": "^4.1.2",
     "tslib": "^2.5.0",
-    "@dumlj/stackblitz-webpack-plugin": "^0.0.1",
-    "react": "^18.1.0",
-    "@dumlj/dumi-plugin-seed": "^0.0.1"
+    "utility-types": "^3.10.0",
+    "webpack-virtual-modules": "^0.6.0",
+    "lodash": "^4.17.21",
+    "webpack": "^5.88.2"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

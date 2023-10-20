@@ -18,7 +18,6 @@ interface Node {
   }
 }
 
-// const block
 export const stackblitzRemark = () => {
   return (tree: any) => {
     unistUtilVisit.visit(tree, 'paragraph', (node: Node, index: number, parent: Node) => {
@@ -35,7 +34,7 @@ export const stackblitzRemark = () => {
       parent.children.splice(index, 1, {
         type: 'html',
         lang: 'html',
-        value: `<stackblitz-live-demo name="${name}" style="height:480px;" />`,
+        value: `<stackblitz-live-demo name="${name}" />`,
       })
     })
   }

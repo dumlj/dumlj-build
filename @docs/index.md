@@ -1,1 +1,3 @@
-$stackblitz`@dumlj-example/seed-webpack-plugin`
+# abc 1
+
+$node-stackblitz`@dumlj-example/seed-webpack-plugin`

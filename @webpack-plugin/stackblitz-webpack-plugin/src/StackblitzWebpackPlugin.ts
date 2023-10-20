@@ -198,7 +198,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
     const plugins = [
       new webpack.DefinePlugin({ __STACKBLITZ_MANIFEST__: JSON.stringify(this.manifest) }),
       new webpack.EntryPlugin(context, path.join(__dirname, 'client'), {
-        filename: 'main.stackblitz.js',
+        filename: 'dumlj.stackblitz-webpack-plugin.js',
       }),
     ]
 
