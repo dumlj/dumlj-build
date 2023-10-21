@@ -29,10 +29,10 @@
     "commander": "^11.0.0",
     "depcheck": "^1.4.6",
     "fs-extra": "^11.1.1",
-    "handlebars": "^4.7.8",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "@dumlj/feature-readme": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

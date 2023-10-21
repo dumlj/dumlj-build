@@ -19,5 +19,5 @@ export default defineConfig({
       github: 'https://github.com/dumlj/dumlj-build',
     },
   },
-  plugins: [require.resolve('@dumlj/dumi-plugin-node-stackblitz')],
+  plugins: [require.resolve('@dumlj/dumi-plugin-node-stackblitz'), require.resolve('@dumlj/dumi-plugin-mono-readme')],
 })

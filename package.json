@@ -28,7 +28,7 @@
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
-    "docs:dev": "dumi dev",
+    "docs:dev": "rm -rf .dumi && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
     "ok": "yarn tidy && yarn compile && yarn lint && yarn test && yarn readme && yarn format"
   },

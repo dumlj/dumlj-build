@@ -1,11 +1,11 @@
 import { createDumiPlugin } from '@dumlj/dumi-plugin-seed'
 import { StackblitzWebpackPlugin, type StackblitzWebpackPluginOptions } from '@dumlj/stackblitz-webpack-plugin'
 
-export interface UserConfig {
+export interface NodeStackblitzOptions {
   nodeStackblitz: StackblitzWebpackPluginOptions
 }
 
-export default createDumiPlugin<UserConfig>('nodeStackblitz', async (api, { registerSyntax, pushWebpackPlugin }) => {
+export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (api, { pushWebpackPlugin }) => {
   const { nodeStackblitz = {} } = api.useConfig || {}
 
   api.describe({
@@ -23,11 +23,5 @@ export default createDumiPlugin<UserConfig>('nodeStackblitz', async (api, { regi
     },
   })
 
-  /**
-   * because web component has been registered,
-   * we only need to register the custom syntax
-   * block without specifying a file.
-   */
-  registerSyntax({ syntax: 'stackblitz-live-demo' })
   pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin(nodeStackblitz))
 })

@@ -2,7 +2,7 @@
 
 # Dumi Plugin Node Stackblitz
 
-Compressed to zip webpack plugin
+Supports live demo of node powered by stackblitz.
 
 ## INSTALL
 

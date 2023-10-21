@@ -21,7 +21,7 @@ export class StackblitzLiveDemo extends HTMLElement {
   public async connectedCallback() {
     this.style.display = 'block'
 
-    const name = this.getAttribute('content')
+    const name = this.getAttribute('src')
     name && (await this.embed(name))
   }
 
@@ -49,6 +49,10 @@ export class StackblitzLiveDemo extends HTMLElement {
   protected async loadTarballs(name: string) {
     const { examples } = await this.loadManifest()
     const deps = examples[name]
+    if (!(Array.isArray(deps) && deps.length > 0)) {
+      return
+    }
+
     const response = await Promise.all(
       deps.map(async (file) => {
         const response = await fetch(`/${file}.zip`)

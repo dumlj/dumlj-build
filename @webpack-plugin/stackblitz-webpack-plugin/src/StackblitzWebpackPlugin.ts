@@ -51,9 +51,8 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
       const changedFiles = modifiedFiles ? Array.from(modifiedFiles.values()) : []
       const FileCache = compilation.getCache(this.pluginName)
 
-      const travel =
-        <A extends any[]>(workspaces: Project[], callback: (project: Project, ...args: A) => void) =>
-        (projects: string[], ...args: A) => {
+      const travel = <A extends any[]>(workspaces: Project[], callback: (project: Project, ...args: A) => void) => {
+        return (projects: string[], ...args: A) => {
           const travelProject = (projects: string[], collection = new Set<Project>()) => {
             for (const name of projects) {
               for (const workspace of workspaces) {
@@ -82,6 +81,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
 
           return travelProject(projects)
         }
+      }
 
       const collectExamples = async () => {
         const workspaces = await yarnWorkspaces.options({ cwd: context }).exec()
@@ -165,8 +165,8 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
         return new Map(stats)
       }
 
-      const collectExtras = async () =>
-        Promise.all(
+      const collectExtras = async () => {
+        return Promise.all(
           this.files.map(async (file) => {
             const absPath = path.join(context, file)
             const buffer = await readFile(absPath)
@@ -174,6 +174,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
             return [file, content]
           })
         )
+      }
 
       compilation.hooks.optimizeAssets.tapPromise(
         {

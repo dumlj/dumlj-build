@@ -8,5 +8,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.d.ts", "../../typings/**/*.d.ts"],
-  "exclude": ["node_modules", "./libs/*"]
+  "exclude": ["node_modules", "./libs"]
 }

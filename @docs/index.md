@@ -1,3 +1,1 @@
-# abc 1
-
-$node-stackblitz`@dumlj-example/seed-webpack-plugin`
+<embed-project src="@dumlj-example/seed-webpack-plugin"></embed-project>
