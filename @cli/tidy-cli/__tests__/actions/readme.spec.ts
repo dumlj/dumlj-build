@@ -1,5 +1,6 @@
 import { vol } from 'memfs'
 import { tidyReadme } from '@/actions/readme'
+import { store } from '@dumlj/feature-readme'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
@@ -49,6 +50,7 @@ describe('test actions/tidyReadme', () => {
   })
 
   afterEach(() => {
+    store.clearRender()
     vol.reset()
   })
 

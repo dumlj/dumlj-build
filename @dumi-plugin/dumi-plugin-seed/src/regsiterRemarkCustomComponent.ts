@@ -20,6 +20,17 @@ export interface Node {
   }
 }
 
+export interface VFile {
+  cwd: string
+  value: string
+  messages: string[]
+  history: string[]
+  data: {
+    embeds: string[]
+    frontmatter: Record<string, any>
+  }
+}
+
 export interface SyntaxRenderContext<A extends Record<string, string> = Record<string, string>> {
   /** 标签 */
   tag: string
@@ -27,6 +38,11 @@ export interface SyntaxRenderContext<A extends Record<string, string> = Record<s
   attributes: A
   /** 编译成 AST */
   parseAST?: (content: string) => any
+  /**
+   * dumi vfile interface
+   * @see https://github.com/umijs/dumi/blob/v2.2.13/src/loaders/markdown/transformer/remarkEmbed.ts#L111
+   */
+  vFile: VFile
 }
 
 export type CustomComponentRender<A extends Record<string, string> = Record<string, string>> = (context: SyntaxRenderContext<A>) => string | Record<string, any>
@@ -38,9 +54,8 @@ export interface RegsiterRemarkCustomComponentOptions extends Pick<SyntaxRenderC
 
 export const regsiterRemarkCustomComponent = (name: string, options?: RegsiterRemarkCustomComponentOptions) => {
   const { tag = kebabCase(name), render, parseAST } = options || {}
-
   return (api: IApi) => {
-    const remarkCustomComponent = () => (tree: any) => {
+    const remarkCustomComponent = () => (tree: any, vFile: VFile) => {
       unistUtilVisit.visit(tree, 'html', (node: Node, index: number, parent: Node) => {
         const html = parse(node.value)
         const target = html.querySelector(tag)
@@ -49,7 +64,7 @@ export const regsiterRemarkCustomComponent = (name: string, options?: RegsiterRe
         }
 
         const { attributes } = target
-        const result = render({ tag, attributes, parseAST })
+        const result = render({ tag, attributes, parseAST, vFile })
         if (typeof result === 'string') {
           parent?.children.splice(index, 1, {
             type: 'html',

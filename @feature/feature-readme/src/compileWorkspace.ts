@@ -1,11 +1,11 @@
 import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import micromatch from 'micromatch'
+import { type Render } from './renderStore'
 import { compile, type CompileOptions } from './compile'
 
-export interface Renderer {
+export type Renderer = Render & {
   project: ProjectInWorkspaces
-  render: (data?: Record<string, any>) => string
 }
 
 export interface CompileWorkspaceOptions extends CompileOptions {
@@ -51,9 +51,12 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
     projects.map(async (project) => {
       const { name, location } = project
       const render = await compile(location, { cwd: rootPath, configFile })
-      if (typeof render === 'function') {
-        renderers.set(name, { project, render })
+      if (typeof render !== 'function') {
+        return
       }
+
+      const renderProject = Object.assign(render, { project })
+      renderers.set(name, renderProject)
     })
   )
 

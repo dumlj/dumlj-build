@@ -32,5 +32,3 @@ export class CustomWebpackPlugin extends SeedWebpackPlugin {
   }
 }
 ```
-
-<stackblitz-live-demo src="@dumlj-example/seed-webpack-plugin"></stackblitz-live-demo>

@@ -26,7 +26,8 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   // 渲染
   /** 结果 */
   const stats = await Promise.all(
-    Array.from(renderers.values()).map(async ({ project, render }) => {
+    Array.from(renderers.values()).map(async (render) => {
+      const { project } = render
       const { location } = project
       const file = path.join(cwd, location, output)
       const content = render()

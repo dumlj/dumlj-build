@@ -1,15 +1,17 @@
 import { vol } from 'memfs'
 import { compileSnippets } from '@/compileSnippets'
+import { clearRender } from '@/renderStore'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
 
 describe('test actions/tidyReadme/compile', () => {
   afterEach(() => {
+    clearRender()
     vol.reset()
   })
 
-  it('will return renderer', async () => {
+  it('will return render function', async () => {
     vol.fromJSON({
       '/a/b/c/d/__readme__/TITLE.md': '# {{title}}',
     })
@@ -21,11 +23,11 @@ describe('test actions/tidyReadme/compile', () => {
     expect(render({ title: 'hello world' })).toEqual('# hello world')
   })
 
-  it('will return an empty array when the file is not found', async () => {
+  it('will return undefined when the file is not found', async () => {
     const snippets = ['TITLE.md']
     const lookupPaths = ['/__readme__']
     const render = await compileSnippets({ snippets, lookupPaths })
-    expect(typeof render === 'function').toBeTruthy()
+    expect(typeof render === 'undefined').toBeTruthy()
   })
 
   it('can compile nearest file using lookupPaths parameter', async () => {

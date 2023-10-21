@@ -21,6 +21,9 @@ export class StackblitzLiveDemo extends HTMLElement {
   public async connectedCallback() {
     this.style.display = 'block'
 
+    const height = this.getAttribute('height')
+    height && (this.style.height = height)
+
     const name = this.getAttribute('src')
     name && (await this.embed(name))
   }
@@ -138,6 +141,7 @@ export class StackblitzLiveDemo extends HTMLElement {
       if (previewFile) {
         await vm.editor.setCurrentFile(previewFile)
         await vm.editor.openFile(previewFile)
+        await vm.editor.setTheme('default')
       }
 
       return vm
@@ -154,7 +158,7 @@ export class StackblitzLiveDemo extends HTMLElement {
     this.appendChild(node)
 
     const style = document.createElement('style')
-    style.innerText = `#${id}{border:0;height:480px;}`
+    style.innerText = `#${id}{border:0;min-height:480px;}`
     this.appendChild(style)
 
     const launch = this.activeProject(name)

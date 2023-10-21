@@ -1,6 +1,5 @@
-import fs from 'fs-extra'
-import handlebars from 'handlebars'
 import { lookupFile } from './lookupFile'
+import { existsRender, getRender, updateRender } from './renderStore'
 
 export interface CompileSnippetsParams {
   /**
@@ -27,26 +26,32 @@ export interface CompileSnippetsParams {
 /** 编译代码片段 */
 export const compileSnippets = async (params: CompileSnippetsParams) => {
   const { snippets, lookupPaths } = params
-  const renders = await Promise.all(
+  const snippetRenders = await Promise.all(
     snippets.map(async (snippet) => {
-      const template = await lookupFile(snippet, lookupPaths)
-      if (!template) {
+      const markdown = await lookupFile(snippet, lookupPaths)
+      if (!markdown) {
         return
       }
 
-      const source = (await fs.readFile(template)).toString()
-      return handlebars.compile(source)
+      if (!existsRender(markdown)) {
+        await updateRender(markdown)
+      }
+
+      // 返回必须不能为异步
+      return (context: Record<string, any>) => {
+        const render = getRender(markdown)
+        return render(context)
+      }
     })
   )
 
+  const renders = snippetRenders.filter(Boolean)
   if (renders.length === 0) {
     return
   }
 
   return (context?: Record<string, any>) => {
-    return renders
-      .filter(Boolean)
-      .map((fn) => fn(context))
-      .join('\n')
+    const section = renders.map((fn) => fn(context))
+    return section.join('\n')
   }
 }

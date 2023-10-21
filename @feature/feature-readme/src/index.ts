@@ -1,4 +1,7 @@
+export * from './compileSnippets'
 export * from './compile'
 export * from './compileWorkspace'
 export * from './constants'
+export * from './findSnippets'
+export * as store from './renderStore'
 export * from './types'

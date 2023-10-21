@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { DEFAULT_TEMPLATE_FILE_NAME } from './constants'
 
-export interface FindReadmeOptions {
+export interface FindSnippetsOptions {
   /**
    * 模板文件（文件夹）
    * @description
@@ -19,7 +19,7 @@ export interface FindReadmeOptions {
  * 类似 node_modules 的查找模式，
  * 将所有 "template" 的路径记录并返回
  */
-export const findReadme = async (location: string, options?: FindReadmeOptions) => {
+export const findSnippets = async (location: string, options?: FindSnippetsOptions) => {
   const { template = DEFAULT_TEMPLATE_FILE_NAME, cwd = process.cwd() } = options || {}
   location = path.isAbsolute(location) ? location : path.join(cwd, location)
 

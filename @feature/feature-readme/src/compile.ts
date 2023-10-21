@@ -1,6 +1,6 @@
 import { resolveConfig } from './resolveConfig'
 import { resolveProject } from './resolveProject'
-import { findReadme } from './findReadme'
+import { findSnippets } from './findSnippets'
 import { compileSnippets } from './compileSnippets'
 import { README_BANNER } from './constants'
 
@@ -33,18 +33,20 @@ export const compile = async (location: string, options?: CompileOptions) => {
 
   // 优先使用传入的 template
   // template of options first
-  const { paths: lookupPaths } = await findReadme(location, { template: options?.template || template, cwd })
-  const render = await compileSnippets({ snippets: snippets.map((snippet) => `${snippet}.md`), lookupPaths })
-  if (typeof render !== 'function') {
+  const { paths: lookupPaths } = await findSnippets(location, { template: options?.template || template, cwd })
+  const renderSnippets = await compileSnippets({ snippets: snippets.map((snippet) => `${snippet}.md`), lookupPaths })
+  if (typeof renderSnippets !== 'function') {
     return
   }
 
   const info = await resolveProject(location, { cwd })
-  return (data?: Metadata) => {
+  const render = (data?: Metadata) => {
     const context = { ...info, ...helpers, ...metadatas, ...data }
-    const codes = render(context)
+    const codes = renderSnippets(context)
     const head = typeof banner === 'function' ? banner(context) : banner
     const content = [head].concat(codes)
     return content.join('\n\n')
   }
+
+  return Object.assign(render, renderSnippets)
 }

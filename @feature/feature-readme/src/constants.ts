@@ -1,5 +1,5 @@
 /** 默认模块 */
-export const DEFAULT_SNIPPETS = ['TITLE', 'BACKGROUND', 'FEATURE', 'INSTALL', 'USAGE', 'CONTRIBUTING']
+export const DEFAULT_SNIPPETS = ['TITLE', 'BACKGROUND', 'FEATURE', 'INSTALL', 'USAGE', 'DEMO', 'CONTRIBUTING']
 /** 模板文件名称 */
 export const DEFAULT_TEMPLATE_FILE_NAME = '__readme__'
 /** 配置文件 */
