@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/vite-plugin-seed",
   "version": "0.0.1",
-  "description": "basic vite plugin",
+  "description": "Basic vite plugin.",
   "private": true,
   "repository": {
     "type": "git",

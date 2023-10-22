@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/create-cli",
   "version": "0.0.1",
-  "description": "project creator",
+  "description": "Convenient tool for project creation.",
   "private": true,
   "repository": {
     "type": "git",

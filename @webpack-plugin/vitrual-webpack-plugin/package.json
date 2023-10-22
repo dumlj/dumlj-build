@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/vitrual-webpack-plugin",
   "version": "0.0.1",
-  "description": "virtual file system plugin",
+  "description": "Virtual file system plugin.",
   "private": true,
   "repository": {
     "type": "git",

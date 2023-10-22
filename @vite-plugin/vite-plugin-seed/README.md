@@ -2,7 +2,7 @@
 
 # Vite Plugin Seed
 
-basic vite plugin
+Basic vite plugin.
 
 ## BACKGROUND
 

@@ -2,7 +2,7 @@
 
 # Vitrual Webpack Plugin
 
-virtual file system plugin
+Virtual file system plugin.
 
 ## INSTALL
 

@@ -2,7 +2,7 @@
 
 # Tidy Cli
 
-cli for organizing projects
+Cli for organizing projects.
 
 ## BACKGROUND
 

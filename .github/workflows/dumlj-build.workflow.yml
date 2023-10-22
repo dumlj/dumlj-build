@@ -1,0 +1,20 @@
+name: dumlj-build.workflow
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'fix/**'
+      - 'ci/*'
+      - 'perf/*'
+      - 'docs/*'
+      - 'style/*'
+    tags-ignore:
+      - '**'
+
+jobs:
+  npm:
+    uses: dumlj/dumlj-workflows/.github/workflows/npm.workflow.yml@main
+    secrets: inherit

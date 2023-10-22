@@ -1,3 +1,9 @@
-<embed-project src="@dumlj-example/seed-webpack-plugin"></embed-project>
+---
+title: Dumlj Build
+order: 1
+hero:
+  title: Dumlj Build
+  description: Any tools used to build the project.
+---
 
-<embed src="./q.md"></embed>
+<embed src="@/README.md"></embed>

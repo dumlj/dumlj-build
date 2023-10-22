@@ -4,8 +4,10 @@ import { defineConfig } from 'dumi'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
-  title: 'Dumlj Build',
+  title: 'Dumlj',
   outputPath: 'gh-pages/docs',
+  logo: 'images/android-chrome-512x512.png',
+  favicons: ['images/favicon.ico', 'images/favicon-32x32.png'],
   resolve: {
     docDirs: ['@docs'],
   },
@@ -13,8 +15,8 @@ export default defineConfig({
   base: isDev ? '/' : '/dumlj/docs/',
   publicPath: isDev ? '/' : '/dumlj/docs/',
   themeConfig: {
-    name: 'Dumlj Build',
-    footer: 'Dumlj Build MIT Licensed | Copyright © 2023-present',
+    name: 'Dumlj',
+    footer: 'Dumlj MIT Licensed | Copyright © 2023-present',
     socialLinks: {
       github: 'https://github.com/dumlj/dumlj-build',
     },

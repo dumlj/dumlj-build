@@ -2,7 +2,7 @@
   "name": "@dumlj/tidy-cli",
   "version": "0.0.1",
   "private": true,
-  "description": "cli for organizing projects",
+  "description": "Cli for organizing projects.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

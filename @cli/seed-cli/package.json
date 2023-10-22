@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/seed-cli",
   "version": "0.0.1",
-  "description": "basic cli utils",
+  "description": "Basic cli, the registrar for all dumlj cli.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

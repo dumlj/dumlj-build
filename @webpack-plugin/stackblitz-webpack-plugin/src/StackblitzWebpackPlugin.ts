@@ -27,7 +27,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   constructor(options?: StackblitzWebpackPluginOptions) {
     super(options)
 
-    this.manifest = options?.manifest || 'stackblitz-assets.json'
+    this.manifest = options?.manifest || '/stackblitz-assets.json'
     this.ignored = [].concat(options?.ignored || [], [
       '**/node_modules/**',
       '**/__tests__/**',

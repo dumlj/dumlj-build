@@ -2,7 +2,7 @@
 
 # Seed Cli
 
-basic cli utils
+Basic cli, the registrar for all dumlj cli.
 
 ## INSTALL
 

@@ -1,0 +1,25 @@
+name: gh-pages.workflow
+
+on: [workflow_dispatch]
+
+env:
+  # 默认分支
+  CI_DEFAULT_BRANCH: main
+
+jobs:
+  # 发布 Github Pages
+  pages:
+    name: Page
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: macOS-latest
+    steps:
+      # 初始化
+      - name: Initialize project
+        uses: dumlj/dumlj-workflows/.github/actions/setup-composite@main
+        with:
+          token: ${{ secrets.CI_GIT_TOKEN }}
+      # 发布 github apge
+      - name: Deploy github page
+        uses: dumlj/dumlj-workflows/.github/actions/pages-composite@main
+        with:
+          token: ${{ secrets.CI_GIT_TOKEN }}

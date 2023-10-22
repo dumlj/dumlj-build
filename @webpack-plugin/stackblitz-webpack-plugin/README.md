@@ -2,7 +2,7 @@
 
 # Stackblitz Webpack Plugin
 
-live demo
+Online demo of stackblitz implementation.
 
 ## INSTALL
 

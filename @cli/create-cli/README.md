@@ -2,7 +2,7 @@
 
 # Create Cli
 
-project creator
+Convenient tool for project creation.
 
 ## FEATURE
 
