@@ -1,3 +1,4 @@
+import { promisify } from 'util'
 import { OutdatedWebpackPlugin } from '@/plugins/OutdatedWebpackPlugin'
 import { SeedWebpackPlugin } from '@/plugins/SeedWebpackPlugin'
 import { mockWebpack } from '@dumlj/mock-lib'
@@ -20,6 +21,7 @@ describe('test plugins/SeedWebpackPlugin', () => {
 
   it('is will push outdate plugin.', async () => {
     const { compiler } = await webpack({ plugins: [new SeedWebpackPlugin()] })
+    await promisify(compiler.run.bind(compiler))()
     expect(compiler.options.plugins.find((plugin) => plugin instanceof OutdatedWebpackPlugin)).not.toBeUndefined()
   })
 
