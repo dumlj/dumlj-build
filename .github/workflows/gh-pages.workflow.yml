@@ -1,4 +1,6 @@
-name: ghpages.workflow
+name: gh-pages.workflow
+
+on: [workflow_dispatch]
 
 jobs:
   gh-pages:
