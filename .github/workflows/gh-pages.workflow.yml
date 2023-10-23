@@ -13,12 +13,12 @@ jobs:
     runs-on: macOS-latest
     steps:
       # 初始化
-      - name: Initialize project
+      - name: Initialize projects
         uses: dumlj/dumlj-workflows/.github/actions/setup-composite@main
         with:
-          token: ${{ secrets.CI_GIT_TOKEN }}
+          git_access_token: ${{ secrets.CI_GIT_TOKEN }}
       # 发布 github apge
-      - name: Deploy github page
+      - name: Deploy to github page
         uses: dumlj/dumlj-workflows/.github/actions/pages-composite@main
         with:
-          token: ${{ secrets.CI_GIT_TOKEN }}
+          git_access_token: ${{ secrets.CI_GIT_TOKEN }}
