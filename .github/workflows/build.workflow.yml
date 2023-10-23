@@ -1,4 +1,4 @@
-name: dumlj-build.workflow
+name: build.workflow
 
 on:
   push:

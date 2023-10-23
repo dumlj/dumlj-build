@@ -10,7 +10,6 @@ jobs:
   # 发布 Github Pages
   pages:
     name: Page
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: macOS-latest
     steps:
       # 初始化
