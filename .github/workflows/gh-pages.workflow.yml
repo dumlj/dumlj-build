@@ -1,24 +1,6 @@
 name: gh-pages.workflow
 
-on: [workflow_dispatch]
-
-env:
-  # 默认分支
-  CI_DEFAULT_BRANCH: main
-
 jobs:
-  # 发布 Github Pages
-  pages:
-    name: Page
-    runs-on: macOS-latest
-    steps:
-      # 初始化
-      - name: Initialize projects
-        uses: dumlj/dumlj-workflows/.github/actions/setup-composite@main
-        with:
-          git_access_token: ${{ secrets.CI_GIT_TOKEN }}
-      # 发布 github apge
-      - name: Deploy to github page
-        uses: dumlj/dumlj-workflows/.github/actions/pages-composite@main
-        with:
-          git_access_token: ${{ secrets.CI_GIT_TOKEN }}
+  gh-pages:
+    uses: dumlj/dumlj-workflows/.github/workflows/gh-pages.workflow.yml@main
+    secrets: inherit
