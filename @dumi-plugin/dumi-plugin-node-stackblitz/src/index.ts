@@ -1,3 +1,4 @@
+import { trimEnd } from 'lodash'
 import { createDumiPlugin } from '@dumlj/dumi-plugin-seed'
 import { StackblitzWebpackPlugin, type StackblitzWebpackPluginOptions } from '@dumlj/stackblitz-webpack-plugin'
 
@@ -6,7 +7,7 @@ export interface NodeStackblitzOptions {
 }
 
 export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (api, { pushWebpackPlugin }) => {
-  const { nodeStackblitz = {} } = api.useConfig || {}
+  const { publicPath, nodeStackblitz = {} } = api.userConfig || {}
 
   api.describe({
     key: 'nodeStackblitz',
@@ -23,5 +24,11 @@ export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (
     },
   })
 
-  pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin(nodeStackblitz))
+  pushWebpackPlugin(
+    StackblitzWebpackPlugin.PLUGIN_NAME,
+    new StackblitzWebpackPlugin({
+      ...nodeStackblitz,
+      manifest: `${trimEnd(publicPath, '/')}/stackblitz-assets.json`,
+    })
+  )
 })

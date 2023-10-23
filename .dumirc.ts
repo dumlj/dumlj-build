@@ -6,7 +6,7 @@ const isDev = process.env.NODE_ENV === 'development'
 export default defineConfig({
   title: 'Dumlj',
   outputPath: 'gh-pages/docs',
-  logo: isDev ? '/' : '/dumlj-build/docs/' + 'images/android-chrome-512x512.png',
+  logo: (isDev ? '/' : '/dumlj-build/docs/') + 'images/android-chrome-512x512.png',
   favicons: ['images/favicon.ico', 'images/favicon-32x32.png'].map((path) => (isDev ? '/' : '/dumlj-build/docs/' + path)),
   resolve: {
     docDirs: ['@docs'],

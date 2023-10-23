@@ -20,7 +20,8 @@
   "dependencies": {
     "tslib": "^2.5.0",
     "@dumlj/stackblitz-webpack-plugin": "^0.0.1",
-    "@dumlj/dumi-plugin-seed": "^0.0.1"
+    "@dumlj/dumi-plugin-seed": "^0.0.1",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
