@@ -12,8 +12,8 @@ export default defineConfig({
     docDirs: ['@docs'],
   },
   hash: true,
-  base: isDev ? '/' : '/dumlj/docs/',
-  publicPath: isDev ? '/' : '/dumlj/docs/',
+  base: isDev ? '/' : '/dumlj-build/docs/',
+  publicPath: isDev ? '/' : '/dumlj-build/docs/',
   themeConfig: {
     name: 'Dumlj',
     footer: 'Dumlj MIT Licensed | Copyright © 2023-present',
