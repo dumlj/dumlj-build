@@ -1,10 +1,18 @@
-import { promisify } from 'util'
 import { OutdatedWebpackPlugin } from '@/plugins/OutdatedWebpackPlugin'
 import { SeedWebpackPlugin } from '@/plugins/SeedWebpackPlugin'
 import { mockWebpack } from '@dumlj/mock-lib'
 import type { Compiler } from 'webpack'
 
 describe('test plugins/SeedWebpackPlugin', () => {
+  const env = process.env
+  beforeEach(() => {
+    process.env.CI = undefined
+  })
+
+  afterEach(() => {
+    process.env = { ...env }
+  })
+
   const webpack = mockWebpack({
     '/index.js': 'console.log("hi world")',
   })
@@ -20,8 +28,12 @@ describe('test plugins/SeedWebpackPlugin', () => {
   })
 
   it('is will push outdate plugin.', async () => {
+    /**
+     * process.env.CI must be equal undefined
+     * OutdatedWebpackPlugin can not push to compiler.options.plugins in CI env.
+     */
+    expect(process.env.CI).toBeUndefined()
     const { compiler } = await webpack({ plugins: [new SeedWebpackPlugin()] })
-    await promisify(compiler.run.bind(compiler))()
     expect(compiler.options.plugins.find((plugin) => plugin instanceof OutdatedWebpackPlugin)).not.toBeUndefined()
   })
 

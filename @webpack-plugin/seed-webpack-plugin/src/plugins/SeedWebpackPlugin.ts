@@ -125,7 +125,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { OutdatedWebpackPlugin } = require('./OutdatedWebpackPlugin')
     const index = compiler.options.plugins.findIndex((plugin) => {
-      return plugin instanceof OutdatedWebpackPlugin
+      return plugin['pluginName'] === OutdatedWebpackPlugin.pluginName
     })
 
     if (-1 === index && process.env.NODE_ENV !== 'production' && !process.env.CI) {
