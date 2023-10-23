@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - main
-      - 'feature/**'
-      - 'hotfix/**'
-      - 'fix/**'
+      - 'feat/*'
+      - 'feature/*'
+      - 'hotfix/*'
+      - 'fix/*'
       - 'ci/*'
       - 'perf/*'
       - 'docs/*'
