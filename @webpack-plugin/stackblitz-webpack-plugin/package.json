@@ -19,7 +19,8 @@
     "glob": "^10.3.4",
     "tslib": "^2.5.0",
     "jszip": "^3.10.1",
-    "utility-types": "^3.10.0"
+    "utility-types": "^3.10.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

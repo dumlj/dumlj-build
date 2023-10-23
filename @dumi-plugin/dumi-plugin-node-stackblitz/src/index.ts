@@ -1,4 +1,3 @@
-import { trimEnd } from 'lodash'
 import { createDumiPlugin } from '@dumlj/dumi-plugin-seed'
 import { StackblitzWebpackPlugin, type StackblitzWebpackPluginOptions } from '@dumlj/stackblitz-webpack-plugin'
 
@@ -24,11 +23,5 @@ export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (
     },
   })
 
-  pushWebpackPlugin(
-    StackblitzWebpackPlugin.PLUGIN_NAME,
-    new StackblitzWebpackPlugin({
-      ...nodeStackblitz,
-      manifest: `${trimEnd(publicPath, '/')}/stackblitz-assets.json`,
-    })
-  )
+  pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin({ ...nodeStackblitz, publicPath }))
 })
