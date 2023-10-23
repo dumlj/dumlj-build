@@ -1,4 +1,4 @@
-name: gh-pages.workflow
+name: ghPages.workflow
 
 jobs:
   gh-pages:
