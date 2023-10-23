@@ -1,3 +1,4 @@
+import path from 'path'
 import { findTsConfig } from '@/findTsConfig'
 import { vol } from 'memfs'
 
@@ -19,9 +20,9 @@ describe('test findTsConfig', () => {
       '/packages/b/path/index.ts': 'consnole.log("ok")',
     })
 
-    expect(await findTsConfig('/packages/b/path/index.ts')).toBe('/packages/b/tsconfig.json')
-    expect(await findTsConfig('/packages/a/index.ts')).toBe('/packages/a/tsconfig.json')
-    expect(await findTsConfig('/index.ts')).toBe('/tsconfig.json')
+    expect(await findTsConfig('/packages/b/path/index.ts')).toBe(path.normalize('/packages/b/tsconfig.json'))
+    expect(await findTsConfig('/packages/a/index.ts')).toBe(path.normalize('/packages/a/tsconfig.json'))
+    expect(await findTsConfig('/index.ts')).toBe(path.normalize('/tsconfig.json'))
   })
 
   it('will return false when tsconfig not found.', async () => {

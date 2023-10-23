@@ -13,7 +13,7 @@ const BGCommands = {
 /** 创建后台执行的进程 */
 const spawnBGProcess = (command: keyof typeof BGCommands) => {
   const cp = spawn(CLI_NAME, [command], {
-    detached: true,
+    ...(process.platform === 'win32' ? { shell: true, windowsHide: true } : { detached: true }),
     stdio: 'ignore',
     env: {
       ...process.env,
