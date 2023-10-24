@@ -1,4 +1,3 @@
-import { trimEnd, trimStart } from 'lodash'
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
 import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
 import fs from 'fs-extra'
@@ -13,7 +12,6 @@ export interface Project extends ProjectInWorkspaces {
 }
 
 export interface StackblitzWebpackPluginOptions extends SeedWebpackPluginOptions {
-  publicPath?: string
   manifest?: string
   ignored?: string[]
   files?: string[]
@@ -22,7 +20,6 @@ export interface StackblitzWebpackPluginOptions extends SeedWebpackPluginOptions
 export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   static PLUGIN_NAME = 'stackblitz-webpack-plugin'
 
-  protected publicPath: string
   protected manifest: string
   protected ignored: string[]
   protected files: string[]
@@ -30,7 +27,6 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   constructor(options?: StackblitzWebpackPluginOptions) {
     super(options)
 
-    this.publicPath = options?.publicPath
     this.manifest = options?.manifest || '/stackblitz-assets.json'
     this.ignored = [].concat(options?.ignored || [], [
       '**/node_modules/**',
@@ -199,11 +195,8 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   }
 
   public applyScript(compiler: Compiler) {
-    const { context, webpack, options } = compiler
-    const { output } = options || {}
-
-    const publicPath = this.publicPath || (typeof output.publicPath === 'string' ? output.publicPath : '/')
-    const finalPublicPath = trimEnd(publicPath, '/') + '/' + trimStart(this.manifest, '/')
+    const { context, webpack } = compiler
+    const finalPublicPath = this.manifest
 
     const plugins = [
       new webpack.DefinePlugin({ __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath) }),

@@ -6,7 +6,7 @@ export interface NodeStackblitzOptions {
 }
 
 export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (api, { pushWebpackPlugin }) => {
-  const { publicPath, nodeStackblitz = {} } = api.userConfig || {}
+  const { nodeStackblitz = {} } = api.userConfig || {}
 
   api.describe({
     key: 'nodeStackblitz',
@@ -23,5 +23,5 @@ export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (
     },
   })
 
-  pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin({ ...nodeStackblitz, publicPath }))
+  pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin(nodeStackblitz))
 })

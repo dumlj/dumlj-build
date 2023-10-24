@@ -1,7 +1,14 @@
 import Stackblitz, { type EmbedOptions } from '@stackblitz/sdk'
 import Zip from 'jszip'
+import { trimEnd, trimStart } from 'lodash'
 
 declare const __STACKBLITZ_MANIFEST__: string
+declare const __webpack_public_path__: string | (() => string)
+
+const withPublicPath = (url: string) => {
+  const baseUrl = typeof __webpack_public_path__ === 'function' ? __webpack_public_path__() : __webpack_public_path__
+  return trimEnd(baseUrl, '/') + '/' + trimStart(url, '/')
+}
 
 interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
@@ -43,7 +50,7 @@ export class StackblitzLiveDemo extends HTMLElement {
       return this.MANIFEST_CACHE
     }
 
-    const response = await fetch(__STACKBLITZ_MANIFEST__)
+    const response = await fetch(withPublicPath(__STACKBLITZ_MANIFEST__))
     const stats: MANIFEST_ASSETS_STATS = await response.json()
     this.MANIFEST_CACHE = stats
     return stats
@@ -58,7 +65,7 @@ export class StackblitzLiveDemo extends HTMLElement {
 
     const response = await Promise.all(
       deps.map(async (file) => {
-        const response = await fetch(`/${file}.zip`)
+        const response = await fetch(withPublicPath(`/${file}.zip`))
         const buffer = await response.arrayBuffer()
         const zip = new Zip()
         const { files } = await zip.loadAsync(buffer, { createFolders: false })
