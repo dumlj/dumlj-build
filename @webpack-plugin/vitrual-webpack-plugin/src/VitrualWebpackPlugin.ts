@@ -3,6 +3,8 @@ import { fs, vol } from 'memfs'
 import type { Compiler } from 'webpack'
 
 export interface VitrualWebpackPluginOptions extends SeedWebpackPluginOptions {
+  /** 读硬盘 */
+  readFromDisk?: boolean
   /** 写硬盘 */
   writeToDisk?: boolean
   /** 初始时的文件 */
@@ -12,6 +14,8 @@ export interface VitrualWebpackPluginOptions extends SeedWebpackPluginOptions {
 export class VitrualWebpackPlugin extends SeedWebpackPlugin {
   static PLUGIN_NAME = 'vitrual-webpack-plugin'
 
+  /** 读硬盘 */
+  protected readFromDisk: boolean
   /** 写硬盘 */
   protected writeToDisk: boolean
   /** 文件 */
@@ -24,7 +28,8 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
   constructor(options?: VitrualWebpackPluginOptions) {
     super(options)
 
-    const { files, writeToDisk = false } = options || {}
+    const { files, readFromDisk = false, writeToDisk = false } = options || {}
+    this.readFromDisk = readFromDisk
     this.writeToDisk = writeToDisk
     this.files = files || {
       'src/index.js': '',
@@ -34,7 +39,9 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
   public apply(compiler: Compiler) {
     super.apply(compiler)
 
-    compiler.inputFileSystem = fs
+    if (this.readFromDisk === false) {
+      compiler.inputFileSystem = fs
+    }
 
     if (this.writeToDisk === false) {
       compiler.outputFileSystem = fs
