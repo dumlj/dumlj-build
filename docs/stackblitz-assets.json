@@ -7,8 +7,8 @@
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
-      "@dumlj/vitrual-webpack-plugin",
-      "@dumlj/feature-pretty"
+      "@dumlj/feature-pretty",
+      "@dumlj/vitrual-webpack-plugin"
     ],
     "@dumlj-example/seed-webpack-plugin": [
       "@dumlj/seed-webpack-plugin",
@@ -27,8 +27,8 @@
     "@dumlj/feature-updater.zip",
     "@dumlj/shell-lib.zip",
     "@dumlj/util-lib.zip",
-    "@dumlj/vitrual-webpack-plugin.zip",
     "@dumlj/feature-pretty.zip",
+    "@dumlj/vitrual-webpack-plugin.zip",
     "@dumlj-example/seed-webpack-plugin.zip"
   ],
   "extras": [
