@@ -1,0 +1,25 @@
+{
+  "name": "@dumlj-example/crx-manifest-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "build": "yarn webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/crx-manifest-webpack-plugin": "0.0.1",
+    "@dumlj/vitrual-webpack-plugin": "0.0.1",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "webpack": "^5",
+    "webpack-cli": "^5"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}

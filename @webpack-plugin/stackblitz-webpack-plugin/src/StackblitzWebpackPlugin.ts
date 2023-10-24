@@ -4,6 +4,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { glob } from 'glob'
 import JSZip from 'jszip'
+import { IGNORED_PATTERNS } from './constants'
 import type { Compiler } from 'webpack'
 
 export interface Project extends ProjectInWorkspaces {
@@ -28,19 +29,8 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
     super(options)
 
     this.manifest = options?.manifest || '/stackblitz-assets.json'
-    this.ignored = [].concat(options?.ignored || [], [
-      '**/node_modules/**',
-      '**/__tests__/**',
-      '**/__typetests__/**',
-      '**/jest.*',
-      '**/src/**',
-      '**/*.map',
-      '**/tsconfig.*',
-      '**/.npmignore',
-      '**/.DS_Store',
-    ])
-
     this.files = [].concat(options?.files || [], ['package.json', 'tsconfig.json'])
+    this.ignored = Array.from(new Set([].concat(options?.ignored || [], IGNORED_PATTERNS)))
   }
 
   public applyTarball(compiler: Compiler) {
@@ -53,18 +43,18 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
 
       const travel = <A extends any[]>(workspaces: Project[], callback: (project: Project, ...args: A) => void) => {
         return (projects: string[], ...args: A) => {
-          const travelProject = (projects: string[], collection = new Set<Project>()) => {
+          const travelProject = (projects: string[], fileCollection = new Set<Project>()) => {
             for (const name of projects) {
               for (const workspace of workspaces) {
                 if (workspace.name !== name) {
                   continue
                 }
 
-                if (collection.has(workspace)) {
+                if (fileCollection.has(workspace)) {
                   continue
                 }
 
-                collection.add(workspace)
+                fileCollection.add(workspace)
                 callback(workspace, ...args)
 
                 const { workspaceDependencies } = workspace
@@ -72,11 +62,11 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
                   continue
                 }
 
-                travelProject(workspaceDependencies, collection)
+                travelProject(workspaceDependencies, fileCollection)
               }
             }
 
-            return collection
+            return fileCollection
           }
 
           return travelProject(projects)
@@ -117,52 +107,99 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
         return buffer
       }
 
-      type TarballStats = Map<string, { name: string; files: string[]; zip: JSZip }>
-      type EntriesMap<T> = T extends Map<infer K, infer V> ? [K, V] : never
       const compileTarballs = async (projects: Project[], examples: Record<string, string[]>) => {
-        const files = await glob(
-          projects.map((project) => path.join(project.location, '**/*')),
-          {
-            cwd: context,
-            dot: true,
-            nodir: true,
-            ignore: [...this.ignored],
-            windowsPathsNoEscape: true,
+        const pattern = projects.map(({ location }) => path.join(location, '**/*'))
+        const files = await glob(pattern, {
+          cwd: context,
+          dot: true,
+          nodir: true,
+          ignore: [...this.ignored],
+          windowsPathsNoEscape: true,
+        })
+
+        /** find the project where the detection file is located */
+        const isFileInProject = (file: string) => {
+          /** 权重 */
+          interface MaxWeight {
+            name: string
+            weight: number
           }
-        )
 
-        const stats = await Promise.all(
-          projects.flatMap(async ({ name, location }) => {
-            const file = `${name}.zip`
+          const project = projects.reduce(
+            (max: MaxWeight, { name, location }) => {
+              if (0 !== file.indexOf(location)) {
+                return max
+              }
+
+              const prefix = file.substring(0, location.length + 1)
+              if (prefix !== `${location}/`) {
+                return max
+              }
+
+              if (prefix.length > max.weight) {
+                return { name, weight: prefix.length }
+              }
+
+              return max
+            },
+            { weight: 0 } as MaxWeight
+          )
+
+          return project?.name
+        }
+
+        const fileCollection = new Map(projects.map(({ name }) => [name, []]))
+        files.forEach((file) => {
+          const project = isFileInProject(file)
+          fileCollection.get(project).push(file)
+        })
+
+        interface Stats {
+          name: string
+          files: string[]
+          zip: JSZip
+        }
+
+        const stats = new Map<string, Stats>()
+        await Promise.all(
+          projects.map(async ({ name }) => {
+            const tarball = `${name}.zip`
+            if (stats.has(tarball)) {
+              return
+            }
+
+            /**
+             * locked
+             * since all operations are asynchronous, they must be locked first.
+             * 因为所有操作都是异步的，所以必须先上锁，否则这个 `stats.has(tarball)` 没有任何作用。
+             */
+            stats.set(tarball, null)
+
+            const isExample = examples[name]
             const zip = new JSZip()
-            const isExample = !!examples[name]
+            const files = fileCollection.get(name)
 
-            const matches: string[] = []
             await Promise.all(
               files.map(async (file) => {
-                if (!(0 === file.indexOf(location) && file.substring(0, location.length + 1) === `${location}/`)) {
-                  return
-                }
-
-                const absPath = path.join(context, file)
                 const source = await readFile(file)
-
                 zip.file(file, source, { createFolders: false })
-                isExample && compilation.fileDependencies.add(absPath)
-                matches.push(absPath)
+
+                if (isExample) {
+                  const absPath = path.join(context, file)
+                  compilation.fileDependencies.add(absPath)
+                }
               })
             )
 
             const buffer = await zip.generateAsync({ type: 'nodebuffer' })
             const source = new webpack.sources.RawSource(buffer)
-            compilation.emitAsset(file, source)
+            compilation.emitAsset(tarball, source)
 
-            const stats: EntriesMap<TarballStats> = [file, { name, files: matches, zip }]
-            return stats
+            stats.set(tarball, { name, files, zip })
           })
         )
 
-        return new Map(stats)
+        return stats
       }
 
       const collectExtras = async () => {
