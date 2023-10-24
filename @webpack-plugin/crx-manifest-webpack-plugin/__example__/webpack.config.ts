@@ -26,7 +26,7 @@ const CONFIG: Configuration = {
           ok(`The following is the content of manifest.json.`, { verbose: false })
 
           // eslint-disable-next-line no-console
-          console.dir(JSON.parse(files[manifest]), { depth: null, colors: true })
+          console.dir(JSON.parse(files[manifest].toString()), { depth: null, colors: true })
           warn('Please compare the contents above and ./manifest.json.', { verbose: false })
         })
       },
