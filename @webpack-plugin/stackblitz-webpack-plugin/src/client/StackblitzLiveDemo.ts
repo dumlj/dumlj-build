@@ -1,7 +1,14 @@
 import Stackblitz, { type EmbedOptions } from '@stackblitz/sdk'
 import Zip from 'jszip'
+import { trimEnd, trimStart } from 'lodash'
 
 declare const __STACKBLITZ_MANIFEST__: string
+declare const __webpack_public_path__: string | (() => string)
+
+const withPublicPath = (url: string) => {
+  const baseUrl = typeof __webpack_public_path__ === 'function' ? __webpack_public_path__() : __webpack_public_path__
+  return trimEnd(baseUrl, '/') + '/' + trimStart(url, '/')
+}
 
 interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
@@ -43,10 +50,25 @@ export class StackblitzLiveDemo extends HTMLElement {
       return this.MANIFEST_CACHE
     }
 
-    const response = await fetch(__STACKBLITZ_MANIFEST__)
+    const response = await fetch(withPublicPath(__STACKBLITZ_MANIFEST__))
     const stats: MANIFEST_ASSETS_STATS = await response.json()
     this.MANIFEST_CACHE = stats
     return stats
+  }
+
+  protected async downloadTarball(project: string) {
+    const response = await fetch(withPublicPath(`/${project}.zip`))
+    const buffer = await response.arrayBuffer()
+    const zip = new Zip()
+    const { files } = await zip.loadAsync(buffer, { createFolders: false })
+
+    return Promise.all(
+      Object.keys(files).map(async (file) => {
+        const zipObject = zip.files[file]
+        const content = await zipObject.async('text')
+        return [file, content] as [string, string]
+      })
+    )
   }
 
   protected async loadTarballs(name: string) {
@@ -56,24 +78,14 @@ export class StackblitzLiveDemo extends HTMLElement {
       return
     }
 
-    const response = await Promise.all(
-      deps.map(async (file) => {
-        const response = await fetch(`/${file}.zip`)
-        const buffer = await response.arrayBuffer()
-        const zip = new Zip()
-        const { files } = await zip.loadAsync(buffer, { createFolders: false })
-
-        return Promise.all(
-          Object.keys(files).map(async (file) => {
-            const zipObject = zip.files[file]
-            const content = await zipObject.async('text')
-            return [file, content] as [string, string]
-          })
-        )
-      })
-    )
-
+    const response = await Promise.all(deps.map((name) => this.downloadTarball(name)))
     const files = new Map(response.flatMap((file) => file))
+
+    // example files
+    Object.values(await this.downloadTarball(name)).forEach(([path, value]) => {
+      files.set(path.split('/__example__/').pop(), value)
+    })
+
     this.TARBALL_CACHE[name] = files
     return files
   }
@@ -85,29 +97,29 @@ export class StackblitzLiveDemo extends HTMLElement {
       throw new Error(`${name} is not found`)
     }
 
+    const PKG_FILE = 'package.json'
     const extraFiles = new Map(extras)
-    const content = extraFiles.get('package.json')
+    const content = extraFiles.get(PKG_FILE)
     const { name: title = name, description = '', workspaces = [] } = (content ? JSON.parse(content) : {}) as PackageSource
-    const exampleFiles = new Map<string, string>()
-    Array.from(tarballs.keys()).forEach((file) => {
-      const content = tarballs.get(file)
-      if (-1 === file.indexOf('__example__')) {
-        exampleFiles.set(file, content)
-        return
-      }
 
-      const [, path] = file.split('/__example__/')
-      if (path === 'package.json') {
-        const pkgSource = JSON.parse(content)
-        pkgSource.workspaces = workspaces
-        exampleFiles.set(path, JSON.stringify(pkgSource, null, 2))
-        return
-      }
+    // clone tarball files
+    const tarballFiles = new Map<string, string>(tarballs.entries())
+    if (tarballFiles.has(PKG_FILE)) {
+      // example origin source of package.json
+      const content = tarballFiles.get(PKG_FILE)
+      const pkgSource = JSON.parse(content)
 
-      exampleFiles.set(path, content)
-    })
+      // merge workspaces
+      pkgSource.workspaces = workspaces
 
-    const files = [].concat(Array.from(extraFiles.entries()), Array.from(exampleFiles.entries())).reduce((result, [name, content]) => {
+      // update package.json
+      const merged = JSON.stringify(pkgSource, null, 2)
+      tarballFiles.set(PKG_FILE, merged)
+    }
+
+    const fileMap = [extraFiles, tarballs, tarballFiles]
+    const finalFiles = fileMap.flatMap((group) => Array.from(group.entries()))
+    const files = finalFiles.reduce((result, [name, content]) => {
       result[name] = content
       return result
     }, {})

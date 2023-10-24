@@ -1,3 +1,4 @@
+import path from 'path'
 import { tidyTscfg } from '@/actions/tscfg'
 import { vol } from 'memfs'
 
@@ -59,9 +60,16 @@ describe('test actions/tidyTscfg', () => {
     expect(aContent.compilerOptions.rootDir).toEqual('aSrc')
     expect(bContent.compilerOptions.rootDir).toEqual('bSrc')
 
-    expect(bContent.references).toStrictEqual([{ path: '../a/tsconfig.build.json' }])
-    expect(bContent.references).toStrictEqual([{ path: '../a/tsconfig.build.json' }])
+    expect(bContent.references).toStrictEqual([{ path: path.normalize('../a/tsconfig.build.json') }])
+    expect(bContent.references).toStrictEqual([{ path: path.normalize('../a/tsconfig.build.json') }])
 
-    expect(rContent.references).toStrictEqual([{ path: './packages/a/tsconfig.build.json' }, { path: './packages/b/tsconfig.build.json' }])
+    expect(rContent.references).toStrictEqual([
+      {
+        path: process.platform === 'win32' ? `.\\${path.normalize('./packages/a/tsconfig.build.json')}` : './packages/a/tsconfig.build.json',
+      },
+      {
+        path: process.platform === 'win32' ? `.\\${path.normalize('./packages/b/tsconfig.build.json')}` : './packages/b/tsconfig.build.json',
+      },
+    ])
   })
 })

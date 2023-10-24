@@ -1,3 +1,4 @@
+import path from 'path'
 import { vol } from 'memfs'
 import { lookupFile } from '@/lookupFile'
 
@@ -15,8 +16,7 @@ describe('test actions/tidyReadme/lookupFile', () => {
     })
 
     const paths = ['/a/b/c/d/__readme__', '/a/b/c/__readme__']
-
-    expect(await lookupFile('TITLE.md', paths)).toEqual('/a/b/c/d/__readme__/TITLE.md')
+    expect(await lookupFile('TITLE.md', paths)).toEqual(path.normalize('/a/b/c/d/__readme__/TITLE.md'))
   })
 
   it('search file according to order of input paths', async () => {
@@ -26,8 +26,7 @@ describe('test actions/tidyReadme/lookupFile', () => {
     })
 
     const paths = ['/__readme__', '/a/__readme__', '/a/b/__readme__', '/a/b/c/__readme__', '/a/b/c/d/__readme__']
-
-    expect(await lookupFile('TITLE.md', paths)).toEqual('/__readme__/TITLE.md')
+    expect(await lookupFile('TITLE.md', paths)).toEqual(path.normalize('/__readme__/TITLE.md'))
   })
 
   it('will return undefined when file not exists', async () => {
