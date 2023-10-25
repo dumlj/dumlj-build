@@ -5,32 +5,27 @@ import type { Compiler } from 'webpack'
 import type WebpackDevServer from 'webpack-dev-server'
 import { SSE_HEADERS, SSE_SESSION_ID, SSE_RELOAD_TOKEN } from './constants/sse'
 import { BACKGROUND_DEFAULT_FILE, CONTENT_SCRIPT_DEFAULT_FILE } from './constants/crx'
-
-export interface SseResponse<T = any> {
-  code: number
-  success: boolean
-  data: T
-}
+import type { SseResponse } from './types'
 
 export interface Client {
   id: string
   res: ServerResponse
 }
 
-export interface SseLiveReloadWebpackPluginParams {
+export interface CrxLiveReloadWebpackPluginParams {
   host: string
   port: number
 }
 
-export interface SseLiveReloadWebpackPluginOptions extends SeedWebpackPluginOptions {
+export interface CrxLiveReloadWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 后台 JS 文件 */
   background?: string
   /** 注入的 JS 文件 */
   contentScript?: string
 }
 
-export class SseLiveReloadWebpackPlugin extends SeedWebpackPlugin {
-  static PLUGIN_NAME = 'sse-live-reload-webpack-plugin'
+export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
+  static PLUGIN_NAME = 'crx-live-reload-webpack-plugin'
 
   protected clients: Client[]
   protected host: string
@@ -42,7 +37,7 @@ export class SseLiveReloadWebpackPlugin extends SeedWebpackPlugin {
     return `http://${this.host}:${this.port}/__livereload__`
   }
 
-  constructor(params?: SseLiveReloadWebpackPluginParams, options?: SseLiveReloadWebpackPluginOptions) {
+  constructor(params?: CrxLiveReloadWebpackPluginParams, options?: CrxLiveReloadWebpackPluginOptions) {
     super(options)
 
     const { host = '0.0.0.0', port = 8182 } = params || {}

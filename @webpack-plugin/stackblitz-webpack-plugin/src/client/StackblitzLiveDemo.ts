@@ -1,14 +1,9 @@
 import Stackblitz, { type EmbedOptions } from '@stackblitz/sdk'
 import Zip from 'jszip'
-import { trimEnd, trimStart } from 'lodash'
+import { withPublicPath } from './withPublicPath'
+import { request } from './request'
 
 declare const __STACKBLITZ_MANIFEST__: string
-declare const __webpack_public_path__: string | (() => string)
-
-const withPublicPath = (url: string) => {
-  const baseUrl = typeof __webpack_public_path__ === 'function' ? __webpack_public_path__() : __webpack_public_path__
-  return trimEnd(baseUrl, '/') + '/' + trimStart(url, '/')
-}
 
 interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
@@ -56,9 +51,21 @@ export class StackblitzLiveDemo extends HTMLElement {
     return stats
   }
 
+  protected async concatUnit8Array(...uint8: Uint8Array[]) {
+    const totalSize = uint8.reduce((sum, chunk) => sum + chunk.length, 0)
+    const response = new Uint8Array(totalSize)
+
+    let position = 0
+    for (const chunk of uint8) {
+      response.set(chunk, position)
+      position += chunk.length
+    }
+
+    return response
+  }
+
   protected async downloadTarball(project: string) {
-    const response = await fetch(withPublicPath(`/${project}.zip`))
-    const buffer = await response.arrayBuffer()
+    const buffer = await request(`/${project}.zip`)
     const zip = new Zip()
     const { files } = await zip.loadAsync(buffer, { createFolders: false })
 
@@ -174,6 +181,7 @@ export class StackblitzLiveDemo extends HTMLElement {
     this.appendChild(style)
 
     const launch = this.activeProject(name)
-    await launch(id)
+    const vm = await launch(id)
+    return vm
   }
 }

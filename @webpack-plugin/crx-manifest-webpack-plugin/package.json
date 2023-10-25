@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/crx-manifest-webpack-plugin",
   "version": "0.0.1",
-  "description": "generate manifest file for chrome extension",
+  "description": "Automatically import files into the chrome extension's manifest.json.",
   "private": true,
   "repository": {
     "type": "git",
