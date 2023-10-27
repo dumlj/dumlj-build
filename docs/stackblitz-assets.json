@@ -1,5 +1,14 @@
 {
   "examples": {
+    "@dumlj-example/crx-live-reload-webpack-plugin": [
+      "@dumlj/vitrual-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/mock-lib",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/crx-live-reload-webpack-plugin"
+    ],
     "@dumlj-example/crx-manifest-webpack-plugin": [
       "@dumlj/crx-manifest-webpack-plugin",
       "@dumlj/mock-lib",
@@ -20,15 +29,17 @@
     ]
   },
   "tarballs": [
-    "@dumlj-example/crx-manifest-webpack-plugin.zip",
-    "@dumlj/crx-manifest-webpack-plugin.zip",
-    "@dumlj/mock-lib.zip",
+    "@dumlj-example/crx-live-reload-webpack-plugin.zip",
+    "@dumlj/vitrual-webpack-plugin.zip",
     "@dumlj/seed-webpack-plugin.zip",
+    "@dumlj/mock-lib.zip",
     "@dumlj/feature-updater.zip",
     "@dumlj/shell-lib.zip",
     "@dumlj/util-lib.zip",
+    "@dumlj/crx-live-reload-webpack-plugin.zip",
+    "@dumlj-example/crx-manifest-webpack-plugin.zip",
+    "@dumlj/crx-manifest-webpack-plugin.zip",
     "@dumlj/feature-pretty.zip",
-    "@dumlj/vitrual-webpack-plugin.zip",
     "@dumlj-example/seed-webpack-plugin.zip"
   ],
   "extras": [
