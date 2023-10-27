@@ -2,7 +2,7 @@
 
 # Dumi Plugin Seed
 
-basic dumi plugin
+Basic dumi plugin
 
 ## INSTALL
 
