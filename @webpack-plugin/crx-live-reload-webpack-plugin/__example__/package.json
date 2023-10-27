@@ -4,15 +4,19 @@
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
-    "serve": "yarn webpack serve -c webpack.config.ts"
+    "serve": "concurrently \"yarn webpack serve -c webpack.config.ts\" \"node ./static-serve\""
   },
   "dependencies": {
+    "webpack": "^5",
+    "html-webpack-plugin": "^5.5.3",
     "@dumlj/vitrual-webpack-plugin": "^0.0.1",
     "@dumlj/crx-live-reload-webpack-plugin": "0.0.1"
   },
   "devDependencies": {
-    "webpack": "^5",
-    "webpack-cli": "^5"
+    "webpack-cli": "^5",
+    "concurrently": "^8.2.1",
+    "http-proxy-middleware": "^2.0.6",
+    "express": "^4.18.2"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

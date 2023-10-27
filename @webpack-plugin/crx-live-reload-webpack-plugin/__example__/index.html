@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>😅 Simulate Google Chrome Extension</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      section {
+        width: 100%;
+        height: 100%;
+      }
+      p,
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      p {
+        font-size: 14;
+        font-weight: bolder;
+      }
+      section {
+        flex-direction: column;
+      }
+      fieldset {
+        max-width: 800px;
+        width: 100%;
+      }
+      pre {
+        padding: 10px;
+        height: 200px;
+        overflow-y: auto;
+      }
+      pre::after {
+        content: '...';
+      }
+      legend {
+        margin-left: 10px;
+        padding: 3px 10px;
+      }
+    </style>
+    <section>
+      <p>Since I can't Mock Chrome, please open the console to view the logs.😅</p>
+      <p>And try to change `background.js` or `contentScript.js` files.</p>
+      <p>Webpack DevServer port is 8080, Static Server port is 3000.</p>
+      <p>In real environment, Chrome Extension will mount ./build folder.</p>
+      <fieldset>
+        <legend>Console</legend>
+        <pre></pre>
+      </fieldset>
+    </section>
+  </body>
+</html>

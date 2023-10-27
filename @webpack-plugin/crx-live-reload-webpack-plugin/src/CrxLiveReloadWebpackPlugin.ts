@@ -3,8 +3,8 @@ import path from 'path'
 import type { IncomingMessage, ServerResponse } from 'http'
 import type { Compiler } from 'webpack'
 import type WebpackDevServer from 'webpack-dev-server'
-import { SSE_HEADERS, SSE_SESSION_ID, SSE_RELOAD_TOKEN } from './constants/sse'
-import { BACKGROUND_DEFAULT_FILE, CONTENT_SCRIPT_DEFAULT_FILE } from './constants/crx'
+import { SSE_HEADERS, SSE_SESSION_ID, SSE_RELOAD_TOKEN, SSE_SERVER_PATH } from './constants/sse'
+import { BACKGROUND_DEFAULT_FILE, CONTENT_SCRIPT_DEFAULT_FILE, BACKGROUND_LIVERELOAD_SCRIPT_DEFAULT_FILE, CONTENT_SCRIPT_LIVERELOAD_SCRIPT_DEFAULT_FILE } from './constants/crx'
 import type { SseResponse } from './types'
 
 export interface Client {
@@ -13,15 +13,18 @@ export interface Client {
 }
 
 export interface CrxLiveReloadWebpackPluginParams {
-  host: string
-  port: number
+  host?: string
+  port?: number
+  liveloadServer?: string
 }
 
 export interface CrxLiveReloadWebpackPluginOptions extends SeedWebpackPluginOptions {
-  /** 后台 JS 文件 */
+  /** filename of background.js for chrome extension, default background.js */
   background?: string
-  /** 注入的 JS 文件 */
+  /** filename of contentScript.js for chrome extension, default contentScript.js */
   contentScript?: string
+  backgroundLiveReloadScript?: string
+  contentScriptReloadScript?: string
 }
 
 export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
@@ -30,24 +33,26 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
   protected clients: Client[]
   protected host: string
   protected port: number
+  protected liveloadServer: string
   protected background: string
   protected contentScript: string
-
-  protected get liveReloadUrl() {
-    return `http://${this.host}:${this.port}/__livereload__`
-  }
+  protected backgroundLiveReloadScript: string
+  protected contentScriptLiveReloadScript: string
 
   constructor(params?: CrxLiveReloadWebpackPluginParams, options?: CrxLiveReloadWebpackPluginOptions) {
     super(options)
 
-    const { host = '0.0.0.0', port = 8182 } = params || {}
-    const { background, contentScript } = options || {}
+    const { host = '0.0.0.0', port = 8182, liveloadServer } = params || {}
+    const { background, contentScript, backgroundLiveReloadScript, contentScriptReloadScript } = options || {}
 
     this.clients = []
     this.host = host
     this.port = port
+    this.liveloadServer = liveloadServer || `http://${this.host}:${this.port}/${SSE_SERVER_PATH}`
     this.background = background || BACKGROUND_DEFAULT_FILE
     this.contentScript = contentScript || CONTENT_SCRIPT_DEFAULT_FILE
+    this.backgroundLiveReloadScript = backgroundLiveReloadScript || BACKGROUND_LIVERELOAD_SCRIPT_DEFAULT_FILE
+    this.contentScriptLiveReloadScript = contentScriptReloadScript || CONTENT_SCRIPT_LIVERELOAD_SCRIPT_DEFAULT_FILE
   }
 
   /** 重写 DevServer */
@@ -112,13 +117,11 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
     Object.keys(compiler.options.entry).forEach((name) => {
       switch (name) {
         case getEntryName(this.background): {
-          const js = require.resolve('./client/background.livereload')
-          injectModule(name, js)
+          injectModule(name, this.backgroundLiveReloadScript)
           break
         }
         case getEntryName(this.contentScript): {
-          const js = require.resolve('./client/contentScript.livereload')
-          injectModule(name, js)
+          injectModule(name, this.contentScriptLiveReloadScript)
           break
         }
       }
@@ -126,8 +129,9 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
 
     // 注入环境变量
     const variables = {
-      'process.env.LIVERELOAD_SSE_URL': JSON.stringify(this.liveReloadUrl),
+      'process.env.LIVERELOAD_SSE_URL': JSON.stringify(this.liveloadServer),
       'process.env.LIVERELOAD_SSE_SID': JSON.stringify(SSE_SESSION_ID),
+      'process.env.LIVERELOAD_SSE_SERVER_PATH': JSON.stringify(SSE_SERVER_PATH),
     }
 
     const plugin = new webpack.DefinePlugin(variables)
