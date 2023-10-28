@@ -19,6 +19,24 @@
       "@dumlj/feature-pretty",
       "@dumlj/vitrual-webpack-plugin"
     ],
+    "@dumlj-example/dts-webpack-plugin": [
+      "@dumlj/dts-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/mock-lib",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/pretty-assets-tree-webpack-plugin"
+    ],
+    "@dumlj-example/pretty-assets-tree-webpack-plugin": [
+      "@dumlj/vitrual-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/mock-lib",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/pretty-assets-tree-webpack-plugin"
+    ],
     "@dumlj-example/seed-webpack-plugin": [
       "@dumlj/seed-webpack-plugin",
       "@dumlj/mock-lib",
@@ -40,6 +58,10 @@
     "@dumlj-example/crx-manifest-webpack-plugin.zip",
     "@dumlj/crx-manifest-webpack-plugin.zip",
     "@dumlj/feature-pretty.zip",
+    "@dumlj-example/dts-webpack-plugin.zip",
+    "@dumlj/dts-webpack-plugin.zip",
+    "@dumlj/pretty-assets-tree-webpack-plugin.zip",
+    "@dumlj-example/pretty-assets-tree-webpack-plugin.zip",
     "@dumlj-example/seed-webpack-plugin.zip"
   ],
   "extras": [
