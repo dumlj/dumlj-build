@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1698494207794" clover="3.2.0">
-  <project timestamp="1698494207794" name="All files">
-    <metrics statements="829" coveredstatements="713" conditionals="365" coveredconditionals="233" methods="214" coveredmethods="178" elements="1408" coveredelements="1124" complexity="0" loc="829" ncloc="829" packages="24" files="54" classes="54"/>
+<coverage generated="1698512603910" clover="3.2.0">
+  <project timestamp="1698512603911" name="All files">
+    <metrics statements="941" coveredstatements="815" conditionals="451" coveredconditionals="298" methods="226" coveredmethods="190" elements="1618" coveredelements="1303" complexity="0" loc="941" ncloc="941" packages="26" files="56" classes="56"/>
     <package name="@cli.seed-cli.src.utils">
       <metrics statements="40" coveredstatements="35" conditionals="14" coveredconditionals="6" methods="6" coveredmethods="6"/>
       <file name="readPackageSourceThroughBin.ts" path="/Users/runner/work/dumlj-build/dumlj-build/@cli/seed-cli/src/utils/readPackageSourceThroughBin.ts">
@@ -956,6 +956,130 @@
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="@webpack-plugin.pretty-assets-tree-webpack-plugin.src">
+      <metrics statements="56" coveredstatements="46" conditionals="57" coveredconditionals="38" methods="6" coveredmethods="6"/>
+      <file name="PrettyAssetsTreeWebpackPlugin.ts" path="/Users/runner/work/dumlj-build/dumlj-build/@webpack-plugin/pretty-assets-tree-webpack-plugin/src/PrettyAssetsTreeWebpackPlugin.ts">
+        <metrics statements="56" coveredstatements="46" conditionals="57" coveredconditionals="38" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="37" count="2" type="cond" truecount="2" falsecount="2"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="6" type="cond" truecount="2" falsecount="1"/>
+        <line num="56" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="6" type="cond" truecount="2" falsecount="1"/>
+        <line num="64" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="6" type="stmt"/>
+        <line num="74" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="18" type="cond" truecount="6" falsecount="2"/>
+        <line num="82" count="18" type="cond" truecount="0" falsecount="1"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="86" count="18" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="9" type="stmt"/>
+        <line num="93" count="9" type="stmt"/>
+        <line num="94" count="9" type="stmt"/>
+        <line num="95" count="9" type="stmt"/>
+        <line num="97" count="9" type="cond" truecount="8" falsecount="2"/>
+        <line num="98" count="9" type="cond" truecount="7" falsecount="1"/>
+        <line num="100" count="9" type="stmt"/>
+        <line num="101" count="9" type="cond" truecount="3" falsecount="1"/>
+        <line num="102" count="9" type="stmt"/>
+        <line num="104" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="105" count="9" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="115" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="@webpack-plugin.pretty-assets-tree-webpack-plugin.src.utils">
+      <metrics statements="56" coveredstatements="56" conditionals="29" coveredconditionals="27" methods="6" coveredmethods="6"/>
+      <file name="orbitTree.ts" path="/Users/runner/work/dumlj-build/dumlj-build/@webpack-plugin/pretty-assets-tree-webpack-plugin/src/utils/orbitTree.ts">
+        <metrics statements="56" coveredstatements="56" conditionals="29" coveredconditionals="27" methods="6" coveredmethods="6"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="3" falsecount="0"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="17" type="cond" truecount="3" falsecount="0"/>
+        <line num="23" count="15" type="stmt"/>
+        <line num="26" count="17" type="stmt"/>
+        <line num="27" count="17" type="cond" truecount="6" falsecount="1"/>
+        <line num="28" count="9" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="32" count="8" type="stmt"/>
+        <line num="34" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="36" count="23" type="stmt"/>
+        <line num="37" count="23" type="cond" truecount="1" falsecount="0"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="41" count="15" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="13" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="8" type="stmt"/>
+        <line num="52" count="8" type="stmt"/>
+        <line num="53" count="15" type="stmt"/>
+        <line num="54" count="15" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="62" count="26" type="cond" truecount="1" falsecount="0"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="73" count="3" type="stmt"/>
+        <line num="74" count="12" type="stmt"/>
+        <line num="75" count="12" type="stmt"/>
+        <line num="77" count="12" type="stmt"/>
+        <line num="78" count="26" type="stmt"/>
+        <line num="79" count="26" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="12" type="cond" truecount="1" falsecount="0"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="82" count="2" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="86" count="12" type="stmt"/>
+        <line num="89" count="14" type="cond" truecount="1" falsecount="0"/>
+        <line num="90" count="9" type="stmt"/>
+        <line num="91" count="9" type="stmt"/>
+        <line num="93" count="9" type="stmt"/>
+        <line num="94" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="97" count="14" type="stmt"/>
+        <line num="98" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="99" count="14" type="stmt"/>
+        <line num="101" count="14" type="stmt"/>
+        <line num="102" count="14" type="stmt"/>
+        <line num="106" count="7" type="stmt"/>
+        <line num="107" count="3" type="stmt"/>
+        <line num="108" count="3" type="stmt"/>
       </file>
     </package>
     <package name="@webpack-plugin.seed-webpack-plugin.src.plugins">
