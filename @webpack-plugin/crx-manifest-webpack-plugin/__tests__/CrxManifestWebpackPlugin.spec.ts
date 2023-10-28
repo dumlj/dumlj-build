@@ -14,7 +14,7 @@ describe('test CrxManifestWebpackPlugin', () => {
     expect(instance).toBeInstanceOf(SeedWebpackPlugin)
   })
 
-  it('is will push outdate plugin.', async () => {
+  it('can emit manifest.json assets', async () => {
     const { compiler } = await webpack({
       plugins: [new CrxManifestWebpackPlugin()],
     })

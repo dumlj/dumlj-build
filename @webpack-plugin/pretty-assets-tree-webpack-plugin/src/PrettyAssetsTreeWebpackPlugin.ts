@@ -3,7 +3,7 @@ import type { Compiler } from 'webpack'
 import path from 'path'
 import chalk from 'chalk'
 import micromatch from 'micromatch'
-import { travel, convertAssetsToTree, type ExtraNode } from './utils/assetsTree'
+import { travelOrbitTree, mapFileToOrbitTree, type ExtraOrbitNode } from './utils/orbitTree'
 
 export interface PrettyAssetsTreeWebpackPluginOptions extends SeedWebpackPluginOptions {
   banner?: string
@@ -76,7 +76,7 @@ export class PrettyAssetsTreeWebpackPlugin extends SeedWebpackPlugin {
         return
       }
 
-      const detectLatest = (node: ExtraNode) => {
+      const detectLatest = (node: ExtraOrbitNode) => {
         const { siblings } = node || {}
         const target = siblings?.[siblings?.length - 1]
         if (!target) {
@@ -86,9 +86,9 @@ export class PrettyAssetsTreeWebpackPlugin extends SeedWebpackPlugin {
         return path.join(target.path, target.name) === path.join(node.path, node.name)
       }
 
-      const { tree, collection } = convertAssetsToTree(files)
+      const { tree, collection } = mapFileToOrbitTree(files)
 
-      travel(tree)(collection, (node, chain) => {
+      travelOrbitTree(tree)(collection, (node, chain) => {
         const { path: folder, name, isFile } = node
         const isRoot = chain.length === 1
         const isLatest = detectLatest(node)
