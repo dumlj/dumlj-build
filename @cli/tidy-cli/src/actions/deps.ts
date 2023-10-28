@@ -77,7 +77,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
             return micromatch.isMatch(relativePath, srcPattern)
           })
 
-          isDev ? (devDependencies[name] = `^${version}`) : (dependencies[name] = `^${version}`)
+          isDev ? (devDependencies[name] = `^${version}`.trimEnd()) : (dependencies[name] = `^${version}`.trimEnd())
         })
       )
 

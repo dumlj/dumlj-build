@@ -16,7 +16,7 @@ const CONFIG: Configuration = {
     new CrxManifestWebpackPlugin({ manifest }),
     {
       apply(compiler: Compiler) {
-        compiler.hooks.afterDone.tap('use-for-echo-ignore-me', (stats) => {
+        compiler.hooks.afterDone.tap('use-for-echo-and-ignore-me', (stats) => {
           if (stats.hasErrors()) {
             return
           }

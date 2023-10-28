@@ -1,2 +1,2 @@
 // eslint-disable-next-line no-console
-console.log('contentScript')
+console.log('CONTENT-SCRIPT')

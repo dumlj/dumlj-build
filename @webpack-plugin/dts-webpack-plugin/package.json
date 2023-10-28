@@ -1,0 +1,35 @@
+{
+  "name": "@dumlj/dts-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Build dts files with webpack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@webpack-plugin/dts-webpack-plugin"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "@dumlj/shell-lib": "^0.0.1",
+    "tslib": "^2.5.0",
+    "hjson": "^3.2.2",
+    "tar-stream": "^1.6.2",
+    "typescript": "^5.2.2",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5",
+    "@types/hjson": "^2.4.3",
+    "@types/tar-stream": "^2.2.2",
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3"
+  },
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

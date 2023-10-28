@@ -107,7 +107,7 @@ export class Create {
           return 'name is exists'
         }
 
-        const MIN_SIZE = 4
+        const MIN_SIZE = 3
         const MAX_SIZE = 30
 
         // 必填
@@ -254,7 +254,7 @@ export class Create {
   public async compile(params?: CompileParams) {
     const { name, description, output: dist, template } = params
     const { src, pkgTransform, tsTransform } = template
-    const files = await glob('**/*', { cwd: src, nodir: true, ignore: [this.rc] })
+    const files = await glob('**/*', { cwd: src, nodir: true, ignore: [this.rc], dot: true })
     const ignores = await gitDetectIgnore(files)
 
     /**

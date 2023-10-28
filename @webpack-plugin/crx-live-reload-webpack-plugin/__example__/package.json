@@ -4,7 +4,7 @@
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
-    "serve": "concurrently \"yarn webpack serve -c webpack.config.ts\" \"node ./static-serve\""
+    "serve": "concurrently \"webpack serve -c webpack.config.ts\" \"node ./static-serve\""
   },
   "dependencies": {
     "webpack": "^5",

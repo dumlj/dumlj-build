@@ -4,7 +4,7 @@
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
-    "build": "yarn webpack -c webpack.config.ts"
+    "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
     "@dumlj/crx-manifest-webpack-plugin": "0.0.1",

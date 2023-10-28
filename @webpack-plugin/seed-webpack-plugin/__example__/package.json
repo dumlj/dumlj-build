@@ -4,7 +4,7 @@
   "private": true,
   "main": "CustomWebpackPlugin.ts",
   "scripts": {
-    "build": "yarn webpack -c webpack.config.ts"
+    "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "0.0.1",
