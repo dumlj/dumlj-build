@@ -31,8 +31,10 @@ export interface TemplateSchema {
   name: string
   /** 描述 */
   description: string
+  /** 名称例子 */
+  egName?: string
   /** 重命名 */
-  nameTransform(name: string): {
+  nameTransform?(name: string): {
     shortName: string
     name: string
     same: string
@@ -43,5 +45,5 @@ export interface TemplateSchema {
   /** json 内容转换器 */
   pkgTransform(file: string): ((params: PkgTransformParams) => Promise<TransformReuslt | void>) | void
   /** ts 内容 转换器 */
-  tsTransform(file: string): ((params: TsTransformParams) => Promise<TransformReuslt | void>) | void
+  tsTransform?(file: string): ((params: TsTransformParams) => Promise<TransformReuslt | void>) | void
 }

@@ -64,7 +64,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
-        ignorePatterns: ['libs', 'node_modules'].concat(ignore),
+        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore),
       })
 
       const dependencies: Record<string, string> = {}

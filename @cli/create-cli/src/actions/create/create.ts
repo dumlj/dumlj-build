@@ -102,7 +102,6 @@ export class Create {
         const { outputPathResolver } = template
         const rootPath = await this.getRootPath()
         const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
-
         if (!this.override && (await fs.pathExists(folder))) {
           return 'name is exists'
         }
@@ -200,7 +199,7 @@ export class Create {
     const defaultTemplate = tempalteKey ? choices.find(({ key }) => key === tempalteKey)?.value : undefined
     const skip = (name: string) => (Array.isArray(only) ? !only.includes(name) : false)
 
-    const formFieldValues: FormFieldValues = await inquirer.prompt<FormFieldValues>([
+    const { template }: Pick<FormFieldValues, 'template'> = await inquirer.prompt<FormFieldValues>([
       {
         type: 'list',
         name: 'template',
@@ -209,22 +208,27 @@ export class Create {
         default: defaultTemplate,
         when: () => !skip('template') && !this.yes,
       },
+    ])
+
+    const formFieldValues: Omit<FormFieldValues, 'template'> = await inquirer.prompt<FormFieldValues>([
       {
         type: 'input',
         name: 'name',
         message: `please input a name for this module.`,
-        suffix: chalk.grey(`(e.g.CustomWebpackPlugin)`),
+        ...(template?.egName ? { suffix: chalk.grey(`(e.g.${template.egName})`) } : undefined),
         default: this.name,
         when: () => !skip('name') && !this.yes,
-        validate: this.validate.bind(this, 'name'),
-        transformer(input, { template }) {
+        validate: (input, answers) => {
+          return this.validate('name', input, { ...answers, template })
+        },
+        transformer(input) {
           const { nameTransform } = template
           if (typeof nameTransform === 'function') {
             const { name, same, suffix } = nameTransform(input)
             return name.replace(same, ($1) => chalk.cyan($1)).replace(suffix, ($1) => chalk.gray($1))
           }
 
-          return name
+          return input
         },
       },
       {
@@ -244,11 +248,15 @@ export class Create {
       },
     ])
 
-    return defaults(formFieldValues, {
-      name: this.name,
-      description: this.description,
-      template: defaultTemplate,
-    })
+    return defaults(
+      formFieldValues,
+      { template },
+      {
+        name: this.name,
+        description: this.description,
+        template: defaultTemplate,
+      }
+    )
   }
 
   public async compile(params?: CompileParams) {
@@ -293,7 +301,7 @@ export class Create {
               case '.ts': {
                 const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
                 const ast = project.createSourceFile(path.join(dist, file), content)
-                const tranform = tsTransform(file)
+                const tranform = typeof tsTransform === 'function' ? tsTransform(file) : undefined
 
                 if (typeof tranform === 'function') {
                   const { output = file } = (await tranform({ name, description, ast, file })) || {}
@@ -352,7 +360,7 @@ export class Create {
     }
 
     const rootPath = await this.getRootPath()
-    const { shortName } = nameTransform(name)
+    const { shortName } = typeof nameTransform === 'function' ? nameTransform(name) : { shortName: name }
 
     /** 输出路径 */
     const output = outputPathResolver(kebabCase(shortName))
@@ -368,12 +376,12 @@ export class Create {
     })
 
     const debugs = [
-      confirmValue('nameTransform', nameTransform(name)),
+      nameTransform ? confirmValue('nameTransform', nameTransform(name)) : undefined,
       confirmValue('outputPathResolver', outputPathResolver(name)),
       ...codes.map(({ out, code }) => {
         return confirmFile(out, code)
       }),
-    ]
+    ].filter(Boolean)
 
     while (debugs.length) {
       const message = debugs.shift()
@@ -389,7 +397,7 @@ export class Create {
     const rootPath = await this.getRootPath()
     const { name, description, template, override } = await this.select()
     const { nameTransform, outputPathResolver } = template
-    const { shortName } = nameTransform(name)
+    const { shortName } = typeof nameTransform === 'function' ? nameTransform(name) : { shortName: name }
 
     /** 输出路径 */
     const output = outputPathResolver(kebabCase(shortName))
