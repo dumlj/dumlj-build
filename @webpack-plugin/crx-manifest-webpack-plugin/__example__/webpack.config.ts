@@ -12,7 +12,15 @@ const manifest: ChromeManifest = fs.readJSONSync(manifestFile)
 const CONFIG: Configuration = {
   mode: 'production',
   plugins: [
-    new VitrualWebpackPlugin({ readFromDisk: true }),
+    new VitrualWebpackPlugin({
+      readFromDisk: true,
+      /**
+       * @param boolean
+       * You can open it and check the build folder
+       * after webpack build.
+       */
+      // writeToDisk: true
+    }),
     new CrxManifestWebpackPlugin({ manifest }),
     {
       apply(compiler: Compiler) {

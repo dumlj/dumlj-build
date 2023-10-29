@@ -1,7 +1,7 @@
 ---
 title: CRX Manifest Plugin
 keywords: [chrome, extension]
-group: CRX
+group: crx
 ---
 
 <embed-project src="@dumlj/crx-manifest-webpack-plugin"></embed-project>

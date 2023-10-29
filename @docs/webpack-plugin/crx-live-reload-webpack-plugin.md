@@ -1,7 +1,7 @@
 ---
 title: CRX LiveReload Plugin
 keywords: [chrome, extension]
-group: CRX
+group: crx
 ---
 
 <embed-project src="@dumlj/crx-live-reload-webpack-plugin"></embed-project>

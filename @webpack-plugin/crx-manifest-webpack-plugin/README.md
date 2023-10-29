@@ -42,4 +42,7 @@ export default config
 
 ## LIVE DEMO
 
+In the demo, the files is output to the memory, please check the `console`.
+Or remove the comment `writeToDisk: true` from the `VitrualWebpackPlugin` in `webpack.config.ts` and run `yarn build`.
+
 <stackblitz-live-demo height="800px" src="@dumlj-example/crx-manifest-webpack-plugin"></stackblitz-live-demo>
