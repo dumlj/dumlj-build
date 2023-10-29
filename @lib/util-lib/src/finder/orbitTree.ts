@@ -4,7 +4,7 @@ export interface OrbitNode {
   path: string
   name: string
   isFile: boolean
-  children: Set<string | OrbitNode>
+  children?: Set<OrbitNode>
 }
 
 export interface ExtraOrbitNode extends OrbitNode {
@@ -16,14 +16,14 @@ export interface TravelOptions {
 }
 
 export const travelOrbitTree = (tree: OrbitNode, options?: TravelOptions) => {
-  return (collection: Map<string, OrbitNode>, handle: (node: ExtraOrbitNode, chain: ExtraOrbitNode[]) => void) => {
+  return (handle: (node: ExtraOrbitNode, chain: ExtraOrbitNode[]) => void) => {
     const { ignoreRoot = true } = options || {}
     const walk = (node: ExtraOrbitNode, chain: ExtraOrbitNode[]) => {
       if (!(ignoreRoot && chain.length === 0)) {
         handle(node, chain)
       }
 
-      const { path: folder, name: filename, isFile, children } = node
+      const { isFile, children } = node
       if (isFile || !(children?.size > 0)) {
         return
       }
@@ -38,14 +38,7 @@ export const travelOrbitTree = (tree: OrbitNode, options?: TravelOptions) => {
           break
         }
 
-        if (typeof name !== 'string') {
-          name.isFile ? files.push(name) : folders.push(name)
-          continue
-        }
-
-        const key = path.join(folder, filename, name)
-        const node = collection.get(key)
-        node.isFile ? files.push(node) : folders.push(node)
+        name.isFile ? files.push(name) : folders.push(name)
       }
 
       const nodes = [...folders, ...files]
@@ -59,11 +52,11 @@ export const travelOrbitTree = (tree: OrbitNode, options?: TravelOptions) => {
   }
 }
 
-export const createOrbitNode = (filename: string, isFile: boolean, children: Array<string | OrbitNode> = []) => ({
+export const createOrbitNode = (filename: string, isFile: boolean, children: OrbitNode[] = []) => ({
   path: path.dirname(filename),
   name: path.basename(filename),
   isFile,
-  children: isFile ? undefined : new Set(children),
+  children: isFile ? undefined : new Set([...children]),
 })
 
 export const mapFileToOrbitTree = (files: string[]) => {
@@ -95,7 +88,12 @@ export const mapFileToOrbitTree = (files: string[]) => {
       }
 
       const parent = collection.get(folder)
-      const node = isFile ? createOrbitNode(name, isFile) : path.basename(name)
+      let node = isFile ? createOrbitNode(name, isFile) : collection.get(name)
+      if (!node) {
+        node = createOrbitNode(name, isFile)
+        collection.set(name, node)
+      }
+
       parent.children.add(node)
 
       name = folder
@@ -105,5 +103,43 @@ export const mapFileToOrbitTree = (files: string[]) => {
 
   const rootNodes = Array.from(roots.values()).flatMap((name) => collection.get(name))
   const tree = createOrbitNode('.', false, rootNodes)
-  return { roots, collection, tree }
+  return tree
+}
+
+export const detectLatest = (node: ExtraOrbitNode) => {
+  const { siblings } = node || {}
+  const target = siblings?.[siblings?.length - 1]
+  if (!target) {
+    return false
+  }
+
+  return path.join(target.path, target.name) === path.join(node.path, node.name)
+}
+
+export interface OrbitTreeString {
+  orbit: string
+  file: string
+  isFile: boolean
+}
+
+export const stringifyOrbitTree = (tree: OrbitNode) => {
+  const orbits: OrbitTreeString[] = []
+
+  travelOrbitTree(tree)((node, chain) => {
+    const { path: folder, name, isFile } = node
+    const isRoot = chain.length === 1
+    const isLatest = detectLatest(node)
+    const isLastFolder = detectLatest(chain[0])
+
+    const begin = isRoot ? (isLatest && isFile ? '└' : isLastFolder ? '└' : '├') : isLastFolder ? ' ' : '│'
+    const orbit = isRoot ? (isFile ? '─' : '┬') : `${isLatest ? '└' : '├'}─${isFile ? '──' : '┬─'}`
+
+    const size = chain.length - 2
+    const padLeft = (isRoot ? '─' : ' ') + '│ '.repeat(size > 0 ? size : 0)
+    const prefix = `${begin}${padLeft}${orbit}`
+
+    orbits.push({ isFile, orbit: prefix, file: path.join(folder, name) })
+  })
+
+  return orbits
 }

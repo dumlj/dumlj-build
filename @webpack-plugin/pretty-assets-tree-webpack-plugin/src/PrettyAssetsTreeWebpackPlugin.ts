@@ -3,7 +3,7 @@ import type { Compiler } from 'webpack'
 import path from 'path'
 import chalk from 'chalk'
 import micromatch from 'micromatch'
-import { travelOrbitTree, mapFileToOrbitTree, type ExtraOrbitNode } from './utils/orbitTree'
+import { mapFileToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
 
 export interface PrettyAssetsTreeWebpackPluginOptions extends SeedWebpackPluginOptions {
   banner?: string
@@ -76,33 +76,12 @@ export class PrettyAssetsTreeWebpackPlugin extends SeedWebpackPlugin {
         return
       }
 
-      const detectLatest = (node: ExtraOrbitNode) => {
-        const { siblings } = node || {}
-        const target = siblings?.[siblings?.length - 1]
-        if (!target) {
-          return false
-        }
-
-        return path.join(target.path, target.name) === path.join(node.path, node.name)
-      }
-
-      const { tree, collection } = mapFileToOrbitTree(files)
-
-      travelOrbitTree(tree)(collection, (node, chain) => {
-        const { path: folder, name, isFile } = node
-        const isRoot = chain.length === 1
-        const isLatest = detectLatest(node)
-        const isLastFolder = detectLatest(chain[0])
-
-        const begin = isRoot ? (isLatest && isFile ? '└' : isLastFolder ? '└' : '├') : isLastFolder ? ' ' : '│'
-        const orbit = isRoot ? (isFile ? '─' : '┬') : `${isLatest ? '└' : '├'}─${isFile ? '──' : '┬─'}`
-
-        const size = chain.length - 2
-        const padLeft = (isRoot ? '─' : ' ') + '│ '.repeat(size > 0 ? size : 0)
-        const prefix = `${begin}${padLeft}${orbit}`
-
-        const message = `${prefix} ${isFile ? `${chalk.green(name)} ${chalk.gray(path.join(output, folder, name))}` : chalk.blue(name)}`
-        messages.push(message)
+      const tree = mapFileToOrbitTree(files)
+      stringifyOrbitTree(tree).forEach(({ orbit, file, isFile }) => {
+        const filename = path.basename(file)
+        const message = [`${orbit} ${chalk.cyan(filename)}`]
+        isFile && message.push(chalk.gray(path.join(output, file)))
+        messages.push(message.join(' '))
       })
 
       // eslint-disable-next-line no-console

@@ -26,6 +26,8 @@ const CONFIG: Configuration = {
           compilation.hooks.processAssets.tapPromise('use-for-emit-and-ignore-me', async () => {
             compilation.emitAsset('constants/conf.js', new webpack.sources.RawSource(''))
             compilation.emitAsset('services/echo.js', new webpack.sources.RawSource(''))
+            compilation.emitAsset('services/aaa/echo.js', new webpack.sources.RawSource(''))
+            compilation.emitAsset('services/aaa/aaa.js', new webpack.sources.RawSource(''))
             compilation.emitAsset('utils/find.js', new webpack.sources.RawSource(''))
             compilation.emitAsset('utils/each.js', new webpack.sources.RawSource(''))
             compilation.emitAsset('hello.js', new webpack.sources.RawSource(''))
