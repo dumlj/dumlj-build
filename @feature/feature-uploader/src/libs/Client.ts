@@ -5,10 +5,9 @@ import type { InitParams, UploadOptions, UploadResponse } from '../types'
 import { isReadable } from '../utils/isReadable'
 import { retry } from '../utils/retry'
 
-export abstract class Client {
+export abstract class Client<O extends Record<string, any> = never> {
   static NAME: string
-  protected abstract createService(options: Record<string, any>): any
-  protected abstract _upload(stream: string | Buffer | Readable, options?: UploadOptions): Promise<UploadResponse>
+  protected abstract _upload(stream: string | Buffer | Readable, options?: UploadOptions<O>): Promise<UploadResponse>
 
   public bucket: string
   public region: string
@@ -33,7 +32,7 @@ export abstract class Client {
   }
 
   /** 上传内容 */
-  public upload(content: string | Buffer | Readable, options?: UploadOptions): Promise<UploadResponse> {
+  public upload(content: string | Buffer | Readable, options?: UploadOptions<O>): Promise<UploadResponse> {
     const { retryTimes, onRetry, onProgress, fileName, fileSize, fileKey } = options
     const fileInfo = { fileName, fileSize, fileKey }
     if (typeof onProgress === 'function') {

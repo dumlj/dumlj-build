@@ -24,9 +24,8 @@ export interface CreateKeyOptions {
 
 /** 生成文件 KEY */
 export const createKey = (file: string, options?: CreateKeyOptions) => {
-  const { rootPath = process.cwd(), directory = rootPath, prefix = '' } = options || {}
+  const { rootPath = '/', directory = rootPath, prefix = '' } = options || {}
   const absPath = path.isAbsolute(file) ? file : path.join(directory, file)
   const relativePath = path.isAbsolute(absPath) ? path.relative(rootPath, absPath) : absPath
-  const key = path.join(prefix, relativePath).replace(/\\/, '/')
-  return key
+  return path.join(prefix, relativePath).replace(/\\/, '/')
 }

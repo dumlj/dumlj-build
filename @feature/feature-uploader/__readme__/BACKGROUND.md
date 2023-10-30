@@ -1,4 +1,3 @@
 ## BACKGROUND
 
-工具主要为了磨平不同服务商的 SDK 上传接口，用统一方法对接各个云服务商。
-暂时支持 `oss`, `s3`
+The tool is mainly designed to smooth the SDK upload interfaces of different CDN Service Providers and use some unified methods to connect to various CDN Service Providers.

@@ -2,7 +2,7 @@
 
 # Feature Updater
 
-更新程序
+updater for packages.
 
 ## INSTALL
 

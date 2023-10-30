@@ -17,11 +17,10 @@ export interface RetryOptions {
 
 /** 重试 */
 export const retry = <T extends (...args: any[]) => Promise<any>>(fn: T, options?: RetryOptions) => {
+  const { retryTimes = 3, onRetry, retryDelay = 1e3 } = options || {}
   return (...args: Parameters<T>): ReturnType<T> => {
-    const { retryTimes = 3, onRetry, retryDelay = 1e3 } = options
     const maxRetryTimes = typeof retryTimes === 'number' && Number.isSafeInteger(retryTimes) && retryTimes > 0 ? retryTimes : 3
-
-    const upload = async (times = 0) => {
+    const reExceute = async (times = 0) => {
       return fn(...args).catch(async (error) => {
         if (times < maxRetryTimes) {
           if (typeof onRetry === 'function') {
@@ -34,13 +33,13 @@ export const retry = <T extends (...args: any[]) => Promise<any>>(fn: T, options
 
           // 一秒后重新尝试
           await sleep(retryDelay)
-          return upload(times + 1)
+          return reExceute(times + 1)
         }
 
         return Promise.reject(error)
       })
     }
 
-    return upload()
+    return reExceute()
   }
 }

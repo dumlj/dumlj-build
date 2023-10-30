@@ -59,7 +59,7 @@ export interface RetryFileInfo extends FileInfo {
 }
 
 /** 上传配置 */
-export interface UploadOptions<ClientOptions extends Record<string, any> = never> {
+export interface UploadOptions {
   /** 文件名 */
   fileName?: string
   /** 文件大小 */
@@ -82,7 +82,6 @@ export interface UploadOptions<ClientOptions extends Record<string, any> = never
     'cache-control'?: string
     [k: string]: string
   }
-  client?: ClientOptions
 }
 
 /** 上传返回值 */

@@ -2,14 +2,14 @@ import OSS from 'ali-oss'
 import type { Readable } from 'stream'
 import { RESPONSE_HEADERS } from '../constants/headers'
 import { Client } from '../libs/Client'
-import type { UploadOptions } from '../types'
 import { isReadable } from '../utils/isReadable'
+import type { UploadOptions } from '../types'
 
 /**
  * 阿里云上传工具
  * @see [出现跨域问题](https://help.aliyun.com/document_detail/40130.html)
  */
-export class OSSClient extends Client {
+export class OSSClient extends Client<Partial<OSS.Options>> {
   static NAME = 'oss'
   protected oss?: OSS
 
@@ -20,8 +20,8 @@ export class OSSClient extends Client {
   }
 
   /** 上传 */
-  protected async _upload(content: string | Buffer | Readable, options?: Pick<UploadOptions, 'fileName' | 'fileKey' | 'responseHeaders'>) {
-    this.oss = this.oss || this.createService()
+  protected async _upload(content: string | Buffer | Readable, options?: Pick<UploadOptions, 'client' | 'fileName' | 'fileKey' | 'responseHeaders'>) {
+    this.oss = this.oss || this.createService(options?.client)
 
     const { fileName, fileKey, responseHeaders = {} } = options || {}
     const contentType = this.getContentType(fileName)

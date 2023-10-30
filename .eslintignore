@@ -1,6 +1,7 @@
 # Dest resouces
 libs
 !**/src/**/libs
+!**/__tests__/**/libs
 build
 .next
 coverage

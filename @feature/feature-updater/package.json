@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/feature-updater",
   "version": "0.0.1",
-  "description": "更新程序",
+  "description": "updater for packages.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

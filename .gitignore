@@ -2,6 +2,7 @@
 build
 libs
 !**/src/**/libs
+!**/__tests__/**/libs
 docs-dist
 .next
 coverage

@@ -2,18 +2,16 @@
 
 # Feature Uploader
 
-corss platform uploader
+Corss platform uploader.
 
 ## BACKGROUND
 
-工具主要为了磨平不同服务商的 SDK 上传接口，用统一方法对接各个云服务商。
-暂时支持 `oss`, `s3`
+The tool is mainly designed to smooth the SDK upload interfaces of different CDN Service Providers and use some unified methods to connect to various CDN Service Providers.
 
 ## FEATURE
 
-- 通过单一方法实现上传
-  - 支持 OSS
-  - 支持 S3
+- Support OSS
+- Support S3
 
 ## INSTALL
 
@@ -28,46 +26,20 @@ $ pnpm add @dumlj/feature-uploader -D
 
 ## USAGE
 
+### OSS
+
 ```ts
-import { findOutdateds } from '@series-one/toolkit-updater'
-
-const outdates = await findOutdateds({
-  /* 仅更新补丁版与功能版本 */
-  includes: ['minor', 'patch'],
-  /* 发布时间超过(单位毫秒) */
-  overTime: 0,
-  /* 请求超时, 默认 3 秒 */
-  timeout: 3e3,
-})
-
-outdates.forEach(({ name, updateType, version, latestVersion }) => {
-  console.log(`${name}@${version}有一个新的${updateType}版本,请更新到${latestVersion}`)
-})
+import { OSSClient } from '@dumlj/feature-uploader'
+const oss = new OSSClient({ bucket, region, accessKeyId, accessKeySecret })
+// fileKey is the final name in cdn service
+await oss.upload('hello world', { fileName: 'a.js', fileKey: 'a.hash.js' })
 ```
 
-### 单独使用
+### S3
 
 ```ts
-import { shouldUpdate } from '@series-one/toolkit-updater'
-
-const {
-  name,
-  updateType,
-  version,
-  latestVersion,
-  shouldUpdate: needUpdate,
-} = await shouldUpdate('name', {
-  /* 当前版本 */
-  comareVersion: '1.0.0',
-  /* 仅更新补丁版与功能版本 */
-  includes: ['minor', 'patch'],
-  /* 发布时间超过(单位毫秒) */
-  overTime: 0,
-  /* 请求超时, 默认 3 秒 */
-  timeout: 3e3,
-})
-
-if (needUpdate) {
-  console.log(`${name}@${version}有一个新的${updateType}版本,请更新到${latestVersion}`)
-}
+import { S3Client } from '@dumlj/feature-uploader'
+const s3 = new S3Client({ bucket, region, accessKeyId, accessKeySecret })
+// fileKey is the final name in cdn service
+await s3.upload('hello world', { fileName: 'a.js', fileKey: 'a.hash.js' })
 ```
