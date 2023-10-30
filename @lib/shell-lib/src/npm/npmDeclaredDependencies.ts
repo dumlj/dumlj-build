@@ -1,4 +1,4 @@
-import { createCommonExcutor } from '../creators/createCommonExcutor'
+import { createCommonExecutor } from '../creators/createCommonExecutor'
 import type { NpmLsInfo } from './types'
 
 export interface NpmDeclaredDependenciesResp {
@@ -13,7 +13,7 @@ const command = () => `npm ls --json --omit optional --omit peer --depth 0`
  * @description
  * 主要用户获取声明过的依赖，未声明的依赖不会返回
  */
-export const npmDeclaredDependencies = createCommonExcutor(command, (stdout) => {
+export const npmDeclaredDependencies = createCommonExecutor(command, (stdout) => {
   try {
     const source = stdout.toString().trim()
     const { dependencies }: NpmLsInfo = JSON.parse(source)

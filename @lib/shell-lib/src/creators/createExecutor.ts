@@ -1,5 +1,5 @@
 import type { ExecOptions, ExecSyncOptions } from 'child_process'
-import { execute as originExcute, excuteSync as originExcuteSync } from '../helpers/execute'
+import { execute as originExecute, executeSync as originExecuteSync } from '../helpers/execute'
 import type { TrimPromise } from '../utility-types/trim-promise'
 
 /**
@@ -25,14 +25,14 @@ export type Command = (...params: any[]) => string
  */
 export type Resolve = (stdout: string, isSync: boolean) => unknown
 
-export const createExcutor = (preprocess: Preprocess) => {
+export const createExecutor = (preprocess: Preprocess) => {
   return <C extends Command, R extends Resolve>(command: C, resolv?: R) => {
     type Params = Parameters<C>
     type Response = TrimPromise<ReturnType<R>> extends infer P ? (unknown extends P ? string : P) : never
 
     const options = (options?: ExecOptions) => {
       const exec = async (...params: Params): Promise<Response> => {
-        const stdout = (await preprocess(() => originExcute(command(...params), options))) || ''
+        const stdout = (await preprocess(() => originExecute(command(...params), options))) || ''
         const response = stdout.toString().trim()
         /**
          * resolv 可能为异步也可能不为异步，
@@ -52,7 +52,7 @@ export const createExcutor = (preprocess: Preprocess) => {
 
     const optionsSync = (options?: ExecSyncOptions) => {
       const exec = (...params: Params): Response => {
-        const stdout = preprocess(() => originExcuteSync(command(...params), options)) || ''
+        const stdout = preprocess(() => originExecuteSync(command(...params), options)) || ''
         const response = stdout.toString().trim()
         const result = typeof resolv === 'function' ? resolv(response, true) : stdout
         return result

@@ -1,5 +1,5 @@
 import type { ExecOptions, ExecSyncOptions } from 'child_process'
-import { createExcutor } from '@/creators/createExcutor'
+import { createExecutor } from '@/creators/createExecutor'
 import { expectType } from 'tsd-lite'
 
 jest.mock('child_process', () => {
@@ -12,38 +12,38 @@ jest.mock('child_process', () => {
   return mockExec(COMMAND_RESPONSE_MAP)
 })
 
-describe('test creators/createExcutor', () => {
-  interface ExcuteSync<P extends any[], R> {
+describe('test creators/createExecutor', () => {
+  interface ExecuteSync<P extends any[], R> {
     (...params: P): R
     options(options?: ExecSyncOptions): {
       exec(...params: P): R
     }
   }
 
-  interface Excute<P extends any[], R> {
+  interface Execute<P extends any[], R> {
     (...params: P): Promise<R>
     options(options?: ExecOptions): {
       exec(...params: P): Promise<R>
     }
-    sync: ExcuteSync<P, R>
+    sync: ExecuteSync<P, R>
   }
 
   it('can inherit command parameter inputs.', async () => {
     const fn = (id: string, flag?: boolean) => (flag ? `${id}` : `unknown`)
-    const create = createExcutor((execute) => execute())
-    expectType<Excute<[string, boolean?], string>>(create(fn))
+    const create = createExecutor((execute) => execute())
+    expectType<Execute<[string, boolean?], string>>(create(fn))
   })
 
   it('can inherit command return outputs.', async () => {
     const fn = () => 'x'
-    const create = createExcutor((execute) => execute())
+    const create = createExecutor((execute) => execute())
 
-    expectType<Excute<[], number>>(create(fn, () => 1))
-    expectType<Excute<[], boolean>>(create(fn, () => false))
+    expectType<Execute<[], number>>(create(fn, () => 1))
+    expectType<Execute<[], boolean>>(create(fn, () => false))
   })
 
   it('can return string type when param `resolv` is not provided.', async () => {
-    const create = createExcutor((execute) => execute())
+    const create = createExecutor((execute) => execute())
     const execute = create(() => 'x')
 
     expectType<Promise<string>>(execute())

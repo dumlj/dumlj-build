@@ -1,4 +1,4 @@
-import { createYarnExcutor } from '@/creators/createYarnExcutor'
+import { createGitExecutor } from '@/creators/createGitExecutor'
 
 jest.mock('child_process', () => {
   const COMMAND_RESPONSE_MAP = {
@@ -16,9 +16,9 @@ jest.mock('command-exists', () => ({
   default: () => enableCommandExistsMock,
 }))
 
-describe('test services/createYarnExcutor', () => {
+describe('test services/createGitExecutor', () => {
   it('can create command function', async () => {
-    const execute = createYarnExcutor(() => 'test')
+    const execute = createGitExecutor(() => 'test')
     expect(typeof execute).toBe('function')
     expect(typeof execute.sync).toBe('function')
 
@@ -26,10 +26,10 @@ describe('test services/createYarnExcutor', () => {
     expect(execute.sync()).toBe('ok')
   })
 
-  it('will return empty when yarn no install', async () => {
+  it('will return empty when git no install', async () => {
     enableCommandExistsMock = false
 
-    const execute = createYarnExcutor(() => 'test')
+    const execute = createGitExecutor(() => 'test')
     expect(await execute()).toBe('')
   })
 })

@@ -1,4 +1,6 @@
 import { defineWebComponent } from './defineWebComponent'
-import { StackblitzLiveDemo } from './StackblitzLiveDemo'
+import { StackblitzeComponent } from './StackblitzeComponent'
 
-defineWebComponent('stackblitz-live-demo', StackblitzLiveDemo)
+declare const __STACKBLITZ_HTML_TAG__: string
+
+defineWebComponent(__STACKBLITZ_HTML_TAG__, StackblitzeComponent)

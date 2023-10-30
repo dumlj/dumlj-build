@@ -19,7 +19,8 @@
     "tslib": "^2.5.0",
     "jszip": "^3.10.1",
     "utility-types": "^3.10.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "@dumlj/util-lib": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

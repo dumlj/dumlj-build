@@ -1,5 +1,5 @@
 import type { ExecOptions, ExecSyncOptions } from 'child_process'
-import { createCommonExcutor } from '@/creators/createCommonExcutor'
+import { createCommonExecutor } from '@/creators/createCommonExecutor'
 import { expectType } from 'tsd-lite'
 
 jest.mock('child_process', () => {
@@ -12,35 +12,35 @@ jest.mock('child_process', () => {
   return mockExec(COMMAND_RESPONSE_MAP)
 })
 
-describe('test creators/createCommonExcutor', () => {
-  interface ExcuteSync<P extends any[], R> {
+describe('test creators/createCommonExecutor', () => {
+  interface ExecuteSync<P extends any[], R> {
     (...params: P): R
     options(options?: ExecSyncOptions): {
       exec(...params: P): R
     }
   }
 
-  interface Excute<P extends any[], R> {
+  interface Execute<P extends any[], R> {
     (...params: P): Promise<R>
     options(options?: ExecOptions): {
       exec(...params: P): Promise<R>
     }
-    sync: ExcuteSync<P, R>
+    sync: ExecuteSync<P, R>
   }
 
   it('can inherit command parameter inputs.', async () => {
     const fn = (id: string, flag?: boolean) => (flag ? `${id}` : `unknown`)
-    expectType<Excute<[string, boolean?], string>>(createCommonExcutor(fn))
+    expectType<Execute<[string, boolean?], string>>(createCommonExecutor(fn))
   })
 
   it('can inherit command return outputs.', async () => {
     const fn = () => 'x'
-    expectType<Excute<[], number>>(createCommonExcutor(fn, () => 1))
-    expectType<Excute<[], boolean>>(createCommonExcutor(fn, () => false))
+    expectType<Execute<[], number>>(createCommonExecutor(fn, () => 1))
+    expectType<Execute<[], boolean>>(createCommonExecutor(fn, () => false))
   })
 
   it('can return string type when param `resolv` is not provided.', async () => {
-    const execute = createCommonExcutor(() => 'x')
+    const execute = createCommonExecutor(() => 'x')
     expectType<Promise<string>>(execute())
     expectType<string>(execute.sync())
   })

@@ -61,4 +61,4 @@ export class CustomWebpackPlugin extends SeedWebpackPlugin {
 
 ## LIVE DEMO
 
-<stackblitz-live-demo height="800px" src="@dumlj-example/seed-webpack-plugin"></stackblitz-live-demo>
+<dumlj-stackblitz height="800px" src="@dumlj-example/seed-webpack-plugin"></dumlj-stackblitz>

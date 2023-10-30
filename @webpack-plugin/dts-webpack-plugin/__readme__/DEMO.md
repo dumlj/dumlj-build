@@ -2,4 +2,4 @@
 
 After execution, please check the `console` or `./build` directory.
 
-<stackblitz-live-demo height="800px" src="@dumlj-example/dts-webpack-plugin"></stackblitz-live-demo>
+<dumlj-stackblitz height="800px" src="@dumlj-example/dts-webpack-plugin"></dumlj-stackblitz>

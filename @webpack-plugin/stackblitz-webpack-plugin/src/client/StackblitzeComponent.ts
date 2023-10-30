@@ -1,19 +1,22 @@
-import Stackblitz, { type EmbedOptions } from '@stackblitz/sdk'
+import Stackblitz, { type VM, type EmbedOptions } from '@stackblitz/sdk'
 import Zip from 'jszip'
 import { withPublicPath } from './withPublicPath'
 import { request } from './request'
 
 declare const __STACKBLITZ_MANIFEST__: string
 
-interface MANIFEST_ASSETS_STATS {
+const WS_DIR = `@dps-${Date.now().toString(36)}`
+
+export interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
   tarballs: Record<string, string[]>
   extras?: [string, string][]
 }
 
-export class StackblitzLiveDemo extends HTMLElement {
+export class StackblitzeComponent extends HTMLElement {
   protected MANIFEST_CACHE: MANIFEST_ASSETS_STATS
   protected TARBALL_CACHE: Record<string, Map<string, string>>
+  protected vm: VM
 
   constructor() {
     super()
@@ -27,13 +30,11 @@ export class StackblitzLiveDemo extends HTMLElement {
     height && (this.style.height = height)
 
     const name = this.getAttribute('src')
-    name && (await this.embed(name))
+    name && this.embed(name)
   }
 
   public async attributeChangedCallback(name: string, prevValue: string, nextValue: string) {
-    if (name === 'name') {
-      this.embed(nextValue)
-    }
+    name === 'name' && this.embed(nextValue)
   }
 
   public disconnectedCallback() {
@@ -85,20 +86,28 @@ export class StackblitzLiveDemo extends HTMLElement {
       return
     }
 
-    const response = await Promise.all(deps.map((name) => this.downloadTarball(name)))
-    const files = new Map(response.flatMap((file) => file))
-
-    // example files
+    // main project
+    const fileMap = new Map()
     Object.values(await this.downloadTarball(name)).forEach(([path, value]) => {
-      files.set(path.split('/__example__/').pop(), value)
+      fileMap.set(path, value)
     })
 
-    this.TARBALL_CACHE[name] = files
-    return files
+    // deps project
+    await Promise.all(
+      deps.map(async (name) => {
+        const files = await this.downloadTarball(name)
+        files.forEach(([file, content]) => {
+          fileMap.set(`${WS_DIR}/${name}/${file}`, content)
+        })
+      })
+    )
+
+    this.TARBALL_CACHE[name] = fileMap
+    return fileMap
   }
 
   protected async resolveStackblitzProject(name: string) {
-    const { extras = [] } = await this.loadManifest()
+    const { examples, extras = [] } = await this.loadManifest()
     const tarballs = await this.loadTarballs(name)
     if (!tarballs) {
       throw new Error(`${name} is not found`)
@@ -106,23 +115,18 @@ export class StackblitzLiveDemo extends HTMLElement {
 
     const PKG_FILE = 'package.json'
     const extraFiles = new Map(extras)
-    const content = extraFiles.get(PKG_FILE)
-    const { name: title = name, description = '', workspaces = [] } = (content ? JSON.parse(content) : {}) as PackageSource
 
     // clone tarball files
     const tarballFiles = new Map<string, string>(tarballs.entries())
-    if (tarballFiles.has(PKG_FILE)) {
-      // example origin source of package.json
-      const content = tarballFiles.get(PKG_FILE)
-      const pkgSource = JSON.parse(content)
+    // example origin source of package.json
+    const content = tarballFiles.get(PKG_FILE)
+    const pkgSource = JSON.parse(content)
+    pkgSource.private = true
+    pkgSource.workspaces = examples[name].map((name) => `./${WS_DIR}/${name}`)
 
-      // merge workspaces
-      pkgSource.workspaces = workspaces
-
-      // update package.json
-      const merged = JSON.stringify(pkgSource, null, 2)
-      tarballFiles.set(PKG_FILE, merged)
-    }
+    // update package.json
+    const merged = JSON.stringify(pkgSource, null, 2)
+    tarballFiles.set(PKG_FILE, merged)
 
     const fileMap = [extraFiles, tarballs, tarballFiles]
     const finalFiles = fileMap.flatMap((group) => Array.from(group.entries()))
@@ -131,6 +135,7 @@ export class StackblitzLiveDemo extends HTMLElement {
       return result
     }, {})
 
+    const { title, description } = pkgSource
     return { template: 'node' as const, title, description, files }
   }
 
@@ -181,7 +186,7 @@ export class StackblitzLiveDemo extends HTMLElement {
     this.appendChild(style)
 
     const launch = this.activeProject(name)
-    const vm = await launch(id)
-    return vm
+    this.vm = await launch(id)
+    return this.vm
   }
 }

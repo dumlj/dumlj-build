@@ -4,4 +4,4 @@ Since I can't Mock Chrome, please open the console to view the logs.😅 And try
 
 Webpack DevServer port is `8080`, Static Server port is `3000`. In real environment, Chrome Extension will mount `./build` folder.
 
-<stackblitz-live-demo height="800px" src="@dumlj-example/crx-live-reload-webpack-plugin"></stackblitz-live-demo>
+<dumlj-stackblitz height="800px" src="@dumlj-example/crx-live-reload-webpack-plugin"></dumlj-stackblitz>
