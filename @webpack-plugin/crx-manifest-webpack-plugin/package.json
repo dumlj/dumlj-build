@@ -12,15 +12,15 @@
   "types": "./libs/index.d.ts",
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/webpack": "^5",
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3",
     "@dumlj/mock-lib": "^0.0.1",
-    "memfs": "^4.2.1"
+    "@jest/types": "^29.6.3",
+    "@types/webpack": "^5.28.4",
+    "memfs": "^4.6.0",
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "webpack": "5.x"

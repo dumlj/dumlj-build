@@ -23,23 +23,23 @@
   "dependencies": {
     "@dumlj/feature-prepare": "^0.0.1",
     "@dumlj/feature-pretty": "^0.0.1",
+    "@dumlj/feature-readme": "^0.0.1",
     "@dumlj/shell-lib": "^0.0.1",
     "@dumlj/util-lib": "^0.0.1",
     "chalk": "^4.1.2",
-    "commander": "^11.0.0",
-    "depcheck": "^1.4.6",
+    "commander": "^11.1.0",
+    "depcheck": "^1.4.7",
     "fs-extra": "^11.1.1",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5",
-    "tslib": "^2.5.0",
-    "@dumlj/feature-readme": "^0.0.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@jest/types": "^29.6.3",
-    "@types/lodash": "^4.14.198",
-    "@types/micromatch": "^4.0.2",
     "@dumlj/seed-cli": "^0.0.1",
-    "memfs": "^4.2.1",
+    "@jest/types": "^29.6.3",
+    "@types/lodash": "^4.14.200",
+    "@types/micromatch": "^4.0.4",
+    "memfs": "^4.6.0",
     "ts-jest": "^29.1.1"
   },
   "peerDependencies": {

@@ -18,14 +18,14 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
-    "get-tsconfig": "^4.7.0",
+    "get-tsconfig": "^4.7.2",
     "interpret": "^1.4.0",
     "rechoir": "^0.6.2"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
+    "memfs": "^4.6.0",
     "ts-jest": "^29.1.1",
-    "memfs": "^4.2.1",
     "tslib": "^2.6.2"
   },
   "peerDependencies": {

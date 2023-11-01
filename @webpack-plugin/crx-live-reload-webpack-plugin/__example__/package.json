@@ -7,16 +7,16 @@
     "serve": "concurrently \"webpack serve -c webpack.config.ts\" \"node ./static-serve\""
   },
   "dependencies": {
-    "webpack": "^5",
-    "html-webpack-plugin": "^5.5.3",
+    "@dumlj/crx-live-reload-webpack-plugin": "0.0.1",
     "@dumlj/vitrual-webpack-plugin": "^0.0.1",
-    "@dumlj/crx-live-reload-webpack-plugin": "0.0.1"
+    "html-webpack-plugin": "^5.5.3",
+    "webpack": "^5.89.0"
   },
   "devDependencies": {
-    "webpack-cli": "^5",
-    "concurrently": "^8.2.1",
+    "concurrently": "^8.2.2",
+    "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
-    "express": "^4.18.2"
+    "webpack-cli": "^5"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

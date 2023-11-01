@@ -18,16 +18,16 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "memfs": "^4.2.1",
+    "memfs": "^4.6.0",
     "tslib": "^2.5.0",
-    "webpack": "^5.88.2"
+    "webpack": "^5.89.0"
   },
   "publishConfig": {
     "access": "public",
     "@jest/types": "^29.6.3"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1"
   }
 }

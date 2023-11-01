@@ -15,10 +15,10 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/webpack": "^5",
+    "@jest/types": "^29.6.3",
+    "@types/webpack": "^5.28.4",
     "@types/webpack-dev-server": "^4",
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "webpack": "5.x",

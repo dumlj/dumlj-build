@@ -7,6 +7,7 @@ declare const __STACKBLITZ_MANIFEST__: string
 
 const WS_DIR = `@dps-${Date.now().toString(36)}`
 const PKG_FILE = 'package.json'
+const STACKBLITZ_RC = '.stackblitzrc'
 
 export interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
@@ -97,8 +98,8 @@ export class StackblitzeComponent extends HTMLElement {
         const files = await this.downloadTarball(moduleName)
         files.forEach(([file, content]) => {
           // copy `.stackblitzrc` to outside
-          if (name === moduleName && file === '.stackblitzrc') {
-            map.set('.stackblitzrc', content)
+          if (name === moduleName && file === STACKBLITZ_RC) {
+            map.set(STACKBLITZ_RC, content)
           }
 
           const path = `${WS_DIR}/${moduleName}/${file}`

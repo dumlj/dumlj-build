@@ -12,16 +12,16 @@
   "types": "./libs/index.d.ts",
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0",
+    "@dumlj/util-lib": "^0.0.1",
     "chalk": "^4.1.2",
     "micromatch": "^4.0.5",
-    "@dumlj/util-lib": "^0.0.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/webpack": "^5",
-    "ts-jest": "^29.1.1",
+    "@dumlj/mock-lib": "^0.0.1",
     "@jest/types": "^29.6.3",
-    "@dumlj/mock-lib": "^0.0.1"
+    "@types/webpack": "^5.28.4",
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "webpack": "5.x"
