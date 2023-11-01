@@ -1,4 +1,4 @@
 {
   "installDependencies": false,
-  "startCommand": "yarn install && yarn build"
+  "startCommand": "yarn install && yarn workspace @dumlj-example/pretty-assets-tree-webpack-plugin run build"
 }
