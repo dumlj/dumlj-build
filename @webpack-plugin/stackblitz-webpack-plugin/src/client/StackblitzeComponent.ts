@@ -6,6 +6,7 @@ import { request } from './request'
 declare const __STACKBLITZ_MANIFEST__: string
 
 const WS_DIR = `@dps-${Date.now().toString(36)}`
+const PKG_FILE = 'package.json'
 
 export interface MANIFEST_ASSETS_STATS {
   examples: Record<string, string[]>
@@ -79,80 +80,82 @@ export class StackblitzeComponent extends HTMLElement {
     )
   }
 
-  protected async loadTarballs(name: string) {
+  protected async extractTarballs(name: string) {
     const { examples } = await this.loadManifest()
     const deps = examples[name]
     if (!(Array.isArray(deps) && deps.length > 0)) {
       return
     }
 
-    // main project
-    const fileMap = new Map()
-    Object.values(await this.downloadTarball(name)).forEach(([path, value]) => {
-      fileMap.set(path, value)
-    })
+    const maps = await Promise.all(
+      [name, ...deps].map(async (moduleName) => {
+        if (this.TARBALL_CACHE[moduleName]) {
+          return this.TARBALL_CACHE[moduleName]
+        }
 
-    // deps project
-    await Promise.all(
-      deps.map(async (name) => {
-        const files = await this.downloadTarball(name)
+        const map = new Map<string, string>()
+        const files = await this.downloadTarball(moduleName)
         files.forEach(([file, content]) => {
-          fileMap.set(`${WS_DIR}/${name}/${file}`, content)
+          // copy `.stackblitzrc` to outside
+          if (name === moduleName && file === '.stackblitzrc') {
+            map.set('.stackblitzrc', content)
+          }
+
+          const path = `${WS_DIR}/${moduleName}/${file}`
+          map.set(path, content)
         })
+
+        this.TARBALL_CACHE[moduleName] = map
+        return map
       })
     )
 
-    this.TARBALL_CACHE[name] = fileMap
-    return fileMap
+    return new Map(
+      (function* () {
+        const cloned = [...maps]
+        while (cloned.length) {
+          yield* cloned.shift()
+        }
+      })()
+    )
   }
 
-  protected async resolveStackblitzProject(name: string) {
+  protected async buildProject(name: string) {
     const { examples, extras = [] } = await this.loadManifest()
-    const tarballs = await this.loadTarballs(name)
+    const tarballs = await this.extractTarballs(name)
     if (!tarballs) {
       throw new Error(`${name} is not found`)
     }
 
-    const PKG_FILE = 'package.json'
     const extraFiles = new Map(extras)
 
-    // clone tarball files
-    const tarballFiles = new Map<string, string>(tarballs.entries())
-    // example origin source of package.json
-    const content = tarballFiles.get(PKG_FILE)
+    // create a package.json
+    const content = extraFiles.get(PKG_FILE)
     const pkgSource = JSON.parse(content)
-    pkgSource.private = true
-    pkgSource.workspaces = examples[name].map((name) => `./${WS_DIR}/${name}`)
+    const { name: title, version, description, license } = pkgSource
+    const workspaces = [name, ...examples[name]].map((name) => `./${WS_DIR}/${name}`)
+    const newPkgSource = { name: title, version, description, license, private: true, workspaces }
+    tarballs.set(PKG_FILE, JSON.stringify(newPkgSource, null, 2))
 
-    // update package.json
-    const merged = JSON.stringify(pkgSource, null, 2)
-    tarballFiles.set(PKG_FILE, merged)
+    const files: Record<string, string> = {}
+    const concats = new Map(
+      (function* () {
+        yield* extraFiles
+        yield* tarballs
+      })()
+    )
 
-    const fileMap = [extraFiles, tarballs, tarballFiles]
-    const finalFiles = fileMap.flatMap((group) => Array.from(group.entries()))
-    const files = finalFiles.reduce((result, [name, content]) => {
-      result[name] = content
-      return result
-    }, {})
+    for (const [path, content] of Array.from(concats.entries())) {
+      files[path] = content
+    }
 
-    const { title, description } = pkgSource
     return { template: 'node' as const, title, description, files }
   }
 
   protected activeProject(name: string) {
     return async (container: string | HTMLElement, options?: EmbedOptions) => {
-      const project = await this.resolveStackblitzProject(name)
-      const content = project.files?.['package.json']
-
-      let previewFile = ''
-      try {
-        const { main } = JSON.parse(content)
-        previewFile = typeof main === 'string' ? main : ''
-      } catch (error) {
-        // nothing todo...
-      }
-
-      const vm = await Stackblitz.embedProject(container, project, {
+      const info = await this.buildProject(name)
+      const vm = await Stackblitz.embedProject(container, info, {
         clickToLoad: true,
         showSidebar: true,
         view: 'editor',
@@ -162,11 +165,19 @@ export class StackblitzeComponent extends HTMLElement {
         ...options,
       })
 
-      if (previewFile) {
+      Promise.resolve().finally(async () => {
+        const folder = `${WS_DIR}/${name}`
+        const source = info.files[`${folder}/${PKG_FILE}`]
+        const { main } = JSON.parse(source)
+        const previewFile = `${folder}/${main}`
+        if (!previewFile) {
+          return
+        }
+
         await vm.editor.setCurrentFile(previewFile)
         await vm.editor.openFile(previewFile)
         await vm.editor.setTheme('default')
-      }
+      })
 
       return vm
     }

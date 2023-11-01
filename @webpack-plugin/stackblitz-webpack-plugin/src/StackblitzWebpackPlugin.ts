@@ -1,6 +1,5 @@
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
-import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
+import { findWorkspaceProject, findWorkspaceRootPath, type Project } from '@dumlj/util-lib'
 import fs from 'fs-extra'
 import path from 'path'
 import { glob } from 'glob'
@@ -18,11 +17,6 @@ export interface Stats {
   name: string
   files: string[]
   zip: JSZip
-}
-
-export interface Project extends ProjectInWorkspaces {
-  name: string
-  dependencies?: Project[]
 }
 
 export interface StackblitzWebpackPluginOptions extends SeedWebpackPluginOptions {
@@ -112,7 +106,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
       /** collect stackblitz demo project */
       const collectExamples = async (): Promise<ExampleInfo> => {
         const rootPath = await findWorkspaceRootPath()
-        const workspaces = await yarnWorkspaces.options({ cwd: context }).exec()
+        const workspaces = await findWorkspaceProject({ cwd: rootPath })
         const projects = new Set<Project>()
         const examples: Record<string, string[]> = {}
 
