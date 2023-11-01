@@ -11,6 +11,7 @@ export interface ExampleInfo {
   rootPath: string
   examples: Record<string, string[]>
   projects: Set<Project>
+  isWorkspace: boolean
 }
 
 export interface Stats {
@@ -106,7 +107,15 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
       /** collect stackblitz demo project */
       const collectExamples = async (): Promise<ExampleInfo> => {
         const rootPath = await findWorkspaceRootPath()
-        const workspaces = await findWorkspaceProject({ cwd: rootPath })
+        const workspaces: Project[] = await (async () => {
+          if (rootPath) {
+            return findWorkspaceProject({ cwd: rootPath })
+          }
+
+          const { name, version, description, dependencies } = await fs.readJson(path.join(context, 'package.json'))
+          return [{ name, version, description, location: context, dependencies, workspaceDependencies: [] }]
+        })()
+
         const projects = new Set<Project>()
         const examples: Record<string, string[]> = {}
 
@@ -126,7 +135,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
           collect(workspaceDependencies, name)
         }
 
-        return { rootPath, examples, projects }
+        return { rootPath: rootPath || context, examples, projects, isWorkspace: !!rootPath }
       }
 
       /** pack files of projects to tarballs */
@@ -196,11 +205,11 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
           stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
         },
         async () => {
-          const { rootPath, examples, projects } = await collectExamples()
-          const stats = await packTarballs({ rootPath, examples, projects })
+          const { rootPath, examples, projects, isWorkspace } = await collectExamples()
+          const stats = await packTarballs({ rootPath, examples, projects, isWorkspace })
           const extras = await collectExtras()
           const tarballs = Array.from(stats.keys())
-          const content = JSON.stringify({ examples, tarballs, extras }, null, 2)
+          const content = JSON.stringify({ examples, tarballs, extras, isWorkspace }, null, 2)
           const source = new webpack.sources.RawSource(content)
           compilation.emitAsset(this.manifest, source)
         }
