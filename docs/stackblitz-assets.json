@@ -1,68 +1,79 @@
 {
   "examples": {
-    "@dumlj-example/crx-live-reload-webpack-plugin": [
+    "@dumlj-example/stackblitz-webpack-plugin": [
       "@dumlj/vitrual-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
-      "@dumlj/mock-lib",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
-      "@dumlj/crx-live-reload-webpack-plugin"
-    ],
-    "@dumlj-example/crx-manifest-webpack-plugin": [
-      "@dumlj/crx-manifest-webpack-plugin",
       "@dumlj/mock-lib",
+      "@dumlj/stackblitz-webpack-plugin"
+    ],
+    "@dumlj-example/seed-webpack-plugin": [
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
-      "@dumlj/feature-pretty",
+      "@dumlj/mock-lib",
       "@dumlj/vitrual-webpack-plugin"
-    ],
-    "@dumlj-example/dts-webpack-plugin": [
-      "@dumlj/dts-webpack-plugin",
-      "@dumlj/seed-webpack-plugin",
-      "@dumlj/mock-lib",
-      "@dumlj/feature-updater",
-      "@dumlj/shell-lib",
-      "@dumlj/util-lib",
-      "@dumlj/pretty-assets-tree-webpack-plugin"
     ],
     "@dumlj-example/pretty-assets-tree-webpack-plugin": [
       "@dumlj/vitrual-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
-      "@dumlj/mock-lib",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
+      "@dumlj/mock-lib",
       "@dumlj/pretty-assets-tree-webpack-plugin"
     ],
-    "@dumlj-example/seed-webpack-plugin": [
+    "@dumlj-example/dts-webpack-plugin": [
+      "@dumlj/dts-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
-      "@dumlj/mock-lib",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
+      "@dumlj/mock-lib",
+      "@dumlj/pretty-assets-tree-webpack-plugin"
+    ],
+    "@dumlj-example/crx-manifest-webpack-plugin": [
+      "@dumlj/crx-manifest-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/mock-lib",
+      "@dumlj/feature-pretty",
       "@dumlj/vitrual-webpack-plugin"
+    ],
+    "@dumlj-example/crx-live-reload-webpack-plugin": [
+      "@dumlj/vitrual-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/mock-lib",
+      "@dumlj/crx-live-reload-webpack-plugin"
     ]
   },
   "tarballs": [
+    "@dumlj-example/seed-webpack-plugin.zip",
+    "@dumlj-example/pretty-assets-tree-webpack-plugin.zip",
     "@dumlj-example/crx-live-reload-webpack-plugin.zip",
+    "@dumlj-example/stackblitz-webpack-plugin.zip",
     "@dumlj/vitrual-webpack-plugin.zip",
-    "@dumlj/seed-webpack-plugin.zip",
     "@dumlj/mock-lib.zip",
+    "@dumlj/pretty-assets-tree-webpack-plugin.zip",
+    "@dumlj-example/crx-manifest-webpack-plugin.zip",
+    "@dumlj/feature-pretty.zip",
+    "@dumlj/seed-webpack-plugin.zip",
     "@dumlj/feature-updater.zip",
     "@dumlj/shell-lib.zip",
     "@dumlj/util-lib.zip",
-    "@dumlj/crx-live-reload-webpack-plugin.zip",
-    "@dumlj-example/crx-manifest-webpack-plugin.zip",
+    "@dumlj/stackblitz-webpack-plugin.zip",
     "@dumlj/crx-manifest-webpack-plugin.zip",
-    "@dumlj/feature-pretty.zip",
     "@dumlj-example/dts-webpack-plugin.zip",
-    "@dumlj/dts-webpack-plugin.zip",
-    "@dumlj/pretty-assets-tree-webpack-plugin.zip",
-    "@dumlj-example/pretty-assets-tree-webpack-plugin.zip",
-    "@dumlj-example/seed-webpack-plugin.zip"
+    "@dumlj/crx-live-reload-webpack-plugin.zip",
+    "@dumlj/dts-webpack-plugin.zip"
   ],
   "extras": [
     [
