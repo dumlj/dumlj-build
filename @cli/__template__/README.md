@@ -14,3 +14,8 @@ $ yarn add --dev @template/cli
 # use pnpm
 $ pnpm add @template/cli -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-pretty](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty)
+- [@dumlj/seed-cli](https://github.com/dumlj/dumlj-build/tree/main/@cli/seed-cli)

@@ -14,3 +14,7 @@ $ yarn add --dev @dumlj/dumi-plugin-seed
 # use pnpm
 $ pnpm add @dumlj/dumi-plugin-seed -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater)

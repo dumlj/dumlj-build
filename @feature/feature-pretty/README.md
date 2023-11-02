@@ -14,3 +14,5 @@ $ yarn add --dev @dumlj/feature-pretty
 # use pnpm
 $ pnpm add @dumlj/feature-pretty -D
 ```
+
+## INTERNAL DEPENDENCIES

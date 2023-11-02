@@ -14,3 +14,7 @@ $ yarn add --dev @template/webpack-plugin
 # use pnpm
 $ pnpm add @template/webpack-plugin -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)

@@ -9,7 +9,7 @@ export interface ResolveProjectOptions {
 export const resolveProject = async (location: string, options?: ResolveProjectOptions) => {
   const { cwd = process.cwd() } = options || {}
   const pkgJson = path.join(cwd, location, 'package.json')
-  const { name, description }: PackageSource = await fs.readJSON(pkgJson, { encoding: 'utf-8' })
+  const { name, description, repository }: PackageSource = await fs.readJSON(pkgJson, { encoding: 'utf-8' })
   const alias = startCase(name.split('/').pop())
-  return { alias, name, description }
+  return { alias, name, description, repository }
 }

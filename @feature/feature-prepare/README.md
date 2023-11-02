@@ -14,3 +14,5 @@ $ yarn add --dev @dumlj/feature-prepare
 # use pnpm
 $ pnpm add @dumlj/feature-prepare -D
 ```
+
+## INTERNAL DEPENDENCIES

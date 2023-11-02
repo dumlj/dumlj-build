@@ -1,11 +1,10 @@
-import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
+import { findWorkspaceRootPath, findWorkspaceProject, type Project } from '@dumlj/util-lib'
 import micromatch from 'micromatch'
 import { type Render } from './renderStore'
 import { compile, type CompileOptions } from './compile'
 
 export type Renderer = Render & {
-  project: ProjectInWorkspaces
+  project: Project
 }
 
 export interface CompileWorkspaceOptions extends CompileOptions {
@@ -30,7 +29,7 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
-  const projects = (await yarnWorkspaces()).filter(({ location }) => {
+  const projects = (await findWorkspaceProject({ cwd: rootPath })).filter(({ location }) => {
     if (Array.isArray(include) && include.length > 0) {
       return micromatch.isMatch(location, include)
     }
@@ -46,16 +45,23 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
     return
   }
 
+  const projectMap = new Map(projects.map((project) => [project.name, project]))
   const renderers = new Map<string, Renderer>()
   await Promise.all(
     projects.map(async (project) => {
-      const { name, location } = project
+      const { name, location, workspaceDependencies } = project
+      const dependencies = workspaceDependencies.map((name) => {
+        const project = projectMap.get(name)
+        return project
+      })
+
       const render = await compile(location, { cwd: rootPath, configFile })
       if (typeof render !== 'function') {
         return
       }
 
-      const renderProject = Object.assign(render, { project })
+      const renderWithDependencies = (context: Record<string, any>) => render({ dependencies, ...context })
+      const renderProject = Object.assign(renderWithDependencies, { project, dependencies })
       renderers.set(name, renderProject)
     })
   )

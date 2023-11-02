@@ -41,3 +41,9 @@ In the demo, the files is output to the memory, please check the `console`.
 Or remove the comment `writeToDisk: true` from the `VitrualWebpackPlugin` in `webpack.config.ts` and run `yarn build`.
 
 <dumlj-stackblitz height="800px" src="@dumlj-example/pretty-assets-tree-webpack-plugin"></dumlj-stackblitz>
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
+- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)
+- [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib)

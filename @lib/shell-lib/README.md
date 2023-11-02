@@ -14,3 +14,5 @@ $ yarn add --dev @dumlj/shell-lib
 # use pnpm
 $ pnpm add @dumlj/shell-lib -D
 ```
+
+## INTERNAL DEPENDENCIES

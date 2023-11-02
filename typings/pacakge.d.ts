@@ -5,6 +5,12 @@ declare interface PackageSource {
   version: string
   /** 描述 */
   description?: string
+  /** 存储库 */
+  repository?: {
+    type: string
+    url: string
+    directory: string
+  }
   /** 是否为私有 */
   private?: boolean
   /** 工作区 */

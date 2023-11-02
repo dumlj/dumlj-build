@@ -44,3 +44,8 @@ export default {
 ## LIVE DEMO
 
 <dumlj-stackblitz height="800px" src="@dumlj-example/stackblitz-webpack-plugin"></dumlj-stackblitz>
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
+- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)

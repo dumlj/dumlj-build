@@ -43,3 +43,8 @@ export default defineConfig({
 ## LIVE DEMO
 
 See this docs website... 🤠
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/stackblitz-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/stackblitz-webpack-plugin)
+- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed)

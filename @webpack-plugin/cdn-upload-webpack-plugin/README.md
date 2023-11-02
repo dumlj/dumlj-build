@@ -14,3 +14,8 @@ $ yarn add --dev @dumlj/cdn-upload-webpack-plugin
 # use pnpm
 $ pnpm add @dumlj/cdn-upload-webpack-plugin -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-uploader](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-uploader)
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)

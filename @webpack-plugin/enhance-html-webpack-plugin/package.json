@@ -13,7 +13,8 @@
   "types": "./libs/index.d.ts",
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "html-webpack-plugin": "^5.5.3"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

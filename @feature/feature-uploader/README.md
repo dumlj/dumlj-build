@@ -43,3 +43,5 @@ const s3 = new S3Client({ bucket, region, accessKeyId, accessKeySecret })
 // fileKey is the final name in cdn service
 await s3.upload('hello world', { fileName: 'a.js', fileKey: 'a.hash.js' })
 ```
+
+## INTERNAL DEPENDENCIES

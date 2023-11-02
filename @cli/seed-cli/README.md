@@ -14,3 +14,10 @@ $ yarn add --dev @dumlj/seed-cli
 # use pnpm
 $ pnpm add @dumlj/seed-cli -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-pretty](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty)
+- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater)
+- [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib)
+- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)

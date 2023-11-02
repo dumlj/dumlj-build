@@ -40,13 +40,11 @@ export const compile = async (location: string, options?: CompileOptions) => {
   }
 
   const info = await resolveProject(location, { cwd })
-  const render = (data?: Metadata) => {
-    const context = { ...info, ...helpers, ...metadatas, ...data }
+  return (data?: Partial<Metadata>) => {
+    const context = { location, ...info, ...helpers, ...metadatas, ...data }
     const codes = renderSnippets(context)
     const head = typeof banner === 'function' ? banner(context) : banner
     const content = [head].concat(codes)
     return content.join('\n\n')
   }
-
-  return Object.assign(render, renderSnippets)
 }

@@ -43,3 +43,8 @@ export default defineConfig({
 ## LIVE DEMO
 
 See this docs website... 🤠
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed)
+- [@dumlj/feature-readme](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-readme)

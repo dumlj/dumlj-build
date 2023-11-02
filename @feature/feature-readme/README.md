@@ -14,3 +14,8 @@ $ yarn add --dev @dumlj/feature-readme
 # use pnpm
 $ pnpm add @dumlj/feature-readme -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-prepare](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-prepare)
+- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)

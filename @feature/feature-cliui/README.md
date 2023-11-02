@@ -14,3 +14,5 @@ $ yarn add --dev @dumlj/feature-cliui
 # use pnpm
 $ pnpm add @dumlj/feature-cliui -D
 ```
+
+## INTERNAL DEPENDENCIES

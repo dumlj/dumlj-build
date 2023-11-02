@@ -14,3 +14,5 @@ $ yarn add --dev @dumlj/mock-server-lib
 # use pnpm
 $ pnpm add @dumlj/mock-server-lib -D
 ```
+
+## INTERNAL DEPENDENCIES

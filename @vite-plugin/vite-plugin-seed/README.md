@@ -57,3 +57,7 @@ export default connect(
   })
 )
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater)

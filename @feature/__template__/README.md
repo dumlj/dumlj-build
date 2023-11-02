@@ -14,3 +14,5 @@ $ yarn add --dev @template/feature
 # use pnpm
 $ pnpm add @template/feature -D
 ```
+
+## INTERNAL DEPENDENCIES

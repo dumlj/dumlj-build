@@ -62,3 +62,8 @@ export class CustomWebpackPlugin extends SeedWebpackPlugin {
 ## LIVE DEMO
 
 <dumlj-stackblitz height="800px" src="@dumlj-example/seed-webpack-plugin"></dumlj-stackblitz>
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater)
+- [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib)

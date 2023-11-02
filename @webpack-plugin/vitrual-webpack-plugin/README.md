@@ -14,3 +14,7 @@ $ yarn add --dev @dumlj/vitrual-webpack-plugin
 # use pnpm
 $ pnpm add @dumlj/vitrual-webpack-plugin -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)

@@ -24,3 +24,12 @@ $ yarn add --dev @dumlj/create-cli
 # use pnpm
 $ pnpm add @dumlj/create-cli -D
 ```
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/feature-cliui](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-cliui)
+- [@dumlj/feature-prepare](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-prepare)
+- [@dumlj/feature-pretty](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty)
+- [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib)
+- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)
+- [@dumlj/seed-cli](https://github.com/dumlj/dumlj-build/tree/main/@cli/seed-cli)

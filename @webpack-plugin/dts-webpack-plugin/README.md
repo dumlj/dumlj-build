@@ -45,3 +45,8 @@ export default {
 After execution, please check the `console` or `./build` directory.
 
 <dumlj-stackblitz height="800px" src="@dumlj-example/dts-webpack-plugin"></dumlj-stackblitz>
+
+## INTERNAL DEPENDENCIES
+
+- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
+- [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib)
