@@ -1,5 +1,5 @@
+import { promisify } from 'util'
 import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
-import fs from 'fs-extra'
 import JSZip from 'jszip'
 import path from 'path'
 import type { Compiler } from 'webpack'
@@ -45,6 +45,11 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
   public apply(compiler: Compiler) {
     super.apply(compiler)
 
+    const statAsync = promisify(compiler.inputFileSystem.stat)
+    const readFileAsync = promisify(compiler.inputFileSystem.readFile)
+    // prettier-ignore
+    const pathExistsAsync = (file: string) => statAsync(file).then(() => true).catch(() => false)
+
     const { webpack, options } = compiler
     const { output } = options
     const zip = new JSZip()
@@ -86,7 +91,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
           // 保证必须为文件而非文件夹
           const isFilesMap = await Promise.all(
             extras.map(async (file) => {
-              return (await fs.pathExists(file)) && (await fs.stat(file)).isFile()
+              return (await pathExistsAsync(file)) && (await statAsync(file)).isFile()
             })
           )
 
@@ -99,7 +104,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
                 // 产物地址
                 const outpath = this.wrap ? path.join(this.wrap, this.extras[file]) : this.extras[file]
                 const relativePath = path.relative(output.path, outpath)
-                const buffer = await fs.readFile(file)
+                const buffer = await readFileAsync(file)
                 zip.file(relativePath, buffer)
               })
             )

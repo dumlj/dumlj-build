@@ -31,8 +31,9 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
     const { files, readFromDisk = false, writeToDisk = false } = options || {}
     this.readFromDisk = readFromDisk
     this.writeToDisk = writeToDisk
-    this.files = files || {
+    this.files = {
       'src/index.js': '',
+      ...files,
     }
   }
 

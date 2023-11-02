@@ -1,0 +1,27 @@
+{
+  "name": "@dumlj-example/zip-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "build": "webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/zip-webpack-plugin": "0.0.1",
+    "@dumlj/vitrual-webpack-plugin": "^0.0.1",
+    "@dumlj/util-lib": "^0.0.1",
+    "webpack": "5.x",
+    "webpack-cli": "^5",
+    "chalk": "^4.1.2",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5.28.4"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}
