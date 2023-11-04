@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.15% </span>
+                <span class="strong">66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/53</span>
+                <span class='fraction'>33/50</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">38.46% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/16</span>
+                <span class='fraction'>5/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.34% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/47</span>
+                <span class='fraction'>33/44</span>
             </div>
         
             
@@ -257,7 +257,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -266,25 +266,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -393,7 +393,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
           const extras = Object.keys(this.extras || <span class="branch-1 cbranch-no" title="branch not covered" >{})</span>
           // 保证必须为文件而非文件夹
           const isFilesMap = await Promise.all(
-            extras.map(<span class="fstat-no" title="function not covered" >async (f</span>ile) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+            extras.map(<span class="fstat-no" title="function not covered" >async </span>(file) =&gt; {
 <span class="cstat-no" title="statement not covered" >              return (await pathExistsAsync(file)) &amp;&amp; (await statAsync(file)).isFile()</span>
             })
           )
@@ -403,7 +403,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
             const assets = <span class="cstat-no" title="statement not covered" >compilation.getAssets().map(<span class="fstat-no" title="function not covered" >({</span> name }) =&gt; <span class="cstat-no" title="statement not covered" >path.join(output.path, name))</span></span>
             const finalFiles = <span class="cstat-no" title="statement not covered" >needCompressFiles.filter(<span class="fstat-no" title="function not covered" >(f</span>ile) =&gt; <span class="cstat-no" title="statement not covered" >-1 === assets.indexOf(file))</span></span>
 <span class="cstat-no" title="statement not covered" >            await Promise.all(</span>
-              finalFiles.map(<span class="fstat-no" title="function not covered" >async (f</span>ile) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+              finalFiles.map(<span class="fstat-no" title="function not covered" >async </span>(file) =&gt; {
                 // 产物地址
                 const outpath = <span class="cstat-no" title="statement not covered" >this.wrap ? path.join(this.wrap, this.extras[file]) : this.extras[file]</span>
                 const relativePath = <span class="cstat-no" title="statement not covered" >path.relative(output.path, outpath)</span>
@@ -427,7 +427,7 @@ export class ZipWebpackPlugin extends SeedWebpackPlugin {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-02T18:03:47.049Z
+                at 2023-11-04T17:16:12.976Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
