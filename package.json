@@ -29,9 +29,9 @@
     "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --ignore .templaterc.ts\"",
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
-    "test": "NODE_OPTIONS=\"--experimental-vm-modules\" jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
+    "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "docs:dev": "rm -rf .dumi && rm -rf node_modules/.cache && dumi dev",
-    "dev": "NODE_OPTIONS=\"--experimental-vm-modules\" jest -c ./jest.config.ts --watch",
+    "dev": "jest -c ./jest.config.ts --watch",
     "ok": "yarn tidy && yarn compile && yarn lint && yarn test && yarn readme && yarn format"
   },
   "devDependencies": {
