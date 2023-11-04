@@ -17,4 +17,10 @@ $ pnpm add @dumlj/vitrual-webpack-plugin -D
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/vitrual-webpack-plugin" target="_blank">@dumlj/vitrual-webpack-plugin</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin" target="_blank">@dumlj/seed-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a></pre>

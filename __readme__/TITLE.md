@@ -1,3 +1,3 @@
-# {{alias}}
+# {{ alias }}
 
 {{ description }}

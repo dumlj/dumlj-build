@@ -46,5 +46,17 @@ See this docs website... 🤠
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/stackblitz-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/stackblitz-webpack-plugin)
-- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz" target="_blank">@dumlj/dumi-plugin-node-stackblitz</a>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/stackblitz-webpack-plugin" target="_blank">@dumlj/stackblitz-webpack-plugin</a>
+│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin" target="_blank">@dumlj/seed-webpack-plugin</a>
+│ │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+│ │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a>
+│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed" target="_blank">@dumlj/dumi-plugin-seed</a>
+  └─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a></pre>

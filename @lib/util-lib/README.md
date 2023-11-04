@@ -16,3 +16,5 @@ $ pnpm add @dumlj/util-lib -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a></pre>

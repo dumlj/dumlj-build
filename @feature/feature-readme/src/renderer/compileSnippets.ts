@@ -1,4 +1,4 @@
-import { lookupFile } from './lookupFile'
+import { lookupFile } from '../utils/lookupFile'
 import { existsRender, getRender, updateRender } from './renderStore'
 
 export interface CompileSnippetsParams {
@@ -51,7 +51,7 @@ export const compileSnippets = async (params: CompileSnippetsParams) => {
   }
 
   return (context?: Record<string, any>) => {
-    const section = renders.map((fn) => fn(context))
+    const section = renders.map((render) => render(context))
     return section.join('\n')
   }
 }

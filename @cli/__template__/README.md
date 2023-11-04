@@ -17,5 +17,12 @@ $ pnpm add @template/cli -D
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-pretty](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty)
-- [@dumlj/seed-cli](https://github.com/dumlj/dumlj-build/tree/main/@cli/seed-cli)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/directory" target="_blank">@template/cli</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/seed-cli" target="_blank">@dumlj/seed-cli</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty" target="_blank">@dumlj/feature-pretty</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a></pre>

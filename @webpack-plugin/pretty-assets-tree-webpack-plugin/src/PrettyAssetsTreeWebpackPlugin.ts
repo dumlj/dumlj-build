@@ -3,7 +3,7 @@ import type { Compiler } from 'webpack'
 import path from 'path'
 import chalk from 'chalk'
 import micromatch from 'micromatch'
-import { mapFileToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
+import { mapFilesToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
 
 export interface PrettyAssetsTreeWebpackPluginOptions extends SeedWebpackPluginOptions {
   banner?: string
@@ -76,11 +76,11 @@ export class PrettyAssetsTreeWebpackPlugin extends SeedWebpackPlugin {
         return
       }
 
-      const tree = mapFileToOrbitTree(files)
-      stringifyOrbitTree(tree).forEach(({ orbit, file, isFile }) => {
-        const filename = path.basename(file)
-        const message = [`${orbit} ${chalk.cyan(filename)}`]
-        isFile && message.push(chalk.gray(path.join(output, file)))
+      const tree = mapFilesToOrbitTree(files)
+      stringifyOrbitTree(tree).forEach(({ orbit, content, isLatest }) => {
+        const label = content[content.length - 1]
+        const message = [`${orbit} ${chalk.cyan(label)}`]
+        isLatest && message.push(chalk.gray(path.join(output, content.join('/'))))
         messages.push(message.join(' '))
       })
 

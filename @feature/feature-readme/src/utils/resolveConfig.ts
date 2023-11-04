@@ -1,7 +1,7 @@
 import path from 'path'
 import { prepare } from '@dumlj/feature-prepare'
-import { DEFAULT_CONFIG_FILE_NAME, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_OUTPUT, DEFAULT_SNIPPETS } from './constants'
-import type { ReadmeConfiguration, ReadmeConfig } from './types'
+import { DEFAULT_CONFIG_FILE_NAME, DEFAULT_TEMPLATE_FILE_NAME, DEFAULT_OUTPUT, DEFAULT_SNIPPETS } from '../constants'
+import type { ReadmeConfiguration, ReadmeConfig } from '../types'
 
 /** global cache */
 const ConfigCache = new Map<string, ReadmeConfig>()

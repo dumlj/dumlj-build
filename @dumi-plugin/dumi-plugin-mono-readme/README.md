@@ -46,5 +46,12 @@ See this docs website... 🤠
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed)
-- [@dumlj/feature-readme](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-readme)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme" target="_blank">@dumlj/dumi-plugin-mono-readme</a>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@dumi-plugin/dumi-plugin-seed" target="_blank">@dumlj/dumi-plugin-seed</a>
+│ └─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-readme" target="_blank">@dumlj/feature-readme</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-prepare" target="_blank">@dumlj/feature-prepare</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a></pre>

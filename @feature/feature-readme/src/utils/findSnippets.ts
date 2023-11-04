@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { DEFAULT_TEMPLATE_FILE_NAME } from './constants'
+import { DEFAULT_TEMPLATE_FILE_NAME } from '../constants'
 
 export interface FindSnippetsOptions {
   /**

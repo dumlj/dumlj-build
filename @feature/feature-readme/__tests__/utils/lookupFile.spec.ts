@@ -1,11 +1,11 @@
 import path from 'path'
 import { vol } from 'memfs'
-import { lookupFile } from '@/lookupFile'
+import { lookupFile } from '@/utils/lookupFile'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
 
-describe('test actions/tidyReadme/lookupFile', () => {
+describe('test utils/lookupFile', () => {
   afterEach(() => {
     vol.reset()
   })

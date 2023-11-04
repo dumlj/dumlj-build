@@ -1,6 +1,7 @@
 import { Command } from 'commander'
 import { CLI_NAME, CLI_REGEXP } from '../constants/conf'
 import { findCommands, CACHE_TOKEN, CommandCache } from './findCommands'
+import { fail } from '@dumlj/feature-pretty'
 
 export const loadCommands = async () => {
   const cache = await CommandCache.read(CACHE_TOKEN)
@@ -40,7 +41,7 @@ export const loadCommands = async () => {
 
         return module
       } catch (error) {
-        // nothing todo...
+        fail(error)
       }
     })
   )

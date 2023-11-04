@@ -1,8 +1,10 @@
-import { resolveConfig } from './resolveConfig'
-import { resolveProject } from './resolveProject'
-import { findSnippets } from './findSnippets'
+import handlebars from 'handlebars'
+import { resolveConfig } from '../utils/resolveConfig'
+import { resolveProject } from '../utils/resolveProject'
+import { findSnippets } from '../utils/findSnippets'
 import { compileSnippets } from './compileSnippets'
-import { README_BANNER } from './constants'
+import { README_BANNER } from '../constants'
+import * as DEFAULT_HELPERS from '../helper'
 
 /** trim promise wrapper */
 export type TrimPromise<P> = P extends Promise<infer R> ? R : P
@@ -11,7 +13,7 @@ export interface Metadata extends TrimPromise<ReturnType<typeof resolveProject>>
   [K: string]: any
 }
 
-export interface CompileOptions {
+export interface CompileProjectOptions {
   /** 配置文件 */
   configFile?: string
   /** 执行路径/项目绝对路径 */
@@ -27,9 +29,9 @@ export interface CompileOptions {
 }
 
 /** 编译文档 */
-export const compile = async (location: string, options?: CompileOptions) => {
+export const compileProject = async (location: string, options?: CompileProjectOptions) => {
   const { configFile, cwd, banner = README_BANNER } = options || {}
-  const { template, snippets, helpers, metadatas } = await resolveConfig({ configFile, cwd })
+  const { template, helpers, snippets, metadatas } = await resolveConfig({ configFile, cwd })
 
   // 优先使用传入的 template
   // template of options first
@@ -41,7 +43,9 @@ export const compile = async (location: string, options?: CompileOptions) => {
 
   const info = await resolveProject(location, { cwd })
   return (data?: Partial<Metadata>) => {
-    const context = { location, ...info, ...helpers, ...metadatas, ...data }
+    const context = { location, ...info, ...metadatas, ...data }
+    Object.entries({ ...DEFAULT_HELPERS, ...helpers }).forEach(([name, fn]) => handlebars.registerHelper(name, fn.bind(null, context)))
+
     const codes = renderSnippets(context)
     const head = typeof banner === 'function' ? banner(context) : banner
     const content = [head].concat(codes)

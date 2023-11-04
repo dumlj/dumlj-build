@@ -60,4 +60,8 @@ export default connect(
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@vite-plugin/vite-plugin-seed" target="_blank">@dumlj/vite-plugin-seed</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib" target="_blank">@dumlj/shell-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib" target="_blank">@dumlj/util-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib" target="_blank">@dumlj/mock-lib</a></pre>

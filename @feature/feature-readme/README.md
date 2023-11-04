@@ -17,5 +17,4 @@ $ pnpm add @dumlj/feature-readme -D
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-prepare](https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-prepare)
-- [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib)
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-readme" target="_blank">@dumlj/feature-readme</a></pre>

@@ -1,11 +1,11 @@
 import { vol } from 'memfs'
-import { compileSnippets } from '@/compileSnippets'
-import { clearRender } from '@/renderStore'
+import { compileSnippets } from '@/renderer/compileSnippets'
+import { clearRender } from '@/renderer/renderStore'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
 
-describe('test actions/tidyReadme/compile', () => {
+describe('test renderer/compileSnippets', () => {
   afterEach(() => {
     clearRender()
     vol.reset()
@@ -13,14 +13,14 @@ describe('test actions/tidyReadme/compile', () => {
 
   it('will return render function', async () => {
     vol.fromJSON({
-      '/a/b/c/d/__readme__/TITLE.md': '# {{title}}',
+      '/a/b/c/d/__readme__/TITLE.md': '# {{ title }}',
     })
 
     const snippets = ['TITLE.md']
     const lookupPaths = ['/a/b/c/d/__readme__']
     const render = await compileSnippets({ snippets, lookupPaths })
     expect(typeof render === 'function').toBeTruthy()
-    expect(render({ title: 'hello world' })).toEqual('# hello world')
+    expect(await render({ title: 'hello world' })).toEqual('# hello world')
   })
 
   it('will return undefined when the file is not found', async () => {
@@ -40,6 +40,6 @@ describe('test actions/tidyReadme/compile', () => {
     const lookupPaths = ['/a/__readme__', '/a/b/c/d/__readme__']
     const render = await compileSnippets({ snippets, lookupPaths })
     expect(typeof render === 'function').toBeTruthy()
-    expect(render({ title: 'hello world' })).toEqual('# B')
+    expect(await render({ title: 'hello world' })).toEqual('# B')
   })
 })

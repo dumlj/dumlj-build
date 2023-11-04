@@ -16,3 +16,5 @@ $ pnpm add @dumlj/feature-prepare -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-prepare" target="_blank">@dumlj/feature-prepare</a></pre>
