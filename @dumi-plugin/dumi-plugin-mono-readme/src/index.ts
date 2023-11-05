@@ -51,8 +51,9 @@ export default createDumiPlugin<MonoReadmeOptions>('monoReadme', async (api, { g
       }
 
       vFile.data.embeds.push(...Array.from(state.keys()))
-      const ast = parseAST(render())
-      return ast
+
+      const code = render()
+      return parseAST(code)
     },
   })
 })

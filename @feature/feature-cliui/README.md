@@ -16,5 +16,3 @@ $ pnpm add @dumlj/feature-cliui -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-cliui" target="_blank">@dumlj/feature-cliui</a></pre>

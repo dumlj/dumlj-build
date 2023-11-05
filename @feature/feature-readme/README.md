@@ -16,5 +16,3 @@ $ pnpm add @dumlj/feature-readme -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-readme" target="_blank">@dumlj/feature-readme</a></pre>

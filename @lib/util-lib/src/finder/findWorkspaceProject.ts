@@ -10,6 +10,7 @@ export interface Project {
   location: string
   dependencies: string[]
   workspaceDependencies: string[]
+  isPrivate: boolean
 }
 
 export interface ProjectGraph extends Project {
@@ -54,7 +55,7 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
         }
 
         const source: PackageSource = await fs.readJson(pkg)
-        const { name, version, description } = source
+        const { name, version, description, private: isPrivate = false } = source
         const normalDependencies = Object.keys(source.dependencies || {})
         const devDependencies = Object.keys(source.devDependencies || {})
         const peerDependencies = Object.keys(source.peerDependencies || {})
@@ -64,7 +65,7 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
         const dependencies: string[] = uniq([].concat(normalDependencies, devDependencies, peerDependencies, optionalDependencies, bundleDependencies, bundledDependencies))
 
         const location = path.relative(cwd, src)
-        return { name, version, description, location, dependencies }
+        return { name, version, description, isPrivate, location, dependencies }
       })
     )
   )

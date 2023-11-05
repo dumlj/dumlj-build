@@ -16,5 +16,3 @@ $ pnpm add @dumlj/feature-updater -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater" target="_blank">@dumlj/feature-updater</a></pre>

@@ -16,5 +16,3 @@ $ pnpm add @dumlj/feature-pretty -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty" target="_blank">@dumlj/feature-pretty</a></pre>

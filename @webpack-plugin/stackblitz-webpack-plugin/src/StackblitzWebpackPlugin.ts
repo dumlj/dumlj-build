@@ -112,8 +112,8 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
             return findWorkspaceProject({ cwd: rootPath })
           }
 
-          const { name, version, description, dependencies } = await fs.readJson(path.join(context, 'package.json'))
-          return [{ name, version, description, location: context, dependencies, workspaceDependencies: [] }]
+          const { name, version, description, dependencies, private: isPrivate = false } = await fs.readJson(path.join(context, 'package.json'))
+          return [{ name, version, description, isPrivate, location: context, dependencies, workspaceDependencies: [] }]
         })()
 
         const projects = new Set<Project>()

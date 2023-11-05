@@ -16,5 +16,3 @@ $ pnpm add @template/feature -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/directory" target="_blank">@template/feature</a></pre>

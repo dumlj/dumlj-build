@@ -45,5 +45,3 @@ await s3.upload('hello world', { fileName: 'a.js', fileKey: 'a.hash.js' })
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-uploader" target="_blank">@dumlj/feature-uploader</a></pre>

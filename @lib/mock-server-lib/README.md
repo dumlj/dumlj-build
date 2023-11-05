@@ -16,5 +16,3 @@ $ pnpm add @dumlj/mock-server-lib -D
 ```
 
 ## INTERNAL DEPENDENCIES
-
-<pre style="font-family:monospace;"><a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-server-lib" target="_blank">@dumlj/mock-server-lib</a></pre>
