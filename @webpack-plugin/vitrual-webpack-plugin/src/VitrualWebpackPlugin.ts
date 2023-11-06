@@ -9,6 +9,8 @@ export interface VitrualWebpackPluginOptions extends SeedWebpackPluginOptions {
   writeToDisk?: boolean
   /** 初始时的文件 */
   files?: Record<string, string>
+  /** 清除文件 */
+  empty?: boolean
 }
 
 export class VitrualWebpackPlugin extends SeedWebpackPlugin {
@@ -32,7 +34,7 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
     this.readFromDisk = readFromDisk
     this.writeToDisk = writeToDisk
     this.files = {
-      'src/index.js': '',
+      ...(options?.empty ? {} : { 'src/index.js': '' }),
       ...files,
     }
   }

@@ -1,5 +1,5 @@
-import type { Class } from 'utility-types'
 import type { Compiler } from 'webpack'
+import type { Class } from 'utility-types'
 
 /** 基础插件配置项 */
 export interface SeedWebpackPluginOptions {

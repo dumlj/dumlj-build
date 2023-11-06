@@ -1,5 +1,5 @@
 ---
-title: Compile DTS for Webpack Plugin
+title: Compile DTS for webpack
 description: Compile dts files when webpack build.
 keywords: [dts, ts, typescript, types, webpack]
 ---

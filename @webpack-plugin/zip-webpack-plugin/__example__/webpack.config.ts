@@ -1,6 +1,6 @@
 import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
 import { ZipWebpackPlugin } from '@dumlj/zip-webpack-plugin'
-import { mapPathsToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
+import { mapFilesToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
 import { promisify } from 'util'
 import chalk from 'chalk'
 import JSZip from 'jszip'
@@ -42,8 +42,8 @@ const CONFIG: Configuration = {
           const jszip = new JSZip()
           const zip = await jszip.loadAsync(buffer)
           const files = Object.keys(zip.files)
-          const tree = mapPathsToOrbitTree(files)
-          const messages = [chalk.whiteBright.bold(main), ...stringifyOrbitTree(tree).map(({ orbit, file }) => [orbit, chalk.greenBright.bold(file)].join(' '))]
+          const tree = mapFilesToOrbitTree(files)
+          const messages = [chalk.whiteBright.bold(main), ...stringifyOrbitTree(tree).map(({ orbit, content }) => [orbit, chalk.greenBright.bold(content)].join(' '))]
           // eslint-disable-next-line no-console
           console.log(`\n${messages.join('\n')}\n`)
         })

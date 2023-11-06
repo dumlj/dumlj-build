@@ -1,4 +1,4 @@
 {
   "installDependencies": false,
-  "startCommand": "yarn install && yarn workspace @dumlj-example/seed-webpack-plugin run build"
+  "startCommand": "yarn install && yarn build"
 }

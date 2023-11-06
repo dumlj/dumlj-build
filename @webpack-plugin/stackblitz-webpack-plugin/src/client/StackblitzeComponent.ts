@@ -180,8 +180,15 @@ defineWebComponent(
        * Mainly for trimming dependencies and some redundant properties
        */
       if (isWorkspace) {
+        const source = tarballs.get(`${WS_DIR}/${name}/${PKG_FILE}`)
         const workspaces = [name, ...examples[name]].map((name) => `./${WS_DIR}/${name}`)
-        const newPkgSource = { name: title, version, description, license, private: true, workspaces }
+        const newPkgSource = { name: title, version, description, license, private: true, scripts: {}, workspaces }
+
+        const { scripts } = JSON.parse(source)
+        for (const [command] of Object.entries(scripts)) {
+          newPkgSource.scripts[command] = `npm run ${command} --prefix ${WS_DIR}/${name}`
+        }
+
         tarballs.set(PKG_FILE, JSON.stringify(newPkgSource, null, 2))
       }
 

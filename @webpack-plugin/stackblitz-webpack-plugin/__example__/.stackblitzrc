@@ -1,4 +1,4 @@
 {
   "installDependencies": false,
-  "startCommand": "yarn install && yarn workspace @dumlj-example/stackblitz-webpack-plugin serve"
+  "startCommand": "yarn install && yarn serve"
 }

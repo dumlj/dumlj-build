@@ -12,6 +12,11 @@ gh-pages
 *.tsbuildinfo
 tsconfig.build.json
 
+# Examples
+**/__example__/dist
+**/__example__/build
+**/__example__/src
+
 # Husky
 .husky
 

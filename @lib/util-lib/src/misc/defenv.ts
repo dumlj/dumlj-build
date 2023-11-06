@@ -20,6 +20,14 @@ export const defenv = <T extends Record<string, string> = Record<string, string>
       ...(Object.keys(raw).reduce((env, name) => {
         const key = JSON.stringify(name)
         const value = JSON.stringify(variables[name])
+
+        if (0 === name.indexOf('process.env.')) {
+          const key = JSON.stringify(name.replace('process.env.', ''))
+          const dynamicValue = render`${key} ${value}`
+          env[name] = dynamicValue
+          return env
+        }
+
         const dynamicValue = render`${key} ${value}`
         env[`process.env.${name}`] = dynamicValue
         return env
