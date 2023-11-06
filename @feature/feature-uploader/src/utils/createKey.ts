@@ -27,5 +27,5 @@ export const createKey = (file: string, options?: CreateKeyOptions) => {
   const { rootPath = '/', directory = rootPath, prefix = '' } = options || {}
   const absPath = path.isAbsolute(file) ? file : path.join(directory, file)
   const relativePath = path.isAbsolute(absPath) ? path.relative(rootPath, absPath) : absPath
-  return path.join(prefix, relativePath).replace(/\\/, '/')
+  return path.join(prefix, relativePath).replace(/\\/g, '/')
 }

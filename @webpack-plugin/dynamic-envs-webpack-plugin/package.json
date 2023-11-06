@@ -1,0 +1,32 @@
+{
+  "name": "@dumlj/dynamic-envs-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Dynamically getting environment variables.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@webpack-plugin/dynamic-envs-webpack-plugin"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "tslib": "^2.5.0",
+    "@dumlj/util-lib": "^0.0.1",
+    "lodash": "^4.17.21",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@types/webpack": "^5.28.4",
+    "ts-jest": "^29.1.1"
+  },
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

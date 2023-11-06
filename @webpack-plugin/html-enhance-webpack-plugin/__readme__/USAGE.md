@@ -1,7 +1,7 @@
-# HTML 替换插件
+## USAGE
 
 ```ts
-import { OneWebpackHtmlOverridePlugin } from '@dumlj/enhance-html-webpack-plugin'
+import { HtmlEnhanceWebpackPlugin } from '@dumlj/html-enhance-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const htmlWebpackPluginInstance = new HtmlWebpackPlugin()
@@ -10,12 +10,12 @@ export default {
   // ....
   plugins: [
     htmlWebpackPluginInstance,
-    new OneWebpackHtmlOverridePlugin({
-      /** output */
+    new HtmlEnhanceWebpackPlugin({
+      /** html filename of output */
       htmlNS: 's3',
-      /** HtmlWebpackPlugin 插件 **/
+      /** html-webpack-plugin **/
       HtmlWebpackPlugin: HtmlWebpackPlugin,
-      /** HtmlWebpackPlugin 实例 */
+      /** instance of html-webpack-plugin */
       htmlWebpackPluginInstance: htmlWebpackPluginInstance,
     }),
   ],

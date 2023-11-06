@@ -24,7 +24,7 @@ export interface OverrideAsset {
 export type OverrideAssetCallback = (asset: OverrideAsset) => OverrideAsset
 
 /** 插件必要参数 */
-export interface EnhanceHtmlWebpackPluginParams {
+export interface HtmlEnhanceWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 输出的 HTML 文件名 */
   htmlNS: string
   /**
@@ -36,22 +36,17 @@ export interface EnhanceHtmlWebpackPluginParams {
   htmlWebpackPluginInstance: HtmlWebpackPlugin
 }
 
-export interface EnhanceHtmlWebpackPluginOptions extends SeedWebpackPluginOptions {}
+export class HtmlEnhanceWebpackPlugin extends SeedWebpackPlugin<HtmlEnhanceWebpackPluginOptions> {
+  static PLUGIN_NAME = 'html-enhance-webpack-plugin'
 
-export class EnhanceHtmlWebpackPlugin extends SeedWebpackPlugin {
-  static PLUGIN_NAME = 'enhance-html-webpack-plugin'
-
-  /** 输出的 HTML 文件名 */
   public htmlNS: string
-  /** HtmlWebpackPlugin 插件 */
   public htmlWebpackPluginInstance: HtmlWebpackPlugin
-  /** HtmlWebpackPlugin 实例 */
   public HtmlWebpackPlugin: typeof HtmlWebpackPlugin
 
-  constructor(params: EnhanceHtmlWebpackPluginParams, options?: EnhanceHtmlWebpackPluginOptions) {
+  constructor(options: HtmlEnhanceWebpackPluginOptions) {
     super(options)
 
-    const { htmlNS, HtmlWebpackPlugin: Plugin, htmlWebpackPluginInstance: instance } = this.dismantleHtmlWebpackPlugin(params)
+    const { htmlNS, HtmlWebpackPlugin: Plugin, htmlWebpackPluginInstance: instance } = this.dismantleHtmlWebpackPlugin(options)
     this.htmlNS = htmlNS
     this.htmlWebpackPluginInstance = instance
     this.HtmlWebpackPlugin = Plugin
@@ -71,7 +66,7 @@ export class EnhanceHtmlWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 将 HtmlWebpackPlugin 拆解成 htmlNS, HtmlWebpackPlugin, htmlWebpackPluginInstance */
-  protected dismantleHtmlWebpackPlugin(params: Partial<EnhanceHtmlWebpackPluginParams>) {
+  protected dismantleHtmlWebpackPlugin(params: Partial<Pick<HtmlEnhanceWebpackPluginOptions, 'htmlNS' | 'HtmlWebpackPlugin' | 'htmlWebpackPluginInstance'>>) {
     const { htmlWebpackPluginInstance } = params
     let { htmlNS, HtmlWebpackPlugin } = params
 
