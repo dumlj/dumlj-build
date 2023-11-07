@@ -257,7 +257,7 @@ defineWebComponent(
           position: 'relative',
           width: '100%',
           height: '100%',
-          fontSize: '0.6vw',
+          fontSize: '0.8em',
           backgroundImage: `
               linear-gradient(
                 45deg, rgba(200,200,200,.1) 25%,

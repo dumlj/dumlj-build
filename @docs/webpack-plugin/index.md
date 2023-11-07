@@ -5,4 +5,4 @@ nav:
   order: 1
 ---
 
-# Webpack Plugin
+# Webpack Plugin Collection

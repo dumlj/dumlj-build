@@ -5,4 +5,4 @@ nav:
   order: 2
 ---
 
-# Vite Plugin
+# Vite Plugin Collection

@@ -44,16 +44,16 @@ export default {
 
 After execution, please check the `console` or `./build` directory.
 
-<dumlj-stackblitz height="800px" src="@dumlj-example/dts-webpack-plugin"></dumlj-stackblitz>
+<dumlj-stackblitz height="47vw" src="@dumlj-example/dts-webpack-plugin"></dumlj-stackblitz>
 
 ## INTERNAL DEPENDENCIES
 
 <pre>
 <b>@dumlj/dts-webpack-plugin</b>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/seed-webpack-plugin</a>
-  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/feature-updater</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/shell-lib</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/util-lib</a>
-  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
 </pre>

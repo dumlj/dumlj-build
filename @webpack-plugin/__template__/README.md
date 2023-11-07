@@ -19,10 +19,10 @@ $ pnpm add @template/webpack-plugin -D
 
 <pre>
 <b>@template/webpack-plugin</b>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/seed-webpack-plugin</a>
-  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/feature-updater</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/shell-lib</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/util-lib</a>
-  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/directory">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
 </pre>

@@ -2,7 +2,6 @@
   "name": "@dumlj/feature-dotenv",
   "version": "0.0.1",
   "description": "dotenv utilities.",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

@@ -9,7 +9,7 @@ const stringify = ({ name, internalDependencies }: TreeProject, parent?: string[
 
 export const dependencies = (context: Context) => {
   const { name, repository, dependencies, projects } = context
-  const { url, directory } = repository
+  const { url } = repository
 
   const paths = dependencies.flatMap((project) => stringify(project))
   const tree = mapPathsToOrbitTree(paths)
@@ -17,9 +17,9 @@ export const dependencies = (context: Context) => {
   const messages = stringifyOrbitTree(tree).map(({ orbit, content }) => {
     const name = content.pop()
     const project = projects.find((project) => project.name === name)
-    const { isPrivate } = project
+    const { location, isPrivate } = project
 
-    const contentHTML = `<a href="${url}/tree/main/${directory}">${name}</a>`
+    const contentHTML = `<a href="${url}/tree/main/${location}">${name}</a>`
     const extraHTML = isPrivate ? '<sup><small><i>PRIVATE</i></small></sup>' : ''
     return `${orbit} ${contentHTML}${extraHTML}`
   })

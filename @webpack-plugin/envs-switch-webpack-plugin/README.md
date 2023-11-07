@@ -55,32 +55,32 @@ export default {
 
 ## LIVE DEMO
 
-<dumlj-stackblitz height="800px" src="@dumlj-example/envs-switch-webpack-plugin"></dumlj-stackblitz>
+<dumlj-stackblitz height="47vw" src="@dumlj-example/envs-switch-webpack-plugin"></dumlj-stackblitz>
 
 ## INTERNAL DEPENDENCIES
 
 <pre>
 <b>@dumlj/envs-switch-webpack-plugin</b>
-├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/seed-webpack-plugin</a>
-│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/feature-updater</a>
-│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/shell-lib</a>
-│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/util-lib</a>
-│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/compare-envs-webpack-plugin</a><sup><small><i>PRIVATE</i></small></sup>
-│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/seed-webpack-plugin</a>
-│ │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/feature-updater</a>
-│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/shell-lib</a>
-│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/util-lib</a>
-│ │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/feature-dotenv</a><sup><small><i>PRIVATE</i></small></sup>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/dynamic-envs-webpack-plugin</a>
-  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/seed-webpack-plugin</a>
-  │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/feature-updater</a>
-  │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/shell-lib</a>
-  │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/util-lib</a>
-  │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/envs-switch-webpack-plugin">@dumlj/util-lib</a>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/compare-envs-webpack-plugin">@dumlj/compare-envs-webpack-plugin</a><sup><small><i>PRIVATE</i></small></sup>
+│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+│ │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+│ │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-dotenv">@dumlj/feature-dotenv</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dynamic-envs-webpack-plugin">@dumlj/dynamic-envs-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+  │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
 </pre>

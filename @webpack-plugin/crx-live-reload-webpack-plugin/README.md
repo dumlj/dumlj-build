@@ -61,16 +61,16 @@ Since I can't Mock Chrome, please open the console to view the logs.😅 And try
 
 Webpack DevServer port is `8080`, Static Server port is `3000`. In real environment, Chrome Extension will mount `./build` folder.
 
-<dumlj-stackblitz height="800px" src="@dumlj-example/crx-live-reload-webpack-plugin"></dumlj-stackblitz>
+<dumlj-stackblitz height="47vw" src="@dumlj-example/crx-live-reload-webpack-plugin"></dumlj-stackblitz>
 
 ## INTERNAL DEPENDENCIES
 
 <pre>
 <b>@dumlj/crx-live-reload-webpack-plugin</b>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/seed-webpack-plugin</a>
-  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/feature-updater</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/shell-lib</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/util-lib</a>
-  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/crx-live-reload-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
 </pre>

@@ -62,8 +62,8 @@ export default connect(
 
 <pre>
 <b>@dumlj/vite-plugin-seed</b>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@vite-plugin/vite-plugin-seed">@dumlj/feature-updater</a>
-  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@vite-plugin/vite-plugin-seed">@dumlj/shell-lib</a>
-  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@vite-plugin/vite-plugin-seed">@dumlj/util-lib</a>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@vite-plugin/vite-plugin-seed">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
 </pre>

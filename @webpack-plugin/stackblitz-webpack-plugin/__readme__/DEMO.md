@@ -1,3 +1,3 @@
 ## LIVE DEMO
 
-<dumlj-stackblitz height="800px" src="@dumlj-example/stackblitz-webpack-plugin"></dumlj-stackblitz>
+<dumlj-stackblitz height="47vw" src="@dumlj-example/stackblitz-webpack-plugin"></dumlj-stackblitz>

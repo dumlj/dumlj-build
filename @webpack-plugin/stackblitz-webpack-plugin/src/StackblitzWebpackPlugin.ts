@@ -31,6 +31,8 @@ export interface StackblitzWebpackPluginOptions extends SeedWebpackPluginOptions
   test?: (name: string, project: Project) => boolean
   /** custom html tag (default <dumlj-stackblitz></dumlj-stackblitz>) */
   customElement?: string
+  /** custom element file path */
+  customComponent?: string
 }
 
 export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
@@ -41,6 +43,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   protected files: string[]
   protected test?: (name: string, project: Project) => boolean
   protected customElement?: string
+  protected customComponent?: string
 
   constructor(options?: StackblitzWebpackPluginOptions) {
     super(options)
@@ -50,6 +53,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
     this.ignored = Array.from(new Set([].concat(options?.ignored || [], IGNORED_PATTERNS)))
     this.test = typeof options?.test === 'function' ? options?.test : (name) => /-example\//.test(name)
     this.customElement = options?.customElement || HTML_TAG
+    this.customComponent = options?.customElement || path.join(__dirname, 'client')
   }
 
   /** collect project and zip tarballs */
@@ -227,7 +231,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
         __STACKBLITZ_HTML_TAG__: JSON.stringify(this.customElement),
         __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath),
       }),
-      new webpack.EntryPlugin(context, path.join(__dirname, 'client'), {
+      new webpack.EntryPlugin(context, this.customComponent, {
         filename: 'dumlj.stackblitz-webpack-plugin.js',
       }),
     ]

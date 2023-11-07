@@ -4,16 +4,6 @@
 
 Convenient tool for project creation.
 
-## FEATURE
-
-### INSTALL
-
-#### Husky
-
-- Compatible with some GUIs (GitKargen) that will not use `git config core.hooksPath` as a hook, causing hooks to be skipped
-- Compatible with some GUIs (SourceTree) and cannot obtain environment paths such as `Node` and `Yarn`
-- Compatible with `Windows` platform
-
 ## INSTALL
 
 ```bash
@@ -29,12 +19,12 @@ $ pnpm add @dumlj/create-cli -D
 
 <pre>
 <b>@dumlj/create-cli</b>
-└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/seed-cli</a>
-  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/feature-updater</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/shell-lib</a>
-  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/util-lib</a>
-  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
-  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/feature-pretty</a>
-  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/shell-lib</a>
-  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/create-cli">@dumlj/util-lib</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@cli/seed-cli">@dumlj/seed-cli</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-pretty">@dumlj/feature-pretty</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
 </pre>

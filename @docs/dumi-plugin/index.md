@@ -5,4 +5,4 @@ nav:
   order: 3
 ---
 
-# Dumi Plugin
+# Dumi Plugin Collection

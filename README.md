@@ -2,4 +2,4 @@
 
 # Dumlj Build
 
-详细内容请查看[文档](https://dumlj.github.io/dumlj-build/docs)
+[DOCS 👀](https://dumlj.github.io/dumlj-build/docs)

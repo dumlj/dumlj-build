@@ -8,7 +8,7 @@ docs-dist
 coverage
 junit.xml
 gh-pages
-.dumi
+.dumi/tmp*
 *.tsbuildinfo
 tsconfig.build.json
 
