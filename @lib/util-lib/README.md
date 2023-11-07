@@ -16,3 +16,8 @@ $ pnpm add @dumlj/util-lib -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/util-lib</b>
+
+</pre>

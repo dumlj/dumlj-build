@@ -16,3 +16,8 @@ $ pnpm add @dumlj/mock-lib -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/mock-lib</b>
+
+</pre>

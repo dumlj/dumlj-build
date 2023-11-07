@@ -16,3 +16,8 @@ $ pnpm add @template/feature -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@template/feature</b>
+
+</pre>

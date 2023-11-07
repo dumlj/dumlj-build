@@ -46,11 +46,14 @@ See this docs website... 🤠
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)<sup><small>PRIVATE</small></sup>
-  - [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
-    - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
-    - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
-    - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)<sup><small>PRIVATE</small></sup>
-- [@dumlj/feature-readme](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
-  - [@dumlj/feature-prepare](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
-  - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme)
+<pre>
+<b>@dumlj/dumi-plugin-mono-readme</b>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/dumi-plugin-seed</a><sup><small><i>PRIVATE</i></small></sup>
+│ └─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/feature-updater</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/shell-lib</a>
+│ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/util-lib</a>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/feature-readme</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/feature-prepare</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-mono-readme">@dumlj/util-lib</a>
+</pre>

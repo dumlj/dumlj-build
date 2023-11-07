@@ -46,16 +46,19 @@ See this docs website... 🤠
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/stackblitz-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-  - [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-    - [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-      - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-      - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-      - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)<sup><small>PRIVATE</small></sup>
-    - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)<sup><small>PRIVATE</small></sup>
-  - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-- [@dumlj/dumi-plugin-seed](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)<sup><small>PRIVATE</small></sup>
-  - [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-    - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-    - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)
-    - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz)<sup><small>PRIVATE</small></sup>
+<pre>
+<b>@dumlj/dumi-plugin-node-stackblitz</b>
+├─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/stackblitz-webpack-plugin</a>
+│ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/seed-webpack-plugin</a>
+│ │ ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/feature-updater</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/shell-lib</a>
+│ │ │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/util-lib</a>
+│ │ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+│ │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+│ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/util-lib</a>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/dumi-plugin-seed</a><sup><small><i>PRIVATE</i></small></sup>
+  └─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-node-stackblitz">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>

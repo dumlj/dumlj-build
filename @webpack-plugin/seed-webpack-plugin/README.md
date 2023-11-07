@@ -65,7 +65,10 @@ export class CustomWebpackPlugin extends SeedWebpackPlugin {
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
-  - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
-  - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)
-  - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)<sup><small>PRIVATE</small></sup>
+<pre>
+<b>@dumlj/seed-webpack-plugin</b>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/feature-updater</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/shell-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/util-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>

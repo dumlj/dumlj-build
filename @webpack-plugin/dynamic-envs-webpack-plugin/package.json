@@ -2,7 +2,6 @@
   "name": "@dumlj/dynamic-envs-webpack-plugin",
   "version": "0.0.1",
   "description": "Dynamically getting environment variables.",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",

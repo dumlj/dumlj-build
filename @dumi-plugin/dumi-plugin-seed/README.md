@@ -17,7 +17,10 @@ $ pnpm add @dumlj/dumi-plugin-seed -D
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed)
-  - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed)
-  - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed)
-  - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed)<sup><small>PRIVATE</small></sup>
+<pre>
+<b>@dumlj/dumi-plugin-seed</b>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed">@dumlj/feature-updater</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed">@dumlj/shell-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed">@dumlj/util-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dumi-plugin-seed">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>

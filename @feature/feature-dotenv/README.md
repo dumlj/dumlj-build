@@ -16,3 +16,8 @@ $ pnpm add @dumlj/feature-dotenv -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/feature-dotenv</b>
+
+</pre>

@@ -17,7 +17,10 @@ $ pnpm add @dumlj/seed-cli -D
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@services/updater)
-  - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@services/updater)
-  - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@services/updater)
-  - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@services/updater)<sup><small>PRIVATE</small></sup>
+<pre>
+<b>@dumlj/seed-cli</b>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@services/updater">@dumlj/feature-updater</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@services/updater">@dumlj/shell-lib</a>
+  ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@services/updater">@dumlj/util-lib</a>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@services/updater">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>

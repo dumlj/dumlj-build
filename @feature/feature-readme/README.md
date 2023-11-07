@@ -16,3 +16,8 @@ $ pnpm add @dumlj/feature-readme -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/feature-readme</b>
+
+</pre>

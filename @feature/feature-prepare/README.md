@@ -16,3 +16,8 @@ $ pnpm add @dumlj/feature-prepare -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/feature-prepare</b>
+
+</pre>

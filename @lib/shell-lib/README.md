@@ -16,3 +16,8 @@ $ pnpm add @dumlj/shell-lib -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/shell-lib</b>
+
+</pre>

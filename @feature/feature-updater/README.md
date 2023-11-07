@@ -16,3 +16,8 @@ $ pnpm add @dumlj/feature-updater -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/feature-updater</b>
+
+</pre>

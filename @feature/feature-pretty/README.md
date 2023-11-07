@@ -16,3 +16,8 @@ $ pnpm add @dumlj/feature-pretty -D
 ```
 
 ## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/feature-pretty</b>
+
+</pre>

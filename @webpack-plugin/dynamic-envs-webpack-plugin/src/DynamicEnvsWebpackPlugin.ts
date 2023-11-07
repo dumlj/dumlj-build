@@ -27,7 +27,13 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
   protected globalThis: string
   protected globalThisProp: string
   protected globalThisFn: string
-  protected scriptPath: string
+
+  /**
+   * 脚本路径
+   * @description
+   * 特殊入口需要用到，例如 workbox
+   */
+  public scriptPath: string
 
   /**
    * 是否已经注入

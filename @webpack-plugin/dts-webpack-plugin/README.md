@@ -48,9 +48,12 @@ After execution, please check the `console` or `./build` directory.
 
 ## INTERNAL DEPENDENCIES
 
-- [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)
-  - [@dumlj/feature-updater](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)
-    - [@dumlj/shell-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)
-    - [@dumlj/util-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)
-    - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)<sup><small>PRIVATE</small></sup>
-  - [@dumlj/mock-lib](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin)<sup><small>PRIVATE</small></sup>
+<pre>
+<b>@dumlj/dts-webpack-plugin</b>
+└─┬ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/seed-webpack-plugin</a>
+  ├─┬─ <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/feature-updater</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/shell-lib</a>
+  │ ├─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/util-lib</a>
+  │ └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+  └─── <a href="https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/dts-webpack-plugin">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>
