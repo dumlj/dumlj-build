@@ -1,0 +1,24 @@
+{
+  "name": "@dumlj-example/compare-envs-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "serve": "webpack serve -c webpack.config.ts",
+    "build": "webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/compare-envs-webpack-plugin": "^0.0.1",
+    "@dumlj/vitrual-webpack-plugin": "0.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}

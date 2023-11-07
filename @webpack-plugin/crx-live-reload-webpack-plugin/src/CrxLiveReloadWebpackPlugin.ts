@@ -56,7 +56,7 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 重写 DevServer */
-  protected applyOverrideDevServer(compiler: Compiler) {
+  public applyOverrideDevServer(compiler: Compiler) {
     const liveReloadHandler = this.withCros((req, res) => {
       // 添加 Client
       const id = (Date.now() + Math.floor(Math.random() * 1e13)).toString(32)
@@ -99,7 +99,7 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 注入模块 */
-  protected applyLiveReloadInject(compiler: Compiler) {
+  public applyLiveReloadInject(compiler: Compiler) {
     const { webpack } = compiler
     const injectModule = (name: string, file: string) => {
       const entry = compiler.options.entry[name]
@@ -139,7 +139,7 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 注册服务 */
-  protected applyLiveReloadSender(compiler: Compiler) {
+  public applyLiveReloadSender(compiler: Compiler) {
     compiler.hooks.afterDone.tap(this.pluginName, () => {
       this.sendMessage(SSE_RELOAD_TOKEN)
     })

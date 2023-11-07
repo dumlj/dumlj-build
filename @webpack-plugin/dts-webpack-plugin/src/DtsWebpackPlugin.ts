@@ -93,7 +93,7 @@ export class DtsWebpackPlugin extends SeedWebpackPlugin {
    * 这里要使用到
    * @see https://github.com/nonara/ts-patch#setup
    */
-  protected applyPreinstallTsPatch(compiler: Compiler) {
+  public applyPreinstallTsPatch(compiler: Compiler) {
     if (!this.supportAlias) {
       return
     }
@@ -119,7 +119,7 @@ export class DtsWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 收集 .ts 文件 */
-  protected applyCollectTsFiles(compiler: Compiler) {
+  public applyCollectTsFiles(compiler: Compiler) {
     const extnames = ['.ts', '.tsx']
     compiler.resolverFactory.hooks.resolver.for('normal').tap('name', (resolver) => {
       resolver.hooks.result.tap(this.pluginName, (result) => {
@@ -133,7 +133,7 @@ export class DtsWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 执行编译 */
-  protected applyCompile(compiler: Compiler) {
+  public applyCompile(compiler: Compiler) {
     const { webpack } = compiler
 
     compiler.hooks.thisCompilation.tap(this.pluginName, (compilation) => {

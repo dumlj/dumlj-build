@@ -60,7 +60,9 @@ export const validateDotEnv = async (files: string[]) => {
 
   const invalids: string[] = []
   const { missing, variables, files: fileMap } = await findMissingVariables(files)
-  invalids.push(...missing.map(({ file, variables }) => (variables.length > 0 ? `文件 ${path.relative(cwd, file)} 缺少环境变量: ${variables.join(', ')}` : '')).filter(Boolean))
+  invalids.push(
+    ...missing.map(({ file, variables }) => (variables.length > 0 ? `File ${path.relative(cwd, file)} lacks environment variables: ${variables.join(', ')}` : '')).filter(Boolean)
+  )
 
   const missingVariables = Array.from(new Set(Object.values(missing).flatMap(({ variables }) => variables)))
   invalids.push(
@@ -71,7 +73,7 @@ export const validateDotEnv = async (files: string[]) => {
         return `${path.relative(cwd, file)}:${line}`
       })
 
-      return `环境变量 ${name} 存在于 ${files.join(', ')}`
+      return `The environment variable ${name} exists in ${files.join(', ')}`
     })
   )
 

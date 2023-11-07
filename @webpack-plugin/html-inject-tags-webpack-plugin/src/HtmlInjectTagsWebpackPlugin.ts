@@ -53,7 +53,7 @@ export class HtmlInjectTagsWebpackPlugin extends HtmlEnhanceWebpackPlugin {
   }
 
   /** 注入 Tags */
-  protected applyInjectTags(compiler: Compiler) {
+  public applyInjectTags(compiler: Compiler) {
     this.htmlWebpackPluginInstance && this.htmlWebpackPluginInstance.apply(compiler)
 
     this.overrideAssets(compiler, (data) => {

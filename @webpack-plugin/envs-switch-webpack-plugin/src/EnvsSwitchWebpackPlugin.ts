@@ -58,14 +58,14 @@ export class EnvsSwitchWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** compare difference dotenv files */
-  protected applyCompare(compiler: Compiler) {
+  public applyCompare(compiler: Compiler) {
     const Compare = this.use(CompareEnvsWebpackPlugin)
     const compare = path.join(this.dotenvFolder, '*.env')
     new Compare({ compare, skipCompareDevMode: this.skipCompareDevMode }).apply(compiler)
   }
 
   /** inject envs into entry */
-  protected applyInjectEnvs(compiler: Compiler) {
+  public applyInjectEnvs(compiler: Compiler) {
     const { context } = compiler
     const outputPath = compiler.outputPath || 'dist'
 
@@ -114,7 +114,7 @@ export class EnvsSwitchWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** generate switch script */
-  protected applySwitchScript(compiler: Compiler) {
+  public applySwitchScript(compiler: Compiler) {
     const { context, webpack } = compiler
     const outputPath = compiler.outputPath || 'dist'
 

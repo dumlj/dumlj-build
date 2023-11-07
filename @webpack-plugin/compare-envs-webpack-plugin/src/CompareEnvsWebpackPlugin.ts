@@ -38,7 +38,11 @@ export class CompareEnvsWebpackPlugin extends SeedWebpackPlugin {
       return []
     }
 
-    return glob(pattern, { cwd: context, absolute: true })
+    try {
+      return glob(pattern, { cwd: context, absolute: true })
+    } catch (error) {
+      return
+    }
   }
 
   public applyCompare(compiler: Compiler) {
@@ -48,8 +52,17 @@ export class CompareEnvsWebpackPlugin extends SeedWebpackPlugin {
 
     const compare = async () => {
       const files = await this.lookupDotenvFiles(this.compare)
+      if (files.length === 0) {
+        this.logger.warn('Not found any dotenv files.')
+        return true
+      }
+
       const invalids = await validateDotEnv(files)
-      return invalids.length > 0 ? `环境变量(dotenv)配置错误 \n - ${invalids.join('\n - ')}` : true
+      return invalids.length > 0
+        ? `The environment variables (dotenv) is incorrectly configured \n - ${invalids.join(
+            '\n - '
+          )} \nPlease set the missing envs to empty string in the above file. e.g \`ABC=\``
+        : true
     }
 
     if (mode === 'production') {

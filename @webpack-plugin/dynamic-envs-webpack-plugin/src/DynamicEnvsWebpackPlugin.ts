@@ -51,7 +51,7 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
   public update() {}
 
   /** 注入模块 */
-  protected applyInject(compiler: Compiler) {
+  public applyInject(compiler: Compiler) {
     const { options } = compiler
     options.resolve.fallback = {
       ...options.resolve.fallback,
@@ -75,7 +75,7 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
   }
 
   /** 注入变量 */
-  protected applyDefine(compiler: Compiler) {
+  public applyDefine(compiler: Compiler) {
     const { webpack, options } = compiler
     const { DefinePlugin } = webpack
 

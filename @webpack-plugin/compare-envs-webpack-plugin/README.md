@@ -15,6 +15,25 @@ $ yarn add --dev @dumlj/compare-envs-webpack-plugin
 $ pnpm add @dumlj/compare-envs-webpack-plugin -D
 ```
 
+## USAGE
+
+```ts
+import { CompareEnvsWebpackPlugin } from '@dumlj/compare-envs-webpack-plugin'
+
+export default {
+  // ...
+  plugins: [
+    new CompareEnvsWebpackPlugin({
+      compare: ['dotenv/*.env'],
+    }),
+  ],
+}
+```
+
+## LIVE DEMO
+
+<dumlj-stackblitz height="800px" src="@dumlj-example/compare-envs-webpack-plugin"></dumlj-stackblitz>
+
 ## INTERNAL DEPENDENCIES
 
 - [@dumlj/seed-webpack-plugin](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/compare-envs-webpack-plugin)

@@ -37,7 +37,7 @@ export class PrettyAssetsTreeWebpackPlugin extends SeedWebpackPlugin {
     this.exclude = Array.isArray(exclude) ? exclude : typeof exclude === 'string' ? [exclude] : []
   }
 
-  protected applyPrint(compiler: Compiler) {
+  public applyPrint(compiler: Compiler) {
     compiler.hooks.afterDone.tap(this.pluginName, (stats) => {
       if (stats.hasErrors()) {
         return
