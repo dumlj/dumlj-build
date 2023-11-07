@@ -1,4 +1,5 @@
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
+import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
 import { findWorkspaceProject, findWorkspaceRootPath, type Project } from '@dumlj/util-lib'
 import fs from 'fs-extra'
 import path from 'path'
@@ -223,20 +224,15 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
 
   /** inject client script */
   public applyClient(compiler: Compiler) {
-    const { context, webpack } = compiler
+    const { webpack } = compiler
     const finalPublicPath = this.manifest
 
-    const plugins = [
-      new webpack.DefinePlugin({
-        __STACKBLITZ_HTML_TAG__: JSON.stringify(this.customElement),
-        __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath),
-      }),
-      new webpack.EntryPlugin(context, this.customComponent, {
-        filename: 'dumlj.stackblitz-webpack-plugin.js',
-      }),
-    ]
+    new webpack.DefinePlugin({
+      __STACKBLITZ_HTML_TAG__: JSON.stringify(this.customElement),
+      __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath),
+    }).apply(compiler)
 
-    plugins.forEach((instance) => instance.apply(compiler))
+    new InjectEntryScriptWebpackPlugin(this.customComponent).apply(compiler)
   }
 
   public apply(compiler: Compiler) {

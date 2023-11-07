@@ -1,5 +1,5 @@
 ---
-title: Feature
+title: Feature Collection
 nav:
   title: Feature
   order: 8

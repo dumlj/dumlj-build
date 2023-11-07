@@ -1,4 +1,6 @@
+import path from 'path'
 import { createDumiPlugin } from '@dumlj/dumi-plugin-seed'
+import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
 import { store, compileWorkspace, type CompileWorkspaceOptions, DEFAULT_TEMPLATE_FILE_NAME } from '@dumlj/feature-readme'
 
 export interface MonoReadmeOptions extends Omit<CompileWorkspaceOptions, 'cwd' | 'config'> {
@@ -33,6 +35,14 @@ export default createDumiPlugin<MonoReadmeOptions>('monoReadme', async (api, { g
           await Promise.all(files.map((file) => store.updateRender(file)))
         }
       })
+    },
+  })
+
+  pushWebpackPlugin(`${name}/webComponent`, {
+    apply(compiler) {
+      const { webpack } = compiler
+      new webpack.DefinePlugin({ __OUTPUT_PATH__: JSON.stringify(api.userConfig.outputPath) }).apply(compiler)
+      new InjectEntryScriptWebpackPlugin(path.join(__dirname, 'web-components/link')).apply(compiler)
     },
   })
 

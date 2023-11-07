@@ -1,5 +1,5 @@
 ---
-title: Cli
+title: Cli Collection
 nav:
   title: Cli
   order: 1

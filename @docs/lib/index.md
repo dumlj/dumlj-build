@@ -1,5 +1,5 @@
 ---
-title: Lib
+title: Lib Collection
 nav:
   title: Lib
   order: 9

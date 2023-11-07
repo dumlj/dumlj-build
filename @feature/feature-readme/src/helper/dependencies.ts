@@ -19,7 +19,7 @@ export const dependencies = (context: Context) => {
     const project = projects.find((project) => project.name === name)
     const { location, isPrivate } = project
 
-    const contentHTML = `<a href="${url}/tree/main/${location}">${name}</a>`
+    const contentHTML = `<a is="dumlj-link" data-project="${encodeURI(JSON.stringify(project))}" ${url ? `href="${url}/tree/main/${location}"` : ''}>${name}</a>`
     const extraHTML = isPrivate ? '<sup><small><i>PRIVATE</i></small></sup>' : ''
     return `${orbit} ${contentHTML}${extraHTML}`
   })

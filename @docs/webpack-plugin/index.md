@@ -1,5 +1,5 @@
 ---
-title: Webpack Plugin
+title: Webpack Plugin Collection
 nav:
   title: Webpack Plugin
   order: 1

@@ -1,5 +1,5 @@
 ---
-title: Seed Plugin
+title: SeedWebpackPlugin
 group:
   title: Basic
   order: 999
