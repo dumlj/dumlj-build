@@ -1,19 +1,21 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
-[![Static Badge](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/html-inject-envs-webpack-plugin)&nbsp;
+[![Github Repo](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/html-inject-envs-webpack-plugin)&nbsp;
 [![codecov](https://codecov.io/gh/dumlj/dumlj-build/graph/badge.svg?token=ELV5W1H0C0)](https://codecov.io/gh/dumlj/dumlj-build)&nbsp;
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-&nbsp;<a href="https://badge.fury.io/js/@dumlj/html-inject-envs-webpack-plugin">
-<picture>
-
-<source src="https://badge.fury.io/js/@dumlj/html-inject-envs-webpack-plugin.svg">
-<img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c">
-</picture>
-</a>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&nbsp;
+<a href="https://www.npmjs.com/package/@dumlj/html-inject-envs-webpack-plugin"><picture><source src="https://badge.fury.io/js/@dumlj/html-inject-envs-webpack-plugin.svg"><img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version"></picture></a>&nbsp;
 
 # Html Inject Envs Webpack Plugin
 
 Dynamically inject envs into html files via script tag.
+
+## BACKGROUND
+
+When we need to insert some variables, we generally consider inserting the variables into HTML through the `script` tag instead of inserting them directly into JS files, so that different variables can be obtained according to different HTML entries.
+
+This plugin is a convenient plugin based on `html-webpack-plugin`, so be sure to pass in the class and instance of `html-webpack-plugin`. The plugin will only use the version of the '`html-webpack-plugin`' you use.
+
+**The plugin itself is generally only used as the basic capability of other upper-level plug-ins in this project.**
 
 ## INSTALL
 
@@ -24,6 +26,36 @@ $ npm install --dev @dumlj/html-inject-envs-webpack-plugin
 $ yarn add --dev @dumlj/html-inject-envs-webpack-plugin
 # use pnpm
 $ pnpm add @dumlj/html-inject-envs-webpack-plugin -D
+```
+
+## USAGE
+
+```ts
+import { HtmlInjectEnvsWebpackPlugin } from '@dumlj/html-inject-envs-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+
+const htmlWebpackPluginInstance = new HtmlWebpackPlugin()
+
+export default {
+  // ...
+  plugins: [
+    htmlWebpackPluginInstance,
+    new HtmlInjectEnvsWebpackPlugin(
+      {
+        /** html filename of output */
+        htmlNS: 's3',
+        /** class of HtmlWebpackPlugin **/
+        HtmlWebpackPlugin: HtmlWebpackPlugin,
+        /** instnace of HtmlWebpackPlugin */
+        htmlWebpackPluginInstance: htmlWebpackPluginInstance,
+      },
+      // all envirment variables
+      {
+        APP_ENV: 'production',
+      }
+    ),
+  ],
+}
 ```
 
 ## INTERNAL DEPENDENCIES
