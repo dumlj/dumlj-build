@@ -46,7 +46,22 @@
       "@dumlj/compare-envs-webpack-plugin",
       "@dumlj/feature-dotenv",
       "@dumlj/dynamic-envs-webpack-plugin",
+      "@dumlj/inject-entry-script-webpack-plugin",
       "@dumlj/feature-pretty"
+    ],
+    "@dumlj-example/dynamic-public-path-webpack-plugin": [
+      "@dumlj/feature-pretty",
+      "@dumlj/dynamic-public-path-webpack-plugin",
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/mock-lib",
+      "@dumlj/dynamic-envs-webpack-plugin",
+      "@dumlj/inject-entry-script-webpack-plugin",
+      "@dumlj/html-inject-envs-webpack-plugin",
+      "@dumlj/html-inject-tags-webpack-plugin",
+      "@dumlj/html-enhance-webpack-plugin"
     ],
     "@dumlj-example/dynamic-envs-webpack-plugin": [
       "@dumlj/vitrual-webpack-plugin",
@@ -56,7 +71,8 @@
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
       "@dumlj/feature-pretty",
-      "@dumlj/dynamic-envs-webpack-plugin"
+      "@dumlj/dynamic-envs-webpack-plugin",
+      "@dumlj/inject-entry-script-webpack-plugin"
     ],
     "@dumlj-example/dts-webpack-plugin": [
       "@dumlj/dts-webpack-plugin",
@@ -101,6 +117,7 @@
     "@dumlj-example/zip-webpack-plugin.zip",
     "@dumlj-example/seed-webpack-plugin.zip",
     "@dumlj-example/pretty-assets-tree-webpack-plugin.zip",
+    "@dumlj-example/dynamic-public-path-webpack-plugin.zip",
     "@dumlj-example/dynamic-envs-webpack-plugin.zip",
     "@dumlj-example/crx-live-reload-webpack-plugin.zip",
     "@dumlj/zip-webpack-plugin.zip",
@@ -112,6 +129,7 @@
     "@dumlj-example/envs-switch-webpack-plugin.zip",
     "@dumlj/feature-dotenv.zip",
     "@dumlj/feature-pretty.zip",
+    "@dumlj/html-inject-tags-webpack-plugin.zip",
     "@dumlj-example/crx-manifest-webpack-plugin.zip",
     "@dumlj-example/compare-envs-webpack-plugin.zip",
     "@dumlj/seed-webpack-plugin.zip",
@@ -122,6 +140,9 @@
     "@dumlj/envs-switch-webpack-plugin.zip",
     "@dumlj/compare-envs-webpack-plugin.zip",
     "@dumlj/dynamic-envs-webpack-plugin.zip",
+    "@dumlj/dynamic-public-path-webpack-plugin.zip",
+    "@dumlj/html-inject-envs-webpack-plugin.zip",
+    "@dumlj/html-enhance-webpack-plugin.zip",
     "@dumlj/crx-manifest-webpack-plugin.zip",
     "@dumlj-example/dts-webpack-plugin.zip",
     "@dumlj/crx-live-reload-webpack-plugin.zip",
