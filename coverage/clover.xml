@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699378531888" clover="3.2.0">
-  <project timestamp="1699378531888" name="All files">
+<coverage generated="1699424582727" clover="3.2.0">
+  <project timestamp="1699424582727" name="All files">
     <metrics statements="1110" coveredstatements="906" conditionals="475" coveredconditionals="271" methods="235" coveredmethods="181" elements="1820" coveredelements="1358" complexity="0" loc="1110" ncloc="1110" packages="31" files="73" classes="73"/>
     <package name="@cli.seed-cli.src.utils">
       <metrics statements="40" coveredstatements="35" conditionals="10" coveredconditionals="6" methods="3" coveredmethods="3"/>
