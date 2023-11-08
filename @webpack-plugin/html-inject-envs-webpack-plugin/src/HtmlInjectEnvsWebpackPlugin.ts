@@ -54,7 +54,6 @@ export class HtmlInjectEnvsWebpackPlugin extends HtmlEnhanceWebpackPlugin {
 
   public apply(compiler: Compiler) {
     super.apply(compiler)
-
     this.applyInjectEnvs(compiler)
   }
 }

@@ -1,8 +1,8 @@
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
 import { guid, defenv } from '@dumlj/util-lib'
+import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
 import defaultsDeep from 'lodash/defaultsDeep'
 import chalk from 'chalk'
-import { pushScriptToEntries } from './utils/pushScriptToEntries'
 import { makeGetEnvFnRenderer } from './utils/makeGetEnvFnRenderer'
 import { GLOBAL_TARGET, FIND_ENV_MODULE } from './constants/conf'
 import type { Compiler } from 'webpack'
@@ -54,10 +54,8 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
     this.injected = false
   }
 
-  public update() {}
-
-  /** 注入模块 */
-  public applyInject(compiler: Compiler) {
+  /** inject env getter scripts to entries */
+  public applyInjectEnvGetterScript(compiler: Compiler) {
     const { options } = compiler
     options.resolve.fallback = {
       ...options.resolve.fallback,
@@ -66,22 +64,11 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
       os: false,
     }
 
-    if (this.scriptPath) {
-      const pushScript = pushScriptToEntries(this.scriptPath)
-      if (typeof options.entry === 'function') {
-        const noConflit = options.entry
-        options.entry = async function (this: any, ...args: any[]) {
-          const entries = await noConflit.call(this, ...args)
-          return pushScript(entries)
-        }
-      } else if (typeof options.entry === 'object') {
-        options.entry = pushScript(options.entry)
-      }
-    }
+    new InjectEntryScriptWebpackPlugin(this.scriptPath).apply(compiler)
   }
 
-  /** 注入变量 */
-  public applyDefine(compiler: Compiler) {
+  /** inject variables by webpack define plugin */
+  public applyVariables(compiler: Compiler) {
     const { webpack, options } = compiler
     const { DefinePlugin } = webpack
 
@@ -198,7 +185,7 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
   public apply(compiler: Compiler) {
     super.apply(compiler)
 
-    this.applyInject(compiler)
-    this.applyDefine(compiler)
+    this.applyInjectEnvGetterScript(compiler)
+    this.applyVariables(compiler)
   }
 }
