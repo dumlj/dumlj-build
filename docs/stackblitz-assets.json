@@ -59,8 +59,6 @@
       "@dumlj/mock-lib",
       "@dumlj/dynamic-envs-webpack-plugin",
       "@dumlj/inject-entry-script-webpack-plugin",
-      "@dumlj/html-inject-envs-webpack-plugin",
-      "@dumlj/html-inject-tags-webpack-plugin",
       "@dumlj/html-enhance-webpack-plugin"
     ],
     "@dumlj-example/dynamic-envs-webpack-plugin": [
@@ -129,7 +127,6 @@
     "@dumlj-example/envs-switch-webpack-plugin.zip",
     "@dumlj/feature-dotenv.zip",
     "@dumlj/feature-pretty.zip",
-    "@dumlj/html-inject-tags-webpack-plugin.zip",
     "@dumlj-example/crx-manifest-webpack-plugin.zip",
     "@dumlj-example/compare-envs-webpack-plugin.zip",
     "@dumlj/seed-webpack-plugin.zip",
@@ -141,7 +138,6 @@
     "@dumlj/compare-envs-webpack-plugin.zip",
     "@dumlj/dynamic-envs-webpack-plugin.zip",
     "@dumlj/dynamic-public-path-webpack-plugin.zip",
-    "@dumlj/html-inject-envs-webpack-plugin.zip",
     "@dumlj/html-enhance-webpack-plugin.zip",
     "@dumlj/crx-manifest-webpack-plugin.zip",
     "@dumlj-example/dts-webpack-plugin.zip",
