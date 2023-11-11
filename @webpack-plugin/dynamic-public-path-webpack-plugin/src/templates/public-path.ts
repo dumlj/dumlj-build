@@ -8,4 +8,4 @@ declare let __webpack_public_path__: string
  * PUBLIC_PATH 则是固定
  */
 /* eslint-disable-next-line */
-__webpack_public_path__ = `${trimUrlPathEnd(process.env.PUBLIC_PATH || '')}/`
+__webpack_public_path__ = `${trimUrlPathEnd(process.env.__DYNAMIC_PUBLIC_PATH__ || '')}/`

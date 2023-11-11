@@ -20,13 +20,13 @@
   "dependencies": {
     "@dumlj/feature-updater": "^0.0.1",
     "chalk": "^4.1.2",
-    "inclusion": "^1.0.1",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
     "tslib": "^2.5.0",
     "utility-types": "^3.10.0",
     "webpack": "^5.89.0",
-    "webpack-virtual-modules": "^0.6.0"
+    "webpack-virtual-modules": "^0.6.0",
+    "@dumlj/util-lib": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

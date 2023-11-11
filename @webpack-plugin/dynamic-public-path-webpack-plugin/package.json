@@ -14,9 +14,9 @@
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "^0.0.1",
     "@dumlj/dynamic-envs-webpack-plugin": "^0.0.1",
-    "@dumlj/html-inject-envs-webpack-plugin": "^0.0.1",
     "@dumlj/inject-entry-script-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "@dumlj/html-enhance-webpack-plugin": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

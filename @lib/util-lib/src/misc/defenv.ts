@@ -9,7 +9,12 @@ export interface DefenvResp<T extends Record<string, any>> {
 
 export type TemplateRenderer = ([]: TemplateStringsArray, key: string, value: string) => string
 
-export const defenv = <T extends Record<string, string> = Record<string, string>>(render: TemplateRenderer) => {
+export interface DefenvOptions {
+  prefix?: string
+}
+
+export const defenv = <T extends Record<string, string> = Record<string, string>>(render: TemplateRenderer, options?: DefenvOptions) => {
+  const { prefix = 'process.env.' } = options || {}
   return (variables: Record<string, any>): DefenvResp<T> => {
     const raw = Object.keys(variables).reduce((env, key) => {
       env[key] = variables[key]
@@ -21,15 +26,14 @@ export const defenv = <T extends Record<string, string> = Record<string, string>
         const key = JSON.stringify(name)
         const value = JSON.stringify(variables[name])
 
-        if (0 === name.indexOf('process.env.')) {
-          const key = JSON.stringify(name.replace('process.env.', ''))
+        if (prefix && 0 === name.indexOf(prefix)) {
           const dynamicValue = render`${key} ${value}`
           env[name] = dynamicValue
           return env
         }
 
         const dynamicValue = render`${key} ${value}`
-        env[`process.env.${name}`] = dynamicValue
+        env[`${prefix}${name}`] = dynamicValue
         return env
       }, {}) as Processify<T>),
     }
