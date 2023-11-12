@@ -6,3 +6,5 @@ nav:
 ---
 
 # Webpack Plugin Collection
+
+This collection mainly contains webpack plugins, which are named `@dumlj/*-webpack-plugin`. And makes project building easier.
