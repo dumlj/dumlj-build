@@ -1,6 +1,6 @@
 import path from 'path'
 import { type Configuration } from 'webpack'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { StackblitzWebpackPlugin } from '@dumlj/stackblitz-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import 'webpack-dev-server'
@@ -9,7 +9,7 @@ const CONFIG: Configuration = {
   mode: 'development',
   entry: path.join(__dirname, 'resources/index'),
   plugins: [
-    new VitrualWebpackPlugin({
+    new MemfsWebpackPlugin({
       readFromDisk: true,
     }),
     new HtmlWebpackPlugin({

@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@dumlj/zip-webpack-plugin": "0.0.1",
-    "@dumlj/vitrual-webpack-plugin": "^0.0.1",
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
     "@dumlj/util-lib": "^0.0.1",
     "webpack": "5.x",
     "webpack-cli": "^5",

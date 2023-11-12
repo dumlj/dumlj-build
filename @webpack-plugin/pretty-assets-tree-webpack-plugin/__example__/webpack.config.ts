@@ -1,4 +1,4 @@
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { PrettyAssetsTreeWebpackPlugin } from '@dumlj/pretty-assets-tree-webpack-plugin'
 import chalk from 'chalk'
 import type { Configuration, Compiler } from 'webpack'
@@ -10,7 +10,7 @@ const CONFIG: Configuration = {
       banner: chalk.whiteBright.bold('The following files are artifacts.'),
     }),
     // output to memory
-    new VitrualWebpackPlugin({
+    new MemfsWebpackPlugin({
       /**
        * @param boolean
        * You can open it and check the build folder

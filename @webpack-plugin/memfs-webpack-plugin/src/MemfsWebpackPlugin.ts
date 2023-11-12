@@ -4,7 +4,7 @@ import micromatch from 'micromatch'
 import type { ValuesType } from 'utility-types'
 import type { Compiler } from 'webpack'
 
-export interface VitrualWebpackPluginOptions extends SeedWebpackPluginOptions {
+export interface MemfsWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 读硬盘 */
   readFromDisk?: boolean
   /** 写硬盘 */
@@ -14,16 +14,19 @@ export interface VitrualWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 清除文件 */
   empty?: boolean
   /** 包含 */
-  includeDisk?: string[]
+  include?: string[]
+  /** 不包含 */
+  exclude?: string[]
 }
 
-export class VitrualWebpackPlugin extends SeedWebpackPlugin {
-  static PLUGIN_NAME = 'vitrual-webpack-plugin'
+export class MemfsWebpackPlugin extends SeedWebpackPlugin {
+  static PLUGIN_NAME = 'memfs-webpack-plugin'
 
   protected readFromDisk: boolean
   protected writeToDisk: boolean
   protected files: Record<string, string>
-  protected includeDisk: string[]
+  protected include: string[]
+  protected exclude: string[]
 
   private originInputFs: Compiler['inputFileSystem']
   private originOutputFs: Compiler['outputFileSystem']
@@ -32,13 +35,14 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
     return vol.toJSON()
   }
 
-  constructor(options?: VitrualWebpackPluginOptions) {
+  constructor(options?: MemfsWebpackPluginOptions) {
     super(options)
 
-    const { files, readFromDisk = false, writeToDisk = false, includeDisk = ['**/node_modules/**'] } = options || {}
+    const { files, readFromDisk = false, writeToDisk = false, include = ['**/node_modules/**'], exclude = [] } = options || {}
     this.readFromDisk = readFromDisk
     this.writeToDisk = writeToDisk
-    this.includeDisk = includeDisk
+    this.include = include
+    this.exclude = exclude
     this.files = {
       ...(options?.empty ? {} : { 'src/index.js': '' }),
       ...files,
@@ -48,7 +52,6 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
   public apply(compiler: Compiler) {
     super.apply(compiler)
 
-    const { includeDisk } = this
     this.originInputFs = compiler.inputFileSystem
     this.originOutputFs = compiler.outputFileSystem
 
@@ -60,43 +63,33 @@ export class VitrualWebpackPlugin extends SeedWebpackPlugin {
 
     const methods = ['lstat', 'readdir', 'stat', 'readFile', 'readJson', 'realpath', 'readlink', 'write', 'writeFile', 'unlink'] as const
     type APIs = Method<typeof compiler.inputFileSystem, typeof methods>
+    type FileSystem = Compiler['inputFileSystem'] | Compiler['outputFileSystem']
 
-    if (this.readFromDisk === false) {
+    const virtualize = (fileSystem: FileSystem, originFileSystem: FileSystem) => {
       const apis: APIs = {}
       for (const name of methods) {
-        if (!(typeof compiler.inputFileSystem[name] === 'function' && typeof fs[name] === 'function')) {
+        if (!(typeof fileSystem[name] === 'function' && typeof fs[name] === 'function')) {
           continue
         }
 
         apis[name] = (file: string, ...args: any[]) => {
-          if (micromatch.isMatch(file, includeDisk, { dot: true, cwd: '/' })) {
-            return this.originInputFs[name](file, ...args)
+          if (micromatch.isMatch(file, this.include, { dot: true, cwd: '/' })) {
+            return originFileSystem[name](file, ...args)
           }
 
           return fs[name](file, ...args)
         }
       }
 
-      compiler.inputFileSystem = Object.assign({}, compiler.inputFileSystem, fs, apis)
+      return Object.assign({}, fileSystem, fs, apis)
+    }
+
+    if (this.readFromDisk === false) {
+      compiler.inputFileSystem = virtualize(compiler.inputFileSystem, this.originInputFs)
     }
 
     if (this.writeToDisk === false) {
-      const apis: APIs = {}
-      for (const name of methods) {
-        if (!(typeof compiler.outputFileSystem[name] === 'function' && typeof fs[name] === 'function')) {
-          continue
-        }
-
-        apis[name] = (file: string, ...args: any[]) => {
-          if (micromatch.isMatch(file, includeDisk)) {
-            return this.originOutputFs[name](file, ...args)
-          }
-
-          return fs[name](file, ...args)
-        }
-      }
-
-      compiler.outputFileSystem = Object.assign({}, fs, apis)
+      compiler.outputFileSystem = virtualize(compiler.outputFileSystem, this.originOutputFs)
     }
 
     compiler.hooks.thisCompilation.tap(this.pluginName, () => {

@@ -1,12 +1,11 @@
 {
-  "name": "@dumlj/vitrual-webpack-plugin",
+  "name": "@dumlj/memfs-webpack-plugin",
   "version": "0.0.1",
-  "description": "Virtual file system plugin.",
-  "private": true,
+  "description": "File system in memory webpack plugin.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
-    "directory": "@webpack-plugin/vitrual-webpack-plugin"
+    "directory": "@webpack-plugin/memfs-webpack-plugin"
   },
   "license": "MIT",
   "main": "./libs/index.js",

@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@dumlj/crx-live-reload-webpack-plugin": "0.0.1",
-    "@dumlj/vitrual-webpack-plugin": "^0.0.1",
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.89.0"
   },

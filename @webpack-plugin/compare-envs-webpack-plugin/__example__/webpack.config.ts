@@ -1,5 +1,5 @@
 import path from 'path'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { CompareEnvsWebpackPlugin } from '@dumlj/compare-envs-webpack-plugin'
 import { type Configuration } from 'webpack'
 
@@ -9,7 +9,7 @@ const CONFIG: Configuration = {
     main: path.join(__dirname, 'index'),
   },
   plugins: [
-    new VitrualWebpackPlugin({
+    new MemfsWebpackPlugin({
       readFromDisk: true,
     }),
     new CompareEnvsWebpackPlugin({

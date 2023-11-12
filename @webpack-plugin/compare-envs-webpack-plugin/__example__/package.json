@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@dumlj/compare-envs-webpack-plugin": "^0.0.1",
-    "@dumlj/vitrual-webpack-plugin": "0.0.1"
+    "@dumlj/memfs-webpack-plugin": "0.0.1"
   },
   "devDependencies": {
     "webpack": "^5.89.0",

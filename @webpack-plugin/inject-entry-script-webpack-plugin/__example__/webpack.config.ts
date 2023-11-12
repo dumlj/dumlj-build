@@ -1,5 +1,5 @@
 import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { ok, info } from '@dumlj/feature-pretty'
 import chalk from 'chalk'
 import type { Configuration, Compiler } from 'webpack'
@@ -15,7 +15,7 @@ const CONFIG: Configuration = {
   },
   plugins: [
     /** remove next-line will write disk */
-    new VitrualWebpackPlugin({
+    new MemfsWebpackPlugin({
       empty: true,
       files: {
         // write content to memory files
@@ -31,7 +31,7 @@ const CONFIG: Configuration = {
             return
           }
 
-          const files = VitrualWebpackPlugin.files
+          const files = MemfsWebpackPlugin.files
           ok(`The following is the content of main.js.`, { verbose: false })
 
           const { '/dist/main.js': main, '/src/need-inject-script.js': inject } = files

@@ -1,87 +1,93 @@
-#root {
-  .dumi-default-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    padding: 220px 0;
-    width: 100%;
-    height: auto;
+.dumi-default-header-left {
+  width: auto;
+}
+
+.dumi-default-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 220px 0;
+  width: 100%;
+  height: auto;
+
+  &:before {
+    background-image: none;
   }
+}
 
-  .dumi-default-header-content {
-    max-width: 100%;
-  }
+.dumi-default-header-content {
+  max-width: 100%;
+}
 
-  .dumi-default-hero-title {
-    width: 100%;
-    text-transform: uppercase;
-    font-family: 'Century Gothic', Lato, sans-serif;
-    font-size: 100px;
-    font-weight: bolder;
-    letter-spacing: 16px;
+.dumi-default-hero-title {
+  width: 100%;
+  text-transform: uppercase;
+  font-family: 'Century Gothic', Lato, sans-serif;
+  font-size: 8vw;
+  font-weight: bolder;
+  letter-spacing: 16px;
 
-    > span {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #444;
-      background: none;
-      text-shadow: none;
-    }
-  }
-
-  .dumi-default-hero-title + p {
-    font-family: 'Century Gothic', Lato, sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 4.8px;
-    line-height: 18.4px;
-    text-align: center;
-  }
-
-  .dumi-default-doc-layout > main {
-    max-width: 100%;
-    gap: 10px;
-  }
-
-  .dumi-default-header + main > .dumi-default-content,
-  .dumi-default-doc-layout-mobile-bar + main > .dumi-default-content {
-    max-width: 1440px;
-  }
-
-  .dumi-default-sidebar {
-    width: 320px;
-  }
-
-  .dumi-default-navbar {
-    display: flex;
-    justify-content: space-around;
-    margin: 0 20px;
-    width: 100%;
-  }
-
-  .dumi-default-navbar > li {
+  > span {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &:not(:last-child) {
-      margin-inline-end: none;
-    }
+    color: #444;
+    background: none;
+    text-shadow: none;
   }
+}
 
-  .dumi-default-navbar > li > .dumi-default-navbar-dropdown > li > a:hover,
-  .dumi-default-navbar > li > a:hover,
-  .dumi-default-sidebar > dl > dd > a.active,
-  .dumi-default-sidebar > dl > dd > a:hover,
-  .dumi-default-content-footer > nav > a {
-    color: #000;
+.dumi-default-hero-title + p {
+  font-family: 'Century Gothic', Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 4.8px;
+  line-height: 18.4px;
+  text-align: center;
+}
 
-    [data-prefers-color='dark'] & {
-      color: #fff;
-    }
+.dumi-default-doc-layout > main {
+  max-width: 100%;
+  gap: 10px;
+}
+
+.dumi-default-header + main > .dumi-default-content,
+.dumi-default-doc-layout-mobile-bar + main > .dumi-default-content {
+  max-width: 1440px;
+}
+
+.dumi-default-sidebar {
+  width: 320px;
+}
+
+.dumi-default-navbar {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 10px;
+  width: 100%;
+}
+
+.dumi-default-navbar > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-inline-end: 10px;
+  }
+}
+
+.dumi-default-navbar > li > .dumi-default-navbar-dropdown > li > a:hover,
+.dumi-default-navbar > li > a:hover,
+.dumi-default-sidebar > dl > dd > a.active,
+.dumi-default-sidebar > dl > dd > a:hover,
+.dumi-default-content-footer > nav > a {
+  color: #000;
+
+  [data-prefers-color='dark'] & {
+    color: #fff;
   }
 }

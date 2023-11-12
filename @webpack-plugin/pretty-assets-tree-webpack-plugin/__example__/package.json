@@ -7,7 +7,7 @@
     "build": "webpack build -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/vitrual-webpack-plugin": "^0.0.1",
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
     "@dumlj/pretty-assets-tree-webpack-plugin": "0.0.1",
     "chalk": "^4.1.2"
   },

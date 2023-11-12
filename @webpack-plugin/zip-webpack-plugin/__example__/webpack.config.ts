@@ -1,4 +1,4 @@
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { ZipWebpackPlugin } from '@dumlj/zip-webpack-plugin'
 import { mapFilesToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
 import { promisify } from 'util'
@@ -9,10 +9,12 @@ import { type Configuration, type Compiler } from 'webpack'
 const CONFIG: Configuration = {
   mode: 'development',
   output: {
+    /** remove next-line will write disk */
     path: '/',
   },
   plugins: [
-    new VitrualWebpackPlugin({
+    /** remove next-line will write disk */
+    new MemfsWebpackPlugin({
       files: {
         '/not_import.js': 'console.log("this is a not imported module")',
       },

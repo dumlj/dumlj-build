@@ -1,25 +1,22 @@
 import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
-import { DynamicEnvsWebpackPlugin } from '@dumlj/dynamic-envs-webpack-plugin'
-import { ok, info } from '@dumlj/feature-pretty'
-import path from 'path'
-import { type Compiler, type Configuration } from 'webpack'
+import { ok } from '@dumlj/feature-pretty'
+import type { Configuration, Compiler } from 'webpack'
 
 const CONFIG: Configuration = {
   mode: 'production',
-  entry: path.join(__dirname, 'index'),
   output: {
+    clean: true,
     /** remove next-line will write disk */
     path: '/',
-    clean: true,
   },
   plugins: [
     /** remove next-line will write disk */
     new MemfsWebpackPlugin({
-      empty: true,
-      readFromDisk: true,
-    }),
-    new DynamicEnvsWebpackPlugin({
-      'process.env.APP_ENV': JSON.stringify('development'),
+      readFromDisk: false,
+      writeToDisk: false,
+      files: {
+        './src/index.js': 'console.log("i am virtual module.")',
+      },
     }),
     {
       apply(compiler: Compiler) {
@@ -31,10 +28,9 @@ const CONFIG: Configuration = {
           const files = MemfsWebpackPlugin.files
           ok(`The following is the content of main.js.`, { verbose: false })
 
+          const { '/main.js': main } = files
           // eslint-disable-next-line no-console
-          console.log(`\n${files['/main.js']}\n`)
-
-          info('The first half is used to getting envs and was automatically injected.', { verbose: false })
+          console.log(`\n${main}\n`)
         })
       },
     },

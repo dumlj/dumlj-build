@@ -1,6 +1,6 @@
 import path from 'path'
 import webpack, { type Configuration } from 'webpack'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { CrxLiveReloadWebpackPlugin } from '@dumlj/crx-live-reload-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
@@ -38,7 +38,7 @@ const CONFIG: Configuration = {
         /** MOCK END, PLEASE IGNORE */
       }
     ),
-    new VitrualWebpackPlugin({ readFromDisk: true }),
+    new MemfsWebpackPlugin({ readFromDisk: true }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'index.html'),
     }),

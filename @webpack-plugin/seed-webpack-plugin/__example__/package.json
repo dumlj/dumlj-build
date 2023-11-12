@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "0.0.1",
-    "@dumlj/vitrual-webpack-plugin": "0.0.1"
+    "@dumlj/memfs-webpack-plugin": "0.0.1"
   },
   "devDependencies": {
     "webpack": "^5",

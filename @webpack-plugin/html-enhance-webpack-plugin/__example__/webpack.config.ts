@@ -1,5 +1,5 @@
 import { HtmlEnhanceWebpackPlugin } from '@dumlj/html-enhance-webpack-plugin'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { ok } from '@dumlj/feature-pretty'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import type { Configuration, Compiler } from 'webpack'
@@ -10,11 +10,12 @@ const CONFIG: Configuration = {
   mode: 'production',
   output: {
     clean: true,
+    /** remove next-line will write disk */
     path: '/',
   },
   plugins: [
     /** remove next-line will write disk */
-    new VitrualWebpackPlugin(),
+    new MemfsWebpackPlugin(),
     htmlWebpackPluginInstance,
     new (class extends HtmlEnhanceWebpackPlugin {
       apply(compiler: Compiler) {
@@ -55,7 +56,7 @@ const CONFIG: Configuration = {
             return
           }
 
-          const files = VitrualWebpackPlugin.files
+          const files = MemfsWebpackPlugin.files
           ok(`The following is the content of index.html.`, { verbose: false })
 
           const { '/index.html': index } = files
