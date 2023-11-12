@@ -2,7 +2,6 @@
   "name": "@dumlj/compare-envs-webpack-plugin",
   "version": "0.0.1",
   "description": "Check whether the contents of dotenv files are consistent.",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
