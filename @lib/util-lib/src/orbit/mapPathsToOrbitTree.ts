@@ -22,6 +22,14 @@ export const mapPathsToOrbitTree = (paths: string[][]) => {
     let current = [...parts]
     let isLatest = true
 
+    if (current.length === 1) {
+      const node = createOrbitNode(current, isLatest)
+      const token = current.join(DIVIDER_CHAR)
+      collection.set(token, node)
+      roots.push(token)
+      continue
+    }
+
     while (true) {
       const previous = current.slice(0, -1)
       const curToken = current.join(DIVIDER_CHAR)
