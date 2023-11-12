@@ -9,6 +9,15 @@
 
 Append or prepend scripts to entries.
 
+## BACKGROUND
+
+It is mainly used to quickly insert scripts into various javascript entry files.
+
+## FEATURE
+
+- Compatible with various entry option formats.
+- Quickly import to various entries.
+
 ## INSTALL
 
 ```bash
@@ -19,6 +28,21 @@ $ yarn add --dev @dumlj/inject-entry-script-webpack-plugin
 # use pnpm
 $ pnpm add @dumlj/inject-entry-script-webpack-plugin -D
 ```
+
+## USAGE
+
+```ts
+import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
+
+export default {
+  // ....
+  plugins: [new InjectEntryScriptWebpackPlugin('need-inject-script.js')],
+}
+```
+
+## LIVE DEMO
+
+<dumlj-stackblitz height="47vw" src="@dumlj-example/inject-entry-script-webpack-plugin"></dumlj-stackblitz>
 
 ## INTERNAL DEPENDENCIES
 

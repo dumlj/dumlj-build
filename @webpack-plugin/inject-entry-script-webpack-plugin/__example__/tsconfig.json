@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@/*": ["./resources/*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["**/*.ts", "**/*.d.ts", "../../typings/**/*.d.ts"]
+}

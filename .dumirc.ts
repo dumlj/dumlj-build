@@ -22,10 +22,7 @@ export default defineConfig({
       github: 'https://github.com/dumlj/dumlj-build',
     },
   },
-  locales: [
-    { id: 'zh-CN', name: '中文' },
-    { id: 'en-US', name: 'EN' },
-  ],
+  locales: [{ id: 'en-US', name: 'EN' }],
   nodeStackblitz: {
     ignored: [
       '**/__tests__/**',

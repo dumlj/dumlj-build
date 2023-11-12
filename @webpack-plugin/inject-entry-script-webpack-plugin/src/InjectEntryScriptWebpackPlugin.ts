@@ -1,9 +1,12 @@
+import path from 'path'
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
 import type { Compiler } from 'webpack'
 
 export interface InjectEntryScriptWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 位于另一个入口文件之后 */
   after?: string
+  /** 上下文 */
+  context?: string
 }
 
 export class InjectEntryScriptWebpackPlugin extends SeedWebpackPlugin {
@@ -22,10 +25,17 @@ export class InjectEntryScriptWebpackPlugin extends SeedWebpackPlugin {
   /** prepend or append script to all entries */
   protected pushScriptToEntries(scriptPath: string, options?: InjectEntryScriptWebpackPluginOptions) {
     return <T>(entries: T): T => {
-      const { after } = options || {}
-      Object.keys(entries).forEach((name) => {
-        const entry = entries[name]
-        if (entry && Array.isArray(entry.import) && -1 === entry.import.indexOf(scriptPath)) {
+      const { after, context = process.cwd() } = options || {}
+      for (const entry of Object.values(entries)) {
+        if (!entry) {
+          entry.import = [scriptPath]
+        }
+
+        if (typeof entry === 'object' && Object.keys(entry).length === 0) {
+          entry.import = [path.join(context, './src/index')]
+        }
+
+        if (Array.isArray(entry.import) && -1 === entry.import.indexOf(scriptPath)) {
           if (typeof after === 'string') {
             const index = entry.import.indexOf(after)
             if (index !== -1) {
@@ -36,16 +46,17 @@ export class InjectEntryScriptWebpackPlugin extends SeedWebpackPlugin {
 
           entry.import.unshift(scriptPath)
         }
-      })
+      }
 
       return entries
     }
   }
 
   public applyInject(compiler: Compiler) {
-    const { options } = compiler
+    const { options, context } = compiler
     const pushScript = this.pushScriptToEntries(this.scriptPath, {
       after: this.after,
+      context: context,
     })
 
     if (typeof options.entry === 'function') {
@@ -57,6 +68,8 @@ export class InjectEntryScriptWebpackPlugin extends SeedWebpackPlugin {
     } else if (typeof options.entry === 'object') {
       options.entry = pushScript(options.entry)
     }
+
+    return options
   }
 
   public apply(compiler: Compiler) {
