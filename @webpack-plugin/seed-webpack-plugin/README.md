@@ -11,12 +11,12 @@ Basic webpack plugins
 
 ## BACKGROUND
 
-Webpack 插件开发存在大量重复流程，因此所有 `@dumlj/*-webpack-plugin` 插件均继承该模块。
+There is a lot of duplication in the development of Webpack plugins, so all '@dumlj/\*-webpack-plugin's can inherit this basic plugin to make development more convenient.
 
 ## FEATURE
 
-- 统一检查更新，更新提示只会来自一个检测，并只有在 package.json 中声明的依赖才会提示（嵌套插件中，没声明的依赖将会忽略）。
-- 提供一些比较通用的方法
+- Check for updates uniformly. Update prompts will only come from one checker, and only dependencies declared in `package.json` will be prompted (in nested plug-ins, undeclared dependencies will be ignored).
+- Provide some more general methods.
 
 ## INSTALL
 

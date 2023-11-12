@@ -11,12 +11,12 @@ Basic vite plugin.
 
 ## BACKGROUND
 
-避免基础能力重复编写，特意使用该基础插件进行基础能力建设。
+To avoid repeated writing of basic capabilities, this basic plug-in is specially used to build basic capabilities.
 
 ## FEATURE
 
-- 支持 logger 日志服务
-- 支持 outdate 更新服务
+- Support logger log service.
+- Support update service.
 
 ## INSTALL
 

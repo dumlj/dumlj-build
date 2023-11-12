@@ -1,3 +1,3 @@
 ## BACKGROUND
 
-Webpack 插件开发存在大量重复流程，因此所有 `@dumlj/*-webpack-plugin` 插件均继承该模块。
+There is a lot of duplication in the development of Webpack plugins, so all '@dumlj/\*-webpack-plugin's can inherit this basic plugin to make development more convenient.
