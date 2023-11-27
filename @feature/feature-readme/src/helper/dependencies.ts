@@ -7,6 +7,27 @@ const stringify = ({ name, internalDependencies }: TreeProject, parent?: string[
   return [path, ...dependencies]
 }
 
+export const badgeGithub = (context: Context) => {
+  const { repository } = context
+  const { url, directory } = repository
+  return `[![Github Repo](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)](${url}/tree/main/${directory})`
+}
+
+export const badgeMIT = () => {
+  return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+}
+
+export const badgeNpmVersion = (context: Context) => {
+  const { name } = context
+  return (
+    `<a href="https://www.npmjs.com/package/${name}">` +
+    `<picture><source src="https://badge.fury.io/js/${name.replace(/\//g, '%2F')}.svg">` +
+    `<img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version">` +
+    `</picture>` +
+    `</a>`
+  )
+}
+
 export const dependencies = (context: Context) => {
   const { name, repository, dependencies, projects } = context
   const { url } = repository
