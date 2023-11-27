@@ -19,13 +19,7 @@ export const badgeMIT = () => {
 
 export const badgeNpmVersion = (context: Context) => {
   const { name } = context
-  return (
-    `<a href="https://www.npmjs.com/package/${name}">` +
-    `<picture><source srcset="https://badge.fury.io/js/${name.replace(/\//g, '%2F')}.svg">` +
-    `<img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version">` +
-    `</picture>` +
-    `</a>`
-  )
+  return `[![NPM Version](https://badge.fury.io/js/${name.replace(/\//g, '%2F')}.svg)](https://www.npmjs.com/package/${name})`
 }
 
 export const dependencies = (context: Context) => {
