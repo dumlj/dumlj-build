@@ -1,31 +1,31 @@
 {
   "examples": {
     "@dumlj-example/zip-webpack-plugin": [
-      "@dumlj/zip-webpack-plugin",
+      "@dumlj/memfs-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/memfs-webpack-plugin"
+      "@dumlj/zip-webpack-plugin"
     ],
     "@dumlj-example/stackblitz-webpack-plugin": [
-      "@dumlj/stackblitz-webpack-plugin",
+      "@dumlj/memfs-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/inject-entry-script-webpack-plugin",
-      "@dumlj/memfs-webpack-plugin"
+      "@dumlj/stackblitz-webpack-plugin",
+      "@dumlj/inject-entry-script-webpack-plugin"
     ],
     "@dumlj-example/seed-webpack-plugin": [
+      "@dumlj/memfs-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
-      "@dumlj/mock-lib",
-      "@dumlj/memfs-webpack-plugin"
+      "@dumlj/mock-lib"
     ],
     "@dumlj-example/pretty-assets-tree-webpack-plugin": [
       "@dumlj/memfs-webpack-plugin",
@@ -37,69 +37,69 @@
       "@dumlj/pretty-assets-tree-webpack-plugin"
     ],
     "@dumlj-example/memfs-webpack-plugin": [
+      "@dumlj/feature-pretty",
       "@dumlj/memfs-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
-      "@dumlj/mock-lib",
-      "@dumlj/feature-pretty"
+      "@dumlj/mock-lib"
     ],
     "@dumlj-example/inject-entry-script-webpack-plugin": [
+      "@dumlj/feature-pretty",
       "@dumlj/inject-entry-script-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/memfs-webpack-plugin",
-      "@dumlj/feature-pretty"
+      "@dumlj/memfs-webpack-plugin"
     ],
     "@dumlj-example/html-enhance-webpack-plugin": [
+      "@dumlj/feature-pretty",
       "@dumlj/html-enhance-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/memfs-webpack-plugin",
-      "@dumlj/feature-pretty"
+      "@dumlj/memfs-webpack-plugin"
     ],
     "@dumlj-example/envs-switch-webpack-plugin": [
       "@dumlj/envs-switch-webpack-plugin",
+      "@dumlj/compare-envs-webpack-plugin",
+      "@dumlj/feature-dotenv",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/compare-envs-webpack-plugin",
-      "@dumlj/feature-dotenv",
       "@dumlj/dynamic-envs-webpack-plugin",
       "@dumlj/inject-entry-script-webpack-plugin",
       "@dumlj/feature-pretty"
     ],
     "@dumlj-example/dynamic-public-path-webpack-plugin": [
-      "@dumlj/feature-pretty",
       "@dumlj/dynamic-public-path-webpack-plugin",
-      "@dumlj/seed-webpack-plugin",
-      "@dumlj/feature-updater",
-      "@dumlj/shell-lib",
-      "@dumlj/util-lib",
-      "@dumlj/mock-lib",
       "@dumlj/dynamic-envs-webpack-plugin",
       "@dumlj/inject-entry-script-webpack-plugin",
-      "@dumlj/html-enhance-webpack-plugin"
+      "@dumlj/seed-webpack-plugin",
+      "@dumlj/feature-updater",
+      "@dumlj/shell-lib",
+      "@dumlj/util-lib",
+      "@dumlj/mock-lib",
+      "@dumlj/html-enhance-webpack-plugin",
+      "@dumlj/feature-pretty"
     ],
     "@dumlj-example/dynamic-envs-webpack-plugin": [
-      "@dumlj/memfs-webpack-plugin",
+      "@dumlj/dynamic-envs-webpack-plugin",
+      "@dumlj/inject-entry-script-webpack-plugin",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
       "@dumlj/feature-pretty",
-      "@dumlj/dynamic-envs-webpack-plugin",
-      "@dumlj/inject-entry-script-webpack-plugin"
+      "@dumlj/memfs-webpack-plugin"
     ],
     "@dumlj-example/dts-webpack-plugin": [
       "@dumlj/dts-webpack-plugin",
@@ -131,12 +131,12 @@
     ],
     "@dumlj-example/compare-envs-webpack-plugin": [
       "@dumlj/compare-envs-webpack-plugin",
+      "@dumlj/feature-dotenv",
       "@dumlj/seed-webpack-plugin",
       "@dumlj/feature-updater",
       "@dumlj/shell-lib",
       "@dumlj/util-lib",
       "@dumlj/mock-lib",
-      "@dumlj/feature-dotenv",
       "@dumlj/memfs-webpack-plugin"
     ]
   },
@@ -150,9 +150,9 @@
     "@dumlj-example/dynamic-public-path-webpack-plugin.zip",
     "@dumlj-example/dynamic-envs-webpack-plugin.zip",
     "@dumlj-example/crx-live-reload-webpack-plugin.zip",
-    "@dumlj/zip-webpack-plugin.zip",
-    "@dumlj/mock-lib.zip",
     "@dumlj/memfs-webpack-plugin.zip",
+    "@dumlj/mock-lib.zip",
+    "@dumlj/zip-webpack-plugin.zip",
     "@dumlj-example/stackblitz-webpack-plugin.zip",
     "@dumlj/inject-entry-script-webpack-plugin.zip",
     "@dumlj/pretty-assets-tree-webpack-plugin.zip",
