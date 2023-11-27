@@ -3,15 +3,17 @@
 ;(async function main () {
   const fs = require('fs')
   const { exec } = require('child_process')
-  const tasks = ['ts-patch install -s']
+  const tasks = []
   
   if (fs.existsSync('tsconfig.build.json')) {
     tasks.push('tsc --build ./tsconfig.build.json')
   } else {
     tasks.push(...[
+      'ts-patch install -s',
       'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli --scope=@dumlj/create-cli',
       'dumlj install husky',
       'dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\"\"',
+      'tsc --build ./tsconfig.build.json',
     ])
   }
 
