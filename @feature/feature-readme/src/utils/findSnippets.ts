@@ -34,7 +34,7 @@ export const findSnippets = async (location: string, options?: FindSnippetsOptio
       paths.push(target)
     }
 
-    if (current === cwd || ['.', '/'].includes(current)) {
+    if (current === cwd || ['.', path.sep].includes(current)) {
       break
     }
 
