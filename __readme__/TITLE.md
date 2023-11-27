@@ -1,7 +1,8 @@
-[![Github Repo](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)]({{ repository.url }}/tree/main/{{ repository.directory }})&nbsp;
+{{{ badgeMIT }}}&nbsp;
+{{{ badgeGithub }}}&nbsp;
+{{{ badgeNpmVersion }}}&nbsp;
+[![See Docs](https://img.shields.io/badge/see-docs-blue?logo=dumi&logoColor=green)](https://dumlj.github.io/dumlj-build/docs)&nbsp;
 [![codecov](https://codecov.io/gh/dumlj/dumlj-build/graph/badge.svg?token=ELV5W1H0C0)](https://codecov.io/gh/dumlj/dumlj-build)&nbsp;
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&nbsp;
-<a href="https://www.npmjs.com/package/{{ name }}"><picture><source src="https://badge.fury.io/js/{{ name }}.svg"><img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version"></picture></a>&nbsp;
 
 # {{ alias }}
 
