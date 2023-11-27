@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-cliui",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "{{description}}",
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "tslib": "^2.5.0",
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

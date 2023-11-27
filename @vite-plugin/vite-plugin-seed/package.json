@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/vite-plugin-seed",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Basic vite plugin.",
   "private": true,
   "repository": {
@@ -18,7 +18,7 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "^0.0.1",
+    "@dumlj/feature-updater": "^2.5.18",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
     "tslib": "^2.5.0",

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dts-webpack-plugin",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Build dts files with webpack",
   "repository": {
     "type": "git",
@@ -11,8 +11,8 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1",
+    "@dumlj/seed-webpack-plugin": "^2.5.18",
+    "@dumlj/shell-lib": "^2.5.18",
     "fs-extra": "^11.1.1",
     "hjson": "^3.2.2",
     "tar-stream": "^1.6.2",

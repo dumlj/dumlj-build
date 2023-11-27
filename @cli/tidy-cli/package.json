@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/tidy-cli",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Cli for organizing projects.",
   "private": true,
   "repository": {
@@ -21,11 +21,11 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-prepare": "^0.0.1",
-    "@dumlj/feature-pretty": "^0.0.1",
-    "@dumlj/feature-readme": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1",
-    "@dumlj/util-lib": "^0.0.1",
+    "@dumlj/feature-prepare": "^2.5.18",
+    "@dumlj/feature-pretty": "^2.5.18",
+    "@dumlj/feature-readme": "^2.5.18",
+    "@dumlj/shell-lib": "^2.5.18",
+    "@dumlj/util-lib": "^2.5.18",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "depcheck": "^1.4.7",
@@ -35,7 +35,7 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "^0.0.1",
+    "@dumlj/seed-cli": "^2.5.18",
     "@jest/types": "^29.6.3",
     "@types/lodash": "^4.14.200",
     "@types/micromatch": "^4.0.4",

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/shell-lib",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "shell 工具库",
   "repository": {
     "type": "git",
@@ -17,11 +17,11 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "command-exists": "^1.2.9",
-    "tslib": "^2.5.0",
     "@jest/types": "^29.6.3",
+    "chokidar": "^3.5.3",
+    "command-exists": "^1.2.9",
     "lodash": "^4.17.21",
-    "chokidar": "^3.5.3"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "ts-jest": "^29.1.1",

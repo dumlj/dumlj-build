@@ -1,14 +1,14 @@
 {
   "name": "@dumlj-example/crx-live-reload-webpack-plugin",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "serve": "concurrently \"webpack serve -c webpack.config.ts\" \"node ./static-serve\""
   },
   "dependencies": {
-    "@dumlj/crx-live-reload-webpack-plugin": "0.0.1",
-    "@dumlj/memfs-webpack-plugin": "0.0.1",
+    "@dumlj/crx-live-reload-webpack-plugin": "^2.5.18",
+    "@dumlj/memfs-webpack-plugin": "^2.5.18",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.89.0"
   },

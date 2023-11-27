@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-dotenv",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "dotenv utilities.",
   "repository": {
     "type": "git",
@@ -11,13 +11,13 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "tslib": "^2.5.0",
     "dotenv": "^16.3.1",
-    "fs-extra": "^11.1.1"
+    "fs-extra": "^11.1.1",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

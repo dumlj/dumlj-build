@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/compare-envs-webpack-plugin",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Check whether the contents of dotenv files are consistent.",
   "repository": {
     "type": "git",
@@ -11,11 +11,11 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0",
+    "@dumlj/feature-dotenv": "^2.5.18",
+    "@dumlj/seed-webpack-plugin": "^2.5.18",
+    "chalk": "^4.1.2",
     "glob": "^10.3.10",
-    "@dumlj/feature-dotenv": "^0.0.1",
-    "chalk": "^4.1.2"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

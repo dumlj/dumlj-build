@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/seed-cli",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Basic cli, the registrar for all dumlj cli.",
   "repository": {
     "type": "git",
@@ -20,10 +20,10 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-pretty": "^0.0.1",
-    "@dumlj/feature-updater": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1",
-    "@dumlj/util-lib": "^0.0.1",
+    "@dumlj/feature-pretty": "^2.5.18",
+    "@dumlj/feature-updater": "^2.5.18",
+    "@dumlj/shell-lib": "^2.5.18",
+    "@dumlj/util-lib": "^2.5.18",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "fs-extra": "^11.1.0",

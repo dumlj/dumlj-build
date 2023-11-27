@@ -1,6 +1,6 @@
 {
   "name": "@template/feature",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "something...",
   "private": true,
   "repository": {
@@ -15,8 +15,8 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

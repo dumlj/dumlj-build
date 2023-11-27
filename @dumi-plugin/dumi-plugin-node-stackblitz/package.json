@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dumi-plugin-node-stackblitz",
-  "version": "0.0.1",
+  "version": "2.5.18",
   "description": "Supports live demo of node powered by stackblitz.",
   "private": true,
   "repository": {
@@ -18,9 +18,9 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "tslib": "^2.5.0",
-    "@dumlj/stackblitz-webpack-plugin": "^0.0.1",
-    "@dumlj/dumi-plugin-seed": "^0.0.1"
+    "@dumlj/dumi-plugin-seed": "^2.5.18",
+    "@dumlj/stackblitz-webpack-plugin": "^2.5.18",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
