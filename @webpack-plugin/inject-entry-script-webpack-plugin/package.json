@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/inject-entry-script-webpack-plugin",
-  "version": "2.5.19",
+  "version": "2.5.20",
   "description": "Append or prepend scripts to entries.",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^2.5.19",
+    "@dumlj/seed-webpack-plugin": "^2.5.20",
     "tslib": "^2.5.0"
   },
   "devDependencies": {

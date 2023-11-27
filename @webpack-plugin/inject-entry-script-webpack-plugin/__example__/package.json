@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/inject-entry-script-webpack-plugin",
-  "version": "2.5.19",
+  "version": "2.5.20",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -10,9 +10,9 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/feature-pretty": "^2.5.19",
-    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.19",
-    "@dumlj/memfs-webpack-plugin": "^2.5.19",
+    "@dumlj/feature-pretty": "^2.5.20",
+    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.20",
+    "@dumlj/memfs-webpack-plugin": "^2.5.20",
     "chalk": "^4.1.2",
     "tslib": "^2.5.0",
     "webpack": "5.x",

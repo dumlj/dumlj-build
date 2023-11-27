@@ -1,14 +1,14 @@
 {
   "name": "@dumlj-example/pretty-assets-tree-webpack-plugin",
-  "version": "2.5.19",
+  "version": "2.5.20",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "build": "webpack build -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/memfs-webpack-plugin": "^2.5.19",
-    "@dumlj/pretty-assets-tree-webpack-plugin": "^2.5.19",
+    "@dumlj/memfs-webpack-plugin": "^2.5.20",
+    "@dumlj/pretty-assets-tree-webpack-plugin": "^2.5.20",
     "chalk": "^4.1.2"
   },
   "optionalDependencies": {
