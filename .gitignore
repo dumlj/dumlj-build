@@ -2,14 +2,20 @@
 build
 libs
 !**/src/**/libs
+!**/__tests__/**/libs
 docs-dist
 .next
 coverage
 junit.xml
 gh-pages
-.dumi
+.dumi/tmp*
 *.tsbuildinfo
 tsconfig.build.json
+
+# Examples
+**/__example__/dist
+**/__example__/build
+**/__example__/src
 
 # Husky
 .husky

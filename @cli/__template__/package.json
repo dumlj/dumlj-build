@@ -12,15 +12,15 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "commander": "^11.0.0",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "commander": "^11.1.0",
     "tslib": "^2.5.0",
-    "typescript": "^5.2.2",
-    "@dumlj/feature-pretty": "^0.0.1"
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "ts-jest": "^29.1.1",
+    "@dumlj/seed-cli": "^0.0.1",
     "@jest/types": "^29.6.3",
-    "@dumlj/seed-cli": "^0.0.1"
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "@dumlj/seed-cli": "*"

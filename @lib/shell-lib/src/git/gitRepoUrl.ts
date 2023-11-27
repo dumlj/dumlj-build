@@ -1,4 +1,4 @@
-import { createGitExcutor } from '../creators/createGitExcutor'
+import { createGitExecutor } from '../creators/createGitExecutor'
 
 const command = () => `git remote -v`
 
@@ -8,4 +8,4 @@ export const getGitRepoUrl = (remotes: string) => {
   return url
 }
 
-export const gitRepoUrl = createGitExcutor(command, getGitRepoUrl)
+export const gitRepoUrl = createGitExecutor(command, getGitRepoUrl)

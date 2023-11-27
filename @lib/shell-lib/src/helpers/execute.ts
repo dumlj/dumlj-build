@@ -31,7 +31,7 @@ export const execute = (command: string, options?: ExecOptions) => {
  * @description
  * 兼容 exec 无法捕获错误
  */
-export const excuteSync = (command: string, options?: ExecSyncOptions) => {
+export const executeSync = (command: string, options?: ExecSyncOptions) => {
   try {
     const stdout = execSync(command, options)
     return stdout.toString()

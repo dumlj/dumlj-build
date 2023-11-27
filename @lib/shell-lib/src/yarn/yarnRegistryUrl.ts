@@ -1,6 +1,6 @@
-import { createYarnExcutor } from '../creators/createYarnExcutor'
+import { createYarnExecutor } from '../creators/createYarnExecutor'
 
 const command = () => 'yarn config get registry'
 
 /** 获取项目地址 */
-export const yarnRegistryUrl = createYarnExcutor(command)
+export const yarnRegistryUrl = createYarnExecutor(command)

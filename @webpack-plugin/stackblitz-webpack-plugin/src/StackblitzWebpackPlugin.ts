@@ -1,21 +1,39 @@
 import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-webpack-plugin'
-import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
+import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
+import { findWorkspaceProject, findWorkspaceRootPath, type Project } from '@dumlj/util-lib'
 import fs from 'fs-extra'
 import path from 'path'
 import { glob } from 'glob'
 import JSZip from 'jszip'
-import { IGNORED_PATTERNS } from './constants'
+import { HTML_TAG, IGNORED_PATTERNS } from './constants'
 import type { Compiler } from 'webpack'
 
-export interface Project extends ProjectInWorkspaces {
+export interface ExampleInfo {
+  rootPath: string
+  examples: Record<string, string[]>
+  projects: Set<Project>
+  isWorkspace: boolean
+}
+
+export interface Stats {
   name: string
-  dependencies?: Project[]
+  files: string[]
+  zip: JSZip
 }
 
 export interface StackblitzWebpackPluginOptions extends SeedWebpackPluginOptions {
+  /** the name of manifest */
   manifest?: string
+  /** ignore file pattern */
   ignored?: string[]
+  /** extra files */
   files?: string[]
+  /** determine if project is a demo (default name matches `*-example`) */
+  test?: (name: string, project: Project) => boolean
+  /** custom html tag (default <dumlj-stackblitz></dumlj-stackblitz>) */
+  customElement?: string
+  /** custom element file path */
+  customComponent?: string
 }
 
 export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
@@ -24,6 +42,9 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
   protected manifest: string
   protected ignored: string[]
   protected files: string[]
+  protected test?: (name: string, project: Project) => boolean
+  protected customElement?: string
+  protected customComponent?: string
 
   constructor(options?: StackblitzWebpackPluginOptions) {
     super(options)
@@ -31,8 +52,12 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
     this.manifest = options?.manifest || '/stackblitz-assets.json'
     this.files = [].concat(options?.files || [], ['package.json', 'tsconfig.json'])
     this.ignored = Array.from(new Set([].concat(options?.ignored || [], IGNORED_PATTERNS)))
+    this.test = typeof options?.test === 'function' ? options?.test : (name) => /-example\//.test(name)
+    this.customElement = options?.customElement || HTML_TAG
+    this.customComponent = options?.customElement || path.join(__dirname, 'client')
   }
 
+  /** collect project and zip tarballs */
   public applyTarball(compiler: Compiler) {
     const { context, webpack } = compiler
 
@@ -41,23 +66,34 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
       const changedFiles = modifiedFiles ? Array.from(modifiedFiles.values()) : []
       const FileCache = compilation.getCache(this.pluginName)
 
+      /** get cache, if not exists read file content and push to cache */
+      const getCacheOrReadFile = async (file: string) => {
+        if (changedFiles.includes(file)) {
+          return FileCache.getPromise<Buffer>(file, null)
+        }
+
+        const buffer = await fs.readFile(file)
+        await FileCache.storePromise<Buffer>(file, null, buffer)
+        return buffer
+      }
+
       const travel = <A extends any[]>(workspaces: Project[], callback: (project: Project, ...args: A) => void) => {
         return (projects: string[], ...args: A) => {
           const travelProject = (projects: string[], fileCollection = new Set<Project>()) => {
             for (const name of projects) {
-              for (const workspace of workspaces) {
-                if (workspace.name !== name) {
+              for (const project of workspaces) {
+                if (project.name !== name) {
                   continue
                 }
 
-                if (fileCollection.has(workspace)) {
+                if (fileCollection.has(project)) {
                   continue
                 }
 
-                fileCollection.add(workspace)
-                callback(workspace, ...args)
+                fileCollection.add(project)
+                callback(project, ...args)
 
-                const { workspaceDependencies } = workspace
+                const { workspaceDependencies } = project
                 if (!(Array.isArray(workspaceDependencies) && workspaceDependencies.length > 0)) {
                   continue
                 }
@@ -73,100 +109,61 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
         }
       }
 
-      const collectExamples = async () => {
-        const workspaces = await yarnWorkspaces.options({ cwd: context }).exec()
+      /** collect stackblitz demo project */
+      const collectExamples = async (): Promise<ExampleInfo> => {
+        const rootPath = await findWorkspaceRootPath()
+        const workspaces: Project[] = await (async () => {
+          if (rootPath) {
+            return findWorkspaceProject({ cwd: rootPath })
+          }
+
+          const { name, version, description, dependencies, private: isPrivate = false } = await fs.readJson(path.join(context, 'package.json'))
+          return [{ name, version, description, isPrivate, location: context, dependencies, workspaceDependencies: [] }]
+        })()
+
+        const projects = new Set<Project>()
         const examples: Record<string, string[]> = {}
-        const projects: Project[] = []
 
         const collect = travel<[string]>(workspaces, (project, name) => {
           examples[name].push(project.name)
-          projects.push(project)
+          projects.add(project)
         })
 
-        for (const workspace of workspaces) {
-          const { name, location, workspaceDependencies } = workspace
-          if (path.basename(location) !== '__example__') {
+        for (const project of workspaces) {
+          const { name, workspaceDependencies } = project
+          if (!this.test(name, project)) {
             continue
           }
 
-          projects.push(workspace)
+          projects.add(project)
           examples[name] = []
           collect(workspaceDependencies, name)
         }
 
-        return { examples, projects }
+        return { rootPath: rootPath || context, examples, projects, isWorkspace: !!rootPath }
       }
 
-      const readFile = async (file: string) => {
-        if (changedFiles.includes(file)) {
-          return FileCache.getPromise<Buffer>(file, null)
-        }
-
-        const buffer = await fs.readFile(file)
-        await FileCache.storePromise<Buffer>(file, null, buffer)
-        return buffer
-      }
-
-      const compileTarballs = async (projects: Project[], examples: Record<string, string[]>) => {
-        const pattern = projects.map(({ location }) => path.join(location, '**/*'))
-        const files = await glob(pattern, {
-          cwd: context,
-          dot: true,
-          nodir: true,
-          ignore: [...this.ignored],
-          windowsPathsNoEscape: true,
-        })
-
-        /** find the project where the detection file is located */
-        const isFileInProject = (file: string) => {
-          /** 权重 */
-          interface MaxWeight {
-            name: string
-            weight: number
-          }
-
-          const project = projects.reduce(
-            (max: MaxWeight, { name, location }) => {
-              if (0 !== file.indexOf(location)) {
-                return max
-              }
-
-              const prefix = file.substring(0, location.length + 1)
-              if (prefix !== `${location}/`) {
-                return max
-              }
-
-              if (prefix.length > max.weight) {
-                return { name, weight: prefix.length }
-              }
-
-              return max
-            },
-            { weight: 0 } as MaxWeight
-          )
-
-          return project?.name
-        }
-
-        const fileCollection = new Map(projects.map(({ name }) => [name, []]))
-        files.forEach((file) => {
-          const project = isFileInProject(file)
-          fileCollection.get(project).push(file)
-        })
-
-        interface Stats {
-          name: string
-          files: string[]
-          zip: JSZip
-        }
-
+      /** pack files of projects to tarballs */
+      const packTarballs = async ({ rootPath, projects, examples }: ExampleInfo) => {
         const stats = new Map<string, Stats>()
+
         await Promise.all(
-          projects.map(async ({ name }) => {
-            const tarball = `${name}.zip`
-            if (stats.has(tarball)) {
+          Array.from(projects).map(async ({ name, location }) => {
+            const isExample = examples[name]
+            const cwd = path.join(rootPath, location)
+            const files = await glob('**/*', {
+              cwd: cwd,
+              dot: true,
+              nodir: true,
+              ignore: [...this.ignored],
+              windowsPathsNoEscape: true,
+            })
+
+            if (!files.length) {
               return
             }
+
+            const tarball = `${name}.zip`
 
             /**
              * locked
@@ -175,19 +172,13 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
              */
             stats.set(tarball, null)
 
-            const isExample = examples[name]
             const zip = new JSZip()
-            const files = fileCollection.get(name)
-
             await Promise.all(
               files.map(async (file) => {
-                const source = await readFile(file)
+                const absFile = path.join(cwd, file)
+                const source = await getCacheOrReadFile(absFile)
                 zip.file(file, source, { createFolders: false })
-
-                if (isExample) {
-                  const absPath = path.join(context, file)
-                  compilation.fileDependencies.add(absPath)
-                }
+                isExample && compilation.fileDependencies.add(absFile)
               })
             )
 
@@ -206,7 +197,7 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
         return Promise.all(
           this.files.map(async (file) => {
             const absPath = path.join(context, file)
-            const buffer = await readFile(absPath)
+            const buffer = await getCacheOrReadFile(absPath)
             const content = buffer.toString('utf-8')
             return [file, content]
           })
@@ -219,11 +210,11 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
           stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
         },
         async () => {
-          const { examples, projects } = await collectExamples()
-          const stats = await compileTarballs(projects, examples)
+          const { rootPath, examples, projects, isWorkspace } = await collectExamples()
+          const stats = await packTarballs({ rootPath, examples, projects, isWorkspace })
           const extras = await collectExtras()
           const tarballs = Array.from(stats.keys())
-          const content = JSON.stringify({ examples, tarballs, extras }, null, 2)
+          const content = JSON.stringify({ examples, tarballs, extras, isWorkspace }, null, 2)
           const source = new webpack.sources.RawSource(content)
           compilation.emitAsset(this.manifest, source)
         }
@@ -231,23 +222,23 @@ export class StackblitzWebpackPlugin extends SeedWebpackPlugin {
     })
   }
 
-  public applyScript(compiler: Compiler) {
-    const { context, webpack } = compiler
+  /** inject client script */
+  public applyClient(compiler: Compiler) {
+    const { webpack } = compiler
     const finalPublicPath = this.manifest
 
-    const plugins = [
-      new webpack.DefinePlugin({ __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath) }),
-      new webpack.EntryPlugin(context, path.join(__dirname, 'client'), {
-        filename: 'dumlj.stackblitz-webpack-plugin.js',
-      }),
-    ]
+    new webpack.DefinePlugin({
+      __STACKBLITZ_HTML_TAG__: JSON.stringify(this.customElement),
+      __STACKBLITZ_MANIFEST__: JSON.stringify(finalPublicPath),
+    }).apply(compiler)
 
-    plugins.forEach((instance) => instance.apply(compiler))
+    new InjectEntryScriptWebpackPlugin(this.customComponent).apply(compiler)
   }
 
   public apply(compiler: Compiler) {
     super.apply(compiler)
-    this.applyScript(compiler)
+
+    this.applyClient(compiler)
     this.applyTarball(compiler)
   }
 }

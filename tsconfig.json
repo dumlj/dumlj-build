@@ -3,6 +3,7 @@
     "swc": true,
     "transpileOnly": true,
     "compilerOptions": {
+      "target": "ESNext",
       "module": "commonjs"
     }
   },
@@ -10,9 +11,9 @@
     // 增量编译
     // "incremental": true,
     /* 基本选项 */
-    "target": "ES2015",
+    "target": "ESNext",
     // 模块类型
-    "module": "commonjs",
+    "module": "CommonJS",
     // 指定要包含在编译中的库文件
     "lib": ["dom", "dom.iterable", "esnext"],
     // 允许导入 JS 文件

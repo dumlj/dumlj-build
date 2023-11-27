@@ -1,5 +1,5 @@
-import type { Class } from 'utility-types'
 import type { Compiler } from 'webpack'
+import type { Class } from 'utility-types'
 
 /** 基础插件配置项 */
 export interface SeedWebpackPluginOptions {
@@ -99,7 +99,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
    * 注册的 logger 与 notify 关联，
    * 结束的时候统一打印日志，这样可以比较好输出。
    */
-  protected applyNotify(compiler: Compiler) {
+  public applyNotify(compiler: Compiler) {
     const name = this.pluginName.replace('-plugin', '')
     /** webpack 自带的 logger */
     this.logger = compiler.getInfrastructureLogger(name)
@@ -121,7 +121,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
    * 因为迭代原因，插件更新需要通知。
    * 这里整合 OutdatedWebpackPlugin 来完成更新提醒。
    */
-  protected applyOutdated(compiler: Compiler) {
+  public applyOutdated(compiler: Compiler) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { OutdatedWebpackPlugin } = require('./OutdatedWebpackPlugin')
     const index = compiler.options.plugins.findIndex((plugin) => {

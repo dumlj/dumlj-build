@@ -1,4 +1,4 @@
-import { createCommonExcutor } from '../creators/createCommonExcutor'
+import { createCommonExecutor } from '../creators/createCommonExecutor'
 import type { Dependencies, Package } from '../types'
 import { npmDeclaredDependencies } from './npmDeclaredDependencies'
 
@@ -20,7 +20,7 @@ const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Pac
   return resp.flatMap((item) => item)
 }
 
-export const npmDeclaredParents = createCommonExcutor(command, (stdout, isSync) => {
+export const npmDeclaredParents = createCommonExecutor(command, (stdout, isSync) => {
   const source = stdout.toString().trim()
   const { dependencies } = JSON.parse(source)
   const parents = travel(dependencies)

@@ -1,9 +1,9 @@
-import { createGitExcutor } from '../creators/createGitExcutor'
+import { createGitExecutor } from '../creators/createGitExecutor'
 
 const command = () => 'git log --pretty="%an %ae%n%cn %ce"'
 
 /** 克隆项目 */
-export const gitContributors = createGitExcutor(command, (content) => {
+export const gitContributors = createGitExecutor(command, (content) => {
   const uniqed = Array.from(new Set(content.split('\n')))
   const contributors = uniqed.map((item) => {
     const [prefix, domain] = item.split('@')

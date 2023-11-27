@@ -7,7 +7,7 @@ docs-dist
 coverage
 junit.xml
 gh-pages
-.dumi
+.dumi/tmp*
 
 # Husky
 .husky

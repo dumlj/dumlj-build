@@ -1,8 +1,8 @@
 ---
-title: Vite Plugin
+title: Vite Plugin Collection
 nav:
   title: Vite Plugin
   order: 2
 ---
 
-# Vite Plugin
+# Vite Plugin Collection

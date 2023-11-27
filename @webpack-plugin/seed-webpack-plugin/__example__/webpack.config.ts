@@ -1,18 +1,18 @@
 import type { Configuration } from 'webpack'
-import { VitrualWebpackPlugin } from '@dumlj/vitrual-webpack-plugin'
+import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { CustomWebpackPlugin } from './CustomWebpackPlugin'
 
 const CONFIG_A: Configuration = {
   name: 'a',
   mode: 'production',
-  plugins: [new VitrualWebpackPlugin(), new CustomWebpackPlugin()],
+  plugins: [new MemfsWebpackPlugin(), new CustomWebpackPlugin()],
 }
 
 const CONFIG_B: Configuration = {
   name: 'b',
   mode: 'production',
   plugins: [
-    new VitrualWebpackPlugin(),
+    new MemfsWebpackPlugin(),
     new CustomWebpackPlugin({
       unnecessary: 'ok',
     }),

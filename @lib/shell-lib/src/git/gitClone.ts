@@ -1,4 +1,4 @@
-import { createGitExcutor } from '../creators/createGitExcutor'
+import { createGitExecutor } from '../creators/createGitExecutor'
 
 export interface GitCloneOptions {
   url: string
@@ -8,4 +8,4 @@ export interface GitCloneOptions {
 const command = ({ url, dist }: GitCloneOptions) => `git clone ${url} ${dist}`
 
 /** 获取 Commit 哈希 */
-export const gitClone = createGitExcutor(command)
+export const gitClone = createGitExecutor(command)

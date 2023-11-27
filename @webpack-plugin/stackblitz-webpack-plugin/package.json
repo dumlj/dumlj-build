@@ -2,7 +2,6 @@
   "name": "@dumlj/stackblitz-webpack-plugin",
   "version": "0.0.1",
   "description": "Online demo of stackblitz implementation.",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dumlj/dumlj-build",
@@ -13,18 +12,19 @@
   "types": "./libs/index.d.ts",
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1",
+    "@dumlj/util-lib": "^0.0.1",
     "@stackblitz/sdk": "^1.9.0",
     "fs-extra": "^11.1.1",
-    "glob": "^10.3.4",
-    "tslib": "^2.5.0",
+    "glob": "^10.3.10",
     "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
+    "tslib": "^2.5.0",
     "utility-types": "^3.10.0",
-    "lodash": "^4.17.21"
+    "@dumlj/inject-entry-script-webpack-plugin": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
-    "@types/webpack": "^5",
+    "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"
   },
   "peerDependencies": {

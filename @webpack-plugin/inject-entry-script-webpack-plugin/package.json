@@ -1,0 +1,28 @@
+{
+  "name": "@dumlj/inject-entry-script-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Append or prepend scripts to entries.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@webpack-plugin/inject-entry-script-webpack-plugin"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@types/webpack": "^5.28.4",
+    "ts-jest": "^29.1.1"
+  },
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

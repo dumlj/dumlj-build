@@ -1,9 +1,9 @@
 ---
-title: Seed Vite Plucin
+title: Seed Vite Plugin
 description: Basic vite plugin.
 group:
   title: Basic
-  order: 9
+  order: 999
 ---
 
 <embed-project src="@dumlj/vite-plugin-seed"></embed-project>

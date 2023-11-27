@@ -1,0 +1,26 @@
+{
+  "name": "@dumlj-example/dynamic-envs-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "build": "webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
+    "@dumlj/feature-pretty": "^0.0.1",
+    "@dumlj/dynamic-envs-webpack-plugin": "0.0.1",
+    "webpack": "5.x",
+    "webpack-cli": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@types/webpack": "^5.28.4"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@dumlj/feature-uploader",
+  "version": "0.0.1",
+  "description": "Corss platform uploader.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@feature/feature-uploader"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.440.0",
+    "@aws-sdk/lib-storage": "^3.440.0",
+    "ali-oss": "^6.18.1",
+    "mime": "3.0.0",
+    "progress-stream": "^2.0.0",
+    "tslib": "^2.5.0",
+    "utility-types": "^3.10.0"
+  },
+  "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@types/ali-oss": "^6.16.4",
+    "@types/mime": "^2.0.3",
+    "@types/progress-stream": "^2.0.2",
+    "memfs": "^4.6.0",
+    "ts-jest": "^29.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

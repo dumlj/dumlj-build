@@ -1,0 +1,24 @@
+{
+  "name": "@template/feature",
+  "version": "0.0.1",
+  "description": "something...",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@feature/directory"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "ts-jest": "^29.1.1",
+    "@jest/types": "^29.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

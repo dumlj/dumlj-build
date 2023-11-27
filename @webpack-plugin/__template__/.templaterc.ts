@@ -13,6 +13,7 @@ export const configure = async (): Promise<TemplateSchema> => {
   return {
     name: 'Webpack Plugin Template',
     description: 'Create a webpack plugin which inherits seed-webpack-plugin.',
+    egName: 'CustomWebpackPlugin',
     nameTransform: (input: string) => {
       const SUFFIX_NAME = 'WebpackPlugin'
 
@@ -42,7 +43,7 @@ export const configure = async (): Promise<TemplateSchema> => {
       const suffix = SUFFIX_NAME.substring(length)
       return { shortName, name, same: suffixSameStr, suffix }
     },
-    outputPathResolver: (kebabCaseName: string) => `@webpack-plugin/${kebabCase(kebabCaseName)}-webpack-plugin/`,
+    outputPathResolver: (kebabCaseName: string) => nameDirectory(kebabCaseName),
     pkgTransform: () => {
       return async ({ name, description, source }) => {
         source.name = nameModule(name)

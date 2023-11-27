@@ -6,7 +6,7 @@ import { DEFAULT_RC_FILE, DEFAULT_TEMPLATE_PATTERN } from '../actions/create/con
 const optionEnhance = registerEnhance('addOption', () => [
   new Option('--name <name>', 'specify project name'),
   new Option('--description <description>', 'specify project description'),
-  new Option('--template <template>', 'specify project type').choices(['cli', 'webpack-plugin']),
+  new Option('--template <template>', 'specify project type').choices(['cli', 'webpack-plugin', 'feature']),
   new Option('--pattern <pattern>', `specify pattern of template name in project. (default ${DEFAULT_TEMPLATE_PATTERN})`),
   new Option('--config <config>', `specify name of config file. (default ${DEFAULT_RC_FILE})`),
 ])

@@ -1,11 +1,11 @@
+import { findOutdateds } from '@dumlj/feature-updater'
+import { importOnlySupportESM } from '@dumlj/util-lib'
 import path from 'path'
 import { type IApi } from 'dumi'
 import chalk from 'chalk'
-import { findOutdateds } from '@dumlj/feature-updater'
 import VirtualModulesPlugin from 'webpack-virtual-modules'
 import type { Assign } from 'utility-types'
 import type { Compiler, WebpackPluginInstance } from 'webpack'
-import inclusion from 'inclusion'
 import { regsiterRemarkCustomComponent, type CustomComponentRender } from './regsiterRemarkCustomComponent'
 import { SYNTAX_PLUGIN_SUFFIX, SYNTAX_MODULE_SUFFIX } from './constants'
 
@@ -53,15 +53,15 @@ export const createDumiPlugin = <O extends Record<string, any>>(name: string, fa
 
   const makeCustomComponentRegsiter = async (api: Api<O>, customComponents: Map<string, string>) => {
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    const { unified } = (await inclusion('unified')) as typeof import('unified')
+    const { unified } = await importOnlySupportESM<typeof import('unified')>('unified')
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    const { default: remarkParse } = (await inclusion('remark-parse')) as typeof import('remark-parse')
+    const { default: remarkParse } = await importOnlySupportESM<typeof import('remark-parse')>('remark-parse')
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    const { default: remarkFrontmatter } = (await inclusion('remark-frontmatter')) as typeof import('remark-frontmatter')
+    const { default: remarkFrontmatter } = await importOnlySupportESM<typeof import('remark-frontmatter')>('remark-frontmatter')
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    const { default: remarkDirective } = (await inclusion('remark-directive')) as typeof import('remark-directive')
+    const { default: remarkDirective } = await importOnlySupportESM<typeof import('remark-directive')>('remark-directive')
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-    const { default: remarkGfm } = (await inclusion('remark-gfm')) as typeof import('remark-gfm')
+    const { default: remarkGfm } = await importOnlySupportESM<typeof import('remark-gfm')>('remark-gfm')
 
     const processor = unified().use(remarkParse).use(remarkFrontmatter).use(remarkDirective).use(remarkGfm)
 

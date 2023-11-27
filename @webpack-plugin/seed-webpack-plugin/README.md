@@ -1,17 +1,22 @@
 <!-- This file is dynamically generated. please edit in __readme__ -->
 
+[![Github Repo](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)](https://github.com/dumlj/dumlj-build/tree/main/@webpack-plugin/seed-webpack-plugin)&nbsp;
+[![codecov](https://codecov.io/gh/dumlj/dumlj-build/graph/badge.svg?token=ELV5W1H0C0)](https://codecov.io/gh/dumlj/dumlj-build)&nbsp;
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&nbsp;
+<a href="https://www.npmjs.com/package/@dumlj/seed-webpack-plugin"><picture><source src="https://badge.fury.io/js/@dumlj/seed-webpack-plugin.svg"><img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version"></picture></a>&nbsp;
+
 # Seed Webpack Plugin
 
 Basic webpack plugins
 
 ## BACKGROUND
 
-Webpack 插件开发存在大量重复流程，因此所有 `@dumlj/*-webpack-plugin` 插件均继承该模块。
+There is a lot of duplication in the development of Webpack plugins, so all '@dumlj/\*-webpack-plugin's can inherit this basic plugin to make development more convenient.
 
 ## FEATURE
 
-- 统一检查更新，更新提示只会来自一个检测，并只有在 package.json 中声明的依赖才会提示（嵌套插件中，没声明的依赖将会忽略）。
-- 提供一些比较通用的方法
+- Check for updates uniformly. Update prompts will only come from one checker, and only dependencies declared in `package.json` will be prompted (in nested plug-ins, undeclared dependencies will be ignored).
+- Provide some more general methods.
 
 ## INSTALL
 
@@ -61,4 +66,14 @@ export class CustomWebpackPlugin extends SeedWebpackPlugin {
 
 ## LIVE DEMO
 
-<stackblitz-live-demo height="800px" src="@dumlj-example/seed-webpack-plugin"></stackblitz-live-demo>
+<dumlj-stackblitz height="47vw" src="@dumlj-example/seed-webpack-plugin"></dumlj-stackblitz>
+
+## INTERNAL DEPENDENCIES
+
+<pre>
+<b>@dumlj/seed-webpack-plugin</b>
+└─┬ <a is="dumlj-link" data-project="%7B%22name%22:%22@dumlj/feature-updater%22,%22version%22:%220.0.1%22,%22description%22:%22updater%20for%20packages.%22,%22isPrivate%22:false,%22location%22:%22@feature/feature-updater%22,%22dependencies%22:%5B%22@dumlj/shell-lib%22,%22@dumlj/util-lib%22,%22fs-extra%22,%22semver%22,%22tslib%22,%22@dumlj/mock-lib%22,%22ts-jest%22,%22@jest/types%22%5D,%22workspaceDependencies%22:%5B%22@dumlj/shell-lib%22,%22@dumlj/util-lib%22,%22@dumlj/mock-lib%22%5D%7D" href="https://github.com/dumlj/dumlj-build/tree/main/@feature/feature-updater">@dumlj/feature-updater</a>
+  ├─── <a is="dumlj-link" data-project="%7B%22name%22:%22@dumlj/shell-lib%22,%22version%22:%220.0.1%22,%22description%22:%22shell%20%E5%B7%A5%E5%85%B7%E5%BA%93%22,%22isPrivate%22:false,%22location%22:%22@lib/shell-lib%22,%22dependencies%22:%5B%22command-exists%22,%22tslib%22,%22@jest/types%22,%22lodash%22,%22chokidar%22,%22ts-jest%22,%22tsd-lite%22%5D,%22workspaceDependencies%22:%5B%5D%7D" href="https://github.com/dumlj/dumlj-build/tree/main/@lib/shell-lib">@dumlj/shell-lib</a>
+  ├─── <a is="dumlj-link" data-project="%7B%22name%22:%22@dumlj/util-lib%22,%22version%22:%220.0.1%22,%22description%22:%22util%20%E5%B7%A5%E5%85%B7%E5%BA%93%22,%22isPrivate%22:false,%22location%22:%22@lib/util-lib%22,%22dependencies%22:%5B%22fs-extra%22,%22glob%22,%22lodash%22,%22tslib%22,%22@jest/types%22,%22memfs%22,%22ts-jest%22%5D,%22workspaceDependencies%22:%5B%5D%7D" href="https://github.com/dumlj/dumlj-build/tree/main/@lib/util-lib">@dumlj/util-lib</a>
+  └─── <a is="dumlj-link" data-project="%7B%22name%22:%22@dumlj/mock-lib%22,%22version%22:%220.0.1%22,%22description%22:%22mock%20%E5%B7%A5%E5%85%B7%E5%BA%93%22,%22isPrivate%22:true,%22location%22:%22@lib/mock-lib%22,%22dependencies%22:%5B%22memfs%22,%22tslib%22,%22webpack%22,%22@jest/types%22,%22ts-jest%22%5D,%22workspaceDependencies%22:%5B%5D%7D" href="https://github.com/dumlj/dumlj-build/tree/main/@lib/mock-lib">@dumlj/mock-lib</a><sup><small><i>PRIVATE</i></small></sup>
+</pre>

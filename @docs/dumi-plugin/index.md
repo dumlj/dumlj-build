@@ -1,8 +1,8 @@
 ---
-title: Dumi Plugin
+title: Dumi Plugin Collection
 nav:
   title: Dumi Plugin
   order: 3
 ---
 
-# Dumi Plugin
+# Dumi Plugin Collection

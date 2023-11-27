@@ -2,11 +2,13 @@ import path from 'path'
 import type { Config } from '@jest/types'
 import { workspaces } from './package.json'
 
+const TIMEOUT = 30e3
 const { packages } = workspaces
 
 export default async (): Promise<Config.InitialOptions> => {
   return {
     skipFilter: true,
+    testTimeout: TIMEOUT,
     projects: [
       /**
        * 规范检测

@@ -4,17 +4,17 @@
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
-    "build": "yarn webpack -c webpack.config.ts"
+    "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
     "@dumlj/crx-manifest-webpack-plugin": "0.0.1",
     "@dumlj/feature-pretty": "^0.0.1",
-    "@dumlj/vitrual-webpack-plugin": "0.0.1",
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
     "fs-extra": "^11.1.1",
     "html-webpack-plugin": "^5.5.3"
   },
   "devDependencies": {
-    "webpack": "^5",
+    "webpack": "^5.89.0",
     "webpack-cli": "^5"
   },
   "optionalDependencies": {

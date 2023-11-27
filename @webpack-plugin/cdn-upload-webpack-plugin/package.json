@@ -1,0 +1,36 @@
+{
+  "name": "@dumlj/cdn-upload-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Corss platform uploader for webpack build.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dumlj/dumlj-build",
+    "directory": "@webpack-plugin/cdn-upload-webpack-plugin"
+  },
+  "license": "MIT",
+  "main": "./libs/index.js",
+  "types": "./libs/index.d.ts",
+  "dependencies": {
+    "@dumlj/feature-uploader": "^0.0.1",
+    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "fs-extra": "^11.1.1",
+    "lodash": "^4.17.21",
+    "micromatch": "^4.0.5",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@types/cli-progress": "^3.11.0",
+    "@types/webpack": "^5.28.4",
+    "ts-jest": "^29.1.1"
+  },
+  "peerDependencies": {
+    "webpack": "5.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

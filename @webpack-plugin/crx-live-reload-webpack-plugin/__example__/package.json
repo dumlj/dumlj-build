@@ -1,0 +1,27 @@
+{
+  "name": "@dumlj-example/crx-live-reload-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "serve": "concurrently \"webpack serve -c webpack.config.ts\" \"node ./static-serve\""
+  },
+  "dependencies": {
+    "@dumlj/crx-live-reload-webpack-plugin": "0.0.1",
+    "@dumlj/memfs-webpack-plugin": "0.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "webpack-cli": "^5"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@dumlj-example/dynamic-public-path-webpack-plugin",
+  "version": "0.0.1",
+  "private": true,
+  "main": "webpack.config.ts",
+  "scripts": {
+    "serve": "cd ./dist && serve-static-cli",
+    "build": "webpack -c webpack.config.ts"
+  },
+  "dependencies": {
+    "@dumlj/feature-pretty": "^0.0.1",
+    "@dumlj/dynamic-public-path-webpack-plugin": "0.0.1",
+    "webpack": "5.x",
+    "webpack-cli": "^5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@types/webpack": "^5.28.4",
+    "serve-static-cli": "^1.0.2"
+  },
+  "optionalDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "@babel/register": "^7.22.15"
+  }
+}

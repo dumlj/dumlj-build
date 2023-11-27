@@ -3,7 +3,5 @@ title: Dumlj Build
 order: 1
 hero:
   title: Dumlj Build
-  description: Any tools used to build the project.
+  description: A collection of front-end project development build tools.
 ---
-
-<embed src="@/README.md"></embed>

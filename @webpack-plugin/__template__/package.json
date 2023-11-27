@@ -16,9 +16,9 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/webpack": "^5",
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "@jest/types": "^29.6.3",
+    "@types/webpack": "^5.28.4",
+    "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
     "webpack": "5.x"

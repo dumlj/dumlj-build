@@ -1,7 +1,7 @@
 {
   "name": "@dumlj/dumi-plugin-seed",
   "version": "0.0.1",
-  "description": "basic dumi plugin",
+  "description": "Basic dumi plugin",
   "private": true,
   "repository": {
     "type": "git",
@@ -21,12 +21,12 @@
     "@dumlj/feature-updater": "^0.0.1",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
-    "node-html-parser": "^6.1.10",
+    "node-html-parser": "^6.1.11",
     "tslib": "^2.5.0",
     "utility-types": "^3.10.0",
-    "webpack": "^5.88.2",
+    "webpack": "^5.89.0",
     "webpack-virtual-modules": "^0.6.0",
-    "inclusion": "^1.0.1"
+    "@dumlj/util-lib": "^0.0.1"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

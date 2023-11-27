@@ -64,7 +64,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
-        ignorePatterns: ['libs', 'node_modules'].concat(ignore),
+        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore),
       })
 
       const dependencies: Record<string, string> = {}
@@ -77,7 +77,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
             return micromatch.isMatch(relativePath, srcPattern)
           })
 
-          isDev ? (devDependencies[name] = `^${version}`) : (dependencies[name] = `^${version}`)
+          isDev ? (devDependencies[name] = `^${version}`.trimEnd()) : (dependencies[name] = `^${version}`.trimEnd())
         })
       )
 

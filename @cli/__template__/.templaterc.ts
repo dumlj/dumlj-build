@@ -12,6 +12,7 @@ export const configure = async (): Promise<TemplateSchema> => {
   return {
     name: 'Cli Template',
     description: 'Create a cli which inherits seed-cli.',
+    egName: 'CustomCli',
     nameTransform: (input: string) => {
       const SUFFIX_NAME = 'Cli'
 
@@ -41,7 +42,7 @@ export const configure = async (): Promise<TemplateSchema> => {
       const suffix = SUFFIX_NAME.substring(length)
       return { shortName, name, same: suffixSameStr, suffix }
     },
-    outputPathResolver: (kebabCaseName: string) => `@cli/${kebabCaseName}-cli/`,
+    outputPathResolver: (kebabCaseName: string) => nameDirectory(kebabCaseName),
     pkgTransform: () => {
       return async ({ name, description, source }) => {
         source.name = nameModule(name)
