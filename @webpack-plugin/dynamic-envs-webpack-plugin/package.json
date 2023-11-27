@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dynamic-envs-webpack-plugin",
-  "version": "2.5.18",
+  "version": "2.5.19",
   "description": "Dynamically getting environment variables.",
   "repository": {
     "type": "git",
@@ -11,9 +11,9 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.18",
-    "@dumlj/seed-webpack-plugin": "^2.5.18",
-    "@dumlj/util-lib": "^2.5.18",
+    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.19",
+    "@dumlj/seed-webpack-plugin": "^2.5.19",
+    "@dumlj/util-lib": "^2.5.19",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
     "tslib": "^2.5.0"

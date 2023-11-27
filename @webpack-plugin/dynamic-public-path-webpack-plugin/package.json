@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dynamic-public-path-webpack-plugin",
-  "version": "2.5.18",
+  "version": "2.5.19",
   "description": "Dynamically setting public path for webpack.",
   "private": true,
   "repository": {
@@ -12,10 +12,10 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.18",
-    "@dumlj/html-enhance-webpack-plugin": "^2.5.18",
-    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.18",
-    "@dumlj/seed-webpack-plugin": "^2.5.18",
+    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.19",
+    "@dumlj/html-enhance-webpack-plugin": "^2.5.19",
+    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.19",
+    "@dumlj/seed-webpack-plugin": "^2.5.19",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
