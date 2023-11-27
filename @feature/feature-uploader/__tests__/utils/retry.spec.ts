@@ -27,7 +27,7 @@ describe('test utils/retry', () => {
       })
     )
 
-    await handleRejects.toThrowError('some error')
+    await handleRejects.toThrow('some error')
     expect(handle).toHaveBeenCalledTimes(3 + 1)
   })
 })

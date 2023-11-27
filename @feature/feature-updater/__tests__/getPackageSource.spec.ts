@@ -6,7 +6,7 @@ jest.mock('fs-extra', () => {
     version: '0.0.1',
   }
 
-  const readJson = async () => SOURCE
+  const readJson = jest.fn(async () => SOURCE)
   return { readJson }
 })
 
@@ -18,5 +18,8 @@ describe('test getPackageSource', () => {
     // 只执行一次，二次为缓存
     const cache = await getPackageSource()
     expect(cache.name).toBe('dumlj')
+
+    const fs = await import('fs-extra')
+    expect(fs.readJson).toHaveBeenCalledTimes(1)
   })
 })
