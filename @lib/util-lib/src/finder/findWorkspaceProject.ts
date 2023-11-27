@@ -41,9 +41,13 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
     return findWorkspaceProject({ pattern, fromCache, cwd })
   }
 
-  const folders = await Promise.all(pattern.map((pattern) => glob(path.join(cwd, pattern), {
-    windowsPathsNoEscape: true,
-  })))
+  const folders = await Promise.all(
+    pattern.map((pattern) =>
+      glob(path.join(cwd, pattern), {
+        windowsPathsNoEscape: true,
+      })
+    )
+  )
 
   const results = await Promise.all(
     folders.flatMap((locations) =>

@@ -21,7 +21,7 @@ export const badgeNpmVersion = (context: Context) => {
   const { name } = context
   return (
     `<a href="https://www.npmjs.com/package/${name}">` +
-    `<picture><source src="https://badge.fury.io/js/${name.replace(/\//g, '%2F')}.svg">` +
+    `<picture><source srcset="https://badge.fury.io/js/${name.replace(/\//g, '%2F')}.svg">` +
     `<img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version">` +
     `</picture>` +
     `</a>`

@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&nbsp;
 [![Github Repo](https://img.shields.io/badge/GITHUB-REPO-0?logo=github)](https://github.com/dumlj/dumlj-build/tree/main/@cli/tidytsc-cli)&nbsp;
-<a href="https://www.npmjs.com/package/@dumlj/tidy-cli"><picture><source src="https://badge.fury.io/js/@dumlj%2Ftidy-cli.svg"><img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version"></picture></a>&nbsp;
+<a href="https://www.npmjs.com/package/@dumlj/tidy-cli"><picture><source srcset="https://badge.fury.io/js/@dumlj%2Ftidy-cli.svg"><img src="https://img.shields.io/badge/NPM-Unpublished-e74c3c" alt="NPM Version"></picture></a>&nbsp;
 [![codecov](https://codecov.io/gh/dumlj/dumlj-build/graph/badge.svg?token=ELV5W1H0C0)](https://codecov.io/gh/dumlj/dumlj-build)&nbsp;
 
 # Tidy Cli
