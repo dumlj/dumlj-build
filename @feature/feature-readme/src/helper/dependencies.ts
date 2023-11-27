@@ -14,7 +14,7 @@ export const badgeGithub = (context: Context) => {
 }
 
 export const badgeMIT = () => {
-  return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+  return '[![License: MIT](https://img.shields.io/badge/License-MIT-4c1.svg)](https://opensource.org/licenses/MIT)'
 }
 
 export const badgeNpmVersion = (context: Context) => {
