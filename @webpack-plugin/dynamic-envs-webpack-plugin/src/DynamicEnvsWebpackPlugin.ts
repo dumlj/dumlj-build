@@ -2,10 +2,12 @@ import { SeedWebpackPlugin, type SeedWebpackPluginOptions } from '@dumlj/seed-we
 import { guid, defenv } from '@dumlj/util-lib'
 import { InjectEntryScriptWebpackPlugin } from '@dumlj/inject-entry-script-webpack-plugin'
 import defaultsDeep from 'lodash/defaultsDeep'
+import path from 'path'
+import { tmpdir } from 'os'
 import chalk from 'chalk'
 import { makeGetEnvFnRenderer } from './utils/makeGetEnvFnRenderer'
 import { GLOBAL_TARGET, FIND_ENV_MODULE } from './constants/conf'
-import type { Compiler } from 'webpack'
+import type { Compiler, WebpackPluginInstance, Stats } from 'webpack'
 
 export interface DynamicEnvsWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 存储环境变量的全局变量 */
@@ -54,9 +56,38 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
     this.injected = false
   }
 
+  protected spwanCompile(compiler: Compiler, scriptPath: string, plugins: WebpackPluginInstance[]) {
+    const { webpack, context } = compiler
+    const output = path.join(tmpdir(), (Math.floor(Math.random() * 1e13) + Date.now()).toString(36))
+    const filename = path.basename(scriptPath)
+
+    compiler.hooks.beforeRun.tapPromise(this.pluginName, async () => {
+      const stats = await new Promise<Stats>((resolve, reject) => {
+        const childCompiler = webpack({
+          mode: 'production',
+          entry: {
+            [filename.replace(path.extname(scriptPath), '')]: scriptPath,
+          },
+          output: {
+            path: output,
+          },
+          plugins: [...plugins],
+        })
+
+        childCompiler.run((error, stats) => (error ? reject(error) : resolve(stats)))
+      })
+
+      if (stats.hasErrors()) {
+        this.notify('error', `Compile ${path.relative(context, scriptPath)} failed.`)
+      }
+    })
+
+    return path.join(output, filename)
+  }
+
   /** inject env getter scripts to entries */
   public applyInjectEnvGetterScript(compiler: Compiler) {
-    const { options } = compiler
+    const { options, webpack } = compiler
     options.resolve.fallback = {
       ...options.resolve.fallback,
       fs: false,
@@ -64,7 +95,19 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
       os: false,
     }
 
-    new InjectEntryScriptWebpackPlugin(this.scriptPath).apply(compiler)
+    const file = this.spwanCompile(compiler, this.scriptPath, [
+      /**
+       * 关键变量
+       * 主要用于替换 /tempaltes/find-env.ts 中的变量以做到动态函数名
+       */
+      new webpack.DefinePlugin({
+        __GLOBAL_TARGET__: this.globalThis,
+        __GLOBAL_PROP_NAME__: JSON.stringify(this.globalThisProp),
+        __GLOBAL_PROP_FN__: JSON.stringify(this.globalThisFn),
+      }),
+    ])
+
+    new InjectEntryScriptWebpackPlugin(file).apply(compiler)
   }
 
   /** inject variables by webpack define plugin */
@@ -77,18 +120,7 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
     const originalValues = plugins.reduce((variables, plugin) => Object.assign(variables, plugin.definitions), {})
     const renderGetEnvFn = makeGetEnvFnRenderer(this.globalThisFn, this.globalThis)
     const { raw: envs, stringified: variables } = defenv(renderGetEnvFn)(this.variables)
-
-    /**
-     * 关键变量
-     * 主要用于替换 /tempaltes/find-env.ts 中的变量以做到动态函数名
-     */
-    const keyVariables = {
-      __GLOBAL_TARGET__: this.globalThis,
-      __GLOBAL_PROP_NAME__: JSON.stringify(this.globalThisProp),
-      __GLOBAL_PROP_FN__: JSON.stringify(this.globalThisFn),
-    }
-
-    const clonedVariables: Record<string, any> = Object.assign({}, keyVariables, variables)
+    const clonedVariables: Record<string, any> = Object.assign({}, variables)
 
     // 这里主要为了解决 `process.env = { app: 123 }` 优先于 `process.env.app` 问题
     // 由于第三方包可能存在遍历 `process.env` 的情况, 因此这里不能将 dotenv 变量
@@ -118,7 +150,7 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
     const conflitedKeys = Object.keys(definitions).filter((name) => originalKeys.includes(name))
 
     // 合并所有变量
-    defaultsDeep(definitions, keyVariables, originalValues)
+    defaultsDeep(definitions, originalValues)
 
     // 收集后面的 DefinePlugin 环境变量
     const noConflit = DefinePlugin.prototype.apply
@@ -129,13 +161,13 @@ export class DynamicEnvsWebpackPlugin extends SeedWebpackPlugin {
         }
       })
 
-      // 以防插件没有被调用
-      // 相同的字段不会告警
-      noConflit.call({ definitions }, compiler)
+      /**
+       * 这里只做收集，所以必须指向 this.definitions
+       * 否则可能影响子编译
+       */
+      noConflit.call({ definitions: this.definitions }, compiler)
     }
 
-    // 去除前面的 DefinePlugin
-    options.plugins = plugins.filter((plugin) => !plugins.includes(plugin))
     noConflit.call({ definitions }, compiler)
 
     const warnnings: string[] = conflitedKeys.map((name) => `Conflicting values for ${name}`)
