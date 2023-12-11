@@ -5,8 +5,8 @@ jest.mock('child_process', () => {
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { NAME, PACKAGE } = jest.requireActual<typeof import('./__mocks__/constants')>('./__mocks__/constants')
   const COMMAND_RESPONSE_MAP = {
-    [`npm ls "${NAME}" --json --omit optional --omit peer`]: JSON.stringify(PACKAGE, null, 2),
-    'npm ls --json --omit optional --omit peer --depth 0': JSON.stringify(PACKAGE, null, 2),
+    [`npm ls "${NAME}" --json --link --omit optional --omit peer`]: JSON.stringify(PACKAGE, null, 2),
+    'npm ls --json --link --omit optional --omit peer --depth 0': JSON.stringify(PACKAGE, null, 2),
   }
 
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports

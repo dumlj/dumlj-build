@@ -2,7 +2,7 @@ import { createCommonExecutor } from '../creators/createCommonExecutor'
 import type { Dependencies, Package } from '../types'
 import { npmDeclaredDependencies } from './npmDeclaredDependencies'
 
-const command = (name: string) => `npm ls "${name}" --json --omit optional --omit peer`
+const command = (name: string) => `npm ls "${name}" --json --link --omit optional --omit peer`
 
 const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Package[] => {
   const resp = Object.keys(dependencies || {}).flatMap((name) => {
@@ -20,12 +20,12 @@ const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Pac
   return resp.flatMap((item) => item)
 }
 
-export const npmDeclaredParents = createCommonExecutor(command, (stdout, isSync) => {
+export const npmDeclaredParents = createCommonExecutor(command, (stdout, { sync }) => {
   const source = stdout.toString().trim()
   const { dependencies } = JSON.parse(source)
   const parents = travel(dependencies)
 
-  if (isSync) {
+  if (sync) {
     /** 项目中所有声明的依赖集合 */
     const declares = npmDeclaredDependencies.sync()
     return parents.filter(({ name }) => declares.find((item) => item.name === name))

@@ -4,6 +4,7 @@
   "private": true,
   "description": "something build utilities",
   "license": "MIT",
+  "packageManager": "pnpm@8.10.2",
   "workspaces": {
     "packages": [
       "@lib/*",
@@ -18,13 +19,13 @@
   "scripts": {
     "commit": "git-cz",
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
-    "ci:coverage": "yarn compile && yarn test",
-    "ci:build": "yarn compile",
+    "ci:coverage": "pnpm compile && pnpm test",
+    "ci:build": "pnpm compile",
     "preinstall": "node ./scripts/preinstall",
     "postinstall": "node ./scripts/postinstall",
     "clear": "rimraf --glob ./@*/*/{libs,build,*.tsbuildinfo,tsconfig.build.json} tsconfig.build.json",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
-    "lint": "yarn lint:ts",
+    "lint": "pnpm lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
     "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --ignore .templaterc.ts\"",
     "readme": "dumlj readme --exclude **/__example__",
@@ -32,9 +33,20 @@
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
-    "ok": "yarn tidy && yarn compile && yarn lint && yarn test && yarn readme && yarn format"
+    "ok": "pnpm tidy && pnpm compile && pnpm lint && pnpm test && pnpm readme && pnpm format"
   },
   "devDependencies": {
+    "@dumlj/mock-lib": "workspace:*",
+    "@dumlj/seed-cli": "workspace:*",
+    "@dumlj/seed-webpack-plugin": "workspace:*",
+    "@dumlj/shell-lib": "workspace:*",
+    "@dumlj/util-lib": "workspace:*",
+    "@dumlj/tidy-cli": "workspace:*",
+    "@types/node": "^20.10.1",
+    "lodash": "^4.17.21",
+    "micromatch": "^4.0.5"
+  },
+  "dependencies": {
     "@commitlint/cli": "^17.4.0",
     "@commitlint/config-conventional": "^17.4.0",
     "@jest/types": "^29.6.3",

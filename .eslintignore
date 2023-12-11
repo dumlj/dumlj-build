@@ -10,6 +10,7 @@ gh-pages
 !.templaterc.ts
 !.readmerc.ts
 !.dumirc.ts
+!.dumljrc.ts
 
 # Husky
 .husky

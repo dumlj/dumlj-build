@@ -14,7 +14,6 @@
     "webpack-cli": "^5"
   },
   "devDependencies": {
-    "@types/node": "^20.6.0",
     "@types/webpack": "^5.28.4",
     "serve-static-cli": "^1.0.2"
   },

@@ -19,7 +19,8 @@ describe('test actions/tidyReadme', () => {
         }),
       }))
 
-    const { gitContributors, gitRepoUrl, yarnWorkspaces } = await import('@dumlj/shell-lib')
+    const { findWorkspaceProject } = await import('@dumlj/util-lib')
+    const { gitContributors, gitRepoUrl } = await import('@dumlj/shell-lib')
     jest.isMockFunction(gitContributors) &&
       gitContributors.mockImplementation(async () => {
         return [{ name: 'DavidJones', email: 'qowera@gmail.com' }]
@@ -30,8 +31,8 @@ describe('test actions/tidyReadme', () => {
         return 'https://github.com/dumlj/dumlj.git'
       })
 
-    jest.isMockFunction(yarnWorkspaces) &&
-      yarnWorkspaces.mockImplementation(async () => {
+    jest.isMockFunction(findWorkspaceProject) &&
+      findWorkspaceProject.mockImplementation(async () => {
         return [
           {
             name: 'a',
