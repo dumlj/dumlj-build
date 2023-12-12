@@ -21,7 +21,6 @@
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
     "ci:coverage": "pnpm compile && pnpm test",
     "ci:build": "pnpm compile",
-    "preinstall": "node ./scripts/preinstall",
     "postinstall": "node ./scripts/postinstall",
     "clear": "rimraf --glob ./@*/*/{libs,build,*.tsbuildinfo,tsconfig.build.json} tsconfig.build.json",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
