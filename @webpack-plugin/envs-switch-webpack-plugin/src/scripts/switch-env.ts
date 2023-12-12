@@ -1,12 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { promisify } from 'util'
 import { parse } from 'node-html-parser'
 import { makeEnvTagRenderer } from '../utils/makeEnvTagRenderer'
-
-const exists = promisify(fs.exists)
-const read = promisify(fs.readFile)
-const write = promisify(fs.writeFile)
 
 declare interface __ENVS_SWITCH_CONFIG__ {
   envs: Record<string, Record<string, string>>
@@ -33,15 +28,15 @@ const injectScript = (content: string, variables: Record<string, any>) => {
 /** 替换 HTML */
 const overrideHtmls = async (file: string, variables: Record<string, any>) => {
   const filePath = path.isAbsolute(file) ? file : path.join(process.cwd(), file)
-  if (!(await exists(filePath))) {
+  if (!fs.existsSync(filePath)) {
     // eslint-disable-next-line no-console
     console.log(`[WARN] File ${filePath} not found.`)
     return
   }
 
-  const html = await read(filePath, 'utf-8')
+  const html = await fs.promises.readFile(filePath, 'utf-8')
   const finalHTML = injectScript(html, variables)
-  await write(filePath, finalHTML, 'utf-8')
+  await fs.promises.writeFile(filePath, finalHTML, 'utf-8')
   // eslint-disable-next-line no-console
   console.log(`[OK] Inject ${file} success.`)
 }
@@ -51,8 +46,9 @@ const switchEnv = async (env: string) => {
   const variables = configs?.envs?.[env]
   const files = configs?.htmls || []
   if (!(typeof variables === 'object' && variables !== null)) {
+    const message = configs?.envs ? ` Only ${Object.keys(configs?.envs)} support.` : ''
     // eslint-disable-next-line no-console
-    console.error(`\n[ERROR] Environment variables of ${env} are not found. Only ${Object.keys(configs?.envs)} support.\n`)
+    console.error(`\n[ERROR] Environment variables of ${env} are not found.${message}\n`)
     return
   }
 

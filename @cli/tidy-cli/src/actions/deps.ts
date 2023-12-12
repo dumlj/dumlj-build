@@ -91,14 +91,14 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       if (missDependencies) {
         source.dependencies = {
-          ...source?.dependencies,
+          ...source.dependencies,
           ...dependencies,
         }
       }
 
       if (missDevDependencies) {
         source.devDependencies = {
-          ...source?.devDependencies,
+          ...source.devDependencies,
           ...devDependencies,
         }
       }

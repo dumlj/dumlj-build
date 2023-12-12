@@ -26,9 +26,9 @@ export class InjectEntryScriptWebpackPlugin extends SeedWebpackPlugin {
   protected pushScriptToEntries(scriptPath: string, options?: InjectEntryScriptWebpackPluginOptions) {
     return <T>(entries: T): T => {
       const { after, context = process.cwd() } = options || {}
-      for (const entry of Object.values(entries)) {
+      for (let entry of Object.values(entries)) {
         if (!entry) {
-          entry.import = [scriptPath]
+          entry = { import: [scriptPath] }
         }
 
         if (typeof entry === 'object' && Object.keys(entry).length === 0) {
