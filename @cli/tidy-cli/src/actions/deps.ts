@@ -2,8 +2,8 @@ import chalk from 'chalk'
 import fs from 'fs-extra'
 import path from 'path'
 import micromatch from 'micromatch'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
-import { yarnWorkspaces } from '@dumlj/shell-lib'
+import { resolveOptions } from '@dumlj/seed-cli'
+import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
 import depcheck from 'depcheck'
 import { findSiblingsVersion } from '../utils/findSiblingsVersion'
 import { ok, info, warn } from '../services/logger'
@@ -46,7 +46,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
   const ignore = Array.isArray(inIgnore) ? inIgnore : typeof inIgnore === 'string' ? [inIgnore] : []
   const necessary = Array.isArray(inNecessary) ? inNecessary : inNecessary.split(',')
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
-  const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
+  const workspaces = (await findWorkspaceProject()).filter(({ location }) => {
     if (Array.isArray(include) && include.length > 0) {
       return micromatch.isMatch(location, include)
     }
@@ -61,10 +61,12 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
   await Promise.all(
     workspaces.map(async ({ location }) => {
       const absPath = path.join(rootPath, location)
+      const config = await resolveOptions<TidyDepsOptions>('tidy', absPath)
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
-        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore),
+        ignoreMatches: config?.ignore as ReadonlyArray<string>,
+        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore, config?.ignore),
       })
 
       const dependencies: Record<string, string> = {}
@@ -89,14 +91,14 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       if (missDependencies) {
         source.dependencies = {
-          ...source?.dependencies,
+          ...source.dependencies,
           ...dependencies,
         }
       }
 
       if (missDevDependencies) {
         source.devDependencies = {
-          ...source?.devDependencies,
+          ...source.devDependencies,
           ...devDependencies,
         }
       }
@@ -125,13 +127,13 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       const uselessDevDependencies: Record<string, string> = {}
 
       Object.keys(source?.dependencies || []).forEach((name) => {
-        if (!(name in using || necessary.includes(name))) {
+        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
           uselessDependencies[name] = source.dependencies[name]
         }
       })
 
       Object.keys(source?.devDependencies || []).forEach((name) => {
-        if (!(name in using || necessary.includes(name))) {
+        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
           uselessDevDependencies[name] = source.devDependencies[name]
         }
       })

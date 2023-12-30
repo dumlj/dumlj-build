@@ -1,8 +1,8 @@
 import { fail, ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
 import { pressAnyToContinue } from '@dumlj/feature-cliui'
-import { gitDetectIgnore, yarnWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
+import { gitDetectIgnore } from '@dumlj/shell-lib'
+import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
 import { monitorToDevelop } from '@dumlj/seed-cli'
 import chalk from 'chalk'
 import { trimEnd, kebabCase, defaults } from 'lodash'
@@ -176,7 +176,7 @@ export class Create {
   public async select(options?: SelectOptions) {
     const { only } = options || {}
     const rootPath = await this.getRootPath()
-    const workspaces = await yarnWorkspaces()
+    const workspaces = await findWorkspaceProject()
     const templates = workspaces.filter(({ name }) => new RegExp(`^${this.pattern}`).test(name))
     const choices = await Promise.all(
       templates.map(async ({ name: key, location }) => {

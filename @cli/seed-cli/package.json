@@ -24,6 +24,7 @@
     "@dumlj/feature-updater": "^2.5.20",
     "@dumlj/shell-lib": "^2.5.20",
     "@dumlj/util-lib": "^2.5.20",
+    "@dumlj/feature-prepare": "^2.5.20",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "fs-extra": "^11.1.0",

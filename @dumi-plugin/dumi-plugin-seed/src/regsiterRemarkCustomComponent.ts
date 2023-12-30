@@ -76,7 +76,7 @@ export const regsiterRemarkCustomComponent = (name: string, options?: RegsiterRe
         }
 
         if (typeof result === 'object') {
-          const nodes = Array.isArray(result) ? result : Array.isArray(result?.children) ? result?.children : []
+          const nodes = Array.isArray(result) ? result : Array.isArray(result?.children) ? result.children : []
           nodes.length > 0 && parent?.children.splice(index, 1, ...nodes)
         }
       })

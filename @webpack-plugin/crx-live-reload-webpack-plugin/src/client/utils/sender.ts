@@ -1,5 +1,6 @@
 import { fail, debug } from '../services/logger'
 import { LIVERELOAD_MESSAGE_TARGET } from '../constants/sender'
+import 'chrome'
 
 export interface MessageRequestOptions {
   quiet?: boolean

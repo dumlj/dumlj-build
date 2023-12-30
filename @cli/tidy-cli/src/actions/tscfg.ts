@@ -1,5 +1,4 @@
-import { yarnWorkspaces } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath } from '@dumlj/util-lib'
+import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
 import chalk from 'chalk'
 import isEqual from 'lodash/isEqual'
 import path from 'path'
@@ -35,7 +34,7 @@ export const tidyTscfg = async (options?: TidyTscfgOptions) => {
 
   /** root path in workspaces */
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
-  const workspaces = (await yarnWorkspaces()).filter(({ location }) => {
+  const workspaces = (await findWorkspaceProject()).filter(({ location }) => {
     if (Array.isArray(include) && include.length > 0) {
       return micromatch.isMatch(location, include)
     }

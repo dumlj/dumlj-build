@@ -21,6 +21,10 @@ const CONFIG: Configuration = {
     new DynamicEnvsWebpackPlugin({
       'process.env.APP_ENV': JSON.stringify('development'),
     }),
+    // // batch exceute will inject multiple env getter
+    // new DynamicEnvsWebpackPlugin({
+    //   'process.env.APP_ENV_ANOTHER_KEY': JSON.stringify('another_development'),
+    // }),
     {
       apply(compiler: Compiler) {
         compiler.hooks.afterDone.tap('use-for-echo-and-ignore-me', (stats) => {
