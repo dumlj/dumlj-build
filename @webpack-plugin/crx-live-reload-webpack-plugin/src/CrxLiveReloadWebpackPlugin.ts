@@ -81,21 +81,23 @@ export class CrxLiveReloadWebpackPlugin extends SeedWebpackPlugin {
     })
 
     const { setupMiddlewares } = compiler.options?.devServer || {}
-    compiler.options.devServer = {
-      ...compiler.options.devServer,
-      setupMiddlewares(middlewares: any, devServer: WebpackDevServer) {
-        if (!devServer) {
-          throw new Error('webpack-dev-server is not defined')
-        }
+    Object.assign(compiler.options, {
+      devServer: {
+        ...(compiler.options?.devServer || {}),
+        setupMiddlewares(middlewares: any, devServer: WebpackDevServer) {
+          if (!devServer) {
+            throw new Error('webpack-dev-server is not defined')
+          }
 
-        if (typeof setupMiddlewares === 'function') {
-          setupMiddlewares.call(this, devServer)
-        }
+          if (typeof setupMiddlewares === 'function') {
+            setupMiddlewares.call(this, devServer)
+          }
 
-        devServer.app.get(`/__livereload__`, liveReloadHandler)
-        return middlewares
+          devServer.app.get(`/__livereload__`, liveReloadHandler)
+          return middlewares
+        },
       },
-    }
+    })
   }
 
   /** 注入模块 */

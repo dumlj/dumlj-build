@@ -1,3 +1,4 @@
+export * from './resolveOptions'
 export * from './tryAction'
 export * from './registerCli'
 export * from './enhance'

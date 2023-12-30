@@ -6,7 +6,7 @@ export interface NpmDeclaredDependenciesResp {
   version: string
 }
 
-const command = () => `npm ls --json --omit optional --omit peer --depth 0`
+const command = () => `npm ls --json --link --omit optional --omit peer --depth 0`
 
 /**
  * 获取声明的依赖

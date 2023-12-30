@@ -9,15 +9,9 @@ jest.mock('depcheck')
 
 describe('test actions/tidyDeps', () => {
   beforeAll(async () => {
-    const { findWorkspaceRootPath } = await import('@dumlj/util-lib')
-    jest.isMockFunction(findWorkspaceRootPath) &&
-      findWorkspaceRootPath.mockImplementation(async () => {
-        return '/'
-      })
-
-    const { yarnWorkspaces, execute } = await import('@dumlj/shell-lib')
-    jest.isMockFunction(yarnWorkspaces) &&
-      yarnWorkspaces.mockImplementation(async () => {
+    const { findWorkspaceProject, findWorkspaceRootPath } = await import('@dumlj/util-lib')
+    jest.isMockFunction(findWorkspaceProject) &&
+      findWorkspaceProject.mockImplementation(async () => {
         return [
           {
             name: 'a',
@@ -28,6 +22,12 @@ describe('test actions/tidyDeps', () => {
         ]
       })
 
+    jest.isMockFunction(findWorkspaceRootPath) &&
+      findWorkspaceRootPath.mockImplementation(async () => {
+        return '/'
+      })
+
+    const { execute } = await import('@dumlj/shell-lib')
     // mock findSiblingsVersion
     jest.isMockFunction(execute) &&
       execute.mockImplementation(async () => {

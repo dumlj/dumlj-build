@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { yarnWorkspaces, type ProjectInWorkspaces } from '@dumlj/shell-lib'
+import { findWorkspaceProject, type Project } from '@dumlj/util-lib'
 import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
 import path from 'path'
 import { upperFirst, camelCase } from 'lodash'
@@ -13,9 +13,9 @@ describe('test webpack plugins standards', () => {
     FOLDER: '*-webpack-plugin',
   }
 
-  let projects: Array<ProjectInWorkspaces & { name: string }> = []
+  let projects: Array<Project & { name: string }> = []
   beforeAll(async () => {
-    const workspaces = await yarnWorkspaces()
+    const workspaces = await findWorkspaceProject()
     projects = workspaces.filter(({ name, location }) => {
       if (name === '@dumlj/seed-webpack-plugin') {
         return false
@@ -35,7 +35,7 @@ describe('test webpack plugins standards', () => {
     projects.forEach(({ name, location }) => {
       expect(micromatch.isMatch(name, [RULES.NAME])).toBeTruthy()
 
-      const folder = location.replace(`${FOLDER}/`, '')
+      const folder = location.replace(new RegExp(`${FOLDER}(?:[/\\\\]+?)`), '')
       expect(micromatch.isMatch(folder, [RULES.FOLDER])).toBeTruthy()
     })
   })

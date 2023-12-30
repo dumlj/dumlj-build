@@ -12,12 +12,19 @@ export const execute = (command: string, options?: ExecOptions) => {
     const cp = exec(command, options)
     const { stdout, stderr } = cp
 
-    stderr.on('data', (chunk) => errors.push(chunk.toString()))
-    stdout.on('data', (chunk) => content.push(chunk.toString()))
+    stderr.on('data', (chunk) => {
+      const data = chunk?.toString()
+      data && errors.push(data)
+    })
+
+    stdout.on('data', (chunk) => {
+      const data = chunk?.toString()
+      data && content.push(data)
+    })
 
     cp.on('close', () => {
       if (errors.length > 0) {
-        reject(new Error(errors.join('')))
+        reject(new Error(`${command} failed.\n${errors.join('')}`))
         return
       }
 

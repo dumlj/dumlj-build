@@ -114,7 +114,7 @@
     ]
   },
   // 包含文件
-  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "./typings/**/*.d.ts", "**/.templaterc.ts", "**/.readmerc.ts", "**/.dumirc.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts", "./typings/**/*.d.ts", "**/.templaterc.ts", "**/.readmerc.ts", "**/.dumirc.ts", "**/.dumljrc.ts"],
   // 排除文件
   "exclude": ["node_modules", "./libs"]
 }

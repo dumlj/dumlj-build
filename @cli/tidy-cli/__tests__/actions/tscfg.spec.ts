@@ -4,13 +4,13 @@ import { vol } from 'memfs'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
-jest.mock('@dumlj/shell-lib')
+jest.mock('@dumlj/util-lib')
 
 describe('test actions/tidyTscfg', () => {
   beforeAll(async () => {
-    const { yarnWorkspaces } = await import('@dumlj/shell-lib')
-    jest.isMockFunction(yarnWorkspaces) &&
-      yarnWorkspaces.mockImplementation(async () => {
+    const { findWorkspaceProject, findWorkspaceRootPath } = await import('@dumlj/util-lib')
+    jest.isMockFunction(findWorkspaceProject) &&
+      findWorkspaceProject.mockImplementation(async () => {
         return [
           {
             name: 'a',
@@ -25,6 +25,11 @@ describe('test actions/tidyTscfg', () => {
             mismatchedWorkspaceDependencies: [],
           },
         ]
+      })
+
+    jest.isMockFunction(findWorkspaceRootPath) &&
+      findWorkspaceRootPath.mockImplementation(async () => {
+        return '/'
       })
   })
 

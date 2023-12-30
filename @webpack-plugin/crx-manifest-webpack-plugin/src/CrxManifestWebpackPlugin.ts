@@ -105,7 +105,7 @@ export class CrxManifestWebpackPlugin extends SeedWebpackPlugin {
           const js = files.filter((file) => path.extname(file) === '.js')
 
           manifest.content_scripts = [
-            ...(manifest?.content_scripts || []),
+            ...(Array.isArray(manifest?.content_scripts) ? manifest?.content_scripts : []),
             {
               matches: ['*://*/*'],
               css: css,
@@ -119,7 +119,7 @@ export class CrxManifestWebpackPlugin extends SeedWebpackPlugin {
         const files = assets.map(({ name }) => name)
         if (Array.isArray(files) && files.length > 0) {
           manifest.web_accessible_resources = [
-            ...(manifest?.web_accessible_resources || []),
+            ...(Array.isArray(manifest?.web_accessible_resources) ? manifest?.web_accessible_resources : []),
             {
               matches: ['*://*/*'],
               resources: [...files],

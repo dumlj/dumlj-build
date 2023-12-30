@@ -16,7 +16,8 @@ gh-pages
 .eslintcache
 
 
-# Npm or Yarn
+# Npm or Yarn or Pnpm
+pnpm-lock.yaml
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

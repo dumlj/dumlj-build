@@ -58,7 +58,7 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
       const messages =
         Array.isArray(error?.failures) && (error as RechoirError).failures.length > 0
           ? (error as RechoirError).failures.map((failure) => failure.error.message).join('\n')
-          : (error as Error).message
+          : (error as Error)?.message
 
       throw new Error(`Unable load '${filePath}'\n${messages}\nPlease install one of them`)
     }
