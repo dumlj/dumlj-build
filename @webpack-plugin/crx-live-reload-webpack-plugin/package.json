@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/crx-live-reload-webpack-plugin",
-  "version": "2.5.20",
+  "version": "2.5.21",
   "description": "Livereload over SSE for develop Chrome Extension.",
   "repository": {
     "type": "git",
@@ -11,20 +11,20 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^2.5.20",
-    "tslib": "^2.5.0",
-    "chrome": "^0.1.0"
+    "@dumlj/seed-webpack-plugin": "^2.5.21",
+    "chrome": "^0.1.0",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
-    "@types/webpack": "^5.28.4",
     "@types/chrome": "^0.0.193",
+    "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
+    "@types/chrome": "*",
     "webpack": "5.x",
-    "webpack-dev-server": "4.x",
-    "@types/chrome": "*"
+    "webpack-dev-server": "4.x"
   },
   "publishConfig": {
     "access": "public"
