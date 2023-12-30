@@ -35,7 +35,7 @@ describe('test webpack plugins standards', () => {
     projects.forEach(({ name, location }) => {
       expect(micromatch.isMatch(name, [RULES.NAME])).toBeTruthy()
 
-      const folder = location.replace(`${FOLDER}/`, '')
+      const folder = location.replace(new RegExp(`${FOLDER}(?:[/\\\\]+?)`), '')
       expect(micromatch.isMatch(folder, [RULES.FOLDER])).toBeTruthy()
     })
   })
