@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/memfs-webpack-plugin",
-  "version": "0.0.1",
+  "version": "2.5.20",
   "description": "File system in memory webpack plugin.",
   "repository": {
     "type": "git",
@@ -11,11 +11,11 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^0.0.1",
+    "@dumlj/seed-webpack-plugin": "^2.5.20",
     "memfs": "^4.6.0",
+    "micromatch": "^4.0.5",
     "tslib": "^2.5.0",
-    "utility-types": "^3.10.0",
-    "micromatch": "^4.0.5"
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

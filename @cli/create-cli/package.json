@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/create-cli",
-  "version": "0.0.1",
+  "version": "2.5.20",
   "description": "Convenient tool for project creation.",
   "private": true,
   "repository": {
@@ -18,11 +18,11 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-cliui": "^0.0.1",
-    "@dumlj/feature-prepare": "^0.0.1",
-    "@dumlj/feature-pretty": "^0.0.1",
-    "@dumlj/shell-lib": "^0.0.1",
-    "@dumlj/util-lib": "^0.0.1",
+    "@dumlj/feature-cliui": "^2.5.20",
+    "@dumlj/feature-prepare": "^2.5.20",
+    "@dumlj/feature-pretty": "^2.5.20",
+    "@dumlj/shell-lib": "^2.5.20",
+    "@dumlj/util-lib": "^2.5.20",
     "cardinal": "^2.1.1",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
@@ -35,7 +35,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "^0.0.1",
+    "@dumlj/seed-cli": "^2.5.20",
     "@jest/types": "^29.6.3",
     "@types/inquirer": "^9.0.6",
     "ts-jest": "^29.1.1"

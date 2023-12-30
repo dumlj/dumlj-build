@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-updater",
-  "version": "0.0.1",
+  "version": "2.5.20",
   "description": "updater for packages.",
   "repository": {
     "type": "git",
@@ -17,16 +17,16 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/shell-lib": "^0.0.1",
-    "@dumlj/util-lib": "^0.0.1",
+    "@dumlj/shell-lib": "^2.5.20",
+    "@dumlj/util-lib": "^2.5.20",
     "fs-extra": "^11.1.0",
     "semver": "^7.3.8",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^0.0.1",
-    "ts-jest": "^29.1.1",
-    "@jest/types": "^29.6.3"
+    "@dumlj/mock-lib": "^2.5.20",
+    "@jest/types": "^29.6.3",
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"

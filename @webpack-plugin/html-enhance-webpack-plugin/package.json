@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/html-enhance-webpack-plugin",
-  "version": "0.0.1",
+  "version": "2.5.20",
   "description": "Basic plugin use for enhance html webpack plugin.",
   "repository": {
     "type": "git",
@@ -11,10 +11,10 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^0.0.1",
-    "tslib": "^2.5.0",
+    "@dumlj/seed-webpack-plugin": "^2.5.20",
+    "@dumlj/util-lib": "^2.5.20",
     "html-webpack-plugin": "^5.5.3",
-    "@dumlj/util-lib": "^0.0.1"
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

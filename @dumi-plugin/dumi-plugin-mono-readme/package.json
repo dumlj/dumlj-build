@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dumi-plugin-mono-readme",
-  "version": "0.0.1",
+  "version": "2.5.20",
   "description": "Support referencing for readme file of monorepo.",
   "private": true,
   "repository": {
@@ -18,10 +18,10 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/dumi-plugin-seed": "^0.0.1",
-    "@dumlj/feature-readme": "^0.0.1",
-    "tslib": "^2.5.0",
-    "@dumlj/inject-entry-script-webpack-plugin": "^0.0.1"
+    "@dumlj/dumi-plugin-seed": "^2.5.20",
+    "@dumlj/feature-readme": "^2.5.20",
+    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.20",
+    "tslib": "^2.5.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
