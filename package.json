@@ -41,6 +41,8 @@
     "@dumlj/shell-lib": "workspace:*",
     "@dumlj/util-lib": "workspace:*",
     "@dumlj/tidy-cli": "workspace:*",
+    "@dumlj/dumi-plugin-node-stackblitz": "workspace:*",
+    "@dumlj/dumi-plugin-mono-readme": "workspace:*",
     "@types/node": "^20.10.1",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5"
