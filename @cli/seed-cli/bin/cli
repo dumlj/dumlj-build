@@ -2,24 +2,5 @@
 
 process.env.RUNTIME = 'CLI'
 
-const needPrepare = (() => {
-  try {
-    require.resolve('@dumlj/feature-prepare')
-    return true
-  } catch (error) {
-    return false    
-  }
-})()
-
 const path = require('path')
-if (!needPrepare) {
-  require(path.join(__dirname, '../libs/cli'))
-  return
-}
-
-const fs = require('fs')
-const srcFile = path.join(__dirname, '../src/cli.ts')
-if (fs.existsSync(srcFile)) {
-  const { prepare } = require('@dumlj/feature-prepare')
-  prepare(srcFile)
-}
+require(path.join(__dirname, '../libs/cli'))
