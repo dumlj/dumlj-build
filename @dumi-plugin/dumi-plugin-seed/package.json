@@ -38,7 +38,12 @@
     "ts-jest": "^29.1.1"
   },
   "peerDependencies": {
-    "dumi": "2.x"
+    "dumi": "2.x",
+    "unified": "*",
+    "remark-parse": "*",
+    "remark-frontmatter": "*",
+    "remark-directive": "*",
+    "remark-gfm": "*"
   },
   "publishConfig": {
     "access": "public"

@@ -63,7 +63,7 @@ export const createDumiPlugin = <O extends Record<string, any>>(name: string, fa
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     const { default: remarkGfm } = await importOnlySupportESM<typeof import('remark-gfm')>('remark-gfm')
 
-    const processor = unified().use(remarkParse).use(remarkFrontmatter).use(remarkDirective).use(remarkGfm)
+    const processor = unified().use(remarkFrontmatter).use(remarkDirective).use(remarkGfm).use(remarkParse)
 
     return (options?: RegisterComponentOptions) => {
       const { tag, webComponentFile, render } = options || {}

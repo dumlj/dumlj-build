@@ -36,7 +36,6 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
         const tsConfigLike = await findTsConfig(filePath, { cwd })
         const requireFrom = typeof tsConfigLike === 'string' ? path.dirname(tsConfigLike) : cwd
         const tsConfig = path.isAbsolute(tsConfigFile) ? tsConfigFile : path.join(requireFrom, tsConfigFile)
-
         if (await fs.pathExists(tsConfig)) {
           const { compilerOptions } = parseTsconfig(tsConfig)
           process.env.TS_NODE_COMPILER_OPTIONS = JSON.stringify(compilerOptions)

@@ -4,7 +4,7 @@
   "private": true,
   "description": "something build utilities",
   "license": "MIT",
-  "packageManager": "pnpm@8.10.2",
+  "packageManager": "yarn@1.22.19",
   "workspaces": {
     "packages": [
       "@lib/*",
@@ -35,14 +35,6 @@
     "ok": "pnpm tidy && pnpm compile && pnpm lint && pnpm test && pnpm readme && pnpm format"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "workspace:*",
-    "@dumlj/seed-cli": "workspace:*",
-    "@dumlj/seed-webpack-plugin": "workspace:*",
-    "@dumlj/shell-lib": "workspace:*",
-    "@dumlj/util-lib": "workspace:*",
-    "@dumlj/tidy-cli": "workspace:*",
-    "@dumlj/dumi-plugin-node-stackblitz": "workspace:*",
-    "@dumlj/dumi-plugin-mono-readme": "workspace:*",
     "@types/node": "^20.10.1",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5"
@@ -61,7 +53,7 @@
     "concurrently": "^8.2.2",
     "cz-customizable": "^7.0.0",
     "cz-customizable-i18n-config": "^0.0.1-alpha.2",
-    "dumi": "^2.2.14",
+    "dumi": "^2.2.16",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
@@ -82,7 +74,7 @@
     "shx": "^0.3.4",
     "spinnies": "^0.5.1",
     "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1",
+    "ts-node": "10.9.1",
     "ts-patch": "^3.0.2",
     "tsd-lite": "^0.8.0",
     "tslib": "^2.6.2",
