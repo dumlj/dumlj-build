@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/mock-server-lib",
-  "version": "2.5.20",
+  "version": "2.5.21",
   "private": true,
   "description": "mock 请求服务",
   "repository": {

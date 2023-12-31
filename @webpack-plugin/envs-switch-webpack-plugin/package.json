@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/envs-switch-webpack-plugin",
-  "version": "2.5.20",
+  "version": "2.5.21",
   "description": "Switch environment variables by generated script.",
   "private": true,
   "repository": {
@@ -12,10 +12,10 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/compare-envs-webpack-plugin": "^2.5.20",
-    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.20",
-    "@dumlj/seed-webpack-plugin": "^2.5.20",
-    "@dumlj/util-lib": "^2.5.20",
+    "@dumlj/compare-envs-webpack-plugin": "^2.5.21",
+    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.21",
+    "@dumlj/seed-webpack-plugin": "^2.5.21",
+    "@dumlj/util-lib": "^2.5.21",
     "chalk": "^4.1.2",
     "dotenv": "^16.3.1",
     "node-html-parser": "^6.1.11",
