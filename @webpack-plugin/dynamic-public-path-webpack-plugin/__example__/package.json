@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/dynamic-public-path-webpack-plugin",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -8,8 +8,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/dynamic-public-path-webpack-plugin": "^2.5.21",
-    "@dumlj/feature-pretty": "^2.5.21",
+    "@dumlj/dynamic-public-path-webpack-plugin": "^2.5.22",
+    "@dumlj/feature-pretty": "^2.5.22",
     "webpack": "5.x",
     "webpack-cli": "^5"
   },

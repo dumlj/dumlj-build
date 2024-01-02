@@ -1,6 +1,6 @@
 {
   "name": "@template/cli",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "something...",
   "private": true,
   "repository": {
@@ -12,13 +12,13 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/feature-pretty": "^2.5.21",
+    "@dumlj/feature-pretty": "^2.5.22",
     "commander": "^11.1.0",
     "tslib": "^2.5.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "^2.5.21",
+    "@dumlj/seed-cli": "^2.5.22",
     "@jest/types": "^29.6.3",
     "ts-jest": "^29.1.1"
   },

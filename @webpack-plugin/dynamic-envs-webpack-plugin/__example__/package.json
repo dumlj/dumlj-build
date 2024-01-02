@@ -1,15 +1,15 @@
 {
   "name": "@dumlj-example/dynamic-envs-webpack-plugin",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.21",
-    "@dumlj/feature-pretty": "^2.5.21",
-    "@dumlj/memfs-webpack-plugin": "^2.5.21",
+    "@dumlj/dynamic-envs-webpack-plugin": "^2.5.22",
+    "@dumlj/feature-pretty": "^2.5.22",
+    "@dumlj/memfs-webpack-plugin": "^2.5.22",
     "webpack": "5.x",
     "webpack-cli": "^5"
   },

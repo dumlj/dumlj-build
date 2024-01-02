@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dumi-plugin-seed",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "Basic dumi plugin",
   "private": true,
   "repository": {
@@ -18,8 +18,8 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "^2.5.21",
-    "@dumlj/util-lib": "^2.5.21",
+    "@dumlj/feature-updater": "^2.5.22",
+    "@dumlj/util-lib": "^2.5.22",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
@@ -39,11 +39,11 @@
   },
   "peerDependencies": {
     "dumi": "2.x",
-    "unified": "*",
-    "remark-parse": "*",
-    "remark-frontmatter": "*",
     "remark-directive": "*",
-    "remark-gfm": "*"
+    "remark-frontmatter": "*",
+    "remark-gfm": "*",
+    "remark-parse": "*",
+    "unified": "*"
   },
   "publishConfig": {
     "access": "public"
