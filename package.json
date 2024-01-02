@@ -19,12 +19,12 @@
   "scripts": {
     "commit": "git-cz",
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
-    "ci:coverage": "pnpm compile && pnpm test",
-    "ci:build": "pnpm compile",
+    "ci:coverage": "npm run compile && npm run test",
+    "ci:build": "npm run compile",
     "postinstall": "node ./scripts/postinstall",
     "clear": "rimraf --glob ./@*/*/{libs,build,*.tsbuildinfo,tsconfig.build.json} tsconfig.build.json",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
-    "lint": "pnpm lint:ts",
+    "lint": "npm run lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
     "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --ignore .templaterc.ts\"",
     "readme": "dumlj readme --exclude **/__example__",
@@ -32,7 +32,7 @@
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
-    "ok": "pnpm tidy && pnpm compile && pnpm lint && pnpm test && pnpm readme && pnpm format"
+    "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"
   },
   "devDependencies": {
     "@types/node": "^20.10.1",
