@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/seed-webpack-plugin",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "Basic webpack plugins",
   "repository": {
     "type": "git",
@@ -13,17 +13,17 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "workspace:^2.5.21",
+    "@dumlj/feature-updater": "workspace:^2.5.22",
     "chalk": "^4.1.2",
     "tslib": "^2.5.0",
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "workspace:^2.5.21",
+    "@dumlj/mock-lib": "workspace:^2.5.22",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"

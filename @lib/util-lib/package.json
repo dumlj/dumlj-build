@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/util-lib",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "util 工具库",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
     "fs-extra": "^11.1.1",

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/memfs-webpack-plugin",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -10,8 +10,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/feature-pretty": "workspace:^2.5.21",
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.21",
+    "@dumlj/feature-pretty": "workspace:^2.5.22",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.22",
     "tslib": "^2.5.0",
     "webpack": "5.x",
     "webpack-cli": "^5"

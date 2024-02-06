@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-cliui",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "{{description}}",
   "repository": {
     "type": "git",
@@ -12,8 +12,8 @@
   "types": "./libs/index.d.ts",
   "scripts": {
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
     "chalk": "^4.1.2",

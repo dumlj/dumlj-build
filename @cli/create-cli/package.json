@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/create-cli",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "description": "Convenient tool for project creation.",
   "private": true,
   "repository": {
@@ -14,15 +14,15 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-cliui": "workspace:^2.5.21",
-    "@dumlj/feature-prepare": "workspace:^2.5.21",
-    "@dumlj/feature-pretty": "workspace:^2.5.21",
-    "@dumlj/shell-lib": "workspace:^2.5.21",
-    "@dumlj/util-lib": "workspace:^2.5.21",
+    "@dumlj/feature-cliui": "workspace:^2.5.22",
+    "@dumlj/feature-prepare": "workspace:^2.5.22",
+    "@dumlj/feature-pretty": "workspace:^2.5.22",
+    "@dumlj/shell-lib": "workspace:^2.5.22",
+    "@dumlj/util-lib": "workspace:^2.5.22",
     "cardinal": "^2.1.1",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
@@ -35,7 +35,7 @@
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "workspace:^2.5.21",
+    "@dumlj/seed-cli": "workspace:^2.5.22",
     "@jest/types": "^29.6.3",
     "@types/inquirer": "^9.0.6",
     "ts-jest": "^29.1.1"

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/mock-server-lib",
-  "version": "2.5.21",
+  "version": "2.5.22",
   "private": true,
   "description": "mock 请求服务",
   "repository": {
@@ -28,8 +28,8 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
     "msw": "^1.3.0"

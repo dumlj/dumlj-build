@@ -27,7 +27,7 @@
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "npm run lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
-    "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --ignore .templaterc.ts\"",
+    "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --exclude **/__example__\"",
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
@@ -36,14 +36,15 @@
     "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"
   },
   "peerDependencies": {
-    "@dumlj/mock-lib": "workspace:^2.5.21",
-    "@dumlj/seed-cli": "workspace:^2.5.21",
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.21",
-    "@dumlj/shell-lib": "workspace:^2.5.21",
-    "@dumlj/util-lib": "workspace:^2.5.21",
-    "@dumlj/tidy-cli": "workspace:^2.5.21",
-    "@dumlj/dumi-plugin-node-stackblitz": "workspace:^2.5.21",
-    "@dumlj/dumi-plugin-mono-readme": "workspace:^2.5.21"
+    "@dumlj/mock-lib": "workspace:^2.5.22",
+    "@dumlj/seed-cli": "workspace:^2.5.22",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.22",
+    "@dumlj/shell-lib": "workspace:^2.5.22",
+    "@dumlj/util-lib": "workspace:^2.5.22",
+    "@dumlj/tidy-cli": "workspace:^2.5.22",
+    "@dumlj/dumi-plugin-node-stackblitz": "workspace:^2.5.22",
+    "@dumlj/dumi-plugin-mono-readme": "workspace:^2.5.22",
+    "@dumlj/create-cli": "workspace:^2.5.22"
   },
   "devDependencies": {
     "@types/node": "^20.10.1",
