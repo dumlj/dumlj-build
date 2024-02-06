@@ -4,7 +4,7 @@
   "private": true,
   "description": "something build utilities",
   "license": "MIT",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@8.15.1",
   "workspaces": {
     "packages": [
       "@lib/*",
@@ -22,6 +22,7 @@
     "ci:coverage": "npm run compile && npm run test",
     "ci:build": "npm run compile",
     "postinstall": "node ./scripts/postinstall",
+    "preinstall": "node ./scripts/preinstall",
     "clear": "rimraf --glob ./@*/*/{libs,build,*.tsbuildinfo,tsconfig.build.json} tsconfig.build.json",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "npm run lint:ts",
@@ -33,6 +34,16 @@
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
     "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"
+  },
+  "peerDependencies": {
+    "@dumlj/mock-lib": "workspace:^2.5.21",
+    "@dumlj/seed-cli": "workspace:^2.5.21",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.21",
+    "@dumlj/shell-lib": "workspace:^2.5.21",
+    "@dumlj/util-lib": "workspace:^2.5.21",
+    "@dumlj/tidy-cli": "workspace:^2.5.21",
+    "@dumlj/dumi-plugin-node-stackblitz": "workspace:^2.5.21",
+    "@dumlj/dumi-plugin-mono-readme": "workspace:^2.5.21"
   },
   "devDependencies": {
     "@types/node": "^20.10.1",

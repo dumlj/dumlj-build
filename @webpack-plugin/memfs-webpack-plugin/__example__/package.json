@@ -10,8 +10,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/feature-pretty": "^2.5.21",
-    "@dumlj/memfs-webpack-plugin": "^2.5.21",
+    "@dumlj/feature-pretty": "workspace:^2.5.21",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.21",
     "tslib": "^2.5.0",
     "webpack": "5.x",
     "webpack-cli": "^5"

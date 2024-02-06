@@ -1,0 +1,7 @@
+packages:
+  - '@cli/*'
+  - '@dumi-plugin/*'
+  - '@feature/*'
+  - '@lib/*'
+  - '@vite-plugin/*'
+  - '@webpack-plugin/*'

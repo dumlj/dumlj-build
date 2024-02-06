@@ -17,13 +17,13 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "^2.5.21",
+    "@dumlj/feature-updater": "workspace:^2.5.21",
     "chalk": "^4.1.2",
     "tslib": "^2.5.0",
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^2.5.21",
+    "@dumlj/mock-lib": "workspace:^2.5.21",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"

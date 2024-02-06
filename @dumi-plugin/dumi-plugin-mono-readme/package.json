@@ -18,9 +18,9 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/dumi-plugin-seed": "^2.5.21",
-    "@dumlj/feature-readme": "^2.5.21",
-    "@dumlj/inject-entry-script-webpack-plugin": "^2.5.21",
+    "@dumlj/dumi-plugin-seed": "workspace:^2.5.21",
+    "@dumlj/feature-readme": "workspace:^2.5.21",
+    "@dumlj/inject-entry-script-webpack-plugin": "workspace:^2.5.21",
     "tslib": "^2.5.0"
   },
   "devDependencies": {

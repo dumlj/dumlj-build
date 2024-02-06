@@ -17,14 +17,14 @@
     "test": "yarn jest"
   },
   "dependencies": {
-    "@dumlj/shell-lib": "^2.5.21",
-    "@dumlj/util-lib": "^2.5.21",
+    "@dumlj/shell-lib": "workspace:^2.5.21",
+    "@dumlj/util-lib": "workspace:^2.5.21",
     "fs-extra": "^11.1.0",
     "semver": "^7.3.8",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^2.5.21",
+    "@dumlj/mock-lib": "workspace:^2.5.21",
     "@jest/types": "^29.6.3",
     "ts-jest": "^29.1.1"
   },

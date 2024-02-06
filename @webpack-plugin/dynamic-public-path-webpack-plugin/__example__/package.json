@@ -8,8 +8,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/dynamic-public-path-webpack-plugin": "^2.5.21",
-    "@dumlj/feature-pretty": "^2.5.21",
+    "@dumlj/dynamic-public-path-webpack-plugin": "workspace:^2.5.21",
+    "@dumlj/feature-pretty": "workspace:^2.5.21",
     "webpack": "5.x",
     "webpack-cli": "^5"
   },

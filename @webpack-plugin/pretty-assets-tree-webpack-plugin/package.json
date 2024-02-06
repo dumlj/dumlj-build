@@ -11,14 +11,14 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^2.5.21",
-    "@dumlj/util-lib": "^2.5.21",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.21",
+    "@dumlj/util-lib": "workspace:^2.5.21",
     "chalk": "^4.1.2",
     "micromatch": "^4.0.5",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^2.5.21",
+    "@dumlj/mock-lib": "workspace:^2.5.21",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"

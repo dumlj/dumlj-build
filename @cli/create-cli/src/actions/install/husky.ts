@@ -69,14 +69,14 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
   const commands = Object.keys(hookCommands).reduce((commands, hook) => {
     const scripts = hookCommands[hook]
     if (Array.isArray(scripts) && scripts.length > 0) {
-      commands.push(`yarn husky set .husky/${hook} "${scripts.join('\n')}"`)
+      commands.push(`husky set .husky/${hook} "${scripts.join('\n')}"`)
     }
 
     return commands
   }, [])
 
   if (commands.length > 0) {
-    const scripts = ['yarn husky install'].concat(commands).filter(Boolean).join(' && ')
+    const scripts = ['husky install'].concat(commands).filter(Boolean).join(' && ')
     execSync(scripts, { stdio: 'inherit', cwd })
   }
 
