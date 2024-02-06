@@ -306,9 +306,6 @@ importers:
       '@dumlj/feature-prepare':
         specifier: workspace:^2.5.22
         version: link:../../@feature/feature-prepare
-      '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.22
-        version: link:../../@feature/feature-pretty
       '@dumlj/feature-readme':
         specifier: workspace:^2.5.22
         version: link:../../@feature/feature-readme
