@@ -1,6 +1,0 @@
-#!/usr/bin/env node
-
-process.env.RUNTIME = 'CLI'
-
-const path = require('path')
-require(path.join(__dirname, '../libs/cli'))

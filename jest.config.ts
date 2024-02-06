@@ -9,6 +9,8 @@ export default async (): Promise<Config.InitialOptions> => {
   return {
     skipFilter: true,
     testTimeout: TIMEOUT,
+    coverageReporters: ['text', 'cobertura', 'html'],
+    collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/**/*.d.ts'],
     projects: [
       /**
        * 规范检测

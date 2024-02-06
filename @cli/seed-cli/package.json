@@ -10,9 +10,6 @@
   "license": "MIT",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
-  "bin": {
-    "dumlj": "./bin/cli"
-  },
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
@@ -32,6 +29,7 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@jest/types": "^29.6.3",
     "memfs": "^4.6.0",
     "ts-jest": "^29.1.1"

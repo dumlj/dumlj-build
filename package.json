@@ -12,6 +12,7 @@
       "@webpack-plugin/*",
       "@vite-plugin/*",
       "@dumi-plugin/*",
+      "@next-plugin/*",
       "@cli/*",
       "@*/*/__example__"
     ]
@@ -27,10 +28,10 @@
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
     "lint": "npm run lint:ts",
     "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
-    "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --exclude **/__example__\"",
-    "readme": "dumlj readme --exclude **/__example__",
+    "tidy": "dumlj-tidy tscfg --exclude **/__example__ && dumlj-tidy deps --exclude **/__example__",
+    "readme": "dumlj-tidy readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
-    "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
+    "test": "jest -c ./jest.config.ts --coverage",
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
     "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"

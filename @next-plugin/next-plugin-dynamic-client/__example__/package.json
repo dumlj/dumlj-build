@@ -1,0 +1,10 @@
+{
+  "name": "@dumlj-example/next-plugin-dynamic-client",
+  "version": "1.0.0",
+  "dependencies": {
+    "next": "latest"
+  },
+  "devDependencies": {
+    "@dumlj/next-plugin-dynamic-client": "workspace:*"
+  }
+}

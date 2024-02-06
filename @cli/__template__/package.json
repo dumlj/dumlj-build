@@ -9,8 +9,7 @@
     "directory": "@cli/directory"
   },
   "license": "MIT",
-  "main": "./libs/index.js",
-  "types": "./libs/index.d.ts",
+  "bin": "./bin/cli",
   "dependencies": {
     "@dumlj/feature-pretty": "workspace:^2.5.22",
     "commander": "^11.1.0",

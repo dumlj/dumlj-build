@@ -5,3 +5,5 @@ packages:
   - '@lib/*'
   - '@vite-plugin/*'
   - '@webpack-plugin/*'
+  - '@next-plugin/*'
+  - '@*/*/__example__'

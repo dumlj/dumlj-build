@@ -1,9 +1,9 @@
-import { tryAction, registerEnhance, enhance } from '@dumlj/seed-cli'
+import { tryAction, registerEnhancer, concatEnhancers } from '@dumlj/seed-cli'
 import { Option, Command } from 'commander'
 import { create, debug, type CreateOptions } from '../actions/create'
 import { DEFAULT_RC_FILE, DEFAULT_TEMPLATE_PATTERN } from '../actions/create/constants'
 
-const optionEnhance = registerEnhance('addOption', () => [
+const mapOptionsToCommand = registerEnhancer('addOption', () => [
   new Option('--name <name>', 'specify project name'),
   new Option('--description <description>', 'specify project description'),
   new Option('--template <template>', 'specify project type').choices(['cli', 'webpack-plugin', 'feature']),
@@ -11,7 +11,7 @@ const optionEnhance = registerEnhance('addOption', () => [
   new Option('--config <config>', `specify name of config file. (default ${DEFAULT_RC_FILE})`),
 ])
 
-const debugCommand = enhance(optionEnhance)(
+const debugCommand = mapOptionsToCommand(
   new Command('debug').summary('debug .templaterc.ts').action((options?: CreateOptions, command?: Command) => {
     const parentOptions = command.parent.opts()
     const finalOptions = { ...parentOptions, ...options }
@@ -19,15 +19,19 @@ const debugCommand = enhance(optionEnhance)(
   })
 )
 
-const enhanceDebug = registerEnhance('addCommand', () => [debugCommand])
+const mapEnhancersToCreateCommand = concatEnhancers(
+  // add options to create command
+  mapOptionsToCommand,
+  // map debug command to create command
+  registerEnhancer('addCommand', () => [debugCommand])
+)
 
-export default enhance(
-  optionEnhance,
-  enhanceDebug
-)(
+const createCommand = mapEnhancersToCreateCommand(
   new Command('create')
     .summary('create project by template')
     .option('--override', 'override exists project.')
     .option('--yes', 'say yes for all confirm.')
     .action((options: CreateOptions) => tryAction(create)(options))
 )
+
+export default createCommand

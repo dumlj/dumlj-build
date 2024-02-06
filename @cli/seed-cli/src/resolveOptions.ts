@@ -5,7 +5,7 @@ import { DUMLJ_CONFIG_FILE_NAME } from './constants/definition'
 
 const CACHE = new Map<string, any>()
 
-export const resolveOptions = async <P = any>(ns: string, folder: string): Promise<P> => {
+export async function resolveOptions<P = any>(ns: string, folder: string): Promise<P> {
   const conf = path.join(folder, DUMLJ_CONFIG_FILE_NAME)
   if (CACHE.has(conf)) {
     const config = CACHE.get(conf)

@@ -2,6 +2,7 @@ import { shouldUpdate } from '@dumlj/feature-updater'
 import { registerCache } from '@dumlj/util-lib'
 import fs from 'fs-extra'
 import { readPackageSourceThroughBin } from '../utils/readPackageSourceThroughBin'
+import { YELL_VERSION_TYPE } from '../constants/definition'
 
 export const CACHE_TOKEN = 'outdates'
 export const OUTDATES_CACHE = registerCache<{ compareVer: string; updateType: string | boolean; latestVersion: string }>('cli')
@@ -41,7 +42,7 @@ export const findOutdates = async (options?: FindOutdatesOptions) => {
     latestVersion,
   } = await shouldUpdate(name, {
     compareVer,
-    includes: ['minor', 'preminor', 'patch', 'prepatch'],
+    includes: YELL_VERSION_TYPE,
   })
 
   const CACHE_NAME = `${CACHE_TOKEN}/${name}`
