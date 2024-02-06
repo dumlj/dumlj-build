@@ -8,6 +8,9 @@
     "directory": "@services/updater"
   },
   "license": "MIT",
+  "bin": {
+    "dumlj": "./bin/cli"
+  },
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "scripts": {

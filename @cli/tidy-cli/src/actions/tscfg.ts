@@ -1,10 +1,10 @@
 import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
+import { ok, info } from '@dumlj/seed-cli'
 import chalk from 'chalk'
 import isEqual from 'lodash/isEqual'
 import path from 'path'
 import fs from 'fs-extra'
 import micromatch from 'micromatch'
-import { ok, info } from '../services/logger'
 
 export interface TidyTscfgOptions {
   /** basic tsconfig file in each project */

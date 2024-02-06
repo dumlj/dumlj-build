@@ -312,6 +312,9 @@ importers:
       '@dumlj/feature-readme':
         specifier: workspace:^2.5.22
         version: link:../../@feature/feature-readme
+      '@dumlj/seed-cli':
+        specifier: workspace:^2.5.22
+        version: link:../seed-cli
       '@dumlj/shell-lib':
         specifier: workspace:^2.5.22
         version: link:../../@lib/shell-lib
@@ -340,9 +343,6 @@ importers:
         specifier: ^2.5.0
         version: 2.6.2
     devDependencies:
-      '@dumlj/seed-cli':
-        specifier: workspace:^2.5.22
-        version: link:../seed-cli
       '@jest/types':
         specifier: ^29.6.3
         version: 29.6.3

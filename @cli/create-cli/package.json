@@ -9,9 +9,6 @@
     "directory": "@cli/create-cli"
   },
   "license": "MIT",
-  "bin": {
-    "dumlj-create": "./bin/cli"
-  },
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "scripts": {

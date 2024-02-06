@@ -1,9 +1,9 @@
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { compileWorkspace, type CompileWorkspaceOptions, type ReadmeConfiguration } from '@dumlj/feature-readme'
+import { ok, info, warn } from '@dumlj/seed-cli'
 import fs from 'fs-extra'
 import path from 'path'
 import chalk from 'chalk'
-import { ok, info, warn } from '../services/logger'
 
 export type { ReadmeConfiguration }
 

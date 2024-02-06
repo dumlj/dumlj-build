@@ -9,11 +9,6 @@
     "directory": "@cli/tidytsc-cli"
   },
   "license": "MIT",
-  "bin": {
-    "dumlj-tidy": "./bin/cli"
-  },
-  "main": "./libs/index.js",
-  "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
@@ -22,10 +17,10 @@
   },
   "dependencies": {
     "@dumlj/feature-prepare": "workspace:^2.5.22",
-    "@dumlj/feature-pretty": "workspace:^2.5.22",
     "@dumlj/feature-readme": "workspace:^2.5.22",
     "@dumlj/shell-lib": "workspace:^2.5.22",
     "@dumlj/util-lib": "workspace:^2.5.22",
+    "@dumlj/seed-cli": "workspace:^2.5.22",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "depcheck": "^1.4.7",
@@ -35,15 +30,11 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "workspace:^2.5.22",
     "@jest/types": "^29.6.3",
     "@types/lodash": "^4.14.200",
     "@types/micromatch": "^4.0.4",
     "memfs": "^4.6.0",
     "ts-jest": "^29.1.1"
-  },
-  "peerDependencies": {
-    "@dumlj/seed-cli": "*"
   },
   "publishConfig": {
     "access": "public"

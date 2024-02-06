@@ -9,9 +9,8 @@
     tasks.unshift(...[
       'ts-patch install -s',
       'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli --scope=@dumlj/create-cli',
-      'dumlj-create install husky',
-      'dumlj-tidy tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"',
-      'dumlj-tidy deps --exclude \"**/__template__\" --exclude \"**/__example__\"',
+      'dumlj install husky',
+      'dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\" --exclude \"**/__example__\"\"',
     ])
   }
 
