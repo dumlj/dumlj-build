@@ -4,15 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
-      - 'feat/*'
-      - 'feature/*'
-      - 'hotfix/*'
-      - 'fix/*'
-      - 'ci/*'
-      - 'perf/*'
-      - 'docs/*'
-      - 'style/*'
+      - '**'
     tags-ignore:
       - '**'
 
