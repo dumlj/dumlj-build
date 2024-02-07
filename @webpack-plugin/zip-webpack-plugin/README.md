@@ -32,7 +32,7 @@ $ yarn add --dev @dumlj/zip-webpack-plugin
 $ pnpm add @dumlj/zip-webpack-plugin -D
 ```
 
-## USAGE
+## 使用
 
 ```ts
 import { ZipWebpackPlugin } from '@dumlj/zip-webpack-plugin'
@@ -40,7 +40,7 @@ import { ZipWebpackPlugin } from '@dumlj/zip-webpack-plugin'
 export default {
   plugins: [
     new ZipWebpackPlugin({
-      // default false
+      // 默认为 false
       lonely: false,
       extras: {
         '/not_import.js': '/do_import.js',

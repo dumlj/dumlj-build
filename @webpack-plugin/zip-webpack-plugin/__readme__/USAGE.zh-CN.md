@@ -6,7 +6,7 @@ import { ZipWebpackPlugin } from '@dumlj/zip-webpack-plugin'
 export default {
   plugins: [
     new ZipWebpackPlugin({
-      // 默认为 false
+      // default false
       lonely: false,
       extras: {
         '/not_import.js': '/do_import.js',

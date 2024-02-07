@@ -7,6 +7,7 @@ export type { ReadmeConfiguration }
 
 const readmeCommand = new Command('readme')
   .summary('organizing README.md for monorepo project')
+  .option('--locals <locals>', `specify lanaugages. (e.g. setting "zh-CN" will generate Readme.zh-CN.md)`)
   .option('--config <config>', `specify name of config file. (default ${DEFAULT_CONFIG_FILE_NAME})`)
   .option('--output <output>', `specify name of output file. (default README.md)`)
   .option('--template <template>', `specify name of template folder. (default ${DEFAULT_TEMPLATE_FILE_NAME})`)

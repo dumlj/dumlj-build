@@ -23,10 +23,12 @@ export interface CompileWorkspaceOptions extends CompileProjectOptions {
    * ['__tests__/*']
    */
   exclude?: string | string[]
+  /** 多语言 */
+  local?: string
 }
 
 export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
-  const { configFile, paths, include: inInclude, exclude: inExclude } = options || {}
+  const { configFile, paths, include: inInclude, exclude: inExclude, local } = options || {}
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
   const rootPath = (await findWorkspaceRootPath({ paths })) || process.cwd()
@@ -64,7 +66,7 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
   await Promise.all(
     treeProjects.map(async (project) => {
       const { name, location, internalDependencies } = project
-      const render = await compileProject(location, { cwd: rootPath, configFile })
+      const render = await compileProject(location, { cwd: rootPath, configFile, local })
       if (typeof render !== 'function') {
         return
       }

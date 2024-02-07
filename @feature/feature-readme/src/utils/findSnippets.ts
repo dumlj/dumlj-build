@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import fs from 'fs'
 import path from 'path'
 import { DEFAULT_TEMPLATE_FILE_NAME } from '../constants'
 
@@ -30,7 +30,7 @@ export const findSnippets = async (location: string, options?: FindSnippetsOptio
   let current = location
   while (true) {
     const target = path.join(current, template)
-    if (await fs.pathExists(target)) {
+    if (fs.existsSync(target)) {
       paths.push(target)
     }
 
