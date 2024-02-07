@@ -5,7 +5,7 @@
   "dependencies": {
     "next": "latest"
   },
-  "devDependencies": {
+  "ependencies": {
     "@dumlj/next-plugin-dynamic-client": "workspace:*"
   }
 }
