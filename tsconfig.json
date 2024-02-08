@@ -92,6 +92,7 @@
     "inlineSources": false,
 
     /* 其他选项 */
+    "newLine": "lf",
     // 启用装饰器
     "experimentalDecorators": true,
     // 为装饰器提供元数据的支持
