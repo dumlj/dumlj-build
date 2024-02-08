@@ -5,6 +5,8 @@ import { workspaces } from './package.json'
 const TIMEOUT = 30e3
 const { packages } = workspaces
 
+process.env.NODE_OPTIONS = '--experimental-vm-modules'
+
 export default async (): Promise<Config.InitialOptions> => {
   return {
     skipFilter: true,

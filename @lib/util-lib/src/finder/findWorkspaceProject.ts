@@ -1,6 +1,5 @@
-import fs from 'fs-extra'
+import fs from 'fs'
 import { glob } from 'glob'
-import { uniq } from 'lodash'
 import path from 'path'
 
 export interface Project {
@@ -17,7 +16,7 @@ export interface ProjectGraph extends Project {
   graph?: ProjectGraph[]
 }
 
-const PROJECT_CACHE: Project[] = []
+export const PROJECT_CACHE: Project[] = []
 
 export interface FindWorkspaceProjectOptions {
   /** project pattern in workspace (default get workspace settings from package.json) */
@@ -36,32 +35,39 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
   }
 
   if (typeof pattern === 'undefined') {
-    const source: PackageSource = await fs.readJson(path.join(cwd, 'package.json'))
+    const content = await fs.promises.readFile(path.join(cwd, 'package.json'), 'utf-8')
+    const source: PackageSource = JSON.parse(content)
     const pattern = Array.isArray(source?.workspaces) ? source?.workspaces : source?.workspaces?.packages || []
     return findWorkspaceProject({ pattern, fromCache, cwd })
   }
 
   const folders = await Promise.all(
-    pattern.map((pattern) =>
-      glob(path.join(cwd, pattern), {
+    pattern.map((pattern) => {
+      const finalPattern = path.join(cwd, pattern)
+      if (fs.existsSync(finalPattern)) {
+        return [finalPattern]
+      }
+
+      return glob(path.join(cwd, pattern), {
         windowsPathsNoEscape: true,
       })
-    )
+    })
   )
 
   const results = await Promise.all(
     folders.flatMap((locations) =>
       locations.map(async (src) => {
-        if (!(await fs.stat(src)).isDirectory()) {
+        if (!(await fs.promises.stat(src)).isDirectory()) {
           return null
         }
 
         const pkg = path.join(src, 'package.json')
-        if (!(await fs.pathExists(pkg))) {
+        if (!fs.existsSync(pkg)) {
           return null
         }
 
-        const source: PackageSource = await fs.readJson(pkg)
+        const content = await fs.promises.readFile(pkg, 'utf-8')
+        const source: PackageSource = JSON.parse(content)
         const { name, version, description, private: isPrivate = false } = source
         const normalDependencies = Object.keys(source.dependencies || {})
         const devDependencies = Object.keys(source.devDependencies || {})
@@ -69,7 +75,9 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
         const optionalDependencies = Object.keys(source.optionalDependencies || {})
         const bundleDependencies = Object.keys(source.bundleDependencies || {})
         const bundledDependencies = Object.keys(source.bundledDependencies || {})
-        const dependencies: string[] = uniq([].concat(normalDependencies, devDependencies, peerDependencies, optionalDependencies, bundleDependencies, bundledDependencies))
+        const dependencies: string[] = Array.from(
+          new Set([].concat(normalDependencies, devDependencies, peerDependencies, optionalDependencies, bundleDependencies, bundledDependencies))
+        )
 
         const location = path.relative(cwd, src)
         return { name, version, description, isPrivate, location, dependencies }

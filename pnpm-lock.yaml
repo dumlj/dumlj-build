@@ -726,9 +726,6 @@ importers:
       glob:
         specifier: ^10.3.10
         version: 10.3.10
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       tslib:
         specifier: ^2.5.0
         version: 2.6.2
