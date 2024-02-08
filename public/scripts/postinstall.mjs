@@ -1,22 +1,21 @@
-#!/usr/bin/env node
+import fs from 'fs'
+import { exec } from 'child_process'
+import Spinnies from 'spinnies'
 
 ;(async function main () {
-  const fs = require('fs')
-  const { exec } = require('child_process')
   const tasks = ['tsc --build ./tsconfig.build.json']
-  
+
   if (!fs.existsSync('tsconfig.build.json')) {
     tasks.unshift(...[
       'ts-patch install -s',
       'lerna run compile --concurrency 2 --parallel --include-dependencies --scope=@dumlj/tidy-cli',
-      'dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\" --exclude \"**/__example__\"\"',
+      'dumlj concurrently "tscfg --exclude "**/__template__" --exclude "**/__example__"" "deps --exclude "**/__template__" --exclude "**/__example__""',
       'npm run compile',
       // must compile create-cli
       'dumlj install husky',
     ])
   }
 
-  const Spinnies = require('spinnies')
   const spinnies = new Spinnies()
   tasks.forEach((command) => spinnies.add(command, { text: command }))
 

@@ -41,11 +41,15 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.ts'],
-      extends: ['.eslintrc.typescript.js'],
+      extends: ['./public/eslintrc/ts.js'],
     },
     {
       files: ['**/*.js'],
-      extends: ['.eslintrc.javascript.js'],
+      extends: ['./public/eslintrc/cjs.js'],
+    },
+    {
+      files: ['**/*.mjs'],
+      extends: ['./public/eslintrc/esm.js'],
     },
   ],
 }
