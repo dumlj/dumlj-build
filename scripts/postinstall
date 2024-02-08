@@ -8,9 +8,11 @@
   if (!fs.existsSync('tsconfig.build.json')) {
     tasks.unshift(...[
       'ts-patch install -s',
-      'lerna run compile --parallel --include-dependencies --scope=@dumlj/tidy-cli --scope=@dumlj/create-cli',
-      'dumlj install husky',
+      'lerna run compile --concurrency 2 --parallel --include-dependencies --scope=@dumlj/tidy-cli',
       'dumlj concurrently \"tscfg --exclude \"**/__template__\" --exclude \"**/__example__\"\" \"deps --exclude \"**/__template__\" --exclude \"**/__example__\"\"',
+      'npm run compile',
+      // must compile create-cli
+      'dumlj install husky',
     ])
   }
 
