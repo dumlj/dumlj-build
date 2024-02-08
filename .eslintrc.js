@@ -44,7 +44,7 @@ module.exports = {
       extends: ['.eslintrc.typescript.js'],
     },
     {
-      files: ['**/*.js', '**/*.mjs'],
+      files: ['**/*.js'],
       extends: ['.eslintrc.javascript.js'],
     },
   ],

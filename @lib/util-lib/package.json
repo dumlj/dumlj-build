@@ -24,8 +24,7 @@
   "devDependencies": {
     "@jest/types": "^29.6.3",
     "memfs": "^4.6.0",
-    "ts-jest": "^29.1.1",
-    "unified": "*"
+    "ts-jest": "^29.1.1"
   },
   "publishConfig": {
     "access": "public"
