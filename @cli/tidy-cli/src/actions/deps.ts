@@ -2,11 +2,10 @@ import chalk from 'chalk'
 import fs from 'fs-extra'
 import path from 'path'
 import micromatch from 'micromatch'
-import { resolveOptions } from '@dumlj/seed-cli'
+import { resolveOptions, ok, info, warn } from '@dumlj/seed-cli'
 import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
 import depcheck from 'depcheck'
 import { findSiblingsVersion } from '../utils/findSiblingsVersion'
-import { ok, info, warn } from '../services/logger'
 
 export interface TidyDepsOptions {
   /** 生产依赖匹配参数 */

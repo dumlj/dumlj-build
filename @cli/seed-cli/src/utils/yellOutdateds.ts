@@ -3,6 +3,7 @@ import { shouldUpdate } from '@dumlj/feature-updater'
 import fs from 'fs-extra'
 import chalk from 'chalk'
 import { readPackageSourceThroughBin } from './readPackageSourceThroughBin'
+import { YELL_VERSION_TYPE } from '../constants/definition'
 
 export interface YellOutdatedsOptions {
   bin?: string
@@ -32,7 +33,7 @@ export const yellOutdateds = async (options?: YellOutdatedsOptions) => {
       latestVersion,
     } = await shouldUpdate(name, {
       compareVer,
-      includes: ['minor', 'preminor', 'patch', 'prepatch'],
+      includes: YELL_VERSION_TYPE,
     })
 
     if (needUpdate) {

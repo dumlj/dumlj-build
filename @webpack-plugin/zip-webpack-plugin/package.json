@@ -13,16 +13,16 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "^2.5.22",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.22",
     "jszip": "^3.10.1",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "^2.5.22",
+    "@dumlj/mock-lib": "workspace:^2.5.22",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "memfs": "^4.6.0",

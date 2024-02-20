@@ -26,17 +26,20 @@ export interface CompileProjectOptions {
    * folder of template which store snippets of README.md
    */
   template?: string
+  /** 多语言 */
+  local?: string
 }
 
 /** 编译文档 */
 export const compileProject = async (location: string, options?: CompileProjectOptions) => {
-  const { configFile, cwd, banner = README_BANNER } = options || {}
-  const { template, helpers, snippets, metadatas } = await resolveConfig({ configFile, cwd })
+  const { configFile, cwd, banner = README_BANNER, local } = options || {}
+  const { template, helpers, snippets: inSnippets, metadatas } = await resolveConfig({ configFile, cwd })
+  const snippets = inSnippets.map((snippet) => `${snippet}${local ? `.${local}` : ''}.md`)
 
   // 优先使用传入的 template
   // template of options first
   const { paths: lookupPaths } = await findSnippets(location, { template: options?.template || template, cwd })
-  const renderSnippets = await compileSnippets({ snippets: snippets.map((snippet) => `${snippet}.md`), lookupPaths })
+  const renderSnippets = await compileSnippets({ snippets, lookupPaths })
   if (typeof renderSnippets !== 'function') {
     return
   }

@@ -4,7 +4,7 @@
   "private": true,
   "description": "something build utilities",
   "license": "MIT",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "pnpm@8.15.1",
   "workspaces": {
     "packages": [
       "@lib/*",
@@ -12,6 +12,7 @@
       "@webpack-plugin/*",
       "@vite-plugin/*",
       "@dumi-plugin/*",
+      "@next-plugin/*",
       "@cli/*",
       "@*/*/__example__"
     ]
@@ -21,18 +22,29 @@
     "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
     "ci:coverage": "npm run compile && npm run test",
     "ci:build": "npm run compile",
-    "postinstall": "node ./scripts/postinstall",
+    "postinstall": "node ./public/scripts/postinstall.mjs",
+    "preinstall": "node ./public/scripts/preinstall.mjs",
     "clear": "rimraf --glob ./@*/*/{libs,build,*.tsbuildinfo,tsconfig.build.json} tsconfig.build.json",
     "format": "prettier --config .prettierrc.js --write \"**/*.{js,jsx,ts,tsx,d.ts,vue,md,json,yml,yaml}\"",
-    "lint": "npm run lint:ts",
-    "lint:ts": "eslint --config .eslintrc.js --ext .ts,.tsx --fix .",
-    "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --ignore .templaterc.ts\"",
+    "lint": "eslint --fix .",
+    "tidy": "dumlj concurrently \"tscfg --exclude **/__example__\" \"deps --exclude **/__example__\"",
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
-    "test": "jest -c ./jest.config.ts --coverage --reporters=default --reporters=jest-junit",
+    "test": "jest -c ./jest.config.ts --coverage",
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
     "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"
+  },
+  "peerDependencies": {
+    "@dumlj/mock-lib": "workspace:^2.5.22",
+    "@dumlj/seed-cli": "workspace:^2.5.22",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.22",
+    "@dumlj/shell-lib": "workspace:^2.5.22",
+    "@dumlj/util-lib": "workspace:^2.5.22",
+    "@dumlj/tidy-cli": "workspace:^2.5.22",
+    "@dumlj/dumi-plugin-node-stackblitz": "workspace:^2.5.22",
+    "@dumlj/dumi-plugin-mono-readme": "workspace:^2.5.22",
+    "@dumlj/create-cli": "workspace:^2.5.22"
   },
   "devDependencies": {
     "@types/node": "^20.10.1",
@@ -58,7 +70,6 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-react-hooks": "^4.4.0",
     "fs-extra": "^11.1.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",

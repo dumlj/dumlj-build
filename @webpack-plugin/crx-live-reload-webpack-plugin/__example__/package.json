@@ -7,8 +7,8 @@
     "serve": "concurrently \"webpack serve -c webpack.config.ts\" \"node ./static-serve\""
   },
   "dependencies": {
-    "@dumlj/crx-live-reload-webpack-plugin": "^2.5.22",
-    "@dumlj/memfs-webpack-plugin": "^2.5.22",
+    "@dumlj/crx-live-reload-webpack-plugin": "workspace:^2.5.22",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.22",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.89.0"
   },

@@ -2,6 +2,7 @@
 libs
 !**/src/**/libs
 !**/__tests__/**/libs
+!**/__example
 build
 .next
 coverage

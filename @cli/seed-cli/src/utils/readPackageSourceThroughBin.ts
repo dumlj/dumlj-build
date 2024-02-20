@@ -1,4 +1,5 @@
-import fs from 'fs-extra'
+import fs from 'fs'
+import { readRootPathThroughBin } from './readRootPathThroughBin'
 import path from 'path'
 
 /**
@@ -7,27 +8,17 @@ import path from 'path'
  * @description
  * 类似 node_modules 方式，逐层往上寻找
  */
-export const readPackageSourceThroughBin = async (binPath: string): Promise<PackageSource> => {
-  const readPackageJson = async (folder: string) => {
-    const file = path.join(folder, 'package.json')
-    if (await fs.pathExists(file)) {
-      return fs.readJSON(file, { encoding: 'utf-8' })
-    }
-
+export async function readPackageSourceThroughBin(binPath: string): Promise<PackageSource> {
+  const folder = await readRootPathThroughBin(binPath)
+  if (!folder) {
     return null
   }
 
-  let current: string = path.dirname(binPath)
-  while (true) {
-    if (['.', '/'].includes(current)) {
-      return readPackageJson('/')
-    }
-
-    const content = await readPackageJson(current)
-    if (content) {
-      return content
-    }
-
-    current = path.dirname(current)
+  try {
+    const file = path.join(folder, 'package.json')
+    const content = await fs.promises.readFile(file, 'utf-8')
+    return JSON.parse(content)
+  } catch (error) {
+    return null
   }
 }

@@ -2,7 +2,7 @@ import { createCommonExecutor } from '../creators/createCommonExecutor'
 import type { Dependencies, Package } from '../types'
 import { npmDeclaredDependencies } from './npmDeclaredDependencies'
 
-const command = (name: string) => `npm ls "${name}" --json --link --omit optional --omit peer`
+const command = (name: string) => `npm ls "${name}" --json --link --omit optional --omit peer --silent`
 
 const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Package[] => {
   const resp = Object.keys(dependencies || {}).flatMap((name) => {

@@ -1,3 +1,4 @@
+export * from './utils/resolveConfig'
 export * from './renderer/compileSnippets'
 export * from './renderer/compileProject'
 export * from './renderer/compileWorkspace'

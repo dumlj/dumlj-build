@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: "off" */
+
 const path = require('path')
 const express = require('express')
 const { createProxyMiddleware } = require('http-proxy-middleware')
@@ -15,4 +17,5 @@ app.use(
 )
 
 app.use(express.static(path.join(__dirname, 'build')))
+// eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Example app listening on port ${port}`))

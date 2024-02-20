@@ -12,8 +12,8 @@
   "types": "./libs/index.d.ts",
   "scripts": {
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
     "chalk": "^4.1.2",

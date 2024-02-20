@@ -2,7 +2,7 @@ import { fail, ok } from '@dumlj/feature-pretty'
 import { prepare } from '@dumlj/feature-prepare'
 import { pressAnyToContinue } from '@dumlj/feature-cliui'
 import { gitDetectIgnore } from '@dumlj/shell-lib'
-import { findWorkspaceRootPath, findWorkspaceProject } from '@dumlj/util-lib'
+import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { monitorToDevelop } from '@dumlj/seed-cli'
 import chalk from 'chalk'
 import { trimEnd, kebabCase, defaults } from 'lodash'
@@ -176,29 +176,20 @@ export class Create {
   public async select(options?: SelectOptions) {
     const { only } = options || {}
     const rootPath = await this.getRootPath()
-    const workspaces = await findWorkspaceProject()
-    const templates = workspaces.filter(({ name }) => new RegExp(`^${this.pattern}`).test(name))
+    const configFile = path.join(rootPath, this.rc)
+    const { configure } = await prepare<{ configure: () => Promise<TemplateSchema[]> }>(configFile)
+    const schemas = await configure()
     const choices = await Promise.all(
-      templates.map(async ({ name: key, location }) => {
-        const config = path.join(rootPath, location, this.rc)
-        if (!(await fs.pathExists(config))) {
-          return
-        }
-
-        const { configure } = await prepare<{ configure: () => Promise<TemplateSchema> }>(config)
-        const schema = await configure()
-        const { name: sName, description } = await configure()
-
-        const name = `${sName} - ${description}`
-        const value = { ...schema, src: path.dirname(config), key }
-        return { name, value, key }
+      schemas.map(({ name, description, template, ...rest }) => {
+        const title = `${name} - ${description}`
+        const value = { ...rest, src: template, key: name }
+        return { name: title, value, key: name }
       })
     )
 
     const tempalteKey = this.template ? `${DEFAULT_TEMPLATE_PATTERN}${this.template}` : ''
     const defaultTemplate = tempalteKey ? choices.find(({ key }) => key === tempalteKey)?.value : undefined
     const skip = (name: string) => (Array.isArray(only) ? !only.includes(name) : false)
-
     const { template }: Pick<FormFieldValues, 'template'> = await inquirer.prompt<FormFieldValues>([
       {
         type: 'list',

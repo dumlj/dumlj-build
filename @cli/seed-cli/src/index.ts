@@ -1,5 +1,6 @@
 export * from './resolveOptions'
 export * from './tryAction'
-export * from './registerCli'
 export * from './enhance'
 export * from './monitorToDevelop'
+export * from './execute'
+export * from './services/logger'

@@ -13,12 +13,12 @@
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
-    "dev": "yarn jest --watch",
-    "test": "yarn jest"
+    "dev": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-prepare": "^2.5.22",
-    "@dumlj/util-lib": "^2.5.22",
+    "@dumlj/feature-prepare": "workspace:^2.5.22",
+    "@dumlj/util-lib": "workspace:^2.5.22",
     "fs-extra": "^11.1.1",
     "handlebars": "^4.7.8",
     "lodash": "^4.17.21",

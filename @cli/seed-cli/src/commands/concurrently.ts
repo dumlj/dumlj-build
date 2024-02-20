@@ -1,9 +1,8 @@
-import { program, type Command } from 'commander'
+import { Command } from 'commander'
 import { tryAction } from '../tryAction'
 import { concurrently } from '../actions/concurrently'
 
-export default program
-  .command('concurrently')
+export default new Command('concurrently')
   .summary('execute multiple commands at the same time')
   .argument('<commands...>')
   .action(async (commands: string[], _, command: Command) => {

@@ -27,6 +27,10 @@ export interface TransformReuslt {
 }
 
 export interface TemplateSchema {
+  /** 模板路径 */
+  template: string
+  /** 输出文件夹 */
+  output: string
   /** 名称 */
   name: string
   /** 描述 */

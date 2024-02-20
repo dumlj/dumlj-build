@@ -5,10 +5,14 @@ import { workspaces } from './package.json'
 const TIMEOUT = 30e3
 const { packages } = workspaces
 
+process.env.NODE_OPTIONS = '--experimental-vm-modules'
+
 export default async (): Promise<Config.InitialOptions> => {
   return {
     skipFilter: true,
     testTimeout: TIMEOUT,
+    coverageReporters: ['text', 'cobertura', 'html'],
+    collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/**/*.d.ts'],
     projects: [
       /**
        * 规范检测
