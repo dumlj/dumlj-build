@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
-export async function readRootPathThroughBin(binPath: string): Promise<string> {
-  const existsPackageJson = async (folder: string) => {
+export async function readRootPathThroughBin(binPath: string) {
+  const existsPackageJson = (folder: string) => {
     const file = path.join(folder, 'package.json')
     return fs.existsSync(file)
   }
@@ -17,7 +17,7 @@ export async function readRootPathThroughBin(binPath: string): Promise<string> {
       return
     }
 
-    if (await existsPackageJson(current)) {
+    if (existsPackageJson(current)) {
       return current
     }
 

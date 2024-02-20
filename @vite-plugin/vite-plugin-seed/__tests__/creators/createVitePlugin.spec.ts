@@ -26,8 +26,8 @@ describe('test creators/createVitePlugin', () => {
       expect(plugin(1, '1')).toEqual({ name: 'vite-plugin' })
       expect(factoryFn).toHaveBeenCalled()
       expect(enhanceFn).toHaveBeenCalled()
-      expect(nestParams).toEqual([1, '1'])
-      expect(nestEnhancers).toEqual(ENHANCERS)
+      expect(nestParams!).toEqual([1, '1'])
+      expect(nestEnhancers!).toEqual(ENHANCERS)
     })
   })
 
@@ -74,7 +74,7 @@ describe('test creators/createVitePlugin', () => {
           return enhancers
         }, {})
       })({ ...originEnhancers, ...expandEnhancers })
-      expect(nestEnhancers).toEqual(mergeEnhancers)
+      expect(nestEnhancers!).toEqual(mergeEnhancers)
     })
   })
 })

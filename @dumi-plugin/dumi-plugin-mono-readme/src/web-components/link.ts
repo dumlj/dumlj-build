@@ -12,8 +12,10 @@ if (!customElements.get(TAG_NAME)) {
     class extends HTMLAnchorElement {
       connectedCallback() {
         const { project } = this.dataset
-        const { location }: Project = JSON.parse(decodeURIComponent(project))
-        this.setAttribute('href', `${__webpack_public_path__.replace(/\/$/, '')}/${location.replace(/^\//, '').replace('@', '')}`)
+        if (project) {
+          const { location }: Project = JSON.parse(decodeURIComponent(project))
+          this.setAttribute('href', `${__webpack_public_path__.replace(/\/$/, '')}/${location.replace(/^\//, '').replace('@', '')}`)
+        }
       }
     },
     { extends: 'a' }

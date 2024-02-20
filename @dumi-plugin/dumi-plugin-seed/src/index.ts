@@ -1,5 +1,4 @@
 import { findOutdateds } from '@dumlj/feature-updater'
-import { importOnlySupportESM } from '@dumlj/util-lib'
 import path from 'path'
 import { type IApi } from 'dumi'
 import chalk from 'chalk'
@@ -7,9 +6,10 @@ import VirtualModulesPlugin from 'webpack-virtual-modules'
 import type { Assign } from 'utility-types'
 import type { Compiler, WebpackPluginInstance } from 'webpack'
 import { regsiterRemarkCustomComponent, type CustomComponentRender } from './regsiterRemarkCustomComponent'
+import { importOnlySupportESM } from './importOnlySupportESM'
 import { SYNTAX_PLUGIN_SUFFIX, SYNTAX_MODULE_SUFFIX } from './constants'
 
-export interface RegisterComponentOptions<A extends Record<string, string> = Record<string, string>> {
+export interface RegisterComponentOptions<A> {
   /** 文件 */
   webComponentFile?: string
   /** 标签 */
@@ -21,12 +21,12 @@ export interface RegisterComponentOptions<A extends Record<string, string> = Rec
 export interface Helper<O extends Record<string, any>> {
   regsiterComponent<A extends Record<string, string>>(options?: RegisterComponentOptions<A>): void
   pushWebpackPlugin(name: string, plugin: WebpackPluginInstance): void
-  getOptions?: () => O
+  getOptions: () => O
 }
 
 export type Api<T extends Record<string, any>> = Assign<IApi, { useConfig: Assign<IApi['userConfig'], T> }>
 
-export const createDumiPlugin = <O extends Record<string, any>>(name: string, factory: (api: Api<O>, helper: Helper<O>) => Promise<void>) => {
+export function createDumiPlugin<O extends Record<string, any>>(name: string, factory: (api: Api<O>, helper: Helper<O>) => Promise<void>) {
   const yellOutdateds = async (api: Api<O>) => {
     const outdates = await findOutdateds()
     outdates.forEach(({ name, updateType, version, latestVersion }) => {
@@ -51,7 +51,7 @@ export const createDumiPlugin = <O extends Record<string, any>>(name: string, fa
     return api?.userConfig?.[name] || {}
   }
 
-  const makeCustomComponentRegsiter = async (api: Api<O>, customComponents: Map<string, string>) => {
+  const makeCustomComponentRegsiter = async (api: Api<O>, customComponents: Map<string, string | undefined>) => {
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
     const { unified } = await importOnlySupportESM<typeof import('unified')>('unified')
     // eslint-disable-next-line @typescript-eslint/consistent-type-imports
@@ -65,7 +65,7 @@ export const createDumiPlugin = <O extends Record<string, any>>(name: string, fa
 
     const processor = unified().use(remarkFrontmatter).use(remarkDirective).use(remarkGfm).use(remarkParse)
 
-    return (options?: RegisterComponentOptions) => {
+    return (options?: RegisterComponentOptions<unknown>) => {
       const { tag, webComponentFile, render } = options || {}
       const parseAST = (content: string) => processor.parse(content)
       const fn = regsiterRemarkCustomComponent(name, { tag, render, parseAST })

@@ -26,7 +26,7 @@ const VERSIONS = {
 jest.mock('child_process', () => {
   return {
     __esModule: true,
-    exec(command: string, fn: (error: Error, stdout: string) => void) {
+    exec(command: string, fn: (error: Error | null, stdout: string) => void) {
       if (0 === command.indexOf('npm show')) {
         return mockLatest(VERSIONS)(command, fn)
       }

@@ -11,6 +11,12 @@
   "license": "MIT",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "jest --watch",
+    "test": "jest"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.440.0",
     "@aws-sdk/lib-storage": "^3.440.0",

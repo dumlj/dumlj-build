@@ -60,15 +60,14 @@ export const onRuntimeMessage = (() => {
         sendResponse(response)
       }
     } catch (error) {
-      fail(error.message)
+      const message = error instanceof Error ? error.message : 'something wrong.'
+      fail(message)
 
-      const response: MessageResponse = {
+      sendResponse({
         code: 1,
         success: false,
-        message: error.message,
-      }
-
-      sendResponse(response)
+        message: message,
+      })
     }
   })
 
@@ -80,7 +79,7 @@ export const onRuntimeMessage = (() => {
 })()
 
 /** 发送信息 */
-export function sendRuntimeMessage<T = any, R = any>(action: string, payload?: T, options?: MessageRequestOptions): Promise<R> {
+export function sendRuntimeMessage<T, R>(action: string, payload?: T, options?: MessageRequestOptions) {
   return new Promise((revolve, reject) => {
     const request: MessageRequest<T> = { target: LIVERELOAD_MESSAGE_TARGET, action, payload, options }
     chrome.runtime.sendMessage(request, (response: MessageResponse<R>) => {
@@ -91,7 +90,7 @@ export function sendRuntimeMessage<T = any, R = any>(action: string, payload?: T
 }
 
 /** 向 Tab 发送信息 */
-export function sendTabMessage<T = any, R = any>(tab: number, action: string, payload?: T, options?: MessageRequestOptions): Promise<R> {
+export function sendTabMessage<T = any, R = any>(tab: number, action: string, payload?: T, options?: MessageRequestOptions) {
   return new Promise((revolve, reject) => {
     const request = { target: LIVERELOAD_MESSAGE_TARGET, action, payload, options }
     chrome.tabs.sendMessage(tab, request, (response: MessageResponse<R>) => {
@@ -110,8 +109,16 @@ export const broadcastTabs = <T = any>(action: string, payload?: T, options?: Br
   return new Promise((resolve) => {
     const { tabs: ids = [] } = options || {}
     chrome.tabs.query({}, (tabs) => {
-      const filteredTabs = Array.isArray(ids) && ids.length > 0 ? tabs.filter((tab) => ids.includes(tab.id)) : tabs
-      const promises = filteredTabs.map((tab) => sendTabMessage(tab.id, action, payload).catch((error) => error))
+      const filteredTabs = Array.isArray(ids) && ids.length > 0 ? tabs.filter((tab) => (tab.id ? ids.includes(tab.id) : false)) : tabs
+
+      const promises = filteredTabs.map((tab) => {
+        if (!tab.id) {
+          return
+        }
+
+        return sendTabMessage(tab.id, action, payload)
+      })
+
       resolve(Promise.all(promises))
     })
   })

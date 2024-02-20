@@ -15,7 +15,7 @@ export interface MonitorOptions {
   onClose?: () => void
 }
 
-export const monitor = (params: MonitorParams, options?: MonitorOptions) => {
+export function monitor(params: MonitorParams, options?: MonitorOptions) {
   const { command, argvs } = params
   const { pattern = ['**/*'], cwd = process.cwd(), ignore = [], envs = {}, onClose } = options || {}
 
@@ -24,7 +24,6 @@ export const monitor = (params: MonitorParams, options?: MonitorOptions) => {
    * the program must be isolated
    */
   let server: ChildProcess
-
   const startServer = async () => {
     server = spawn(command, argvs, {
       stdio: 'inherit',
@@ -40,7 +39,7 @@ export const monitor = (params: MonitorParams, options?: MonitorOptions) => {
    * all startups must wait for the process to complete.
    * Here you only need to take the first kill call.
    */
-  let killThread: Promise<void>
+  let killThread: Promise<void> | undefined
 
   const killServer = async () => {
     if (server?.exitCode !== null) {

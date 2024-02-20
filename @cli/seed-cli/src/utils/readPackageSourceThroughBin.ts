@@ -8,7 +8,7 @@ import path from 'path'
  * @description
  * 类似 node_modules 方式，逐层往上寻找
  */
-export async function readPackageSourceThroughBin(binPath: string): Promise<PackageSource> {
+export async function readPackageSourceThroughBin(binPath: string): Promise<PackageSource | null> {
   const folder = await readRootPathThroughBin(binPath)
   if (!folder) {
     return null

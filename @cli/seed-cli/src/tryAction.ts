@@ -8,7 +8,7 @@ export function tryAction<A extends (...args: any[]) => Promise<any>>(handle: A)
     try {
       return handle(...args)
     } catch (error) {
-      fail(error)
+      fail(error as Error)
     }
   }
 }

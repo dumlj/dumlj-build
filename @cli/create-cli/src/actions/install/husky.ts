@@ -60,7 +60,8 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
       })
     } else if (Array.isArray(command)) {
       const [hook, script] = command
-      commands[hook].push(script)
+      const chunks = commands[hook]
+      Array.isArray(chunks) && chunks.push(script)
     }
 
     return commands
@@ -73,7 +74,7 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
     }
 
     return commands
-  }, [])
+  }, [] as string[])
 
   if (commands.length > 0) {
     const scripts = ['husky install'].concat(commands).filter(Boolean).join(' && ')
@@ -98,7 +99,7 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
     }
   } catch (error) {
     fs.removeSync(huskyHooksPath)
-    fail(error)
+    fail(error as Error)
     return
   }
 

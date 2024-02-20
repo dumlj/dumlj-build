@@ -54,7 +54,7 @@ export const latest = async (name: string, options?: LatestOptions) => {
     return compareVer
   }
 
-  if (semver.valid(cacheVersion)) {
+  if (cacheVersion && semver.valid(cacheVersion)) {
     CACHE_LATEST_VERSION.set(CACHE_TOKEN, cacheVersion)
     return cacheVersion
   }

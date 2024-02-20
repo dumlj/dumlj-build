@@ -14,6 +14,7 @@ import { Project, IndentationText, QuoteKind } from 'ts-morph'
 import { highlight } from 'cardinal'
 import { DEFAULT_TEMPLATE_PATTERN, DEFAULT_RC_FILE } from './constants'
 import type { TemplateSchema } from './types'
+import type { Optional } from 'utility-types'
 
 export type Template = TemplateSchema & { src: string; key: string }
 
@@ -79,14 +80,14 @@ export class Create {
   /** pattern of template name in project */
   protected pattern?: string
   /** name of config file */
-  protected rc?: string
+  protected rc: string
   /** override exists project */
   protected override?: boolean
   /** say yes for all confirm  */
   protected yes?: boolean
 
-  protected rules: Record<string, Validator<FormFieldValues>>
-  private rootPath: string
+  protected rules: Record<string, Validator<Optional<FormFieldValues>>>
+  private rootPath?: string
 
   constructor(options?: CreateOptions) {
     this.name = options?.name
@@ -98,7 +99,12 @@ export class Create {
     this.yes = options?.yes || false
 
     this.rules = {
-      name: async (name: string, { template }) => {
+      name: async (name: string, formFieldValues) => {
+        const template = formFieldValues?.template
+        if (!template) {
+          return 'template is required'
+        }
+
         const { outputPathResolver } = template
         const rootPath = await this.getRootPath()
         const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
@@ -160,11 +166,11 @@ export class Create {
       return this.rootPath
     }
 
-    this.rootPath = await findWorkspaceRootPath()
+    this.rootPath = (await findWorkspaceRootPath()) || process.cwd()
     return this.rootPath
   }
 
-  public async validate(name: string, value: string, formvalues: FormFieldValues) {
+  public async validate(name: string, value: string, formvalues: Optional<FormFieldValues>) {
     const validate = this.rules[name]
     if (typeof validate !== 'function') {
       throw new Error(`rule ${name} is not exists`)
@@ -212,7 +218,7 @@ export class Create {
         validate: (input, answers) => {
           return this.validate('name', input, { ...answers, template })
         },
-        transformer(input) {
+        transformer: (input) => {
           const { nameTransform } = template
           if (typeof nameTransform === 'function') {
             const { name, same, suffix } = nameTransform(input)
@@ -250,9 +256,9 @@ export class Create {
     )
   }
 
-  public async compile(params?: CompileParams) {
+  public async compile(params: CompileParams) {
     const { name, description, output: dist, template } = params
-    const { src, pkgTransform, tsTransform } = template
+    const { src, pkgTransform, tsTransform } = template || {}
     const files = await glob('**/*', { cwd: src, nodir: true, ignore: [this.rc], dot: true })
     const ignores = await gitDetectIgnore(files)
 
@@ -305,10 +311,11 @@ export class Create {
           }
 
           const outFile = path.join(dist, file)
-          const { file: output = outFile, code } = (await tranform()) || {}
+          const { file: output = outFile, code = '' } = (await tranform()) || {}
           const operates = [...statsOperates]
+
           while (operates.length) {
-            const fn = operates.shift()
+            const fn = operates.shift()!
             await fn({ src: srcFile, out: output, code })
           }
         })
@@ -375,7 +382,7 @@ export class Create {
     ].filter(Boolean)
 
     while (debugs.length) {
-      const message = debugs.shift()
+      const message = debugs.shift()!
       await pressAnyToContinue({ message })
       /* eslint-disable-next-line no-console */
       console.log('')
@@ -415,7 +422,7 @@ export class Create {
 
         await fs.writeFile(out, code)
       } catch (error) {
-        fail(error)
+        fail(error as Error)
       }
     })
 

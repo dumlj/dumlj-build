@@ -7,7 +7,7 @@ interface SyntaxModule {
   component: Class<HTMLElement>
 }
 
-const defineWebComponent = (tag: string, Component: Class<HTMLElement>) => {
+function defineWebComponent(tag: string, Component: Class<HTMLElement>) {
   if (customElements.get(tag)) {
     throw new Error(`${tag} is exists`)
   }

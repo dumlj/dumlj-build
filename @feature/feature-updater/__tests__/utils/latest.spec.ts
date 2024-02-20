@@ -6,7 +6,7 @@ jest.mock('child_process', () => {
   const { VERSIONS } = jest.requireActual<typeof import('../__mocks__/constants')>('../__mocks__/constants')
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const { mockLatest } = jest.requireActual<typeof import('@dumlj/mock-lib')>('@dumlj/mock-lib/src')
-  const exec = (command: string, fn: (error: Error, stdout: string) => void) => {
+  const exec = (command: string, fn: (error: Error | null, stdout: string) => void) => {
     if (0 === command.indexOf('npm show')) {
       return mockLatest(VERSIONS)(command, fn)
     }

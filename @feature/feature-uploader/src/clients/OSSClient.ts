@@ -1,29 +1,35 @@
 import OSS from 'ali-oss'
-import type { Readable } from 'stream'
 import { RESPONSE_HEADERS } from '../constants/headers'
-import { Client } from '../libs/Client'
+import { Client, type ClientUploadContent, type ClientUploadOptions } from '../libs/Client'
 import { isReadable } from '../utils/isReadable'
-import type { UploadOptions } from '../types'
+
+type CreateServiceOptions = Omit<OSS.Options, 'region' | 'bucket' | 'accessKeyId' | 'accessKeySecret'>
 
 /**
  * 阿里云上传工具
- * @see [出现跨域问题](https://help.aliyun.com/document_detail/40130.html)
+ * @see https://help.aliyun.com/document_detail/40130.html 出现跨域问题
  */
 export class OSSClient extends Client<Partial<OSS.Options>> {
   static NAME = 'oss'
   protected oss?: OSS
 
   /** 创建服务 */
-  protected createService(options?: Partial<OSS.Options>) {
-    const { region, bucket, accessKeyId = process.env.OSS_AK, accessKeySecret = process.env.OSS_SK } = this || {}
-    return new OSS(Object.assign({}, options, { region, bucket, accessKeyId, accessKeySecret }))
+  protected createService(options?: CreateServiceOptions) {
+    const { region, bucket, accessKeyId = process.env.OSS_AK!, accessKeySecret = process.env.OSS_SK! } = this || {}
+    return new OSS({
+      ...options,
+      region,
+      bucket,
+      accessKeyId,
+      accessKeySecret,
+    })
   }
 
   /** 上传 */
-  protected async _upload(content: string | Buffer | Readable, options?: Pick<UploadOptions, 'client' | 'fileName' | 'fileKey' | 'responseHeaders'>) {
+  protected async _upload(content: ClientUploadContent, options: ClientUploadOptions<Partial<OSS.Options>>) {
     this.oss = this.oss || this.createService(options?.client)
 
-    const { fileName, fileKey, responseHeaders = {} } = options || {}
+    const { fileName, fileKey, responseHeaders } = options
     const contentType = this.getContentType(fileName)
     const { ['Cache-Control']: CacheControl } = Object.assign({}, RESPONSE_HEADERS, responseHeaders)
 

@@ -4,7 +4,7 @@ export interface TravelOptions {
   ignoreRoot?: boolean
 }
 
-export const travelOrbitTree = (tree: OrbitNode, options?: TravelOptions) => {
+export function travelOrbitTree(tree: OrbitNode, options?: TravelOptions) {
   return (handle: (node: ExtraOrbitNode, chain: ExtraOrbitNode[]) => void) => {
     const { ignoreRoot = true } = options || {}
     const walk = (node: ExtraOrbitNode, chain: ExtraOrbitNode[]) => {
@@ -13,20 +13,14 @@ export const travelOrbitTree = (tree: OrbitNode, options?: TravelOptions) => {
       }
 
       const { isLatest, children } = node
-      if (isLatest || !(children?.size > 0)) {
+      if (isLatest || !(children && children?.size > 0)) {
         return
       }
 
-      const previous = []
-      const paths = []
+      const previous: OrbitNode[] = []
+      const paths: OrbitNode[] = []
 
-      const names = children.values()
-      while (true) {
-        const { value: node, done } = names.next()
-        if (done) {
-          break
-        }
-
+      for (const node of Array.from(children.values())) {
         node.isLatest ? paths.push(node) : previous.push(node)
       }
 

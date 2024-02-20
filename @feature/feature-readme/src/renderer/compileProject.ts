@@ -31,14 +31,23 @@ export interface CompileProjectOptions {
 }
 
 /** 编译文档 */
-export const compileProject = async (location: string, options?: CompileProjectOptions) => {
+export async function compileProject(location: string, options?: CompileProjectOptions) {
   const { configFile, cwd, banner = README_BANNER, local } = options || {}
   const { template, helpers, snippets: inSnippets, metadatas } = await resolveConfig({ configFile, cwd })
+  if (!(Array.isArray(inSnippets) && inSnippets.length)) {
+    return
+  }
+
   const snippets = inSnippets.map((snippet) => `${snippet}${local ? `.${local}` : ''}.md`)
 
   // 优先使用传入的 template
   // template of options first
-  const { paths: lookupPaths } = await findSnippets(location, { template: options?.template || template, cwd })
+  const result = await findSnippets(location, { template: options?.template || template, cwd })
+  if (!result) {
+    return
+  }
+
+  const { paths: lookupPaths } = result
   const renderSnippets = await compileSnippets({ snippets, lookupPaths })
   if (typeof renderSnippets !== 'function') {
     return
@@ -47,7 +56,9 @@ export const compileProject = async (location: string, options?: CompileProjectO
   const info = await resolveProject(location, { cwd })
   return (data?: Partial<Metadata>) => {
     const context = { location, ...info, ...metadatas, ...data }
-    Object.entries({ ...DEFAULT_HELPERS, ...helpers }).forEach(([name, fn]) => handlebars.registerHelper(name, fn.bind(null, context)))
+    for (const [name, fn] of Object.entries({ ...DEFAULT_HELPERS, ...helpers })) {
+      handlebars.registerHelper(name, fn.bind(null, context))
+    }
 
     const codes = renderSnippets(context)
     const head = typeof banner === 'function' ? banner(context) : banner

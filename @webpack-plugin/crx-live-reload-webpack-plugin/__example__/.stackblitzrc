@@ -1,6 +1,6 @@
 {
   "installDependencies": false,
-  "startCommand": "yarn install && yarn serve",
+  "startCommand": "pnpm install && pnpm serve",
   "env": {
     "STACKBLITZ": "1"
   }

@@ -16,11 +16,11 @@ export interface ResolveConfigOptions {
 }
 
 /** 解析配置文件 */
-export const resolveConfig = async <O extends Record<string, any>>(options?: ResolveConfigOptions): Promise<ReadmeConfig & O> => {
-  const { configFile = DEFAULT_CONFIG_FILE_NAME, defaults = {}, cwd = process.cwd() } = options
+export async function resolveConfig<O extends Record<string, any>>(options?: ResolveConfigOptions): Promise<ReadmeConfig & O> {
+  const { configFile = DEFAULT_CONFIG_FILE_NAME, defaults = {}, cwd = process.cwd() } = options || {}
   const rcFile = path.join(cwd, configFile)
   if (ConfigCache.has(rcFile)) {
-    return ConfigCache.get(rcFile) as ReadmeConfig & O
+    return ConfigCache.get(rcFile)! as ReadmeConfig & O
   }
 
   const { configure } = await prepare<{ configure: ReadmeConfiguration<O> }>(rcFile)

@@ -24,7 +24,7 @@ export const registerCache = <T>(scope: string = (Date.now() + Math.random() * 1
   }
 
   /** 读缓存 */
-  const read = async (name: string, options?: ReadOptions): Promise<T> => {
+  const read = async (name: string, options?: ReadOptions): Promise<T | undefined> => {
     const { remove: removeAfterRead = false } = options || {}
     const file = path.join(folder, name)
     if (await fs.pathExists(file)) {

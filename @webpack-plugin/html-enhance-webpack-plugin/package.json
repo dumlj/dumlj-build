@@ -10,6 +10,12 @@
   "license": "MIT",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "jest --watch",
+    "test": "jest"
+  },
   "dependencies": {
     "@dumlj/seed-webpack-plugin": "workspace:^2.5.22",
     "@dumlj/util-lib": "workspace:^2.5.22",

@@ -55,9 +55,9 @@ describe('test actions/tidyTscfg', () => {
     expect('/packages/b/tsconfig.build.json' in files).toBeTruthy()
     expect('/tsconfig.build.json' in files).toBeTruthy()
 
-    const rContent = JSON.parse(files['/tsconfig.build.json'])
-    const aContent = JSON.parse(files['/packages/a/tsconfig.build.json'])
-    const bContent = JSON.parse(files['/packages/b/tsconfig.build.json'])
+    const rContent = JSON.parse(files['/tsconfig.build.json']!)
+    const aContent = JSON.parse(files['/packages/a/tsconfig.build.json']!)
+    const bContent = JSON.parse(files['/packages/b/tsconfig.build.json']!)
 
     expect(aContent).toHaveProperty('compilerOptions.composite')
     expect(bContent).toHaveProperty('compilerOptions.composite')

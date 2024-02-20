@@ -11,6 +11,12 @@
   "license": "MIT",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
+  "scripts": {
+    "clear": "rimraf ./libs",
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "jest --watch",
+    "test": "jest"
+  },
   "dependencies": {
     "@dumlj/dynamic-envs-webpack-plugin": "workspace:^2.5.22",
     "@dumlj/html-enhance-webpack-plugin": "workspace:^2.5.22",

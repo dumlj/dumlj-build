@@ -7,7 +7,7 @@ export interface CustomWebpackPluginOptions extends SeedWebpackPluginOptions {
 
 export class CustomWebpackPlugin extends SeedWebpackPlugin {
   static PLUGIN_NAME = 'custom-webpack-plugin'
-  protected unnecessary: string
+  protected unnecessary?: string
 
   constructor(options?: CustomWebpackPluginOptions) {
     super(options)

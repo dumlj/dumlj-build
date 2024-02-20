@@ -14,7 +14,7 @@ describe('test libs/Client', () => {
     const accessKeyId = 'accessKeyId'
     const accessKeySecret = 'accessKeySecret'
 
-    const upload = jest.fn(async (stream: string | Buffer | Readable, options?: UploadOptions) => {
+    const upload = jest.fn(async (stream: string | Buffer | Readable, options: UploadOptions) => {
       const { fileKey, fileName } = options
       return {
         file: fileName,
@@ -24,7 +24,7 @@ describe('test libs/Client', () => {
     })
 
     class CustomClient extends Client {
-      _upload(stream: string | Buffer | Readable, options?: UploadOptions) {
+      _upload(stream: string | Buffer | Readable, options: UploadOptions) {
         return upload(stream, options)
       }
     }

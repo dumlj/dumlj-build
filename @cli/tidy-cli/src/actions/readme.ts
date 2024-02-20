@@ -1,6 +1,5 @@
 import { findWorkspaceRootPath } from '@dumlj/util-lib'
-import { compileWorkspace, resolveConfig } from '@dumlj/feature-readme'
-import type { Renderer, CompileWorkspaceOptions } from '@dumlj/feature-readme'
+import { compileWorkspace, resolveConfig, type Renderer, type CompileWorkspaceOptions } from '@dumlj/feature-readme'
 import { ok, info, warn } from '@dumlj/seed-cli'
 import fs from 'fs'
 import path from 'path'
@@ -16,7 +15,7 @@ export interface TidyReadmeOptions extends Omit<CompileWorkspaceOptions, 'config
 }
 
 export const tidyReadme = async (options?: TidyReadmeOptions) => {
-  const { locals: inLocals = [], output = 'README.md', config: configFile, template, cwd: inCwd, banner, include, exclude, paths } = options
+  const { locals: inLocals = [], output = 'README.md', config: configFile, template, cwd: inCwd, banner, include, exclude, paths } = options || {}
   const cwd = typeof inCwd === 'string' ? inCwd : (await findWorkspaceRootPath({ paths })) || process.cwd()
   const { locals = inLocals } = await resolveConfig<{ locals: string[] }>({ cwd, configFile })
   const buildRender = async (local?: string) => {
@@ -48,18 +47,21 @@ export const tidyReadme = async (options?: TidyReadmeOptions) => {
   // 渲染
   /** 结果 */
   const defaultStats = await render(renderers)
-  const localStats = await Promise.all(
+  const localStats: { file: string; location: string }[] = []
+
+  await Promise.all(
     locals.map(async (local) => {
       const renderers = await buildRender(local)
       if (!(renderers && renderers.length > 0)) {
         return
       }
 
-      return render(renderers, local)
+      const stats = await render(renderers, local)
+      localStats.push(...stats)
     })
   )
 
-  const stats = [...defaultStats, ...localStats.flatMap((stats) => stats)]
+  const stats = [...defaultStats, ...localStats]
   const message = [''].concat(stats.map(({ file }) => path.relative(cwd, file))).join('\n - ')
   info(`The following ${chalk.bold(output)} have been ${chalk.bold('generated')}.${message}`)
   ok('Generate readme files completed.')

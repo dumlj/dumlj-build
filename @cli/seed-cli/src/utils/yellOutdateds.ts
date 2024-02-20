@@ -43,6 +43,10 @@ export const yellOutdateds = async (options?: YellOutdatedsOptions) => {
       return
     }
   } catch (error) {
+    if (!(error instanceof Error)) {
+      throw error
+    }
+
     // 未发布的不进行对比
     if (/npm ERR! code E404/.test(error?.message)) {
       return

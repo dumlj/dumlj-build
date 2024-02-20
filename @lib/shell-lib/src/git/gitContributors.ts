@@ -19,7 +19,8 @@ export const gitContributors = createGitExecutor(command, (content) => {
     .sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
     .map((name) => {
       // 这里邮箱为最后使用的邮箱
-      const { email } = contributors.find((contributor) => contributor.name === name)
+      const contributor = contributors.find((contributor) => contributor.name === name)
+      const email = contributor?.email
       return { name, email }
     })
 })

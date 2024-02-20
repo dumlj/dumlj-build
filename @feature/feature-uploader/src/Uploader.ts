@@ -5,6 +5,7 @@ import { S3Client } from './clients/S3Client'
 import type { InitParams, UploadOptions, UploadResponse } from './types'
 import type { CreateKeyOptions } from './utils/createKey'
 import { createKey } from './utils/createKey'
+import type { Optional } from 'utility-types'
 
 /** 上传进度回调函数 */
 export type UploaderProcess = (response: UploadResponse, index: number) => void
@@ -33,17 +34,17 @@ export type UploadSource =
     }
 
 /** 上传配置 */
-export interface UploaderUploadOptions extends UploadOptions, CreateKeyOptions {}
+export interface UploaderUploadOptions extends Optional<UploadOptions, 'fileName' | 'fileKey'>, CreateKeyOptions {}
 
 /** 上传类 */
 export class Uploader {
-  protected client: S3Client | OSSClient
+  protected client?: S3Client | OSSClient
   protected maxConcurrency: number
   protected queue: Array<() => Promise<any>>
-  protected uploading: Promise<any>
+  protected uploading?: Promise<any>
 
   public get name() {
-    return this.client.name
+    return this.client?.name || 'none'
   }
 
   constructor(params: UploaderParams) {
@@ -56,6 +57,10 @@ export class Uploader {
 
   /** 上传 */
   public async upload(source: UploadSource, options?: UploaderUploadOptions): Promise<UploadResponse> {
+    if (!this.client) {
+      throw new Error('Upload client is not init.')
+    }
+
     if (typeof source === 'string') {
       const stream = fs.createReadStream(source)
       return this.upload({ file: source, stream }, options)
@@ -64,12 +69,12 @@ export class Uploader {
     const { file } = source
     const content = 'stream' in source ? source.stream : source.content
     const key = createKey(file, options)
-    const finalOptions = Object.assign<UploaderUploadOptions, UploaderUploadOptions, UploaderUploadOptions>({}, options, { fileName: file, fileKey: key })
+    const finalOptions = { ...options, fileName: file, fileKey: key }
     return this.client.upload(content, finalOptions)
   }
 
   /** 创建并发上传任务 */
-  public async parallelUpload(source: UploadSource, options?: UploaderUploadOptions): Promise<UploadResponse> {
+  public async parallelUpload(source: UploadSource, options?: UploaderUploadOptions) {
     return new Promise<UploadResponse>(async (resolve) => {
       this.queue.push(async () => {
         const repsonse = await this.upload(source, options)
@@ -86,7 +91,7 @@ export class Uploader {
     const { maxConcurrency } = this
     const tasksInQueue = this.queue.splice(0)
 
-    const next = async (tasks = []) => {
+    const next = async (tasks: Promise<any>[] = []) => {
       // 没有任务则退出
       if (tasksInQueue.length === 0) {
         this.uploading = undefined

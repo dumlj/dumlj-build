@@ -20,7 +20,8 @@
   "dependencies": {
     "@dumlj/dumi-plugin-seed": "workspace:^2.5.22",
     "@dumlj/stackblitz-webpack-plugin": "workspace:^2.5.22",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.0",
+    "@stackblitz/sdk": "^1.9.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

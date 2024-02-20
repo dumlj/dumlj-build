@@ -2,7 +2,7 @@ import { DIVIDER_CHAR } from './constants'
 import { createOrbitNode } from './createOrbitNode'
 import type { OrbitNode } from './types'
 
-export const mapPathsToOrbitTree = (paths: string[][]) => {
+export function mapPathsToOrbitTree(paths: string[][]) {
   const collection = new Map<string, OrbitNode>()
   const roots: string[] = []
 
@@ -23,7 +23,7 @@ export const mapPathsToOrbitTree = (paths: string[][]) => {
     let isLatest = true
 
     if (current.length === 1) {
-      const node = createOrbitNode(current, isLatest)
+      const node = createOrbitNode(current, isLatest)!
       const token = current.join(DIVIDER_CHAR)
       collection.set(token, node)
       roots.push(token)
@@ -38,7 +38,7 @@ export const mapPathsToOrbitTree = (paths: string[][]) => {
       if (previous.length === 0) {
         // top element
         if (current.join(DIVIDER_CHAR) === preToken) {
-          const node = createOrbitNode(current, isLatest)
+          const node = createOrbitNode(current, isLatest)!
           collection.set(curToken, node)
           roots.push(curToken)
         }
@@ -48,7 +48,7 @@ export const mapPathsToOrbitTree = (paths: string[][]) => {
 
       // create previous
       if (!collection.has(preToken)) {
-        const node = createOrbitNode(previous, false)
+        const node = createOrbitNode(previous, false)!
         collection.set(preToken, node)
 
         const isRoot = preToken.indexOf(DIVIDER_CHAR) === -1
@@ -58,25 +58,29 @@ export const mapPathsToOrbitTree = (paths: string[][]) => {
       // create current
       let node = collection.get(curToken)
       if (!node) {
-        node = createOrbitNode(current, isLatest)
+        node = createOrbitNode(current, isLatest)!
         collection.set(curToken, node)
       }
 
       // add children
       const parent = collection.get(preToken)
-      /**
-       * change parent to path not node,
-       * the logic affects travelOrbitTree
-       */
-      parent.isLatest = false
-      parent.children.add(node)
+      if (parent) {
+        /**
+         * change parent to path not node,
+         * the logic affects travelOrbitTree
+         */
+        parent.isLatest = false
+        parent.children && parent.children.add(node)
+      }
 
       current = previous
       isLatest = false
     }
   }
 
-  const rootNodes = Array.from(roots.values()).flatMap((name) => collection.get(name))
+  const rootNodes = Array.from(roots.values())
+    .flatMap((name) => collection.get(name))
+    .filter(Boolean) as OrbitNode[]
   const tree = createOrbitNode([''], false, rootNodes)
   return tree
 }
