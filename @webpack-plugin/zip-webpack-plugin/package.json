@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/zip-webpack-plugin",
-  "version": "2.5.22",
+  "version": "2.5.23",
   "description": "Compressed to zip webpack plugin",
   "repository": {
     "type": "git",
@@ -17,12 +17,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.22",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.23",
     "jszip": "^3.10.1",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "workspace:^2.5.22",
+    "@dumlj/mock-lib": "workspace:^2.5.23",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "memfs": "^4.6.0",

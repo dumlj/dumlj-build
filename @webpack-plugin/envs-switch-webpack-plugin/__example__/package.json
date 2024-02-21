@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/envs-switch-webpack-plugin",
-  "version": "2.5.22",
+  "version": "2.5.23",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -10,8 +10,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/envs-switch-webpack-plugin": "workspace:^2.5.22",
-    "@dumlj/feature-pretty": "workspace:^2.5.22",
+    "@dumlj/envs-switch-webpack-plugin": "workspace:^2.5.23",
+    "@dumlj/feature-pretty": "workspace:^2.5.23",
     "html-webpack-plugin": "^5.5.3",
     "tslib": "^2.5.0",
     "webpack": "5.x",
