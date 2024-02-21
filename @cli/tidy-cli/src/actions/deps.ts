@@ -38,7 +38,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
     include: inInclude,
     exclude: inExclude,
     ignore: inIgnore,
-  } = options
+  } = options || {}
 
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
@@ -65,7 +65,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
         ignoreBinPackage: false,
         skipMissing: false,
         ignoreMatches: config?.ignore as ReadonlyArray<string>,
-        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore, config?.ignore),
+        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore, config?.ignore || []),
       })
 
       const dependencies: Record<string, string> = {}
@@ -109,7 +109,8 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
        */
 
       if (missDependencies || missDevDependencies) {
-        await fs.writeFile(pkgJson, JSON.stringify(source, null, 2))
+        const content = JSON.stringify(source, null, 2)
+        await fs.writeFile(pkgJson, content)
       }
 
       if (missDependencies) {
@@ -125,17 +126,21 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       const uselessDependencies: Record<string, string> = {}
       const uselessDevDependencies: Record<string, string> = {}
 
-      Object.keys(source?.dependencies || []).forEach((name) => {
-        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-          uselessDependencies[name] = source.dependencies[name]
-        }
-      })
+      if (Array.isArray(source?.dependencies)) {
+        Object.entries(source.dependencies).forEach(([name, dependence]) => {
+          if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
+            uselessDependencies[name] = dependence
+          }
+        })
+      }
 
-      Object.keys(source?.devDependencies || []).forEach((name) => {
-        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-          uselessDevDependencies[name] = source.devDependencies[name]
-        }
-      })
+      if (Array.isArray(source?.devDependencies)) {
+        Object.entries(source.devDependencies).forEach(([name, dependence]) => {
+          if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
+            uselessDevDependencies[name] = dependence
+          }
+        })
+      }
 
       const hasUselessDependencies = Object.keys(uselessDependencies).length > 0
       const hasUselessDevDependencies = Object.keys(uselessDevDependencies).length > 0

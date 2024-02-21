@@ -1,4 +1,4 @@
-import { vitePlugin, PLUGIN_NAME, connect } from '@/vitePlugin'
+import { vitePlugin, PLUGIN_NAME, connect } from '@/index'
 import { createVitePlugin } from '@/creators/createVitePlugin'
 
 describe('test vitePlugin', () => {

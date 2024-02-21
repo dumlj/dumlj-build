@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import fs from 'fs'
 import path from 'path'
 import { parseTsconfig } from 'get-tsconfig'
 import interpret from 'interpret'
@@ -21,8 +21,20 @@ export interface PrepareOptions {
   }
 }
 
+function isRechoirError(error: unknown): error is RechoirError {
+  if (!(typeof error === 'object' && error !== null)) {
+    return false
+  }
+
+  if ('failures' in error && 'error' in error) {
+    return Array.isArray(error) && error.error instanceof Error
+  }
+
+  return false
+}
+
 /** 预处理文件 */
-export const prepare = async <M = any>(file: string, options?: PrepareOptions): Promise<M> => {
+export async function prepare<M = any>(file: string, options?: PrepareOptions): Promise<M> {
   const { cwd = process.cwd(), ts } = options || {}
   const { configFile: tsConfigFile = 'tsconfig.json', onResolved } = ts || {}
 
@@ -36,7 +48,7 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
         const tsConfigLike = await findTsConfig(filePath, { cwd })
         const requireFrom = typeof tsConfigLike === 'string' ? path.dirname(tsConfigLike) : cwd
         const tsConfig = path.isAbsolute(tsConfigFile) ? tsConfigFile : path.join(requireFrom, tsConfigFile)
-        if (await fs.pathExists(tsConfig)) {
+        if (fs.existsSync(tsConfig)) {
           const { compilerOptions } = parseTsconfig(tsConfig)
           process.env.TS_NODE_COMPILER_OPTIONS = JSON.stringify(compilerOptions)
 
@@ -54,12 +66,17 @@ export const prepare = async <M = any>(file: string, options?: PrepareOptions): 
     try {
       rechoir.prepare(interpret.extensions, filePath)
     } catch (error) {
-      const messages =
-        Array.isArray(error?.failures) && (error as RechoirError).failures.length > 0
-          ? (error as RechoirError).failures.map((failure) => failure.error.message).join('\n')
-          : (error as Error)?.message
+      const message = (() => {
+        if (isRechoirError(error)) {
+          return error.failures.map((failure) => failure.error.message).join('\n')
+        }
 
-      throw new Error(`Unable load '${filePath}'\n${messages}\nPlease install one of them`)
+        if (error instanceof Error) {
+          return error?.message
+        }
+      })()
+
+      throw new Error(`Unable load '${filePath}'\n${message}\nPlease install one of them`)
     }
   }
 

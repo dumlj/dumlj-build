@@ -5,14 +5,18 @@ import type { InitParams, UploadOptions, UploadResponse } from '../types'
 import { isReadable } from '../utils/isReadable'
 import { retry } from '../utils/retry'
 
-export abstract class Client<O extends Record<string, any> = never> {
-  static NAME: string
-  protected abstract _upload(stream: string | Buffer | Readable, options?: UploadOptions<O>): Promise<UploadResponse>
+export type ClientUploadContent = string | Buffer | Readable
+export type ClientUploadOptions<O extends Record<string, any>> = Pick<UploadOptions<O>, 'client' | 'fileName' | 'fileKey' | 'responseHeaders'>
 
-  public bucket: string
-  public region: string
-  public accessKeyId: string
-  public accessKeySecret: string
+export abstract class Client<O extends Record<string, any> = never> {
+  protected abstract _upload(stream: ClientUploadContent, options?: ClientUploadOptions<O>): Promise<UploadResponse>
+
+  static NAME: string
+
+  public bucket?: string
+  public region?: string
+  public accessKeyId?: string
+  public accessKeySecret?: string
 
   public get name(): string {
     return Object.getPrototypeOf(this).constructor.NAME
@@ -28,13 +32,13 @@ export abstract class Client<O extends Record<string, any> = never> {
 
   /** 获取文件类型 */
   protected getContentType(file: string) {
-    return getType(file)
+    return getType(file) || undefined
   }
 
   /** 上传内容 */
-  public upload(content: string | Buffer | Readable, options?: UploadOptions<O>): Promise<UploadResponse> {
-    const { retryTimes, onRetry, onProgress, fileName, fileSize, fileKey } = options
-    const fileInfo = { fileName, fileSize, fileKey }
+  public upload(content: string | Buffer | Readable, options: UploadOptions<O>): Promise<UploadResponse> {
+    const { retryTimes, onRetry, onProgress, fileName, fileKey, fileSize } = options
+    const fileInfo = { fileName, fileKey, fileSize }
     if (typeof onProgress === 'function') {
       const streamProgress = progress({
         length: fileSize,
@@ -54,7 +58,7 @@ export abstract class Client<O extends Record<string, any> = never> {
       retryTimes,
       onRetry(error, options) {
         if (typeof onRetry === 'function') {
-          const { times } = options
+          const { times = 3 } = options || {}
           onRetry(error, { ...fileInfo, times })
         }
       },

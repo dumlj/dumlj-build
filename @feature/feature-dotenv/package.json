@@ -10,6 +10,11 @@
   "license": "MIT",
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
+  "scripts": {
+    "compile": "tsc --project ./tsconfig.compile.json",
+    "dev": "jest --watch",
+    "test": "jest"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "fs-extra": "^11.1.1",

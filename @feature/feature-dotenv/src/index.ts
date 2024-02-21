@@ -6,7 +6,7 @@ import path from 'path'
  * 解析环境变量文件
  * @param file 环境变量文件
  */
-export const parseDotEnvFile = async (file: string) => {
+export async function parseDotEnvFile(file: string) {
   const content = (await fs.readFile(file)).toString('utf-8')
   const parsed = parse(content)
   const variables = Object.keys(parsed)
@@ -17,7 +17,7 @@ export const parseDotEnvFile = async (file: string) => {
  * 查找缺失的环境变量
  * @param files 环境变量文件
  */
-export const findMissingVariables = async (files: string[]) => {
+export async function findMissingVariables(files: string[]) {
   const variables: Record<string, string[]> = {}
   const fileMap: Record<string, { content: string }> = {}
 
@@ -52,7 +52,7 @@ export const findMissingVariables = async (files: string[]) => {
  * 校验环境文件
  * @param files 环境变量文件
  */
-export const validateDotEnv = async (files: string[]) => {
+export async function validateDotEnv(files: string[]) {
   const cwd = process.cwd()
   if (!(files?.length > 0)) {
     return []

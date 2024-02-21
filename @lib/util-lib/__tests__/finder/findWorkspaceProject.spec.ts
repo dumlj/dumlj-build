@@ -188,6 +188,8 @@ describe('finder/findWorkspaceProject', () => {
         pattern: ['packages/*'],
         cwd: '',
       })
-    ).rejects.toThrow(`The project name package-a is duplicated in the workspace.\n - ${path.join('packages/package-b/package.json')}\n - ${path.join('packages/package-a/package.json')}`)
+    ).rejects.toThrow(
+      `The project name package-a is duplicated in the workspace.\n - ${path.join('packages/package-b/package.json')}\n - ${path.join('packages/package-a/package.json')}`
+    )
   })
 })

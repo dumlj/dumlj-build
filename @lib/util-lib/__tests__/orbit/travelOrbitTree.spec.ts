@@ -7,7 +7,7 @@ describe('test orbit/travelOrbitTree', () => {
       ['build', 'main'],
       ['build', 'services', 'logger'],
       ['build', 'utils', 'print'],
-    ])
+    ])!
 
     travelOrbitTree(tree)((node) => {
       expect(node).toHaveProperty('path')

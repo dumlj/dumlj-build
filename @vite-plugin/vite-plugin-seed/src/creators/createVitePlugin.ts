@@ -47,8 +47,9 @@ export interface VitePluginEnhancers<E extends VitePluginEnhancerRecord> {
 export const createVitePluginEnhancers = <E extends VitePluginEnhancerRecord>(enhanceFactories: Partial<E> = {}): VitePluginEnhancers<E> => {
   const connectEnhancers = (name: string) => {
     const enhancers = Object.keys(enhanceFactories).reduce((result, key: keyof E) => {
-      if (typeof enhanceFactories[key] === 'function') {
-        result[key] = enhanceFactories[key](name)
+      const fn = enhanceFactories[key]
+      if (typeof fn === 'function') {
+        result[key] = fn(name)
       }
 
       return result

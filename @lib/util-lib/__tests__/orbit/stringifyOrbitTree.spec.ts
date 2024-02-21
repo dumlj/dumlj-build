@@ -7,7 +7,7 @@ describe('test orbit/stringifyOrbitTree', () => {
       ['build', 'main'],
       ['build', 'services', 'logger'],
       ['build', 'utils', 'print'],
-    ])
+    ])!
 
     const messages = stringifyOrbitTree(tree)
     expect(messages).toEqual([

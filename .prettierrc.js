@@ -1,16 +1,19 @@
+/** @type {import('prettier').Config} */
 module.exports = {
-  /** 一行的字符数, 如果超过会进行换行 */
+  /** Compatible with Windows */
+  endOfLine: 'lf',
+  /** The number of characters per line. If exceeded, a newline will be inserted. */
   printWidth: 180,
-  /** 一个tab代表几个空格数 */
+  /** The number of spaces per tab. */
   tabWidth: 2,
-  /** 是否使用tab进行缩进 */
+  /** Whether to use tabs for indentation. */
   useTabs: false,
-  /** 字符串是否使用单引号 */
+  /** Whether to use single quotes for strings. */
   singleQuote: true,
-  /** 行位是否使用分号 */
+  /** Whether to use semicolons at the end of lines. */
   semi: false,
-  /** 是否使用尾逗号 */
+  /** Whether to use trailing commas. */
   trailingComma: 'es5',
-  /** 对象大括号直接是否有空格 */
+  /** Whether to have spaces inside object braces. */
   bracketSpacing: true,
 }

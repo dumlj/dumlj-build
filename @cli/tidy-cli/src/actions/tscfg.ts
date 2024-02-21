@@ -66,18 +66,27 @@ export const tidyTscfg = async (options?: TidyTscfgOptions) => {
     workspaces.map(async ({ location, workspaceDependencies }) => {
       const absPath = path.join(rootPath, location)
       /** tsconfig.references */
-      const references = workspaceDependencies.map((name) => {
-        const { location } = workspaces.find((item) => item.name === name)
-        /** 依赖路径 */
-        const depAbsPath = path.join(rootPath, location)
-        /**
-         * 依赖配置文件的相对路径
-         * @example
-         * {"references": [{ "path": "../a/tsconfig.json" }]}
-         */
-        const relativePath = path.relative(absPath, depAbsPath)
-        return { path: path.join(relativePath, output) }
-      })
+      const references = Array.from(
+        (function* () {
+          for (const name of workspaceDependencies) {
+            const workspace = workspaces.find((item) => item.name === name)
+            if (!workspace) {
+              continue
+            }
+
+            const { location } = workspace
+            /** 依赖路径 */
+            const depAbsPath = path.join(rootPath, location)
+            /**
+             * 依赖配置文件的相对路径
+             * @example
+             * {"references": [{ "path": "../a/tsconfig.json" }]}
+             */
+            const relativePath = path.relative(absPath, depAbsPath)
+            yield { path: path.join(relativePath, output) }
+          }
+        })()
+      )
 
       const configFile = path.join(absPath, tsconfig)
       const source = await fs.readJson(configFile)

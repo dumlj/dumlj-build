@@ -30,7 +30,7 @@ export function concatEnhancers(...enhancers: Enhancer[]) {
     const enhance = [...enhancers]
     while (enhance.length) {
       const fn = enhance.shift()
-      fn(command)
+      typeof fn === 'function' && fn(command)
     }
 
     return command

@@ -27,6 +27,7 @@ const CONFIG: Configuration = {
         '**/__readme__/**',
         '**/build/**',
         '**/dist/**',
+        '**/.next/**',
         '**/src/**',
         '**/jest.*',
         '**/tsconfig.build.json',

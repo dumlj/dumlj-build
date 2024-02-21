@@ -3,7 +3,7 @@ import { mockWebpack } from '@dumlj/mock-lib'
 import path from 'path'
 import { vol } from 'memfs'
 import JSZip from 'jszip'
-import { ZipWebpackPlugin } from '@/ZipWebpackPlugin'
+import { ZipWebpackPlugin } from '@/index'
 
 describe('test ZipWebpackPlugin', () => {
   const webpack = mockWebpack({

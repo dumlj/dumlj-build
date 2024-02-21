@@ -19,11 +19,11 @@ export interface FindSnippetsOptions {
  * 类似 node_modules 的查找模式，
  * 将所有 "template" 的路径记录并返回
  */
-export const findSnippets = async (location: string, options?: FindSnippetsOptions) => {
+export async function findSnippets(location: string, options?: FindSnippetsOptions) {
   const { template = DEFAULT_TEMPLATE_FILE_NAME, cwd = process.cwd() } = options || {}
   location = path.isAbsolute(location) ? location : path.join(cwd, location)
 
-  const paths = []
+  const paths: string[] = []
 
   /** 需要阻塞遍历 */
   /** 文件夹 */

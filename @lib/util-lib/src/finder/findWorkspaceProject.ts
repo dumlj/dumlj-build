@@ -28,7 +28,7 @@ export interface FindWorkspaceProjectOptions {
 }
 
 /** find projects from workspace project */
-export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions): Promise<Project[]> => {
+export async function findWorkspaceProject(options?: FindWorkspaceProjectOptions): Promise<Project[]> {
   const { pattern, fromCache = true, cwd = process.cwd() } = options || {}
   if (fromCache === true && Array.isArray(PROJECT_CACHE) && PROJECT_CACHE.length > 0) {
     return PROJECT_CACHE
@@ -75,8 +75,8 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
         const optionalDependencies = Object.keys(source.optionalDependencies || {})
         const bundleDependencies = Object.keys(source.bundleDependencies || {})
         const bundledDependencies = Object.keys(source.bundledDependencies || {})
-        const dependencies: string[] = Array.from(
-          new Set([].concat(normalDependencies, devDependencies, peerDependencies, optionalDependencies, bundleDependencies, bundledDependencies))
+        const dependencies = Array.from(
+          new Set([...normalDependencies, ...devDependencies, ...peerDependencies, ...optionalDependencies, ...bundleDependencies, ...bundledDependencies])
         )
 
         const location = path.relative(cwd, src)
@@ -85,10 +85,11 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
     )
   )
 
-  const projects = results.filter(Boolean)
+  const projects = results.filter(Boolean) as Project[]
 
   // 验证 workspace 是否正确
-  projects.reduce((checkeds, { name }) => {
+  const checkeds: string[] = []
+  projects.forEach(({ name }) => {
     if (checkeds.includes(name)) {
       const locations = projects.filter((project) => project.name === name).map(({ location }) => path.join(path.relative(process.cwd(), location), 'package.json'))
       throw new Error(`The project name ${name} is duplicated in the workspace.${[''].concat(locations).join('\n - ')}`)
@@ -96,7 +97,7 @@ export const findWorkspaceProject = async (options?: FindWorkspaceProjectOptions
 
     checkeds.push(name)
     return checkeds
-  }, [])
+  })
 
   const arranged: Project[] = projects.map((project) => {
     const workspaceDependencies = project.dependencies.filter((name) => -1 !== projects.findIndex((project) => project.name === name))

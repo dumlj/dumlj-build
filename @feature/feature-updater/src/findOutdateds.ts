@@ -17,7 +17,7 @@ export interface FindOutdatedsOptions extends Omit<FindLatestVersionOptions, 'co
 }
 
 /** 查找过期模块 */
-export const findOutdateds = async (options?: FindOutdatedsOptions) => {
+export async function findOutdateds(options?: FindOutdatedsOptions) {
   const { name = (await getPackageSource()).name, latestVersion: latest, ...latestVersionOptions } = options || {}
 
   /** 所有在有声明且引入该库的包名 */
@@ -26,8 +26,9 @@ export const findOutdateds = async (options?: FindOutdatedsOptions) => {
     dependencies.map(async ({ name, version: compareVer }) => {
       try {
         const version = latest || (await findLatestVersion(name, { ...latestVersionOptions, compareVer }))
-        const needUpdate = semver.parse(compareVer).compare(latest) == -1
-        const updateType = diffVersion(compareVer, latest)
+        const semVer = semver.parse(compareVer)
+        const needUpdate = semVer && typeof latest !== 'undefined' ? semVer.compare(latest) == -1 : false
+        const updateType = latest ? diffVersion(compareVer, latest) : compareVer
         return { name, updateType, version: compareVer, latestVersion: version, shouldUpdate: needUpdate }
       } catch (error) {
         // nothing todo...
