@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/next-auto-dynamic",
-  "version": "1.0.0",
+  "version": "2.5.24",
   "private": true,
   "scripts": {
     "start": "next start",
