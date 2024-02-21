@@ -3,6 +3,7 @@
 const { nextDynamicClient } = require('@dumlj/next-auto-dynamic')
 const withDynamicClient = nextDynamicClient({
   src: './snippets',
+  exclude: ['C.tsx'],
 })
 
 /** @type {import('next').NextConfig} */
