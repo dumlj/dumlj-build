@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-prepare",
-  "version": "2.5.23",
+  "version": "2.5.24",
   "description": "代码源文件预处理工具",
   "repository": {
     "type": "git",
@@ -17,11 +17,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "fs-extra": "^11.2.0",
     "get-tsconfig": "^4.7.2",
     "interpret": "^1.4.0",
     "rechoir": "^0.6.2",
-    "tslib": "^2.6.2",
-    "fs-extra": "^11.2.0"
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

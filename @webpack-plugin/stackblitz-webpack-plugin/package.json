@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/stackblitz-webpack-plugin",
-  "version": "2.5.23",
+  "version": "2.5.24",
   "description": "Online demo of stackblitz implementation.",
   "repository": {
     "type": "git",
@@ -17,9 +17,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/inject-entry-script-webpack-plugin": "workspace:^2.5.23",
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.23",
-    "@dumlj/util-lib": "workspace:^2.5.23",
+    "@dumlj/inject-entry-script-webpack-plugin": "workspace:^2.5.24",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.24",
+    "@dumlj/util-lib": "workspace:^2.5.24",
     "@stackblitz/sdk": "^1.9.0",
     "fs-extra": "^11.1.1",
     "glob": "^10.3.10",
