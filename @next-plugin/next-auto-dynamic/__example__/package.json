@@ -11,6 +11,7 @@
     "next": "latest"
   },
   "devDependencies": {
+    "@types/react": "latest",
     "@dumlj/next-auto-dynamic": "workspace:*"
   }
 }

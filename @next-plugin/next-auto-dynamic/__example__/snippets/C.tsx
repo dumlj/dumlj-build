@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-export default function A() {
+export default function C() {
   const [moduleId, setModuleId] = useState<string>()
   const [parents, setParents] = useState<string[]>()
 
@@ -14,9 +14,9 @@ export default function A() {
   return (
     <section>
       <h2>
-        A <span>{moduleId}</span>
+        C <span>{moduleId}</span>
       </h2>
-      <p>Import "./A"</p>
+      <p>No automatic dynamic import by exclude option of plugin.</p>
       <pre>
         Parents:
         <br />
