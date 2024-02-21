@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/compare-envs-webpack-plugin",
-  "version": "2.5.22",
+  "version": "2.5.23",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -8,8 +8,8 @@
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/compare-envs-webpack-plugin": "workspace:^2.5.22",
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.22"
+    "@dumlj/compare-envs-webpack-plugin": "workspace:^2.5.23",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.23"
   },
   "devDependencies": {
     "webpack": "^5.89.0",
