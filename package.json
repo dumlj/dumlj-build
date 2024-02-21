@@ -19,7 +19,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage || true && dumi build",
+    "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && dumi build",
     "ci:coverage": "npm run compile && npm run test",
     "ci:build": "npm run compile",
     "postinstall": "node ./public/scripts/postinstall.mjs",
