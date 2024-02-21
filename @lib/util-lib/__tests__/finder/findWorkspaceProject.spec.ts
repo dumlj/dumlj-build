@@ -1,5 +1,6 @@
 import { vol } from 'memfs'
 import { findWorkspaceProject, PROJECT_CACHE } from '@/finder/findWorkspaceProject'
+import path from 'path'
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 jest.mock('fs', () => jest.requireActual<typeof import('memfs')>('memfs'))
@@ -12,10 +13,10 @@ describe('finder/findWorkspaceProject', () => {
 
   it('should find projects from a workspace', async () => {
     vol.fromJSON({
-      'package.json': JSON.stringify({
+      [path.join('package.json')]: JSON.stringify({
         workspaces: ['packages/*'],
       }),
-      'packages/package-a/package.json': JSON.stringify({
+      [path.join('packages/package-a/package.json')]: JSON.stringify({
         name: 'package-a',
         version: '1.0.0',
         description: 'Package A',
@@ -23,7 +24,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-b': '^1.0.0',
         },
       }),
-      'packages/package-b/package.json': JSON.stringify({
+      [path.join('packages/package-b/package.json')]: JSON.stringify({
         name: 'package-b',
         version: '1.0.0',
         description: 'Package B',
@@ -31,7 +32,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-c': '^1.0.0',
         },
       }),
-      'packages/package-c/package.json': JSON.stringify({
+      [path.join('packages/package-c/package.json')]: JSON.stringify({
         name: 'package-c',
         version: '1.0.0',
         description: 'Package C',
@@ -49,7 +50,7 @@ describe('finder/findWorkspaceProject', () => {
         version: '1.0.0',
         description: 'Package C',
         isPrivate: false,
-        location: 'packages/package-c',
+        location: path.join('packages/package-c'),
         dependencies: [],
         workspaceDependencies: [],
       },
@@ -58,7 +59,7 @@ describe('finder/findWorkspaceProject', () => {
         version: '1.0.0',
         description: 'Package B',
         isPrivate: false,
-        location: 'packages/package-b',
+        location: path.join('packages/package-b'),
         dependencies: ['package-c'],
         workspaceDependencies: ['package-c'],
       },
@@ -67,7 +68,7 @@ describe('finder/findWorkspaceProject', () => {
         version: '1.0.0',
         description: 'Package A',
         isPrivate: false,
-        location: 'packages/package-a',
+        location: path.join('packages/package-a'),
         dependencies: ['package-b'],
         workspaceDependencies: ['package-b'],
       },
@@ -76,10 +77,10 @@ describe('finder/findWorkspaceProject', () => {
 
   it('should find projects from a workspace with a custom pattern', async () => {
     vol.fromJSON({
-      'package.json': JSON.stringify({
+      [path.join('package.json')]: JSON.stringify({
         workspaces: ['packages/*'],
       }),
-      'packages/package-a/package.json': JSON.stringify({
+      [path.join('packages/package-a/package.json')]: JSON.stringify({
         name: 'package-a',
         version: '1.0.0',
         description: 'Package A',
@@ -87,7 +88,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-b': '^1.0.0',
         },
       }),
-      'packages/package-b/package.json': JSON.stringify({
+      [path.join('packages/package-b/package.json')]: JSON.stringify({
         name: 'package-b',
         version: '1.0.0',
         description: 'Package B',
@@ -95,7 +96,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-c': '^1.0.0',
         },
       }),
-      'packages/package-c/package.json': JSON.stringify({
+      [path.join('packages/package-c/package.json')]: JSON.stringify({
         name: 'package-c',
         version: '1.0.0',
         description: 'Package C',
@@ -114,7 +115,7 @@ describe('finder/findWorkspaceProject', () => {
         version: '1.0.0',
         description: 'Package A',
         isPrivate: false,
-        location: 'packages/package-a',
+        location: path.join('packages/package-a'),
         dependencies: ['package-b'],
         workspaceDependencies: [],
       },
@@ -123,10 +124,10 @@ describe('finder/findWorkspaceProject', () => {
 
   it('should find projects from a workspace with a custom pattern and cwd, and from cache', async () => {
     vol.fromJSON({
-      'package.json': JSON.stringify({
+      [path.join('package.json')]: JSON.stringify({
         workspaces: ['packages/*'],
       }),
-      'packages/package-a/package.json': JSON.stringify({
+      [path.join('packages/package-a/package.json')]: JSON.stringify({
         name: 'package-a',
         version: '1.0.0',
         description: 'Package A',
@@ -134,7 +135,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-b': '^1.0.0',
         },
       }),
-      'packages/package-b/package.json': JSON.stringify({
+      [path.join('packages/package-b/package.json')]: JSON.stringify({
         name: 'package-b',
         version: '1.0.0',
         description: 'Package B',
@@ -142,7 +143,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-c': '^1.0.0',
         },
       }),
-      'packages/package-c/package.json': JSON.stringify({
+      [path.join('packages/package-c/package.json')]: JSON.stringify({
         name: 'package-c',
         version: '1.0.0',
         description: 'Package C',
@@ -161,10 +162,10 @@ describe('finder/findWorkspaceProject', () => {
 
   it('should throw an error if a project name is duplicated in the workspace', async () => {
     vol.fromJSON({
-      'package.json': JSON.stringify({
+      [path.join('package.json')]: JSON.stringify({
         workspaces: ['packages/*'],
       }),
-      'packages/package-a/package.json': JSON.stringify({
+      [path.join('packages/package-a/package.json')]: JSON.stringify({
         name: 'package-a',
         version: '1.0.0',
         description: 'Package A',
@@ -172,7 +173,7 @@ describe('finder/findWorkspaceProject', () => {
           'package-b': '^1.0.0',
         },
       }),
-      'packages/package-b/package.json': JSON.stringify({
+      [path.join('packages/package-b/package.json')]: JSON.stringify({
         name: 'package-a',
         version: '1.0.0',
         description: 'Package A',
@@ -187,6 +188,6 @@ describe('finder/findWorkspaceProject', () => {
         pattern: ['packages/*'],
         cwd: '',
       })
-    ).rejects.toThrow('The project name package-a is duplicated in the workspace.\n - packages/package-b/package.json\n - packages/package-a/package.json')
+    ).rejects.toThrow(`The project name package-a is duplicated in the workspace.\n - ${path.join('packages/package-b/package.json')}\n - ${path.join('packages/package-a/package.json')}`)
   })
 })
