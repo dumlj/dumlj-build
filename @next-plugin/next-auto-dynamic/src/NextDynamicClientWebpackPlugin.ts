@@ -52,16 +52,18 @@ export class NextDynamicClientWebpackPlugin extends SeedWebpackPlugin {
 
   public apply(compiler: Compiler) {
     super.apply(compiler)
+    this.applyReplacement(compiler)
+    this.applyVirtualModules(compiler)
+  }
 
+  protected applyReplacement(compiler: Compiler) {
     compiler.options.module.rules.push({
-      test: /\.tsx?$/,
+      test: /\.m?(t|j)sx?$/,
       loader: LOADER_PATH,
       options: <DynamicClientLoaderOptions>{
         getVirtualModules: () => this.virtualModules,
       },
     })
-
-    this.applyVirtualModules(compiler)
   }
 
   protected applyVirtualModules(compiler: Compiler) {
