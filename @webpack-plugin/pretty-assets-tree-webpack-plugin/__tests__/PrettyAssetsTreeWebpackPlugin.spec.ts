@@ -1,7 +1,7 @@
 import path from 'path'
 import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
 import { mockWebpack } from '@dumlj/mock-lib'
-import { PrettyAssetsTreeWebpackPlugin } from '@/PrettyAssetsTreeWebpackPlugin'
+import { PrettyAssetsTreeWebpackPlugin } from '@/index'
 import chalk from 'chalk'
 import { type Compiler } from 'webpack'
 

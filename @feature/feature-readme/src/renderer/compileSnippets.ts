@@ -24,7 +24,7 @@ export interface CompileSnippetsParams {
 }
 
 /** 编译代码片段 */
-export const compileSnippets = async (params: CompileSnippetsParams) => {
+export async function compileSnippets(params: CompileSnippetsParams) {
   const { snippets, lookupPaths } = params
   const snippetRenders = await Promise.all(
     snippets.map(async (snippet) => {
@@ -39,19 +39,19 @@ export const compileSnippets = async (params: CompileSnippetsParams) => {
 
       // 返回必须不能为异步
       return (context: Record<string, any>) => {
-        const render = getRender(markdown)
+        const render = getRender(markdown)!
         return render(context)
       }
     })
   )
 
-  const renders = snippetRenders.filter(Boolean)
+  const renders = snippetRenders.filter(Boolean) as ((context: Record<string, any>) => string)[]
   if (renders.length === 0) {
     return
   }
 
   return (context?: Record<string, any>) => {
-    const section = renders.map((render) => render(context))
+    const section = renders.map((render) => render({ ...context }))
     return section.join('\n')
   }
 }

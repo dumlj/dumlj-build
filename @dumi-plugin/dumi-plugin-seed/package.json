@@ -28,7 +28,6 @@
     "remark-gfm": "4.0.0",
     "remark-parse": "^11.0.0",
     "tslib": "^2.5.0",
-    "unified": "^11.0.4",
     "utility-types": "^3.10.0",
     "webpack": "^5.89.0",
     "webpack-virtual-modules": "^0.6.0"

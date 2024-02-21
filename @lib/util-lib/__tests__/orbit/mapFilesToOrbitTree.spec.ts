@@ -7,7 +7,7 @@ describe('test orbit/mapPathsToOrbitTree', () => {
       ['build', 'main'],
       ['build', 'services', 'logger'],
       ['build', 'utils', 'print'],
-    ])
+    ])!
 
     expect(tree.path).toEqual([])
     expect(tree.value).toEqual('')
@@ -23,7 +23,7 @@ describe('test orbit/mapPathsToOrbitTree', () => {
       ['foo', 'bar', 'qux'],
     ]
 
-    const tree = mapPathsToOrbitTree(paths)
+    const tree = mapPathsToOrbitTree(paths)!
     expect(tree.path).toEqual([])
     expect(tree.value).toEqual('')
     expect(tree.isLatest).toEqual(false)
@@ -32,9 +32,9 @@ describe('test orbit/mapPathsToOrbitTree', () => {
     const [node] = tree.children
     expect(node.path).toEqual([])
     expect(node.value).toEqual('foo')
-    expect(node.children.size).toEqual(2)
+    expect(node.children!.size).toEqual(2)
 
-    const [n1, n2] = node.children
+    const [n1, n2] = node.children!
 
     expect(n1).toEqual({
       path: ['foo'],
@@ -72,19 +72,19 @@ describe('test orbit/mapPathsToOrbitTree', () => {
       ['foo', 'bar', 'baz'],
     ]
 
-    const tree = mapPathsToOrbitTree(paths)
+    const tree = mapPathsToOrbitTree(paths)!
     expect(tree.children.size).toEqual(1)
 
-    const [node] = tree.children
+    const [node] = tree!.children
     expect(node.path).toEqual([])
     expect(node.value).toEqual('foo')
-    expect(node.children.size).toEqual(1)
+    expect(node.children!.size).toEqual(1)
   })
 
   it('should handle paths with empty elements', () => {
     const paths = [[''], ['foo', ''], ['foo', 'bar', '']]
 
-    const tree = mapPathsToOrbitTree(paths)
+    const tree = mapPathsToOrbitTree(paths)!
     expect(tree.children.size).toEqual(2)
 
     const [empty, foo] = Array.from(tree.children)
@@ -98,9 +98,9 @@ describe('test orbit/mapPathsToOrbitTree', () => {
     expect(foo.path).toEqual([])
     expect(foo.value).toEqual('foo')
     expect(foo.isLatest).toEqual(false)
-    expect(foo.children.size).toEqual(2)
+    expect(foo.children!.size).toEqual(2)
 
-    const [emptyFoo, bar] = Array.from(foo.children)
+    const [emptyFoo, bar] = Array.from(foo.children!)
     expect(emptyFoo).toEqual({
       path: ['foo'],
       value: '',
@@ -111,7 +111,7 @@ describe('test orbit/mapPathsToOrbitTree', () => {
     expect(bar.path).toEqual(['foo'])
     expect(bar.value).toEqual('bar')
     expect(bar.isLatest).toEqual(false)
-    expect(bar.children.size).toEqual(1)
+    expect(bar.children!.size).toEqual(1)
     expect(bar.children).toEqual(
       new Set([
         {

@@ -1,3 +1,4 @@
+import { promisify } from 'util'
 import type { Compiler } from 'webpack'
 import type { Class } from 'utility-types'
 
@@ -19,7 +20,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
   static PLUGIN_NAME = 'seed-webpack-plugin'
 
   /** 传入配置项 */
-  public options: P
+  public options?: P
   /** 打印详细信息 */
   public verbose: boolean
   /** 过滤所有打印信息 */
@@ -27,7 +28,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
   /** 通知信息 */
   protected messages: Array<{ type: 'info' | 'warn' | 'error'; message: string }>
   /** 记录 */
-  protected logger: ReturnType<Compiler['getInfrastructureLogger']>
+  protected logger!: ReturnType<Compiler['getInfrastructureLogger']>
 
   /**
    * 获取当前插件名称
@@ -52,9 +53,13 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
    * 辅助函数。
    * 用于部分传入配置不完整时跳过某些逻辑。
    */
-  protected isSkipIncomplete(title: string, variables: Record<string, string>) {
+  protected isSkipIncomplete(title: string, variables: Record<string, string | undefined>) {
     const names = Object.keys(variables)
-    const invalids = names.filter((name) => !(typeof variables[name] === 'string' && variables[name].length > 0))
+    const invalids = names.filter((name) => {
+      const value = variables[name]
+      return typeof value === 'string' && value.length > 0
+    })
+
     if (invalids.length > 0) {
       this.notify('warn', `${title}\nThe following options are missing: ${['', ...invalids].join('\n - ')}`)
       return true
@@ -72,6 +77,38 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
    */
   protected notify(type: 'info' | 'warn' | 'error', message: string) {
     this.messages.push({ type, message })
+  }
+
+  /** 工具化 fs */
+  protected utilizeFSByCompiler(compiler: Compiler) {
+    const { inputFileSystem: inputFS, outputFileSystem: outputFS } = compiler
+    const pathExists = async (file: string) => {
+      const promisifyStat = promisify(inputFS.stat)
+      await promisifyStat(file).catch((error) => {
+        if ('code' in error && error.code === 'ENOENT') {
+          return false
+        }
+
+        return Promise.reject(error)
+      })
+
+      return true
+    }
+
+    const promisifyReaddir = promisify(inputFS.readdir.bind(inputFS))
+    const readdir = async (dir: string) => {
+      const files = await promisifyReaddir(dir)
+      if (!Array.isArray(files)) {
+        return []
+      }
+
+      return files.filter((file): file is string => typeof file === 'string')
+    }
+
+    const readFile = promisify(inputFS.readFile.bind(inputFS))
+    const writeFile = promisify(outputFS.writeFile.bind(outputFS))
+
+    return { pathExists, readdir, readFile, writeFile }
   }
 
   /**
@@ -107,7 +144,7 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
     compiler.hooks.afterEmit.tap(this.pluginName, () => {
       if (Array.isArray(this.messages) && this.messages.length > 0) {
         this.messages.forEach(({ type, message }) => {
-          if (typeof this.logger[type] === 'function') {
+          if (this.logger && 'type' in this.logger && typeof this.logger[type] === 'function') {
             this.logger[type](message)
           }
         })
@@ -125,7 +162,9 @@ export class SeedWebpackPlugin<P extends SeedWebpackPluginOptions = SeedWebpackP
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { OutdatedWebpackPlugin } = require('./OutdatedWebpackPlugin')
     const index = compiler.options.plugins.findIndex((plugin) => {
-      return plugin['pluginName'] === OutdatedWebpackPlugin.pluginName
+      if (plugin && 'pluginName' in plugin) {
+        return plugin['pluginName'] === OutdatedWebpackPlugin.pluginName
+      }
     })
 
     if (-1 === index && process.env.NODE_ENV !== 'production' && !process.env.CI) {

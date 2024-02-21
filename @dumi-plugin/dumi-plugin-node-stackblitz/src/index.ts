@@ -22,5 +22,9 @@ export default createDumiPlugin<NodeStackblitzOptions>('nodeStackblitz', async (
     },
   })
 
+  api.chainWebpack((config) => {
+    config.resolve.alias.set('@stackblitz/sdk', require.resolve('@stackblitz/sdk/bundles/sdk'))
+  })
+
   pushWebpackPlugin(StackblitzWebpackPlugin.PLUGIN_NAME, new StackblitzWebpackPlugin(nodeStackblitz))
 })

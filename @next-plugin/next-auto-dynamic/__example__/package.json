@@ -1,0 +1,16 @@
+{
+  "name": "@dumlj-example/next-auto-dynamic",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "next start",
+    "build": "next build --no-lint",
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "next": "latest"
+  },
+  "devDependencies": {
+    "@dumlj/next-auto-dynamic": "workspace:*"
+  }
+}

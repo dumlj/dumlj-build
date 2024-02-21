@@ -20,7 +20,7 @@ describe('test renderer/compileSnippets', () => {
     const lookupPaths = ['/a/b/c/d/__readme__']
     const render = await compileSnippets({ snippets, lookupPaths })
     expect(typeof render === 'function').toBeTruthy()
-    expect(await render({ title: 'hello world' })).toEqual('# hello world')
+    expect(render!({ title: 'hello world' })).toEqual('# hello world')
   })
 
   it('will return undefined when the file is not found', async () => {
@@ -40,6 +40,6 @@ describe('test renderer/compileSnippets', () => {
     const lookupPaths = ['/a/__readme__', '/a/b/c/d/__readme__']
     const render = await compileSnippets({ snippets, lookupPaths })
     expect(typeof render === 'function').toBeTruthy()
-    expect(await render({ title: 'hello world' })).toEqual('# B')
+    expect(render!({ title: 'hello world' })).toEqual('# B')
   })
 })

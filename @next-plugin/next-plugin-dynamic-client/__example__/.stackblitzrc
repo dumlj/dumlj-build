@@ -1,4 +1,0 @@
-{
-  "installDependencies": false,
-  "startCommand": "yarn install && yarn build"
-}

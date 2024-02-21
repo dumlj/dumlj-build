@@ -62,7 +62,7 @@ const switchEnv = async (env: string) => {
   console.log('==== DOTENV END ====')
   // eslint-disable-next-line no-console
   console.log(`[INFO] Inject environments into files.`)
-  const htmls = [].concat(files).filter((file) => path.extname(file) === '.html')
+  const htmls = [...files].filter((file) => path.extname(file) === '.html')
   htmls.length > 0 && (await Promise.all(htmls.map((html) => overrideHtmls(html, variables))))
   // eslint-disable-next-line no-console
   console.log('[OK] Switch envs completed.')

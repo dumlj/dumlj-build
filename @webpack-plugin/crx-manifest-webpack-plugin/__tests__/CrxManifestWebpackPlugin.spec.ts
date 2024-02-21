@@ -2,7 +2,7 @@ import { SeedWebpackPlugin } from '@dumlj/seed-webpack-plugin'
 import { mockWebpack } from '@dumlj/mock-lib'
 import path from 'path'
 import { vol } from 'memfs'
-import { CrxManifestWebpackPlugin } from '@/CrxManifestWebpackPlugin'
+import { CrxManifestWebpackPlugin } from '@/index'
 
 describe('test CrxManifestWebpackPlugin', () => {
   const webpack = mockWebpack({
@@ -15,7 +15,9 @@ describe('test CrxManifestWebpackPlugin', () => {
   })
 
   it('can emit manifest.json assets', async () => {
+    const context = path.join(__dirname, '../')
     const { compiler } = await webpack({
+      context: context,
       plugins: [new CrxManifestWebpackPlugin()],
     })
 
@@ -23,11 +25,11 @@ describe('test CrxManifestWebpackPlugin', () => {
     expect(vol.existsSync(manifest)).toBeTruthy()
 
     const content = vol.readFileSync(manifest).toString('utf-8')
-    expect(() => JSON.parse(content)).not.toThrowError()
+    expect(() => JSON.parse(content)).not.toThrow()
 
     const json = JSON.parse(content)
     /* eslint-disable-next-line @typescript-eslint/no-var-requires */
-    const { name, description, version } = require(path.join(__dirname, '../../../package.json'))
+    const { name, description, version } = require(path.join(context, 'package.json'))
     expect(json).toHaveProperty('name', name)
     expect(json).toHaveProperty('description', description)
     expect(json).toHaveProperty('version', version)

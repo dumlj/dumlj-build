@@ -6,6 +6,7 @@ import { type TreeProject } from '../types'
 
 export type Renderer = Render & {
   project: Project
+  dependencies: TreeProject[]
 }
 
 export interface CompileWorkspaceOptions extends CompileProjectOptions {
@@ -27,7 +28,7 @@ export interface CompileWorkspaceOptions extends CompileProjectOptions {
   local?: string
 }
 
-export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
+export async function compileWorkspace(options?: CompileWorkspaceOptions) {
   const { configFile, paths, include: inInclude, exclude: inExclude, local } = options || {}
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
@@ -45,7 +46,7 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
   })
 
   if (projects.length === 0) {
-    return
+    return new Map()
   }
 
   const projectMap = new Map<string, TreeProject>(projects.map((project) => [project.name, { ...project, internalDependencies: [] }]))
@@ -58,7 +59,7 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
     }
 
     const internalDependencies = project.workspaceDependencies.map((name) => projectMap.get(name))
-    project.internalDependencies = internalDependencies
+    project.internalDependencies = internalDependencies.filter(Boolean) as TreeProject[]
     treeProjects.push(project)
   }
 
@@ -71,7 +72,7 @@ export const compileWorkspace = async (options?: CompileWorkspaceOptions) => {
         return
       }
 
-      const renderWithDependencies = (context: Record<string, any>) => render({ projects, dependencies: internalDependencies, ...context })
+      const renderWithDependencies = (context?: Record<string, any>) => render({ projects, dependencies: internalDependencies, ...context })
       const renderProject = Object.assign(renderWithDependencies, { project, dependencies: internalDependencies })
       renderers.set(name, renderProject)
     })

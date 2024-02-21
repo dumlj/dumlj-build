@@ -5,7 +5,7 @@
  * 因此 `jest.mock` 必须声明模块名与对应函数，
  * 而函数内用则可以调用其他模块
  */
-export const mockExec = (commands: Record<string, string>) => {
+export function mockExec(commands: Record<string, string>) {
   const exec = (command: string) => {
     type Handle = (content: string) => void
 

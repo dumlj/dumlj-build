@@ -17,11 +17,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "fs-extra": "^11.1.0",
     "get-tsconfig": "^4.7.2",
     "interpret": "^1.4.0",
     "rechoir": "^0.6.2",
-    "tslib": "^2.6.2"
+    "tslib": "^2.6.2",
+    "fs-extra": "^11.2.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",

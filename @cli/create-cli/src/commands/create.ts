@@ -13,6 +13,10 @@ const mapOptionsToCommand = registerEnhancer('addOption', () => [
 
 const debugCommand = mapOptionsToCommand(
   new Command('debug').summary('debug .templaterc.ts').action((options?: CreateOptions, command?: Command) => {
+    if (!command?.parent) {
+      return
+    }
+
     const parentOptions = command.parent.opts()
     const finalOptions = { ...parentOptions, ...options }
     return tryAction(debug)(finalOptions)
