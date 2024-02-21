@@ -109,7 +109,8 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
        */
 
       if (missDependencies || missDevDependencies) {
-        await fs.writeFile(pkgJson, JSON.stringify(source, null, 2))
+        const content = JSON.stringify(source, null, 2)
+        await fs.writeFile(pkgJson, content)
       }
 
       if (missDependencies) {

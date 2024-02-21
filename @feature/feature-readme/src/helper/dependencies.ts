@@ -1,3 +1,4 @@
+import path from 'path'
 import { mapPathsToOrbitTree, stringifyOrbitTree } from '@dumlj/util-lib'
 import type { Context, TreeProject } from '../types'
 
@@ -49,7 +50,10 @@ export function dependencies(context: Context) {
     }
 
     const { location, isPrivate } = project
-    const contentHTML = `<a is="dumlj-link" data-project="${encodeURI(JSON.stringify(project))}" ${url ? `href="${url}/tree/main/${location}"` : ''}>${name}</a>`
+    const posixLocation = location.split(path.sep).join('/')
+    const projectString = encodeURI(JSON.stringify({ ...project, location: posixLocation }))
+    const hrefAttr = url ? `href="${url}/tree/main/${posixLocation}"` : ''
+    const contentHTML = `<a is="dumlj-link" data-project="${projectString}" ${hrefAttr}>${name}</a>`
     const extraHTML = isPrivate ? '<sup><small><i>PRIVATE</i></small></sup>' : ''
     return `${orbit} ${contentHTML}${extraHTML}`
   })
