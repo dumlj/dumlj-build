@@ -1,9 +1,8 @@
-import { OutdatedWebpackPlugin } from '@/plugins/OutdatedWebpackPlugin'
-import { SeedWebpackPlugin } from '@/plugins/SeedWebpackPlugin'
+import { SeedWebpackPlugin } from '@/index'
 import { mockWebpack } from '@dumlj/mock-lib'
 import type { Compiler } from 'webpack'
 
-describe('test plugins/SeedWebpackPlugin', () => {
+describe('test SeedWebpackPlugin', () => {
   const env = process.env
   beforeEach(() => {
     process.env.CI = undefined
@@ -25,16 +24,6 @@ describe('test plugins/SeedWebpackPlugin', () => {
     expect(instance).toHaveProperty('verbose')
     expect(instance).toHaveProperty('silence')
     expect(instance).toHaveProperty('messages')
-  })
-
-  it('is will push outdate plugin.', async () => {
-    /**
-     * process.env.CI must be equal undefined
-     * OutdatedWebpackPlugin can not push to compiler.options.plugins in CI env.
-     */
-    expect(process.env.CI).toBeUndefined()
-    const { compiler } = await webpack({ plugins: [new SeedWebpackPlugin()] })
-    expect(compiler.options.plugins.find((plugin) => plugin instanceof OutdatedWebpackPlugin)).not.toBeUndefined()
   })
 
   it('can be inherited by custom plugin.', async () => {

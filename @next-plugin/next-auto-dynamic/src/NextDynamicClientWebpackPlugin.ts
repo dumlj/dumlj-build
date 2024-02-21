@@ -13,7 +13,7 @@ export const LOADER_PATH = require.resolve('./dynamicClientLoader')
 export interface NextDynamicClientWebpackPluginOptions extends SeedWebpackPluginOptions {
   /** 目标文件夹 */
   src: string | string[]
-  /** 默认值为 .dynamic */
+  /** 默认值为 .dynamic-client-virtual */
   suffix?: string
   /** 包含文件 */
   include?: string | string[]
@@ -52,20 +52,22 @@ export class NextDynamicClientWebpackPlugin extends SeedWebpackPlugin {
 
   public apply(compiler: Compiler) {
     super.apply(compiler)
+    this.applyReplacement(compiler)
+    this.applyVirtualModules(compiler)
+  }
 
+  protected applyReplacement(compiler: Compiler) {
     compiler.options.module.rules.push({
-      test: /\.tsx?$/,
+      test: /\.m?(t|j)sx?$/,
       loader: LOADER_PATH,
       options: <DynamicClientLoaderOptions>{
         getVirtualModules: () => this.virtualModules,
       },
     })
-
-    this.applyVirtualModules(compiler)
   }
 
   protected applyVirtualModules(compiler: Compiler) {
-    const fs = this.utilizeFSByCompiler(compiler)
+    const fs = this.utilizeFSB(compiler)
 
     const VM = new VirtualModulesPlugin()
     VM.apply(compiler)

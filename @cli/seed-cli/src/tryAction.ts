@@ -1,9 +1,16 @@
 import { fail } from '@dumlj/feature-pretty'
 import { yellOutdateds } from './utils/yellOutdateds'
 
-export function tryAction<A extends (...args: any[]) => Promise<any>>(handle: A) {
+const DEFAULT_CHECK_OUTDATED = process.argv.includes('--check-outdated') || false
+
+export interface Options {
+  checkOutdated?: boolean
+}
+
+export function tryAction<A extends (...args: any[]) => Promise<any>>(handle: A, options?: Options) {
   return async function execute(...args: Parameters<A>) {
-    await yellOutdateds()
+    const { checkOutdated = DEFAULT_CHECK_OUTDATED } = options || {}
+    checkOutdated === true && (await yellOutdateds())
 
     try {
       return handle(...args)

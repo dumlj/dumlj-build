@@ -18,9 +18,17 @@ globalThis.hasChecked = false
 /** 名称 */
 export const PLUGIN_NAME = 'dumlj-vite-plugin'
 
+const DEFAULT_CHECK_OUTDATED = !!process.env.DUMLJ_CHECK_OUTDATED || false
+
+export interface Options {
+  /** 是否检测过期 */
+  checkOutdatd?: boolean
+}
+
 /** 基础插件 */
 export const vitePlugin = connect(
-  createVitePlugin(PLUGIN_NAME, () => ({ helper }) => {
+  createVitePlugin(PLUGIN_NAME, (options?: Options) => ({ helper }) => {
+    const { checkOutdatd = DEFAULT_CHECK_OUTDATED } = options || {}
     const { notifications } = helper
 
     /** 检测版本过期 */
@@ -52,7 +60,8 @@ export const vitePlugin = connect(
 
     return {
       async buildEnd() {
-        await Promise.all([checkOutdated.call(this), applyNotify.call(this)])
+        checkOutdatd && (await checkOutdated.call(this))
+        await applyNotify.call(this)
       },
     }
   })
