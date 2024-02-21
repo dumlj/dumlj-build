@@ -1,6 +1,6 @@
 import { fail, warn } from '@dumlj/feature-pretty'
 import { shouldUpdate } from '@dumlj/feature-updater'
-import fs from 'fs-extra'
+import fs from 'fs'
 import chalk from 'chalk'
 import { readPackageSourceThroughBin } from './readPackageSourceThroughBin'
 import { YELL_VERSION_TYPE } from '../constants/definition'
@@ -11,8 +11,8 @@ export interface YellOutdatedsOptions {
 
 /** 版本过期警告 */
 export const yellOutdateds = async (options?: YellOutdatedsOptions) => {
-  const { bin } = options || { bin: process.argv[1] }
-  const realBin = await fs.realpath(bin)
+  const { bin = process.argv[1] } = options || {}
+  const realBin = await fs.promises.realpath(bin)
   const source = await readPackageSourceThroughBin(realBin)
 
   // 正常不会没有，真的没有不处理

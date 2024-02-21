@@ -132,7 +132,10 @@ export class CdnUploadWebpackPlugin extends SeedWebpackPlugin {
     const uploadedFiles: string[] = []
     compiler.hooks.thisCompilation.tap(this.pluginName, (compilation) => {
       compilation.hooks.afterProcessAssets.tap(this.pluginName, (compilationAssets) => {
-        const assets = Object.entries(compilationAssets).filter(([filePath]) => !micromatch.isMatch(filePath, this.exclude, { dot: true }))
+        const entries = Object.entries(compilationAssets)
+        const assets = !Array.isArray(this.exclude) ? entries : entries.filter(([filePath]) => {
+          return !micromatch.isMatch(filePath, this.exclude!, { dot: true })
+        })
 
         if (!clients.length) {
           if (this.verbose) {

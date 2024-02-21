@@ -93,7 +93,8 @@ export const latest = async (name: string, options?: LatestOptions) => {
         }
 
         // 保证必须是在当前版本之后发布
-        if (![0, -1].includes(semver.parse(compareVer).compare(version))) {
+        const semVer = semver.parse(compareVer)
+        if (!(semVer && [0, -1].includes(semVer.compare(version)))) {
           return false
         }
 
