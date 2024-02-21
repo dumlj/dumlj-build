@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1755" lines-covered="1028" line-rate="0.5857" branches-valid="753" branches-covered="342" branch-rate="0.45409999999999995" timestamp="1708537880233" complexity="0" version="0.1">
+<coverage lines-valid="1755" lines-covered="1028" line-rate="0.5857" branches-valid="753" branches-covered="342" branch-rate="0.45409999999999995" timestamp="1708540574384" complexity="0" version="0.1">
   <sources>
     <source>/Users/runner/work/dumlj-build/dumlj-build</source>
   </sources>
