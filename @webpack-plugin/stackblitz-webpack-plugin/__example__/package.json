@@ -16,7 +16,8 @@
     "webpack-dev-server": "4.x"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.4"
+    "@types/webpack": "^5.28.4",
+    "@types/node": "latest"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",
