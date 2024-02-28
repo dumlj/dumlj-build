@@ -48,7 +48,7 @@
     "@dumlj/create-cli": "workspace:^2.5.22"
   },
   "devDependencies": {
-    "@types/node": "^20.10.1",
+    "@types/node": "latest",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.5"
   },
