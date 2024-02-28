@@ -4,15 +4,15 @@ export type TreeProject = Project & { internalDependencies: TreeProject[] }
 
 export interface Context {
   alias: string
-  name: string
-  description: string
   location: string
-  repository: {
+  name: string
+  description?: string
+  repository?: {
     type: string
     url: string
     directory: string
   }
-  projects: Project[]
+  projects?: Project[]
   dependencies?: TreeProject[]
 }
 
@@ -38,7 +38,7 @@ export interface ReadmeConfig {
    * @description
    * handlebars 的辅助函数
    */
-  helpers?: Record<string, (context: Context) => string>
+  helpers?: Record<string, (context: Omit<Context, 'projects'>) => string>
 }
 
 /** 配置函数 */

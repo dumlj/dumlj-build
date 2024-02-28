@@ -1,6 +1,6 @@
 import { shouldUpdate } from '@dumlj/feature-updater'
 import { registerCache } from '@dumlj/util-lib'
-import fs from 'fs-extra'
+import fs from 'fs'
 import { readPackageSourceThroughBin } from '../utils/readPackageSourceThroughBin'
 import { YELL_VERSION_TYPE } from '../constants/definition'
 
@@ -21,8 +21,8 @@ export interface FindOutdatesOptions {
  * 对命令列表进行更新，让执行与更新同时执行，相当于异步执行。
  */
 export const findOutdates = async (options?: FindOutdatesOptions) => {
-  const { bin } = options || { bin: process.argv[1] }
-  const realBin = await fs.realpath(bin)
+  const { bin = process.argv[1] } = options || {}
+  const realBin = await fs.promises.realpath(bin)
   const source = await readPackageSourceThroughBin(realBin)
 
   // 正常不会没有，真的没有不处理

@@ -18,7 +18,7 @@ export const reload = () => {
   }
 }
 
-let es: EventSource = null
+let es: EventSource | null = null
 
 /** 启动 */
 export const sse = () => {
@@ -36,7 +36,7 @@ export const sse = () => {
 
   es.onerror = () => {
     // 断开重连
-    if (es.readyState === 2) {
+    if (es!.readyState === 2) {
       setTimeout(sse, 3e3)
     }
   }

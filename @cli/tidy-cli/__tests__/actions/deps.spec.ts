@@ -59,15 +59,15 @@ describe('test actions/tidyDeps', () => {
 
   it('can add missing dependencies to package.json', async () => {
     await tidyDeps({ paths: ['/node_modules'] })
-    const { ['/packages/a/package.json']: source } = vol.toJSON()
-    const { dependencies } = JSON.parse(source)
+    const files = vol.toJSON()
+    const { dependencies } = JSON.parse(files['/packages/a/package.json']!)
     expect(dependencies.x).toBe('^1.0.0')
   })
 
   it('can add missing devDependencies to package.json', async () => {
     await tidyDeps({ paths: ['/node_modules'], src: '/none' })
-    const { ['/packages/a/package.json']: source } = vol.toJSON()
-    const { devDependencies } = JSON.parse(source)
+    const files = vol.toJSON()
+    const { devDependencies } = JSON.parse(files['/packages/a/package.json']!)
     expect(devDependencies.x).toBe('^1.0.0')
   })
 })

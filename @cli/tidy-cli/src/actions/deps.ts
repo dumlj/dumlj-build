@@ -38,7 +38,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
     include: inInclude,
     exclude: inExclude,
     ignore: inIgnore,
-  } = options
+  } = options || {}
 
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []
@@ -61,11 +61,16 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
     workspaces.map(async ({ location }) => {
       const absPath = path.join(rootPath, location)
       const config = await resolveOptions<TidyDepsOptions>('tidy', absPath)
+      /**
+       * Note that in TS
+       * the forced type `<Type>` will cause the failure to parse,
+       * because of the conflict with tsx
+       */
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
         ignoreMatches: config?.ignore as ReadonlyArray<string>,
-        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore, config?.ignore),
+        ignorePatterns: ['/libs', '/build', 'node_modules'].concat(ignore, config?.ignore || []),
       })
 
       const dependencies: Record<string, string> = {}
@@ -84,7 +89,6 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       const pkgJson = path.join(absPath, 'package.json')
       const source: PackageSource = await fs.readJson(pkgJson)
-
       const missDependencies = Object.keys(dependencies).length > 0
       const missDevDependencies = Object.keys(devDependencies).length > 0
 
@@ -109,7 +113,8 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
        */
 
       if (missDependencies || missDevDependencies) {
-        await fs.writeFile(pkgJson, JSON.stringify(source, null, 2))
+        const content = JSON.stringify(source, null, 2)
+        await fs.writeFile(pkgJson, content)
       }
 
       if (missDependencies) {
@@ -124,16 +129,15 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       const uselessDependencies: Record<string, string> = {}
       const uselessDevDependencies: Record<string, string> = {}
-
-      Object.keys(source?.dependencies || []).forEach((name) => {
+      Object.entries({ ...source.dependencies }).forEach(([name, version]) => {
         if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-          uselessDependencies[name] = source.dependencies[name]
+          uselessDependencies[name] = version
         }
       })
 
-      Object.keys(source?.devDependencies || []).forEach((name) => {
+      Object.entries({ ...source.devDependencies }).forEach(([name, version]) => {
         if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-          uselessDevDependencies[name] = source.devDependencies[name]
+          uselessDevDependencies[name] = version
         }
       })
 

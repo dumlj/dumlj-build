@@ -19,7 +19,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && shx cp -rf ./coverage ./gh-pages/coverage && dumi build",
+    "ci:pages": "shx rm -rf ./gh-pages && mkdir -p ./gh-pages && dumi build",
     "ci:coverage": "npm run compile && npm run test",
     "ci:build": "npm run compile",
     "postinstall": "node ./public/scripts/postinstall.mjs",
@@ -31,9 +31,10 @@
     "readme": "dumlj readme --exclude **/__example__",
     "compile": "tsc --build ./tsconfig.build.json",
     "test": "jest -c ./jest.config.ts --coverage",
+    "docs": "dumi build",
     "docs:dev": "rm -rf .dumi/tmp && rm -rf node_modules/.cache && dumi dev",
     "dev": "jest -c ./jest.config.ts --watch",
-    "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format"
+    "ok": "npm run tidy && npm run compile && npm run lint && npm run test && npm run readme && npm run format && npm run docs"
   },
   "peerDependencies": {
     "@dumlj/mock-lib": "workspace:^2.5.22",

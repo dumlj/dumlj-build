@@ -13,7 +13,7 @@ export interface ShouldUpdateOptions extends FindLatestVersionOptions {
 }
 
 /** 检测包需要更新 */
-export const shouldUpdate = async (name: string, options?: ShouldUpdateOptions) => {
+export async function shouldUpdate(name: string, options?: ShouldUpdateOptions) {
   const { compareVer = '0.0.0-alpha.0', latestVersion: inLatestVersion } = options || {}
 
   /** 最新版本 */
@@ -24,10 +24,10 @@ export const shouldUpdate = async (name: string, options?: ShouldUpdateOptions) 
    * @description
    * 最新版本对比当前版本有更新
    */
-  const shouldUpdate = semver.parse(latest).compare(compareVer) > 0
+  const semVer = semver.parse(latest)
+  const shouldUpdate = semVer ? semVer.compare(compareVer) > 0 : false
 
   /** 升级类型 */
-  const updateType = diffVersion(compareVer, latest)
-
+  const updateType = latest ? diffVersion(compareVer, latest) : compareVer
   return { name, updateType, version: compareVer, latestVersion: latest, shouldUpdate }
 }

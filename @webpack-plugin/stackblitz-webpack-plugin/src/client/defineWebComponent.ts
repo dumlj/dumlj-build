@@ -1,11 +1,11 @@
 import type { Class } from 'utility-types'
 
-const createElement = ([tag, attachTag]: [string, string], props: Record<string, any>, children = '') => {
+function createElement([tag, attachTag]: [string, string?], props: Record<string, any>, children = '') {
   const inlineProps = Object.entries(props).map(([name, value]) => `${name}="${value}"`)
   return attachTag ? `<${attachTag} is="${tag}" ${inlineProps}>${children}</${attachTag}>` : `<${tag} ${props}>${children}</${tag}>`
 }
 
-export const defineWebComponent = (tag: string, Component: Class<HTMLElement> & { readonly inheritTag?: string }) => {
+export function defineWebComponent(tag: string, Component: Class<HTMLElement> & { readonly inheritTag?: string }) {
   if (customElements.get(tag)) {
     throw new Error(`${tag} is exists`)
   }

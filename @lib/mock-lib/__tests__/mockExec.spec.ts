@@ -13,7 +13,7 @@ jest.mock('child_process', () => {
 describe('test mockExec', () => {
   it('can mock child_process.exec', async () => {
     const cp = exec('test')
-    const { stdout } = cp
+    const stdout = cp.stdout!
 
     const response = await new Promise((resolve) => {
       let result: string

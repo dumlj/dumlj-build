@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/dumi-plugin-seed",
-  "version": "2.5.22",
+  "version": "2.5.24",
   "description": "Basic dumi plugin",
   "private": true,
   "repository": {
@@ -18,8 +18,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "workspace:^2.5.22",
-    "@dumlj/util-lib": "workspace:^2.5.22",
+    "@dumlj/feature-updater": "workspace:^2.5.24",
+    "@dumlj/util-lib": "workspace:^2.5.24",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
     "node-html-parser": "^6.1.11",
@@ -28,7 +28,6 @@
     "remark-gfm": "4.0.0",
     "remark-parse": "^11.0.0",
     "tslib": "^2.5.0",
-    "unified": "^11.0.4",
     "utility-types": "^3.10.0",
     "webpack": "^5.89.0",
     "webpack-virtual-modules": "^0.6.0"

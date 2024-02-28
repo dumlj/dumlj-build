@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h2 > span {
+  margin-left: 10px;
+  font-weight: normal;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #999;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px #ccc;
+}
+
+pre {
+  line-height: 1.8;
+  word-break: keep-all;
+  white-space: break-spaces;
+}

@@ -1,37 +1,38 @@
 import { S3Client as S3, type S3ClientConfig } from '@aws-sdk/client-s3'
 import { Upload } from '@aws-sdk/lib-storage'
-import type { Readable } from 'stream'
 import { RESPONSE_HEADERS } from '../constants/headers'
-import { Client } from '../libs/Client'
-import type { UploadOptions } from '../types'
-import type { DeepPartial } from 'utility-types'
+import { Client, type ClientUploadContent, type ClientUploadOptions } from '../libs/Client'
+
+type CreateServiceOptions = Omit<S3ClientConfig, 'region' | 'credentials'> & {
+  credentials?: Omit<S3ClientConfig['credentials'], 'accessKeyId' | 'secretAccessKey'>
+}
 
 export class S3Client extends Client<Partial<S3ClientConfig>> {
   static NAME = 's3'
-  protected s3: S3
+  protected s3!: S3
 
   /** 创建服务 */
-  protected async createService(config?: DeepPartial<S3ClientConfig>) {
-    const { region, accessKeyId = process.env.S3_AK, accessKeySecret = process.env.S3_SK } = this
+  protected async createService(config?: CreateServiceOptions) {
+    const { region, accessKeyId = process.env.S3_AK!, accessKeySecret = process.env.S3_SK! } = this
     return new S3({
-      ...(config as any),
+      ...config,
       region,
       credentials: {
-        ...(config?.credentials as any),
+        ...config?.credentials,
         accessKeyId,
         secretAccessKey: accessKeySecret,
       },
     })
   }
 
-  protected async _upload(stream: string | Buffer | Readable, options?: Pick<UploadOptions, 'client' | 'fileName' | 'fileKey' | 'responseHeaders'>) {
-    this.s3 = this.s3 || (await this.createService(options?.client))
+  protected async _upload(stream: ClientUploadContent, options: ClientUploadOptions<Partial<S3ClientConfig>>) {
+    this.s3 = this.s3 || (await this.createService(options.client))
 
     const { bucket } = this
-    const { fileName, fileKey, responseHeaders } = options || {}
+    const { fileName, fileKey, responseHeaders } = options
     const { ['Cache-Control']: CacheControl } = Object.assign({}, RESPONSE_HEADERS, responseHeaders)
 
-    const ContentType = this.getContentType(fileName)
+    const ContentType = fileName ? this.getContentType(fileName) : undefined
     const upload = new Upload({
       client: this.s3,
       params: {

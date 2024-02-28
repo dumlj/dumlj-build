@@ -10,11 +10,16 @@ export interface RequestOptions {
   onProcess(process: RequestProcess): void
 }
 
-export const request = async (url: string, options?: RequestOptions) => {
+export async function request(url: string, options?: RequestOptions) {
   const { onProcess } = options || {}
   const response = await fetch(withPublicPath(url))
+  if (!response.body) {
+    return
+  }
+
   const reader = response.body.getReader()
-  const totalLength = parseInt(response.headers.get('Content-Length'))
+  const contentLength = response.headers.get('Content-Length')
+  const totalLength = contentLength ? parseInt(contentLength, 10) : 0
   const chunks: Uint8Array[] = []
 
   let loadedSize = 0
@@ -28,7 +33,7 @@ export const request = async (url: string, options?: RequestOptions) => {
 
     loadedSize += value.length
     if (typeof onProcess === 'function') {
-      const process = loadedSize / totalLength
+      const process = totalLength ? loadedSize / totalLength : 0
       onProcess({ loaded: loadedSize, process, total: totalLength })
     }
   }

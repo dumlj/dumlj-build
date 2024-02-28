@@ -26,7 +26,7 @@ export interface InitParams {
    */
   responseHeaders?: {
     'cache-control'?: string
-    [k: string]: string
+    [k: string]: string | undefined
   }
 }
 
@@ -34,10 +34,10 @@ export interface InitParams {
 export interface FileInfo {
   /** 文件名 */
   fileName: string
-  /** 文件大小 */
-  fileSize: number
   /** CDN 服务地址 */
   fileKey: string
+  /** 文件大小 */
+  fileSize?: number
 }
 
 /** 进度信息 */
@@ -61,11 +61,11 @@ export interface RetryFileInfo extends FileInfo {
 /** 上传配置 */
 export interface UploadOptions<ClientOptions extends Record<string, any> = never> {
   /** 文件名 */
-  fileName?: string
+  fileName: string
+  /** CDN 服务地址 */
+  fileKey: string
   /** 文件大小 */
   fileSize?: number
-  /** CDN 服务地址 */
-  fileKey?: string
   /** 进程 */
   onProgress?: (progress: Progress, fileInfo: FileInfo) => void
   /** 重试次数 */
@@ -80,7 +80,7 @@ export interface UploadOptions<ClientOptions extends Record<string, any> = never
    */
   responseHeaders?: {
     'cache-control'?: string
-    [k: string]: string
+    [k: string]: string | undefined
   }
   client?: ClientOptions
 }
@@ -92,5 +92,5 @@ export interface UploadResponse {
   /** CDN 服务地址 */
   key: string
   /** 文件内容类型 */
-  contentType: string
+  contentType?: string
 }

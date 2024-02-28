@@ -14,7 +14,7 @@ const travel = (dependencies: Dependencies, cache: Set<string> = new Set()): Pac
     }
 
     cache.add(token)
-    return [].concat({ name, version }, next)
+    return [{ name, version }].concat(next)
   })
 
   return resp.flatMap((item) => item)
