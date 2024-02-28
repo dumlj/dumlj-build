@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-dotenv",
-  "version": "2.5.24",
+  "version": "2.5.25",
   "description": "dotenv utilities.",
   "repository": {
     "type": "git",
