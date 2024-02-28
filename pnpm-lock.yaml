@@ -278,9 +278,6 @@ importers:
       commander:
         specifier: ^11.1.0
         version: 11.1.0
-      fs-extra:
-        specifier: ^11.1.0
-        version: 11.2.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -748,21 +745,9 @@ importers:
 
   '@next-plugin/next-auto-dynamic':
     dependencies:
-      '@babel/parser':
-        specifier: ^7.23.6
-        version: 7.23.9
-      '@babel/traverse':
-        specifier: ^7.23.7
-        version: 7.23.9
-      '@babel/types':
-        specifier: ^7.23.6
-        version: 7.23.9
       '@dumlj/seed-webpack-plugin':
         specifier: workspace:^2.5.24
         version: link:../../@webpack-plugin/seed-webpack-plugin
-      glob:
-        specifier: ^10.3.10
-        version: 10.3.10
       micromatch:
         specifier: ^4.0.5
         version: 4.0.5
@@ -782,9 +767,6 @@ importers:
       '@jest/types':
         specifier: ^29.6.3
         version: 29.6.3
-      '@types/babel__traverse':
-        specifier: ^7.20.5
-        version: 7.20.5
       '@types/micromatch':
         specifier: ^4.0.4
         version: 4.0.6
@@ -1747,9 +1729,6 @@ importers:
       '@stackblitz/sdk':
         specifier: ^1.9.0
         version: 1.9.0
-      fs-extra:
-        specifier: ^11.1.1
-        version: 11.2.0
       glob:
         specifier: ^10.3.10
         version: 10.3.10

@@ -18,18 +18,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/parser": "^7.23.6",
-    "@babel/traverse": "^7.23.7",
-    "@babel/types": "^7.23.6",
     "@dumlj/seed-webpack-plugin": "workspace:^2.5.24",
-    "glob": "^10.3.10",
     "micromatch": "^4.0.5",
     "tslib": "^2.5.0",
     "webpack-virtual-modules": "^0.6.0"
   },
   "devDependencies": {
     "@jest/types": "^29.6.3",
-    "@types/babel__traverse": "^7.20.5",
     "@types/micromatch": "^4.0.4",
     "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"
