@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/next-auto-dynamic",
-  "version": "2.5.24",
+  "version": "2.5.25",
   "private": true,
   "scripts": {
     "start": "next start --port 3002",
@@ -11,7 +11,7 @@
     "next": "latest"
   },
   "devDependencies": {
-    "@types/react": "latest",
-    "@dumlj/next-auto-dynamic": "workspace:*"
+    "@dumlj/next-auto-dynamic": "workspace:*",
+    "@types/react": "latest"
   }
 }

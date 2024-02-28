@@ -169,7 +169,7 @@ importers:
   '@cli/__template__':
     dependencies:
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-pretty
       commander:
         specifier: ^11.1.0
@@ -182,7 +182,7 @@ importers:
         version: 5.3.3
     devDependencies:
       '@dumlj/seed-cli':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-cli
       '@jest/types':
         specifier: ^29.6.3
@@ -194,22 +194,22 @@ importers:
   '@cli/create-cli':
     dependencies:
       '@dumlj/feature-cliui':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-cliui
       '@dumlj/feature-prepare':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-prepare
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-pretty
       '@dumlj/seed-cli':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-cli
       '@dumlj/shell-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/shell-lib
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       cardinal:
         specifier: ^2.1.1
@@ -258,19 +258,19 @@ importers:
   '@cli/seed-cli':
     dependencies:
       '@dumlj/feature-prepare':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-prepare
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-pretty
       '@dumlj/feature-updater':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-updater
       '@dumlj/shell-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/shell-lib
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -301,19 +301,19 @@ importers:
   '@cli/tidy-cli':
     dependencies:
       '@dumlj/feature-prepare':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-prepare
       '@dumlj/feature-readme':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-readme
       '@dumlj/seed-cli':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-cli
       '@dumlj/shell-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/shell-lib
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -356,13 +356,13 @@ importers:
   '@dumi-plugin/dumi-plugin-mono-readme':
     dependencies:
       '@dumlj/dumi-plugin-seed':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../dumi-plugin-seed
       '@dumlj/feature-readme':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-readme
       '@dumlj/inject-entry-script-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@webpack-plugin/inject-entry-script-webpack-plugin
       dumi:
         specifier: 2.x
@@ -381,10 +381,10 @@ importers:
   '@dumi-plugin/dumi-plugin-node-stackblitz':
     dependencies:
       '@dumlj/dumi-plugin-seed':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../dumi-plugin-seed
       '@dumlj/stackblitz-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@webpack-plugin/stackblitz-webpack-plugin
       '@stackblitz/sdk':
         specifier: ^1.9.0
@@ -406,10 +406,10 @@ importers:
   '@dumi-plugin/dumi-plugin-seed':
     dependencies:
       '@dumlj/feature-updater':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-updater
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -562,10 +562,10 @@ importers:
   '@feature/feature-readme':
     dependencies:
       '@dumlj/feature-prepare':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../feature-prepare
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       fs-extra:
         specifier: ^11.1.1
@@ -596,10 +596,10 @@ importers:
   '@feature/feature-updater':
     dependencies:
       '@dumlj/shell-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/shell-lib
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       fs-extra:
         specifier: ^11.1.0
@@ -612,7 +612,7 @@ importers:
         version: 2.6.2
     devDependencies:
       '@dumlj/mock-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/mock-lib
       '@jest/types':
         specifier: ^29.6.3
@@ -793,7 +793,7 @@ importers:
   '@vite-plugin/vite-plugin-seed':
     dependencies:
       '@dumlj/feature-updater':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-updater
       chalk:
         specifier: ^4.1.2
@@ -827,7 +827,7 @@ importers:
   '@webpack-plugin/__template__':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       tslib:
         specifier: ^2.5.0
@@ -849,10 +849,10 @@ importers:
   '@webpack-plugin/cdn-upload-webpack-plugin':
     dependencies:
       '@dumlj/feature-uploader':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-uploader
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       chalk:
         specifier: ^4.1.2
@@ -889,10 +889,10 @@ importers:
   '@webpack-plugin/compare-envs-webpack-plugin':
     dependencies:
       '@dumlj/feature-dotenv':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-dotenv
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       chalk:
         specifier: ^4.1.2
@@ -920,10 +920,10 @@ importers:
   '@webpack-plugin/compare-envs-webpack-plugin/__example__':
     dependencies:
       '@dumlj/compare-envs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
     optionalDependencies:
       '@babel/core':
@@ -949,7 +949,7 @@ importers:
   '@webpack-plugin/crx-live-reload-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       chrome:
         specifier: ^0.1.0
@@ -980,10 +980,10 @@ importers:
   '@webpack-plugin/crx-live-reload-webpack-plugin/__example__':
     dependencies:
       '@dumlj/crx-live-reload-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       html-webpack-plugin:
         specifier: ^5.5.3
@@ -1021,7 +1021,7 @@ importers:
   '@webpack-plugin/crx-manifest-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       tslib:
         specifier: ^2.5.0
@@ -1031,7 +1031,7 @@ importers:
         version: 5.90.1(webpack-cli@5.1.4)
     devDependencies:
       '@dumlj/mock-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/mock-lib
       '@jest/types':
         specifier: ^29.6.3
@@ -1049,13 +1049,13 @@ importers:
   '@webpack-plugin/crx-manifest-webpack-plugin/__example__':
     dependencies:
       '@dumlj/crx-manifest-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       fs-extra:
         specifier: ^11.1.1
@@ -1087,10 +1087,10 @@ importers:
   '@webpack-plugin/dts-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/shell-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/shell-lib
       fs-extra:
         specifier: ^11.1.1
@@ -1130,10 +1130,10 @@ importers:
   '@webpack-plugin/dts-webpack-plugin/__example__':
     dependencies:
       '@dumlj/dts-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/pretty-assets-tree-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../pretty-assets-tree-webpack-plugin
       chalk:
         specifier: ^4.1.2
@@ -1176,13 +1176,13 @@ importers:
   '@webpack-plugin/dynamic-envs-webpack-plugin':
     dependencies:
       '@dumlj/inject-entry-script-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../inject-entry-script-webpack-plugin
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -1210,13 +1210,13 @@ importers:
   '@webpack-plugin/dynamic-envs-webpack-plugin/__example__':
     dependencies:
       '@dumlj/dynamic-envs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       webpack:
         specifier: 5.x
@@ -1245,16 +1245,16 @@ importers:
   '@webpack-plugin/dynamic-public-path-webpack-plugin':
     dependencies:
       '@dumlj/dynamic-envs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../dynamic-envs-webpack-plugin
       '@dumlj/html-enhance-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../html-enhance-webpack-plugin
       '@dumlj/inject-entry-script-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../inject-entry-script-webpack-plugin
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       html-webpack-plugin:
         specifier: '*'
@@ -1279,10 +1279,10 @@ importers:
   '@webpack-plugin/dynamic-public-path-webpack-plugin/__example__':
     dependencies:
       '@dumlj/dynamic-public-path-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       webpack:
         specifier: 5.x
@@ -1314,16 +1314,16 @@ importers:
   '@webpack-plugin/envs-switch-webpack-plugin':
     dependencies:
       '@dumlj/compare-envs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../compare-envs-webpack-plugin
       '@dumlj/dynamic-envs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../dynamic-envs-webpack-plugin
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -1354,10 +1354,10 @@ importers:
   '@webpack-plugin/envs-switch-webpack-plugin/__example__':
     dependencies:
       '@dumlj/envs-switch-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       html-webpack-plugin:
         specifier: ^5.5.3
@@ -1395,10 +1395,10 @@ importers:
   '@webpack-plugin/html-enhance-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       html-webpack-plugin:
         specifier: ^5.5.3
@@ -1423,13 +1423,13 @@ importers:
   '@webpack-plugin/html-enhance-webpack-plugin/__example__':
     dependencies:
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       '@dumlj/html-enhance-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       html-webpack-plugin:
         specifier: ^5.5.3
@@ -1464,7 +1464,7 @@ importers:
   '@webpack-plugin/inject-entry-script-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       tslib:
         specifier: ^2.5.0
@@ -1486,13 +1486,13 @@ importers:
   '@webpack-plugin/inject-entry-script-webpack-plugin/__example__':
     dependencies:
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       '@dumlj/inject-entry-script-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       chalk:
         specifier: ^4.1.2
@@ -1527,7 +1527,7 @@ importers:
   '@webpack-plugin/memfs-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       memfs:
         specifier: ^4.6.0
@@ -1558,10 +1558,10 @@ importers:
   '@webpack-plugin/memfs-webpack-plugin/__example__':
     dependencies:
       '@dumlj/feature-pretty':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@feature/feature-pretty
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       tslib:
         specifier: ^2.5.0
@@ -1593,10 +1593,10 @@ importers:
   '@webpack-plugin/pretty-assets-tree-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       chalk:
         specifier: ^4.1.2
@@ -1612,7 +1612,7 @@ importers:
         version: 5.90.1(webpack-cli@5.1.4)
     devDependencies:
       '@dumlj/mock-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/mock-lib
       '@jest/types':
         specifier: ^29.6.3
@@ -1627,10 +1627,10 @@ importers:
   '@webpack-plugin/pretty-assets-tree-webpack-plugin/__example__':
     dependencies:
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       '@dumlj/pretty-assets-tree-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       chalk:
         specifier: ^4.1.2
@@ -1658,7 +1658,7 @@ importers:
   '@webpack-plugin/seed-webpack-plugin':
     dependencies:
       '@dumlj/feature-updater':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@feature/feature-updater
       chalk:
         specifier: ^4.1.2
@@ -1674,7 +1674,7 @@ importers:
         version: 5.90.1(webpack-cli@5.1.4)
     devDependencies:
       '@dumlj/mock-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/mock-lib
       '@jest/types':
         specifier: ^29.6.3
@@ -1689,10 +1689,10 @@ importers:
   '@webpack-plugin/seed-webpack-plugin/__example__':
     dependencies:
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
     optionalDependencies:
       '@babel/core':
@@ -1718,13 +1718,13 @@ importers:
   '@webpack-plugin/stackblitz-webpack-plugin':
     dependencies:
       '@dumlj/inject-entry-script-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../inject-entry-script-webpack-plugin
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/util-lib
       '@stackblitz/sdk':
         specifier: ^1.9.0
@@ -1761,10 +1761,10 @@ importers:
   '@webpack-plugin/stackblitz-webpack-plugin/__example__':
     dependencies:
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       '@dumlj/stackblitz-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       html-webpack-plugin:
         specifier: ^5.5.3
@@ -1799,7 +1799,7 @@ importers:
   '@webpack-plugin/zip-webpack-plugin':
     dependencies:
       '@dumlj/seed-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../seed-webpack-plugin
       jszip:
         specifier: ^3.10.1
@@ -1812,7 +1812,7 @@ importers:
         version: 5.90.1(webpack-cli@5.1.4)
     devDependencies:
       '@dumlj/mock-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../@lib/mock-lib
       '@jest/types':
         specifier: ^29.6.3
@@ -1830,13 +1830,13 @@ importers:
   '@webpack-plugin/zip-webpack-plugin/__example__':
     dependencies:
       '@dumlj/memfs-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../memfs-webpack-plugin
       '@dumlj/util-lib':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:../../../@lib/util-lib
       '@dumlj/zip-webpack-plugin':
-        specifier: workspace:^2.5.24
+        specifier: workspace:^2.5.25
         version: link:..
       chalk:
         specifier: ^4.1.2

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/stackblitz-webpack-plugin",
-  "version": "2.5.24",
+  "version": "2.5.25",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
@@ -8,8 +8,8 @@
     "serve": "webpack serve -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.24",
-    "@dumlj/stackblitz-webpack-plugin": "workspace:^2.5.24",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/stackblitz-webpack-plugin": "workspace:^2.5.25",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "5.x",
     "webpack-cli": "^5",
