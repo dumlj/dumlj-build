@@ -1,13 +1,13 @@
 import { fail, info, ok, warn } from '@dumlj/feature-pretty'
 import { execSync } from 'child_process'
-import fs from 'fs-extra'
+import fs from 'fs'
 import path from 'path'
 
 type GitHook = 'pre-commit' | 'prepare-commit-msg' | 'commit-msg' | 'post-commit' | 'post-checkout' | 'pre-rebase'
 
 const inPlatform = (platform: NodeJS.Platform) => platform === process.platform
 
-interface InstallHuskyOptions {
+export interface InstallHuskyOptions {
   upgrade?: boolean
   cwd?: string
   /** 兼容模式 */
@@ -16,9 +16,9 @@ interface InstallHuskyOptions {
   skipCi?: boolean
 }
 
-export const husky = async (options: InstallHuskyOptions = {}) => {
+export async function husky(options: InstallHuskyOptions = {}) {
   const git = path.join(process.cwd(), '.git')
-  const isGitRepo = fs.pathExistsSync(git) && fs.statSync(git).isDirectory()
+  const isGitRepo = fs.existsSync(git) && fs.statSync(git).isDirectory()
   if (!isGitRepo) {
     warn('The project is not a Git repository, skip the Husky installation process')
     return
@@ -31,7 +31,7 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
   }
 
   const huskyHooksPath = path.join(cwd, '.husky')
-  if (upgrade === false && fs.pathExistsSync(huskyHooksPath)) {
+  if (upgrade === false && fs.existsSync(huskyHooksPath)) {
     ok('Husky is already installed, skip the Husky installation process')
     return
   }
@@ -91,14 +91,14 @@ export const husky = async (options: InstallHuskyOptions = {}) => {
         files.forEach((filename) => {
           const huskyFile = path.join(huskyHooksPath, filename)
           const file = path.join(hooksPath, filename)
-          fs.pathExistsSync(file) && fs.removeSync(file)
-          fs.copySync(huskyFile, file)
+          fs.existsSync(file) && fs.rmSync(file)
+          fs.copyFileSync(huskyFile, file)
           info(`${path.relative(cwd, huskyFile)} => ${path.relative(cwd, file)}`)
         })
       }
     }
   } catch (error) {
-    fs.removeSync(huskyHooksPath)
+    fs.rmdirSync(huskyHooksPath)
     fail(error as Error)
     return
   }
