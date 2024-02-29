@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "CommonJS",
     "esModuleInterop": true,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {

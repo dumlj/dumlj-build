@@ -42,10 +42,10 @@ const CONFIG: Configuration = {
           const main = 'main.zip'
           const buffer = await promisify(compiler.outputFileSystem.readFile)(`/${main}`)
           const jszip = new JSZip()
-          const zip = await jszip.loadAsync(buffer)
+          const zip = await jszip.loadAsync(buffer!)
           const files = Object.keys(zip.files)
           const tree = mapFilesToOrbitTree(files)
-          const messages = [chalk.whiteBright.bold(main), ...stringifyOrbitTree(tree).map(({ orbit, content }) => [orbit, chalk.greenBright.bold(content)].join(' '))]
+          const messages = [chalk.whiteBright.bold(main), ...stringifyOrbitTree(tree!).map(({ orbit, content }) => [orbit, chalk.greenBright.bold(content)].join(' '))]
           // eslint-disable-next-line no-console
           console.log(`\n${messages.join('\n')}\n`)
         })

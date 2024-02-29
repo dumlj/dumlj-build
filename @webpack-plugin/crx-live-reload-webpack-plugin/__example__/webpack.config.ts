@@ -4,6 +4,8 @@ import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { CrxLiveReloadWebpackPlugin } from '@dumlj/crx-live-reload-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
+import 'webpack-dev-server'
+
 const CONFIG: Configuration = {
   mode: 'development',
   entry: {
