@@ -27,7 +27,6 @@
     "@dumlj/util-lib": "workspace:^2.5.25",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
-    "fs-extra": "^11.1.0",
     "lodash": "^4.17.21",
     "tslib": "^2.5.0"
   },

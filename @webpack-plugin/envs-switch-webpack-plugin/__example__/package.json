@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "@types/webpack": "^5.28.4",
-    "serve-static-cli": "^1.0.2"
+    "serve-static-cli": "^1.0.2",
+    "@types/node": "latest"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

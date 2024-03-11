@@ -60,9 +60,9 @@ export class NextDynamicClientWebpackPlugin extends SeedWebpackPlugin {
     compiler.options.module.rules.push({
       test: /\.m?(t|j)sx?$/,
       loader: LOADER_PATH,
-      options: <DynamicClientLoaderOptions>{
+      options: {
         getVirtualModules: () => this.virtualModules,
-      },
+      } as DynamicClientLoaderOptions,
     })
   }
 

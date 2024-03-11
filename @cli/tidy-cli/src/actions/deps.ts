@@ -61,6 +61,11 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
     workspaces.map(async ({ location }) => {
       const absPath = path.join(rootPath, location)
       const config = await resolveOptions<TidyDepsOptions>('tidy', absPath)
+      /**
+       * Note that in TS
+       * the forced type `<Type>` will cause the failure to parse,
+       * because of the conflict with tsx
+       */
       const { missing, using } = await depcheck(absPath, {
         ignoreBinPackage: false,
         skipMissing: false,
@@ -84,7 +89,6 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       const pkgJson = path.join(absPath, 'package.json')
       const source: PackageSource = await fs.readJson(pkgJson)
-
       const missDependencies = Object.keys(dependencies).length > 0
       const missDevDependencies = Object.keys(devDependencies).length > 0
 
@@ -125,22 +129,17 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       const uselessDependencies: Record<string, string> = {}
       const uselessDevDependencies: Record<string, string> = {}
+      Object.entries({ ...source.dependencies }).forEach(([name, version]) => {
+        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
+          uselessDependencies[name] = version
+        }
+      })
 
-      if (Array.isArray(source?.dependencies)) {
-        Object.entries(source.dependencies).forEach(([name, dependence]) => {
-          if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-            uselessDependencies[name] = dependence
-          }
-        })
-      }
-
-      if (Array.isArray(source?.devDependencies)) {
-        Object.entries(source.devDependencies).forEach(([name, dependence]) => {
-          if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
-            uselessDevDependencies[name] = dependence
-          }
-        })
-      }
+      Object.entries({ ...source.devDependencies }).forEach(([name, version]) => {
+        if (!(name in using || necessary.includes(name) || config?.ignore?.includes(name))) {
+          uselessDevDependencies[name] = version
+        }
+      })
 
       const hasUselessDependencies = Object.keys(uselessDependencies).length > 0
       const hasUselessDevDependencies = Object.keys(uselessDevDependencies).length > 0

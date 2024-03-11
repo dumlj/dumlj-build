@@ -3,7 +3,7 @@
   "version": "2.5.25",
   "private": true,
   "scripts": {
-    "start": "next start",
+    "start": "next start --port 3002",
     "build": "next build --no-lint",
     "dev": "next dev"
   },
