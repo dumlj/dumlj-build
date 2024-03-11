@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/vite-plugin-seed",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "Basic vite plugin.",
   "private": true,
   "repository": {
@@ -18,7 +18,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-updater": "workspace:^2.5.25",
+    "@dumlj/feature-updater": "workspace:^2.5.26",
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
     "tslib": "^2.5.0",

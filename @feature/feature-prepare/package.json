@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-prepare",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "代码源文件预处理工具",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@dumlj-example/next-auto-dynamic",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "private": true,
   "scripts": {
     "start": "next start --port 3002",

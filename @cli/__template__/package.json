@@ -1,6 +1,6 @@
 {
   "name": "@template/cli",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "something...",
   "private": true,
   "repository": {
@@ -10,13 +10,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@dumlj/feature-pretty": "workspace:^2.5.25",
+    "@dumlj/feature-pretty": "workspace:^2.5.26",
     "commander": "^11.1.0",
     "tslib": "^2.5.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@dumlj/seed-cli": "workspace:^2.5.25",
+    "@dumlj/seed-cli": "workspace:^2.5.26",
     "@jest/types": "^29.6.3",
     "ts-jest": "^29.1.1"
   },

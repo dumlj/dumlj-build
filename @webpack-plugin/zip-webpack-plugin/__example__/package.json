@@ -1,23 +1,23 @@
 {
   "name": "@dumlj-example/zip-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.25",
-    "@dumlj/util-lib": "workspace:^2.5.25",
-    "@dumlj/zip-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.26",
+    "@dumlj/util-lib": "workspace:^2.5.26",
+    "@dumlj/zip-webpack-plugin": "workspace:^2.5.26",
     "chalk": "^4.1.2",
     "jszip": "^3.10.1",
     "webpack": "5.x",
     "webpack-cli": "^5"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.4",
-    "@types/node": "latest"
+    "@types/node": "latest",
+    "@types/webpack": "^5.28.4"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

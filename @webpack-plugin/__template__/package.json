@@ -1,6 +1,6 @@
 {
   "name": "@template/webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "something...",
   "private": true,
   "repository": {
@@ -12,7 +12,7 @@
   "main": "./libs/index.js",
   "types": "./libs/index.d.ts",
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.26",
     "tslib": "^2.5.0"
   },
   "devDependencies": {

@@ -1,14 +1,14 @@
 {
   "name": "@dumlj-example/dts-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "build": "webpack build -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/dts-webpack-plugin": "workspace:^2.5.25",
-    "@dumlj/pretty-assets-tree-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/dts-webpack-plugin": "workspace:^2.5.26",
+    "@dumlj/pretty-assets-tree-webpack-plugin": "workspace:^2.5.26",
     "chalk": "^4.1.2"
   },
   "optionalDependencies": {
@@ -16,13 +16,13 @@
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-typescript": "^7.23.2",
     "@babel/register": "^7.22.15",
+    "@types/node": "latest",
     "ts-loader": "^9.5.0",
     "ts-patch": "^3.0.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.2.2",
     "typescript-transform-paths": "^3.4.6",
     "webpack": "^5",
-    "webpack-cli": "^5",
-    "@types/node": "latest"
+    "webpack-cli": "^5"
   }
 }
