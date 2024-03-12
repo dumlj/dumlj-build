@@ -27,7 +27,7 @@ export interface TidyTscfgOptions {
   exclude?: string | string[]
 }
 
-export const tidyTscfg = async (options?: TidyTscfgOptions) => {
+export async function tidyTscfg(options?: TidyTscfgOptions) {
   const { tsconfig = './tsconfig.compile.json', output = 'tsconfig.build.json', paths, include: inInclude, exclude: inExclude } = options || {}
   const include = Array.isArray(inInclude) ? inInclude : typeof inInclude === 'string' ? [inInclude] : []
   const exclude = Array.isArray(inExclude) ? inExclude : typeof inExclude === 'string' ? [inExclude] : []

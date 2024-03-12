@@ -30,7 +30,7 @@ export interface TidyDepsOptions {
   ignore?: string | string[]
 }
 
-export const tidyDeps = async (options?: TidyDepsOptions) => {
+export async function tidyDeps(options?: TidyDepsOptions) {
   const {
     necessary: inNecessary = ['tslib', 'webpack-cli'],
     src: srcPattern = 'src/**',

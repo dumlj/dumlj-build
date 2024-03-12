@@ -14,7 +14,7 @@ export interface TidyReadmeOptions extends Omit<CompileWorkspaceOptions, 'config
   locals?: string[]
 }
 
-export const tidyReadme = async (options?: TidyReadmeOptions) => {
+export async function tidyReadme(options?: TidyReadmeOptions) {
   const { locals: inLocals = [], output = 'README.md', config: configFile, template, cwd: inCwd, banner, include, exclude, paths } = options || {}
   const cwd = typeof inCwd === 'string' ? inCwd : (await findWorkspaceRootPath({ paths })) || process.cwd()
   const { locals = inLocals } = await resolveConfig<{ locals: string[] }>({ cwd, configFile })
