@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/pretty-assets-tree-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "Pretty print assets tree.",
   "repository": {
     "type": "git",
@@ -17,14 +17,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.25",
-    "@dumlj/util-lib": "workspace:^2.5.25",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.26",
+    "@dumlj/util-lib": "workspace:^2.5.26",
     "chalk": "^4.1.2",
     "micromatch": "^4.0.5",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "workspace:^2.5.25",
+    "@dumlj/mock-lib": "workspace:^2.5.26",
     "@jest/types": "^29.6.3",
     "@types/webpack": "^5.28.4",
     "ts-jest": "^29.1.1"

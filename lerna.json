@@ -1,9 +1,9 @@
 {
-  "version": "2.5.25",
+  "version": "2.5.26",
   "npmClient": "pnpm",
   "command": {
     "publish": {
-      "npmClient": "npm",
+      "npmClient": "pnpm",
       "ignoreChanges": ["ignored-file", "*.md"],
       "message": "chore(release): publish"
     }

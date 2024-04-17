@@ -4,7 +4,9 @@ import { MemfsWebpackPlugin } from '@dumlj/memfs-webpack-plugin'
 import { CrxLiveReloadWebpackPlugin } from '@dumlj/crx-live-reload-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-import 'webpack-dev-server'
+// mainly used to extend the "devServer" attribute declaration of "Configuration".
+// eslint-disable-next-line import/no-extraneous-dependencies
+import type {} from 'webpack-dev-server'
 
 const CONFIG: Configuration = {
   mode: 'development',

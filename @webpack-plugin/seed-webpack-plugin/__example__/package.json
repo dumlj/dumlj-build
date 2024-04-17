@@ -1,19 +1,19 @@
 {
   "name": "@dumlj-example/seed-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "private": true,
   "main": "CustomWebpackPlugin.ts",
   "scripts": {
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.25",
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.25"
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.26",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.26"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "webpack": "^5",
-    "webpack-cli": "^5",
-    "@types/node": "latest"
+    "webpack-cli": "^5"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

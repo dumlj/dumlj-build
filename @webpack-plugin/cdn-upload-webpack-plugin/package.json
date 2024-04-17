@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/cdn-upload-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "Corss platform uploader for webpack build.",
   "private": true,
   "repository": {
@@ -18,8 +18,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-uploader": "workspace:^2.5.25",
-    "@dumlj/seed-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/feature-uploader": "workspace:^2.5.26",
+    "@dumlj/seed-webpack-plugin": "workspace:^2.5.26",
     "chalk": "^4.1.2",
     "cli-progress": "^3.12.0",
     "lodash": "^4.17.21",
