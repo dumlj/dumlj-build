@@ -1,6 +1,6 @@
 import kebabCase from 'lodash/kebabCase'
 import type { Assign } from 'utility-types'
-import { type Plugin } from 'vite'
+import type { Plugin } from 'vite'
 
 /** 遍历返回函数的返回类型 */
 export type EachReturnType<T> = {

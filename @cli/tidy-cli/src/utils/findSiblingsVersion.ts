@@ -6,7 +6,7 @@ export interface FindSiblingsVersionOptions {
   remote?: boolean
 }
 
-export const findSiblingsVersion = async (name: string, options?: FindSiblingsVersionOptions) => {
+export async function findSiblingsVersion(name: string, options?: FindSiblingsVersionOptions) {
   const { remote = true } = options || {}
   const packageJson = 'package.json'
 

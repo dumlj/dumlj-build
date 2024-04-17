@@ -41,7 +41,7 @@ export default defineConfig({
       '**/.gitignore',
       '**/.npmignore',
       '**/.DS_Store',
-      '**/LICENSE.md',
+      '**/LICENSE',
       '**/README.md',
     ],
   },

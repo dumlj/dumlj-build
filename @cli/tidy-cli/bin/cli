@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-(async () => {
-  process.env.RUNTIME = 'CLI'
-
-  const { execute } = await import('@dumlj/seed-cli')
-  await execute({ development: false, dir: __dirname })
-})()

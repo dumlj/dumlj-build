@@ -30,11 +30,11 @@ const CONFIG: Configuration = {
           }
 
           const files = MemfsWebpackPlugin.files
-          const manifest = Object.keys(files).find((file) => path.relative(__dirname, file) === 'dist/manifest.json')
+          const manifest = Object.keys(files).find((file) => path.relative(__dirname, file) === 'dist/manifest.json')!
           ok(`The following is the content of manifest.json.`, { verbose: false })
 
           // eslint-disable-next-line no-console
-          console.dir(JSON.parse(files[manifest].toString()), { depth: null, colors: true })
+          console.dir(JSON.parse(files[manifest]!.toString()), { depth: null, colors: true })
           warn('Please compare the contents above and ./manifest.json.', { verbose: false })
         })
       },
@@ -61,6 +61,6 @@ CONFIG.output = {
   filename: '[name].js',
 }
 
-CONFIG.plugins.push(new HtmlWebpackPlugin({ filename: 'popup.html' }))
+CONFIG.plugins!.push(new HtmlWebpackPlugin({ filename: 'popup.html' }))
 
 export default CONFIG

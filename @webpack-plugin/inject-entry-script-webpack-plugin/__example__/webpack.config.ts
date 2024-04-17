@@ -36,7 +36,7 @@ const CONFIG: Configuration = {
 
           const { '/dist/main.js': main, '/src/need-inject-script.js': inject } = files
           // eslint-disable-next-line no-console
-          console.log(`\n${main.replace(inject, ($1) => chalk.white.bold($1))}\n`)
+          console.log(`\n${main!.replace(inject!, ($1) => chalk.white.bold($1))}\n`)
 
           info('The first half is used to getting envs and was automatically injected.', { verbose: false })
         })

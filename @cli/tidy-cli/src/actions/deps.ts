@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import fs from 'fs-extra'
+import fs from 'fs'
 import path from 'path'
 import micromatch from 'micromatch'
 import { resolveOptions, ok, info, warn } from '@dumlj/seed-cli'
@@ -30,7 +30,7 @@ export interface TidyDepsOptions {
   ignore?: string | string[]
 }
 
-export const tidyDeps = async (options?: TidyDepsOptions) => {
+export async function tidyDeps(options?: TidyDepsOptions) {
   const {
     necessary: inNecessary = ['tslib', 'webpack-cli'],
     src: srcPattern = 'src/**',
@@ -88,7 +88,8 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
       )
 
       const pkgJson = path.join(absPath, 'package.json')
-      const source: PackageSource = await fs.readJson(pkgJson)
+      const pkgContent = await fs.promises.readFile(pkgJson, 'utf-8')
+      const source: PackageSource = JSON.parse(pkgContent)
       const missDependencies = Object.keys(dependencies).length > 0
       const missDevDependencies = Object.keys(devDependencies).length > 0
 
@@ -114,7 +115,7 @@ export const tidyDeps = async (options?: TidyDepsOptions) => {
 
       if (missDependencies || missDevDependencies) {
         const content = JSON.stringify(source, null, 2)
-        await fs.writeFile(pkgJson, content)
+        await fs.promises.writeFile(pkgJson, content)
       }
 
       if (missDependencies) {
