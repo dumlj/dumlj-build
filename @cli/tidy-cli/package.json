@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/tidy-cli",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "Cli for organizing projects.",
   "private": true,
   "repository": {
@@ -16,11 +16,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/feature-prepare": "workspace:^2.5.25",
-    "@dumlj/feature-readme": "workspace:^2.5.25",
-    "@dumlj/seed-cli": "workspace:^2.5.25",
-    "@dumlj/shell-lib": "workspace:^2.5.25",
-    "@dumlj/util-lib": "workspace:^2.5.25",
+    "@dumlj/feature-prepare": "workspace:^2.5.26",
+    "@dumlj/feature-readme": "workspace:^2.5.26",
+    "@dumlj/seed-cli": "workspace:^2.5.26",
+    "@dumlj/shell-lib": "workspace:^2.5.26",
+    "@dumlj/util-lib": "workspace:^2.5.26",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "depcheck": "^1.4.7",

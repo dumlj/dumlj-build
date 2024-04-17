@@ -1,22 +1,22 @@
 {
   "name": "@dumlj-example/crx-manifest-webpack-plugin",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "private": true,
   "main": "webpack.config.ts",
   "scripts": {
     "build": "webpack -c webpack.config.ts"
   },
   "dependencies": {
-    "@dumlj/crx-manifest-webpack-plugin": "workspace:^2.5.25",
-    "@dumlj/feature-pretty": "workspace:^2.5.25",
-    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.25",
+    "@dumlj/crx-manifest-webpack-plugin": "workspace:^2.5.26",
+    "@dumlj/feature-pretty": "workspace:^2.5.26",
+    "@dumlj/memfs-webpack-plugin": "workspace:^2.5.26",
     "fs-extra": "^11.1.1",
     "html-webpack-plugin": "^5.5.3"
   },
   "devDependencies": {
+    "@types/node": "latest",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5",
-    "@types/node": "latest"
+    "webpack-cli": "^5"
   },
   "optionalDependencies": {
     "@babel/core": "^7.23.2",

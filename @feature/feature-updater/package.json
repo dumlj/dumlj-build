@@ -1,6 +1,6 @@
 {
   "name": "@dumlj/feature-updater",
-  "version": "2.5.25",
+  "version": "2.5.26",
   "description": "updater for packages.",
   "repository": {
     "type": "git",
@@ -17,14 +17,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dumlj/shell-lib": "workspace:^2.5.25",
-    "@dumlj/util-lib": "workspace:^2.5.25",
+    "@dumlj/shell-lib": "workspace:^2.5.26",
+    "@dumlj/util-lib": "workspace:^2.5.26",
     "fs-extra": "^11.1.0",
     "semver": "^7.3.8",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@dumlj/mock-lib": "workspace:^2.5.25",
+    "@dumlj/mock-lib": "workspace:^2.5.26",
     "@jest/types": "^29.6.3",
     "ts-jest": "^29.1.1"
   },
