@@ -3,7 +3,7 @@
   "npmClient": "pnpm",
   "command": {
     "publish": {
-      "npmClient": "npm",
+      "npmClient": "pnpm",
       "ignoreChanges": ["ignored-file", "*.md"],
       "message": "chore(release): publish"
     }

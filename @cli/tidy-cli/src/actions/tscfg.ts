@@ -3,7 +3,7 @@ import { ok, info } from '@dumlj/seed-cli'
 import chalk from 'chalk'
 import isEqual from 'lodash/isEqual'
 import path from 'path'
-import fs from 'fs-extra'
+import fs from 'fs'
 import micromatch from 'micromatch'
 
 export interface TidyTscfgOptions {
@@ -50,14 +50,15 @@ export async function tidyTscfg(options?: TidyTscfgOptions) {
   const created: string[] = []
 
   const whiteTsConfig = async (file: string, config: Record<string, any>) => {
-    if (await fs.pathExists(file)) {
-      const prevSource = await fs.readJson(file)
+    if (fs.existsSync(file)) {
+      const prevContent = await fs.promises.readFile(file, 'utf-8')
+      const prevSource = JSON.parse(prevContent)
       if (!isEqual(prevSource, config)) {
-        await fs.writeFile(file, JSON.stringify(config, null, 2))
+        await fs.promises.writeFile(file, JSON.stringify(config, null, 2))
         updates.push(path.relative(rootPath, file))
       }
     } else {
-      await fs.writeFile(file, JSON.stringify(config, null, 2))
+      await fs.promises.writeFile(file, JSON.stringify(config, null, 2))
       created.push(path.relative(rootPath, file))
     }
   }
@@ -89,7 +90,8 @@ export async function tidyTscfg(options?: TidyTscfgOptions) {
       )
 
       const configFile = path.join(absPath, tsconfig)
-      const source = await fs.readJson(configFile)
+      const configContent = await fs.promises.readFile(configFile, 'utf-8')
+      const source = JSON.parse(configContent)
       const { compilerOptions = {} } = source || {}
 
       const file = path.join(absPath, output)
