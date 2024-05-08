@@ -12,7 +12,7 @@
     "dumlj": "./bin/cli"
   },
   "main": "./libs/index.js",
-  "types": "./src/index.d.ts",
+  "types": "./libs/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",
