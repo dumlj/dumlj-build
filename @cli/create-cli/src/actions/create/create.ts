@@ -6,7 +6,7 @@ import { findWorkspaceRootPath } from '@dumlj/util-lib'
 import { monitorToDevelop } from '@dumlj/seed-cli'
 import chalk from 'chalk'
 import { trimEnd, kebabCase, defaults } from 'lodash'
-import fs from 'fs-extra'
+import fs from 'fs'
 import path from 'path'
 import { glob } from 'glob'
 import inquirer, { type Validator } from 'inquirer'
@@ -108,7 +108,7 @@ export class Create {
         const { outputPathResolver } = template
         const rootPath = await this.getRootPath()
         const folder = path.join(rootPath, outputPathResolver(kebabCase(name)))
-        if (!this.override && (await fs.pathExists(folder))) {
+        if (!this.override && fs.existsSync(folder)) {
           return 'name is exists'
         }
 
@@ -283,7 +283,8 @@ export class Create {
           const srcFile = path.join(src, file)
           const tranform = async () => {
             if (file === 'package.json') {
-              const source = await fs.readJson(srcFile)
+              const content = await fs.promises.readFile(srcFile, 'utf-8')
+              const source = JSON.parse(content)
               const tranform = pkgTransform(file)
 
               if (typeof tranform === 'function') {
@@ -296,7 +297,7 @@ export class Create {
 
             switch (path.extname(file)) {
               case '.ts': {
-                const content = await fs.readFile(srcFile, { encoding: 'utf-8' })
+                const content = await fs.promises.readFile(srcFile, { encoding: 'utf-8' })
                 const ast = project.createSourceFile(path.join(dist, file), content)
                 const tranform = typeof tsTransform === 'function' ? tsTransform(file) : undefined
 
@@ -407,20 +408,20 @@ export class Create {
       }
 
       const folder = path.join(rootPath, outputPathResolver(shortName))
-      await fs.remove(folder)
+      await fs.promises.rmdir(folder)
     }
 
     const render = await this.compile({ name, description, output: dist, template })
     await render(async ({ src, out, code }) => {
-      await fs.ensureDir(path.dirname(out))
+      await fs.promises.mkdir(path.dirname(out), { recursive: true })
 
       try {
         if (!code) {
-          await fs.copyFile(src, out)
+          await fs.promises.cp(src, out)
           return
         }
 
-        await fs.writeFile(out, code)
+        await fs.promises.writeFile(out, code)
       } catch (error) {
         fail(error as Error)
       }

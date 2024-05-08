@@ -38,8 +38,8 @@ export async function husky(options: InstallHuskyOptions = {}) {
 
   const scripts: Array<string | [GitHook, string]> = [
     inPlatform('win32') ? 'set PATH=\\"%PATH%\\":\\%PATH\\%' : 'export PATH=\\"$PATH\\":\\$PATH',
-    ['pre-commit', `yarn lint-staged`],
-    ['commit-msg', `yarn commitlint --edit \\$1`],
+    ['pre-commit', `pnpm lint-staged`],
+    ['commit-msg', `pnpm commitlint --edit \\$1`],
   ]
 
   const emptyHookCommands = scripts.reduce<Partial<Record<GitHook, string[]>>>((hooks, item) => {

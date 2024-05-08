@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "main": "./libs/index.js",
-  "types": "./libs/index.d.ts",
+  "types": "./src/index.d.ts",
   "scripts": {
     "clear": "rimraf ./libs",
     "compile": "tsc --project ./tsconfig.compile.json",

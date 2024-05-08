@@ -27,7 +27,6 @@
     "cardinal": "^2.1.1",
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
-    "fs-extra": "^11.1.1",
     "glob": "^10.3.10",
     "inquirer": "^6.5.2",
     "lodash": "^4.17.21",
