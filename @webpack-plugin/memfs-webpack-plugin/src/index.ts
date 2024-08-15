@@ -57,7 +57,7 @@ export class MemfsWebpackPlugin extends SeedWebpackPlugin {
 
     type Method<T, M extends readonly string[]> = {
       [K in ValuesType<M>]: {
-        [K1 in K]?: K extends keyof T ? T[K] : never
+        [K1 in K]?: K1 extends keyof T ? T[K1] : never
       }
     }[ValuesType<M>]
 
