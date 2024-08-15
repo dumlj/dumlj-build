@@ -13,7 +13,7 @@
     "@dumlj/feature-pretty": "workspace:^2.5.26",
     "commander": "^11.1.0",
     "tslib": "^2.5.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
     "@dumlj/seed-cli": "workspace:^2.5.26",

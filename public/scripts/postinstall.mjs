@@ -10,7 +10,7 @@ import Spinnies from 'spinnies'
         'ts-patch install -s',
         'lerna run compile --concurrency 2 --parallel --include-dependencies --scope=@dumlj/tidy-cli',
         'dumlj concurrently "tscfg --exclude "**/__template__" --exclude "**/__example__"" "deps --exclude "**/__template__" --exclude "**/__example__""',
-        'npm run compile',
+        'pnpm compile',
         // must compile create-cli
         'dumlj install husky',
       ]

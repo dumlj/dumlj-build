@@ -16,8 +16,8 @@ export function mockWebpack(files: Record<string, string>) {
     })
 
     // mock fs system
-    compiler.inputFileSystem = fs
-    compiler.outputFileSystem = fs
+    compiler.inputFileSystem = fs as any
+    compiler.outputFileSystem = fs as any
 
     // mock files
     vol.fromJSON(
