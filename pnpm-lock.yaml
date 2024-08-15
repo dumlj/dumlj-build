@@ -86,9 +86,6 @@ importers:
       fs-extra:
         specifier: ^11.1.0
         version: 11.2.0
-      husky:
-        specifier: ^9.1.1
-        version: 9.1.4
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@20.11.21)(ts-node@10.9.2(@swc/core@1.7.11(@swc/helpers@0.5.12))(@types/node@20.11.21)(typescript@5.5.4))
@@ -159,6 +156,9 @@ importers:
       '@types/node':
         specifier: latest
         version: 20.11.21
+      cz-customizable-i18n-config:
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2(@types/node@20.11.21)(typescript@5.5.4)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -223,6 +223,9 @@ importers:
       glob:
         specifier: ^10.3.10
         version: 10.3.10
+      husky:
+        specifier: ^9.1.1
+        version: 9.1.4
       inquirer:
         specifier: ^6.5.2
         version: 6.5.2
@@ -6032,6 +6035,13 @@ packages:
   cz-conventional-changelog@3.3.0:
     resolution: {integrity: sha512-U466fIzU5U22eES5lTNiNbZ+d8dfcHcssH4o7QsdWaCcRs/feIPCxKYSWkYBNs5mny7MvEfwpTLWjvbm94hecw==}
     engines: {node: '>= 10'}
+
+  cz-customizable-i18n-config@0.0.1-alpha.2:
+    resolution: {integrity: sha512-+8KBj7Z6fsDorwU2qOzJJg4XuB69cvQaPTqeYWck7hCJ0DL5gNQeQJd3LOoAGzBbF7ZVE9lpKib7OSAzJqUT9g==}
+
+  cz-customizable@6.9.2:
+    resolution: {integrity: sha512-33Y0eHAp40sb7K346Shm07X+ZIckPKV8pBHUH5Lh2tI4fi0mjHkrYDrwQyJMS8095Ri+H+xkxOmblzQ64wT/Fg==}
+    hasBin: true
 
   cz-customizable@7.2.1:
     resolution: {integrity: sha512-Wa3cgG4+IC9zqezwozLbVBIiJ7Cjg1J2hPxvXcp1F3SFjzQzbdiGhOtI1thVfRBnBCX3kvCW63iaP9v+4yYa8w==}
@@ -18512,6 +18522,23 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - typescript
+
+  cz-customizable-i18n-config@0.0.1-alpha.2(@types/node@20.11.21)(typescript@5.5.4):
+    dependencies:
+      commitizen: 4.3.0(@types/node@20.11.21)(typescript@5.5.4)
+      cz-customizable: 6.9.2
+    transitivePeerDependencies:
+      - '@types/node'
+      - typescript
+
+  cz-customizable@6.9.2:
+    dependencies:
+      editor: 1.0.0
+      find-config: 1.0.0
+      inquirer: 6.5.2
+      lodash: 4.17.21
+      temp: 0.9.4
+      word-wrap: 1.2.5
 
   cz-customizable@7.2.1:
     dependencies:

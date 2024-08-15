@@ -77,7 +77,7 @@ export async function husky(options: InstallHuskyOptions = {}) {
   }, [] as string[])
 
   if (commands.length > 0) {
-    const scripts = ['husky install'].concat(commands).filter(Boolean).join(' && ')
+    const scripts = ['husky'].concat(commands).filter(Boolean).join(' && ')
     execSync(scripts, { stdio: 'inherit', cwd })
   }
 
